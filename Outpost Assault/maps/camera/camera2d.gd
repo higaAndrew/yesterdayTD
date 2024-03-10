@@ -7,6 +7,7 @@ extends Camera2D
 @export var drag_speed := 1.0
 
 @onready var target_zoom: float = zoom.x
+@onready var hud := $HUD as HUD
 
 
 func _unhandled_input(event: InputEvent) -> void:

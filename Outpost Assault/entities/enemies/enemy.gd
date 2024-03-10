@@ -2,19 +2,67 @@ class_name Enemy
 extends CharacterBody2D
 
 @export var speed := 150
-@export var health := 100
+@export var rot_speed := 10.0
+@export var health := 100:
+	set = set_health
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D as NavigationAgent2D
+@onready var collision_shape := $CollisionShape2D as CollisionShape2D
+@onready var anim_sprite := $AnimatedSprite2D as AnimatedSprite2D
+@onready var default_sound := $DefaultSound as AudioStreamPlayer2D
+@onready var state_machine = $StateMachine as StateMachine
 
 func _ready() -> void:
 	nav_agent.max_speed = speed
 	var objective: Node2D = $/root/Map/Objective
 	nav_agent.set_target_position(objective.global_position)
+	nav_agent.max_speed = speed
 
 
-func _physics_process(delta: float) -> void:
+func _move(delta: float) -> void:
 	var next_path_pos: Vector2 = nav_agent.get_next_path_position()
 	var cur_agent_pos: Vector2 = global_position
 	var new_velocity: Vector2 = cur_agent_pos.direction_to(next_path_pos) * speed
-	velocity = new_velocity
+	if not nav_agent.avoidance_enabled:
+		velocity = new_velocity
+		move_and_slide()
+	else:
+		nav_agent.set_velocity(new_velocity)
+
+	anim_sprite.global_rotation = _calculate_rot(anim_sprite.global_rotation, velocity.angle(), rot_speed, delta)
+	collision_shape.global_rotation = _calculate_rot(collision_shape.global_rotation, velocity.angle(), rot_speed, delta)
+
+
+func set_health(value: int) -> void:
+	health = max(0, value)
+	if health == 0:
+		state_machine.transition_to("Die")
+
+
+func die() -> void:
+	collision_shape.set_deferred("disabled", true)
+	speed = 0
+	anim_sprite.play("die")
+	default_sound.stop()
+	nav_agent.set_velocity(Vector2.ZERO)
+
+
+func play_animation(anim_name: String) -> void:
+	anim_sprite.play(anim_name)
+
+
+func get_shooter() -> Shooter:
+	return null
+
+
+func _calculate_rot(start_rot: float, target_rot: float, _speed: float, delta: float) -> float:
+	return lerp_angle(start_rot, target_rot, _speed * delta)
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if anim_sprite.animation == "die":
+		queue_free()
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
 	move_and_slide()

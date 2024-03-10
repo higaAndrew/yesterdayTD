@@ -1,8 +1,9 @@
+class_name Shooter
 extends Node2D
 
 @export var fire_rate := 0.1
 @export var rot_speed := 5.0
-@export var projectile_type := PackedScene
+@export var projectile_type: PackedScene
 @export var projectile_speed := 1000
 @export var projectile_damage := 3
 
@@ -21,27 +22,50 @@ func _ready() -> void:
 	map = find_parent("Map")
 
 
-func _physics_process(delta: float) -> void:
+func _rotate_shooter(delta: float) -> void:
 	if not targets.is_empty():
 		var target_pos: Vector2 = targets.front().global_position
 		var target_rot: float = global_position.direction_to(target_pos).angle()
 		rotation = lerp_angle(rotation, target_rot, rot_speed * delta)
 
-		if can_shoot and lookahead.is_colliding():
-			shoot()
+
+func should_shoot() -> bool:
+	return can_shoot and lookahead.is_colliding()
 
 
 func shoot() -> void:
 	can_shoot = false
 	for _muzzle in gun.get_children():
 		_instantiate_projectile(_muzzle.global_position)
-	_play_animations("s")
+	_play_animations("shoot")
 	shoot_sound.play()
 	firerate_timer.start(fire_rate)
 
 
+func die() -> void:
+	set_physics_process(false)
+	can_shoot = false
+	firerate_timer.stop()
+	muzzle_flash.hide()
+	gun.play("die")
+
+
+func is_objective_in_range() -> bool:
+	for target in targets:
+		if target is Objective:
+			return true
+	return false
+
+
 func _instantiate_projectile(_position: Vector2) -> void:
-	pass
+	var projectile: Projectile = projectile_type.instantiate()
+	projectile.start(_position, rotation, projectile_speed, projectile_damage)
+	projectile.collision_mask = $Detector.collision_mask
+	if map:
+		map.add_child(projectile)
+	else:
+		owner.add_child(projectile)
+
 
 
 func _play_animations(anim_name: String) -> void:

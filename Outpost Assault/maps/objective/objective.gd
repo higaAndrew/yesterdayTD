@@ -1,4 +1,7 @@
+class_name Objective
 extends Area2D
+
+signal health_changed(health: int)
 
 @export var health := 500:
 	set = set_health
@@ -9,6 +12,7 @@ extends Area2D
 
 func set_health(value: int) -> void:
 	health = max(0, value)
+	health_changed.emit(health)
 	print("Health ", health)
 	if health == 0:
 		collision_shape.set_deferred("disabled", true)

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cemhusyqymfm6"]
+[gd_scene load_steps=3 format=3 uid="uid://cemhusyqymfm6"]
 
 [ext_resource type="Script" path="res://maps/camera/camera2d.gd" id="1_t5q38"]
+[ext_resource type="PackedScene" uid="uid://ctwsoitc5naif" path="res://ui/hud.tscn" id="2_oqp1o"]
 
 [node name="Camera2D" type="Camera2D"]
 script = ExtResource("1_t5q38")
+
+[node name="HUD" parent="." instance=ExtResource("2_oqp1o")]

@@ -170,9 +170,6 @@ autoplay = "idle"
 [node name="Muzzle" type="Marker2D" parent="Gun"]
 position = Vector2(60, -21)
 
-[node name="Muzzle2" type="Marker2D" parent="Gun"]
-position = Vector2(59, 19)
-
 [node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3md20")
 animation = &"idle"
