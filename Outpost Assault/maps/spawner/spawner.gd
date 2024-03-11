@@ -12,7 +12,7 @@ signal enemies_defeated
 @export var spawn_probabilities := {
 	"infantry": 85,
 	"tank": 15,
-	"helicopter": 50,
+	"helicopter": 5,
 }
 
 var spawn_locations := []
