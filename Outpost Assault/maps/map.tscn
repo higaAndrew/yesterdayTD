@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cht0v7l1mnwkw"]
+[gd_scene load_steps=25 format=3 uid="uid://cht0v7l1mnwkw"]
 
 [ext_resource type="Texture2D" uid="uid://bms5t5i55nrr5" path="res://assets/tiles/field_tilesheet.png" id="1_8n1x0"]
 [ext_resource type="Script" path="res://maps/map.gd" id="1_hfij5"]
@@ -222,6 +222,11 @@ terrain_set_0/terrain_0/color = Color(0.6, 0.184314, 0.490196, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_qagps")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yks4d"]
+vertices = PackedVector2Array(5125, 1, 5119, 4610, -2, 4614, -2, 1)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2, 1, -2, 4614, 5119, 4610, 5125, 1)])
+
 [node name="Map" type="Node2D"]
 script = ExtResource("1_hfij5")
 
@@ -337,5 +342,10 @@ position = Vector2(3142, 2118)
 
 [node name="TowerSlot27" parent="." instance=ExtResource("6_2k2cn")]
 position = Vector2(1589, 2033)
+
+[node name="AircraftNavRegion" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_yks4d")
+navigation_layers = 2
 
 [editable path="Spawner"]

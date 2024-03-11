@@ -369,6 +369,7 @@ radius = 500.0
 collision_layer = 32
 collision_mask = 39
 script = ExtResource("2_ronsh")
+kill_reward = 200
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_umve8")
@@ -423,5 +424,12 @@ script = ExtResource("78_quaa8")
 
 [node name="ShootStationary" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("79_hugvl")
+
+[node name="EntityHUD" parent="UI" index="0"]
+offset_left = -72.0
+offset_top = 69.0
+offset_right = -32.0
+offset_bottom = 109.0
+scale = Vector2(1.45915, 0.893182)
 
 [editable path="Shooter"]

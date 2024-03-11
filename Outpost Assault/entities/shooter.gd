@@ -1,6 +1,8 @@
 class_name Shooter
 extends Node2D
 
+signal has_shot(reload_time: float)
+
 @export var fire_rate := 0.1
 @export var rot_speed := 5.0
 @export var projectile_type: PackedScene
@@ -36,10 +38,11 @@ func should_shoot() -> bool:
 func shoot() -> void:
 	can_shoot = false
 	for _muzzle in gun.get_children():
-		_instantiate_projectile(_muzzle.global_position)
+		_instantiate_projectile(_muzzle.global_position, targets.front())
 	_play_animations("shoot")
 	shoot_sound.play()
 	firerate_timer.start(fire_rate)
+	has_shot.emit(firerate_timer.wait_time)
 
 
 func die() -> void:
@@ -57,9 +60,9 @@ func is_objective_in_range() -> bool:
 	return false
 
 
-func _instantiate_projectile(_position: Vector2) -> void:
+func _instantiate_projectile(_position: Vector2, target: Node2D) -> void:
 	var projectile: Projectile = projectile_type.instantiate()
-	projectile.start(_position, rotation, projectile_speed, projectile_damage)
+	projectile.start(_position, rotation, projectile_speed, projectile_damage, target)
 	projectile.collision_mask = $Detector.collision_mask
 	if map:
 		map.add_child(projectile)

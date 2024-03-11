@@ -1,0 +1,8 @@
+[gd_resource type="JSON" format=3 uid="uid://4ewg3xhy654k"]
+
+[resource]
+data = {
+"cannon": 400.0,
+"gatling": 250.0,
+"missile": 800.0
+}
