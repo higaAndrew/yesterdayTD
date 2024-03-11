@@ -2,6 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 signal enemy_died(enemy: Enemy)
+signal enemy_removed # emitted when enemy dies or reaches objective
 
 @export var speed := 150
 @export var rot_speed := 10.0
@@ -71,8 +72,10 @@ func get_shooter() -> Shooter:
 func _calculate_rot(start_rot: float, target_rot: float, _speed: float, delta: float) -> float:
 	return lerp_angle(start_rot, target_rot, _speed * delta)
 
+
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim_sprite.animation == "die":
+		enemy_removed.emit()
 		queue_free()
 
 

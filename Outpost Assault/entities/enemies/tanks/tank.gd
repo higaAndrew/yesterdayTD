@@ -7,6 +7,7 @@ extends Enemy
 func die() -> void:
 	super.die()
 	shooter.die()
+	$Explosion/AnimationPlayer.play("default_explosion")
 
 
 func get_shooter() -> Shooter:

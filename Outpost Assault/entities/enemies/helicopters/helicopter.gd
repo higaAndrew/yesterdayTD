@@ -13,6 +13,7 @@ func get_shooter() -> Shooter:
 func die() -> void:
 	super()
 	shooter.die()
+	$Explosion/AnimationPlayer.play("default_explosion")
 
 
 func _process(delta: float) -> void:

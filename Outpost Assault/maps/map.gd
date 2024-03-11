@@ -22,9 +22,11 @@ func _ready():
 	Global.money = starting_money
 	hud.initialize(objective.health)
 	objective.health_changed.connect(hud._on_objective_health_changed)
+	objective.objective_destroyed.connect(_on_objective_destroyed)
 	spawner.countdown_started.connect(hud._on_spawner_countdown_started)
 	spawner.wave_started.connect(hud._on_spawner_wave_started)
 	spawner.enemy_spawned.connect(_on_enemy_spawned)
+	spawner.enemies_defeated.connect(_on_enemies_defeated)
 
 
 func _on_enemy_spawned(enemy: Enemy):
@@ -33,3 +35,18 @@ func _on_enemy_spawned(enemy: Enemy):
 
 func _on_enemy_died(enemy: Enemy):
 	Global.money += enemy.kill_reward
+
+
+func _game_over():
+	var hud = camera.hud as HUD
+	hud.get_node("Menus/GameOver").enable()
+	# Prevent pausing during the game over screen
+	hud.get_node("Menus/Pause").queue_free()
+
+
+func _on_objective_destroyed():
+	_game_over()
+
+
+func _on_enemies_defeated():
+	_game_over()
