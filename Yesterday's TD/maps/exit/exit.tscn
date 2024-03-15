@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds456n3wq4sok"]
+
+[ext_resource type="AudioStream" uid="uid://b0jjmr6ngw7lv" path="res://assets/sounds/Casual Enemy Damage C.wav" id="1_r1vw6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtwpt"]
+size = Vector2(64, 64)
+
+[node name="Exit" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qtwpt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_r1vw6")
