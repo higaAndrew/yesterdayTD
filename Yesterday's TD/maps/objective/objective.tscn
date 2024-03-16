@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds456n3wq4sok"]
+
+[ext_resource type="Script" path="res://maps/objective/objective.gd" id="1_mg63i"]
+[ext_resource type="AudioStream" uid="uid://b0jjmr6ngw7lv" path="res://assets/sounds/Casual Enemy Damage C.wav" id="2_qsb76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtwpt"]
+size = Vector2(64, 64)
+
+[node name="Objective" type="Area2D"]
+script = ExtResource("1_mg63i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qtwpt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qsb76")

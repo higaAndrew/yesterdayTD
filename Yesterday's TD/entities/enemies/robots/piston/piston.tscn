@@ -1,18 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0pwch6f3bnh5"]
+[gd_scene load_steps=14 format=3 uid="uid://dv1hvoe6etl43"]
 
 [ext_resource type="Texture2D" uid="uid://8y3wpg8ccit" path="res://assets/effects/robot_death/explosionSmoke1.png" id="1_7ga7d"]
+[ext_resource type="Script" path="res://entities/enemies/robots/piston/piston.gd" id="1_kdqmm"]
 [ext_resource type="Texture2D" uid="uid://c76nwxwjsney1" path="res://assets/effects/robot_death/explosionSmoke2.png" id="2_rrmn3"]
 [ext_resource type="Texture2D" uid="uid://bkifrk3orc070" path="res://assets/effects/robot_death/explosionSmoke3.png" id="3_a7l2m"]
 [ext_resource type="Texture2D" uid="uid://bfd8jtx3tya8n" path="res://assets/effects/robot_death/explosionSmoke4.png" id="4_4g0f2"]
 [ext_resource type="Texture2D" uid="uid://cxfhod374t8ac" path="res://assets/effects/robot_death/explosionSmoke5.png" id="5_4qfwk"]
 [ext_resource type="Texture2D" uid="uid://bb65qlw8e7icj" path="res://assets/enemies/robots/piston/robot1_stand.png" id="6_7ae0j"]
 [ext_resource type="PackedScene" uid="uid://uc2jeyvfhvsl" path="res://components/path_follow_component.tscn" id="7_xjso5"]
-[ext_resource type="PackedScene" uid="uid://c5flvivtmyn06" path="res://components/speed_component.tscn" id="8_y2wvl"]
-[ext_resource type="PackedScene" uid="uid://dam5el5b3n68c" path="res://components/health_component.tscn" id="9_732tf"]
+[ext_resource type="Script" path="res://components/speed_component.gd" id="8_mp73h"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="9_0ehvv"]
 [ext_resource type="AudioStream" uid="uid://c0j7l2dcmfa2" path="res://assets/sounds/Material Layer Metal C.wav" id="10_jg614"]
-[ext_resource type="AudioStream" uid="uid://b0jjmr6ngw7lv" path="res://assets/sounds/Casual Enemy Damage C.wav" id="10_q4jbl"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vw4un"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_525do"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -43,33 +43,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vdrer"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2r43l"]
+radius = 15.0
 height = 46.0
 
-[node name="Piston" type="CharacterBody2D"]
+[node name="Piston" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_kdqmm")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_vw4un")
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_525do")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_vdrer")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_2r43l")
 
-[node name="SpeedComponent" parent="." instance=ExtResource("8_y2wvl")]
+[node name="HealthComponent" type="Node" parent="Area2D" node_paths=PackedStringArray("death_sound")]
+script = ExtResource("9_0ehvv")
+death_sound = NodePath("../DeathSound")
+
+[node name="SpeedComponent" type="Node" parent="Area2D"]
+script = ExtResource("8_mp73h")
 speed = 1000
 
-[node name="PathFollowComponent" parent="." node_paths=PackedStringArray("speed_component", "health_component") instance=ExtResource("7_xjso5")]
+[node name="PathFollowComponent" parent="Area2D" node_paths=PackedStringArray("speed_component", "health_component") instance=ExtResource("7_xjso5")]
 speed_component = NodePath("../SpeedComponent")
 health_component = NodePath("../HealthComponent")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("damage_sound", "death_sound") instance=ExtResource("9_732tf")]
-damage_sound = NodePath("../DamageSound")
-death_sound = NodePath("../DeathSound")
-
-[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+[node name="DeathSound" type="AudioStreamPlayer" parent="Area2D"]
 stream = ExtResource("10_jg614")
-
-[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_q4jbl")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdpworufl4w2s"]
+
+[ext_resource type="Script" path="res://maps/spawner/spawner.gd" id="1_0vb0a"]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource("1_0vb0a")
+
+[node name="WaveTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GroupTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="GroupTimer" to="." method="_on_group_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

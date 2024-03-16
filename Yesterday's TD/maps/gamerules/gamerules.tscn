@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3t3vfkkmarqe"]
+
+[ext_resource type="Script" path="res://maps/gamerules/gamerules.gd" id="1_ix5lh"]
+
+[node name="Gamerules" type="Node"]
+script = ExtResource("1_ix5lh")

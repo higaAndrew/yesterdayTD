@@ -1,0 +1,2 @@
+class_name Piston
+extends PathFollow2D

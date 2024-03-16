@@ -1,0 +1,23 @@
+extends Node2D
+
+@export var monet := 500
+@export var waves := []
+@export var wave_delay := 10
+
+@onready var gamerules := $Gamerules as Gamerules
+@onready var spawner := $Spawner as Spawner
+
+# spawn group format:
+# {"enemy_type": "", "enemy_count": , "spawn_delay": , "group_delay": },
+var classic_waves := [
+	[	# wave 1
+		{"enemy_type": "piston", "enemy_count": 5, "spawn_delay": 0.5, "group_delay": 2.0},
+		{"enemy_type": "piston", "enemy_count": 10, "spawn_delay": 0.25, "group_delay": 5.0},
+		{"enemy_type": "piston", "enemy_count": 7, "spawn_delay": 0.1, "group_delay": 0.0},
+	],
+]
+
+
+func _ready() -> void:
+	if gamerules.gamemode == "classic":
+		waves = classic_waves
