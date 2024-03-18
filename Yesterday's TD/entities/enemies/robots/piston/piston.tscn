@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dv1hvoe6etl43"]
+[gd_scene load_steps=17 format=3 uid="uid://dv1hvoe6etl43"]
 
 [ext_resource type="Texture2D" uid="uid://8y3wpg8ccit" path="res://assets/effects/robot_death/explosionSmoke1.png" id="1_7ga7d"]
 [ext_resource type="Script" path="res://entities/enemies/robots/piston/piston.gd" id="1_kdqmm"]
@@ -7,10 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bfd8jtx3tya8n" path="res://assets/effects/robot_death/explosionSmoke4.png" id="4_4g0f2"]
 [ext_resource type="Texture2D" uid="uid://cxfhod374t8ac" path="res://assets/effects/robot_death/explosionSmoke5.png" id="5_4qfwk"]
 [ext_resource type="Texture2D" uid="uid://bb65qlw8e7icj" path="res://assets/enemies/robots/piston/robot1_stand.png" id="6_7ae0j"]
-[ext_resource type="PackedScene" uid="uid://uc2jeyvfhvsl" path="res://components/path_follow_component.tscn" id="7_xjso5"]
 [ext_resource type="Script" path="res://components/speed_component.gd" id="8_mp73h"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="9_0ehvv"]
 [ext_resource type="AudioStream" uid="uid://c0j7l2dcmfa2" path="res://assets/sounds/Material Layer Metal C.wav" id="10_jg614"]
+[ext_resource type="PackedScene" uid="uid://boec0e7ocyg1x" path="res://components/hitbox_component.tscn" id="12_pe2c0"]
+[ext_resource type="Script" path="res://components/path_follow_component.gd" id="13_3uwld"]
+[ext_resource type="Script" path="res://components/damage_component.gd" id="13_cxr4j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_525do"]
 animations = [{
@@ -43,35 +45,52 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2r43l"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xhx5n"]
 radius = 15.0
-height = 46.0
+height = 48.0
 
-[node name="Piston" type="PathFollow2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2gkj"]
+radius = 15.0
+height = 48.0
+
+[node name="Piston" type="PathFollow2D" groups=["enemy", "robot"]]
 loop = false
+
+[node name="Piston" type="CharacterBody2D" parent="." groups=["enemy", "robot"]]
+collision_mask = 4
 script = ExtResource("1_kdqmm")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Piston"]
 sprite_frames = SubResource("SpriteFrames_525do")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CapsuleShape2D_2r43l")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Piston"]
+shape = SubResource("CapsuleShape2D_xhx5n")
 
-[node name="HealthComponent" type="Node" parent="Area2D" node_paths=PackedStringArray("death_sound")]
-script = ExtResource("9_0ehvv")
-death_sound = NodePath("../DeathSound")
+[node name="DeathSound" type="AudioStreamPlayer" parent="Piston"]
+stream = ExtResource("10_jg614")
 
-[node name="SpeedComponent" type="Node" parent="Area2D"]
-script = ExtResource("8_mp73h")
-speed = 1000
-
-[node name="PathFollowComponent" parent="Area2D" node_paths=PackedStringArray("speed_component", "health_component") instance=ExtResource("7_xjso5")]
-speed_component = NodePath("../SpeedComponent")
+[node name="HitboxComponent" parent="Piston" node_paths=PackedStringArray("health_component") instance=ExtResource("12_pe2c0")]
+collision_layer = 1
 health_component = NodePath("../HealthComponent")
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="Area2D"]
-stream = ExtResource("10_jg614")
+[node name="Hitbox" parent="Piston/HitboxComponent" index="0"]
+shape = SubResource("CapsuleShape2D_h2gkj")
+
+[node name="HealthComponent" type="Node2D" parent="Piston"]
+script = ExtResource("9_0ehvv")
+
+[node name="SpeedComponent" type="Node2D" parent="Piston"]
+script = ExtResource("8_mp73h")
+speed = 200
+
+[node name="DamageComponent" type="Node2D" parent="Piston"]
+script = ExtResource("13_cxr4j")
+
+[node name="PathFollowComponent2" type="Node2D" parent="Piston" node_paths=PackedStringArray("health_component", "speed_component")]
+script = ExtResource("13_3uwld")
+health_component = NodePath("../HealthComponent")
+speed_component = NodePath("../SpeedComponent")
+
+[editable path="Piston/HitboxComponent"]

@@ -17,6 +17,8 @@ var enemy_type := ""
 var enemy_count := 0
 var spawn_delay := 0.0
 var group_delay := 0.0
+var wave_delay := 10
+var z_level := 0
 
 @onready var map := $"../" as Node2D
 @onready var path := $"../Path2D" as Path2D
@@ -57,6 +59,8 @@ func _on_group_timer_timeout() -> void:
 	elif current_group == group_count:
 		current_group = 0
 		current_wave += 1
+		z_level = 0
+		wave_timer.set_wait_time(wave_delay)
 		wave_timer.start()
 		print("next wave!")
 
@@ -65,10 +69,16 @@ func _on_spawn_timer_timeout() -> void:
 	# when SpawnTimer ends, spawn the enemy on the path, and set up the next SpawnTimer
 	if enemy_iter < enemy_count:
 		spawn_timer.set_wait_time(spawn_delay)
+		if spawn_delay == 0.0:
+			spawn_timer.set_wait_time(1)
 		print(enemy_iter)
 		var enemy: PathFollow2D = enemies[enemy_type].instantiate()
 		path.add_child(enemy)
-		enemy.global_position = path.global_position
+
+		# to prevent z-fighting
+		enemy.z_index = z_level
+		z_level -= 1
+
 		enemy_iter += 1
 		spawn_timer.start()
 		print("next enemy!")

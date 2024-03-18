@@ -463,15 +463,14 @@ sources/0 = SubResource("TileSetAtlasSource_mjnxn")
 
 [sub_resource type="Curve2D" id="Curve2D_40nko"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -79, 445, 0, 0, 0, 0, 774, 445, -1.12246, 65.1028, 1.12246, -65.1028, 832, 391, 0, 0, 0, 0, 835, 241, 71.8376, -1.12246, -71.8376, 1.12246, 778, 192, 0, 0, 0, 0, 622, 191, 0, -50.5108, 0, 50.5108, 569, 241, 0, 0, 0, 0, 572, 786, 60.6129, 1.12246, -60.6129, -1.12246, 527, 840, 0, 0, 0, 0, 369, 835, -2.24492, 77.4499, 2.24492, -77.4499, 318, 776, 0, 0, 0, 0, 318, 687, -69.5926, 1.12246, 69.5926, -1.12246, 374, 636, 0, 0, 0, 0, 969, 639, 1.12246, 63.9803, -1.12246, -63.9803, 1024, 590, 0, 0, 0, 0, 1023, 438, -71.8376, -1.12246, 71.8376, 1.12246, 1073, 381, 0, 0, 0, 0, 1163, 381, 0, -67.3477, 0, 67.3477, 1219, 440, 0, 0, 0, 0, 1215, 710, 65.1028, 3.36739, -65.1028, -3.36739, 1165, 771, 0, 0, 0, 0, 822, 773, 1.12246, -63.9803, -1.12246, 63.9803, 767, 820, 0, 0, 0, 0, 768, 1152)
+"points": PackedVector2Array(0, 0, 0, 0, -79, 445, 0, 0, 0, 0, 774, 445, -1.12246, 65.1028, 1.12246, -65.1028, 832, 391, 0, 0, 0, 0, 835, 241, 71.8376, -1.12246, -71.8376, 1.12246, 778, 192, 0, 0, 0, 0, 622, 191, 0, -50.5108, 0, 50.5108, 569, 241, 0, 0, 0, 0, 572, 786, 60.6129, 1.12246, -60.6129, -1.12246, 527, 840, 0, 0, 0, 0, 369, 835, -2.24492, 77.4499, 2.24492, -77.4499, 318, 776, 0, 0, 0, 0, 318, 687, -69.5926, 1.12246, 69.5926, -1.12246, 374, 636, 0, 0, 0, 0, 969, 639, 1.12246, 63.9803, -1.12246, -63.9803, 1024, 590, 0, 0, 0, 0, 1023, 438, -71.8376, -1.12246, 71.8376, 1.12246, 1073, 381, 0, 0, 0, 0, 1163, 381, 0, -67.3477, 0, 67.3477, 1219, 440, 0, 0, 0, 0, 1215, 710, 65.1028, 3.36739, -65.1028, -3.36739, 1165, 771, 0, 0, 0, 0, 822, 773, 1.12246, -63.9803, -1.12246, 63.9803, 767, 820, 0, 0, 0, 0, 768, 1152, 0, 0, 0, 0, 769, 1619)
 }
-point_count = 24
+point_count = 25
 
 [node name="BTD6Map" type="Node2D"]
 script = ExtResource("1_1w58e")
 
 [node name="Camera2D" parent="." instance=ExtResource("1_8xxvl")]
-position = Vector2(17, 150)
 anchor_mode = 0
 
 [node name="MonkeyMeadow" type="TextureRect" parent="."]
@@ -481,6 +480,7 @@ offset_bottom = 1079.0
 texture = ExtResource("1_y4di1")
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -1000
 tile_set = SubResource("TileSet_e2cai")
 format = 2
 layer_0/name = "Ground"
@@ -499,7 +499,10 @@ curve = SubResource("Curve2D_40nko")
 [node name="Spawner" parent="." instance=ExtResource("5_ux7xf")]
 position = Vector2(-79, 445)
 
+[node name="Objective" parent="." instance=ExtResource("7_yo4ga")]
+position = Vector2(765, 1080)
+
 [node name="Gamerules" parent="." instance=ExtResource("7_uh61t")]
 
-[node name="Objective" parent="." instance=ExtResource("7_yo4ga")]
-position = Vector2(769, 1171)
+[editable path="Objective"]
+[editable path="Objective/HitboxComponent"]

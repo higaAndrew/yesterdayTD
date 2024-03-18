@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2id8k7jlq4e5"]
+
+[ext_resource type="Texture2D" uid="uid://y0d27pup6vc5" path="res://assets/enemies/robots/piston/robot1_gun.png" id="1_5qi5s"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="2_25eos"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3_ta0wx"]
+[ext_resource type="Script" path="res://components/speed_component.gd" id="4_3rxnn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ga8m1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5qi5s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w22ky"]
+radius = 26.0
+height = 58.0
+
+[node name="Enemy2" type="PathFollow2D"]
+
+[node name="Enemy2" type="CharacterBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy2"]
+sprite_frames = SubResource("SpriteFrames_ga8m1")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+shape = SubResource("CapsuleShape2D_w22ky")
+
+[node name="HitboxComponent" type="Area2D" parent="Enemy2" node_paths=PackedStringArray("health_component")]
+script = ExtResource("2_25eos")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" type="Node2D" parent="Enemy2"]
+script = ExtResource("3_ta0wx")
+
+[node name="SpeedComponent" type="Node2D" parent="Enemy2"]
+script = ExtResource("4_3rxnn")

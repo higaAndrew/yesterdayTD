@@ -1,16 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds456n3wq4sok"]
+[gd_scene load_steps=7 format=3 uid="uid://ds456n3wq4sok"]
 
 [ext_resource type="Script" path="res://maps/objective/objective.gd" id="1_mg63i"]
-[ext_resource type="AudioStream" uid="uid://b0jjmr6ngw7lv" path="res://assets/sounds/Casual Enemy Damage C.wav" id="2_qsb76"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="2_awtpy"]
+[ext_resource type="PackedScene" uid="uid://boec0e7ocyg1x" path="res://components/hitbox_component.tscn" id="3_tmjf1"]
+[ext_resource type="AudioStream" uid="uid://b0jjmr6ngw7lv" path="res://assets/sounds/Casual Enemy Damage C.wav" id="4_wvskj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtwpt"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_agf0o"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbe5m"]
+radius = 32.0
 
 [node name="Objective" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_mg63i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qtwpt")
+shape = SubResource("CircleShape2D_agf0o")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_qsb76")
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_tmjf1")]
+collision_layer = 8
+collision_mask = 1
+health_component = NodePath("../HealthComponent")
+
+[node name="Hitbox" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_fbe5m")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_awtpy")
+
+[node name="LifeLost" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wvskj")
+max_polyphony = 5
+
+[editable path="HitboxComponent"]

@@ -1,4 +1,4 @@
 class_name SpeedComponent
-extends Node
+extends Node2D
 
 @export var speed := 100
