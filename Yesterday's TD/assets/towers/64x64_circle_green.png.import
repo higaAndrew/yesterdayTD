@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bicw6v011hwn8"
-path="res://.godot/imported/robot1_reload.png-a3161ee8875734a597db16174479ff81.ctex"
+uid="uid://dakvr2ku0m4hs"
+path="res://.godot/imported/64x64_circle_green.png-349bccaf4dde5748c19928bcdea38c19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/robots/piston/robot1_reload.png"
-dest_files=["res://.godot/imported/robot1_reload.png-a3161ee8875734a597db16174479ff81.ctex"]
+source_file="res://assets/towers/64x64_circle_green.png"
+dest_files=["res://.godot/imported/64x64_circle_green.png-349bccaf4dde5748c19928bcdea38c19.ctex"]
 
 [params]
 

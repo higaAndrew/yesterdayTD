@@ -1,8 +1,16 @@
 class_name Spawner
 extends Node2D
 
+@onready var map := $"../" as Node2D
+@onready var path := $"../Path2D" as Path2D
+@onready var wave_timer := $WaveTimer as Timer
+@onready var group_timer := $GroupTimer as Timer
+@onready var spawn_timer := $SpawnTimer as Timer
+
 var enemies := {
-	"piston": preload("res://entities/enemies/robots/piston/piston.tscn"),
+	"piston": preload("res://entities/enemies/robots/piston.tscn"),
+	"rivet": preload("res://entities/enemies/robots/rivet.tscn"),
+	"cog": preload("res://entities/enemies/robots/cog.tscn"),
 }
 var waves := []
 var wave := []
@@ -19,12 +27,6 @@ var spawn_delay := 0.0
 var group_delay := 0.0
 var wave_delay := 10
 var z_level := 0
-
-@onready var map := $"../" as Node2D
-@onready var path := $"../Path2D" as Path2D
-@onready var wave_timer := $WaveTimer as Timer
-@onready var group_timer := $GroupTimer as Timer
-@onready var spawn_timer := $SpawnTimer as Timer
 
 
 func _ready() -> void:
@@ -77,7 +79,7 @@ func _on_spawn_timer_timeout() -> void:
 
 		# to prevent z-fighting
 		enemy.z_index = z_level
-		z_level -= 1
+		z_level += 1
 
 		enemy_iter += 1
 		spawn_timer.start()

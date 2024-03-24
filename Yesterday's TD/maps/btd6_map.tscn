@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://k1hjjigt6gid"]
+[gd_scene load_steps=13 format=3 uid="uid://k1hjjigt6gid"]
 
 [ext_resource type="Script" path="res://maps/btd6_map.gd" id="1_1w58e"]
 [ext_resource type="PackedScene" uid="uid://bge2oxlkcpwm" path="res://maps/camera/camera_2d.tscn" id="1_8xxvl"]
 [ext_resource type="Texture2D" uid="uid://bmpgvlk0vkorb" path="res://assets/backgrounds/monkey_meadow.png" id="1_y4di1"]
 [ext_resource type="Texture2D" uid="uid://qyshl50r00fo" path="res://assets/tiles/towerDefense_tilesheet(snow).png" id="2_bb5m6"]
+[ext_resource type="PackedScene" uid="uid://dv1hvoe6etl43" path="res://entities/enemies/robots/piston.tscn" id="5_ddxkx"]
 [ext_resource type="PackedScene" uid="uid://cdpworufl4w2s" path="res://maps/spawner/spawner.tscn" id="5_ux7xf"]
 [ext_resource type="PackedScene" uid="uid://c3t3vfkkmarqe" path="res://maps/gamerules/gamerules.tscn" id="7_uh61t"]
 [ext_resource type="PackedScene" uid="uid://ds456n3wq4sok" path="res://maps/objective/objective.tscn" id="7_yo4ga"]
+[ext_resource type="PackedScene" uid="uid://c6w1k5raxa556" path="res://entities/towers/penguins/snowballer.tscn" id="8_xm0rq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mjnxn"]
 texture = ExtResource("2_bb5m6")
@@ -496,13 +498,19 @@ layer_1/tile_data = PackedInt32Array()
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_40nko")
 
+[node name="PistonPath" parent="Path2D" instance=ExtResource("5_ddxkx")]
+position = Vector2(-79, 445)
+
 [node name="Spawner" parent="." instance=ExtResource("5_ux7xf")]
 position = Vector2(-79, 445)
 
 [node name="Objective" parent="." instance=ExtResource("7_yo4ga")]
-position = Vector2(765, 1080)
+position = Vector2(768, 1081)
 
 [node name="Gamerules" parent="." instance=ExtResource("7_uh61t")]
+
+[node name="Snowballer" parent="." instance=ExtResource("8_xm0rq")]
+position = Vector2(661, 363)
 
 [editable path="Objective"]
 [editable path="Objective/HitboxComponent"]

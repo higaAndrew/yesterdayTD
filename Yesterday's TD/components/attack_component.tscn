@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://gk1h0f4x6sv7"]
+
+[ext_resource type="Script" path="res://components/attack_component.gd" id="1_0y0ug"]
+
+[node name="AttackComponent" type="Node2D"]
+script = ExtResource("1_0y0ug")
+
+[node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="."]
+
+[node name="RateOfFireTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="RateOfFireTimer" to="." method="_on_rate_of_fire_timer_timeout"]

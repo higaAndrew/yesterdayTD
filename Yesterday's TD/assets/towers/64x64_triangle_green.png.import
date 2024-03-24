@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5d5katc24h03"
-path="res://.godot/imported/robot1_hold.png-642096242427fee5d08194ac3fbc62f4.ctex"
+uid="uid://chmkh2ckm2g7l"
+path="res://.godot/imported/64x64_triangle_green.png-9c4e50e3592d077ef3984a3ed0004e3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/robots/piston/robot1_hold.png"
-dest_files=["res://.godot/imported/robot1_hold.png-642096242427fee5d08194ac3fbc62f4.ctex"]
+source_file="res://assets/towers/64x64_triangle_green.png"
+dest_files=["res://.godot/imported/64x64_triangle_green.png-9c4e50e3592d077ef3984a3ed0004e3f.ctex"]
 
 [params]
 

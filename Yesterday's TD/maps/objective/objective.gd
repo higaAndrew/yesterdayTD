@@ -4,11 +4,11 @@ extends Area2D
 @onready var health_component := $HealthComponent as HealthComponent
 @onready var hitbox_component := $HitboxComponent as HitboxComponent
 @onready var collision_shape := $CollisionShape2D as CollisionShape2D
-@onready var life_lost := $LifeLost as AudioStreamPlayer
+@onready var life_lost_sound := $LifeLostSound as AudioStreamPlayer
 
 
 func _ready() -> void:
-	health_component.initialize_health()
+	health_component.initialize()
 	health_component.took_damage.connect(_health_changed)
 	health_component.health_zero.connect(_die)
 	hitbox_component.enemy_exited.connect(_enemy_exited)
@@ -29,7 +29,7 @@ func _enemy_exited(enemy: Node2D) -> void:
 	var enemy_parent = enemy.get_parent()
 	if enemy_parent is PathFollow2D:
 		enemy_parent.queue_free()
-		life_lost.play()
+		life_lost_sound.play()
 	else:
 		enemy.queue_free()
 

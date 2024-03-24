@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y0d27pup6vc5"
-path="res://.godot/imported/robot1_gun.png-c0361f877c0be2a3a20f8fb5df273f9d.ctex"
+uid="uid://cmn4ybw5r5mjp"
+path="res://.godot/imported/robot1_silencer.png-32ac0633c9dc496a554117861a314936.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/robots/piston/robot1_gun.png"
-dest_files=["res://.godot/imported/robot1_gun.png-c0361f877c0be2a3a20f8fb5df273f9d.ctex"]
+source_file="res://assets/enemies/robots/robot1_silencer.png"
+dest_files=["res://.godot/imported/robot1_silencer.png-32ac0633c9dc496a554117861a314936.ctex"]
 
 [params]
 

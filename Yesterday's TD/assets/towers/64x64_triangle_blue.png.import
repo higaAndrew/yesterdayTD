@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xobmhvvc8e2s"
-path="res://.godot/imported/robot1_machine.png-9ce36ed6fc97bb0bbc7d83097eb9ca6e.ctex"
+uid="uid://s5mysbak18lb"
+path="res://.godot/imported/64x64_triangle_blue.png-8f981c706a910000f201459d46bae05b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/robots/piston/robot1_machine.png"
-dest_files=["res://.godot/imported/robot1_machine.png-9ce36ed6fc97bb0bbc7d83097eb9ca6e.ctex"]
+source_file="res://assets/towers/64x64_triangle_blue.png"
+dest_files=["res://.godot/imported/64x64_triangle_blue.png-8f981c706a910000f201459d46bae05b.ctex"]
 
 [params]
 

@@ -18,19 +18,18 @@ script = ExtResource("1_mg63i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_agf0o")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_tmjf1")]
-collision_layer = 8
-collision_mask = 1
-health_component = NodePath("../HealthComponent")
-
-[node name="Hitbox" parent="HitboxComponent" index="0"]
-shape = SubResource("CircleShape2D_fbe5m")
+[node name="LifeLostSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wvskj")
+max_polyphony = 5
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("2_awtpy")
 
-[node name="LifeLost" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_wvskj")
-max_polyphony = 5
+[node name="HitboxComponent" parent="." instance=ExtResource("3_tmjf1")]
+collision_layer = 8
+collision_mask = 1
+
+[node name="Hitbox" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_fbe5m")
 
 [editable path="HitboxComponent"]

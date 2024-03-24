@@ -6,17 +6,16 @@ signal enemy_exited(enemy: Node2D)
 signal tower_entered(tower: Node2D)
 signal tower_exited(tower: Node2D)
 
-@export var health_component: HealthComponent
-
-@onready var collision_shape: CollisionShape2D= get_child(0)
+# Hitbox Component requires a CollisionShape2D to function
+@onready var hitbox: CollisionShape2D = get_child(0)
 
 
 func enable_collision() -> void:
-	collision_shape.set_deferred("disabled", false)
+	hitbox.set_deferred("disabled", false)
 
 
 func disable_collision() -> void:
-	collision_shape.set_deferred("disabled", true)
+	hitbox.set_deferred("disabled", true)
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -28,7 +27,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
-	# determine what stopped colliding with selfhow
+	# determine what stopped colliding with self
 	if body.is_in_group("enemy"):
 		enemy_exited.emit(body)
 	elif body.is_in_group("tower"):
