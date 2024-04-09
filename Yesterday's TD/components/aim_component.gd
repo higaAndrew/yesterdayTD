@@ -13,3 +13,7 @@ func rotate_towards_target(delta: float) -> void:
 		var target_position: Vector2 = targeting_component.targets.front().global_position
 		var target_rotation: float = global_position.direction_to(target_position).angle()
 		attacker.rotation = lerp_angle(attacker.rotation, target_rotation, rotation_speed * delta)
+
+
+func get_reticle_position() -> Vector2:
+	return self.get_collision_point()

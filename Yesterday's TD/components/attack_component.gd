@@ -25,6 +25,7 @@ var melee_attacks := {
 }
 var can_attack := true
 var _position: Vector2
+var _aim_component_position: Vector2
 var map: Node
 
 
@@ -41,6 +42,7 @@ func aim_and_attack(delta: float) -> void:
 
 func attack() -> void:
 	# attack
+	_aim_component_position = aim_component.get_reticle_position()
 	can_attack = false
 	for _muzzle in animated_sprite.get_children():
 		_instantiate_attack(_muzzle.global_position)
@@ -60,7 +62,7 @@ func throw_projectile_attack(projectile_type: String) -> void:
 		map.add_child(projectile)
 	else:
 		owner.add_child(projectile)
-	projectile.start(_position, attacker.rotation, projectile_speed, projectile_damage, projectile_scale, projectile_penetration)
+	projectile.start(_position, attacker.rotation, projectile_speed, projectile_damage, projectile_scale, projectile_penetration, _aim_component_position)
 	projectile.collision_mask = aim_component.collision_mask
 
 

@@ -9,12 +9,17 @@ extends Node2D
 @onready var projectile := $"../" as Area2D
 
 
-func initialize_throw_behavior(_position: Vector2, _rotation: float, _speed: int, _damage: int, _scale: float, _projectile_penetration: int) -> void:
+func initialize_throw_behavior(_position: Vector2, _rotation: float, _speed: int, _damage: int, _scale: float, _projectile_penetration: int, _aim_component_position: Vector2) -> void:
 	projectile.global_position = _position
 	projectile.rotation = _rotation
 	projectile.speed = _speed
 	projectile.damage = _damage
-	projectile.velocity = Vector2.RIGHT.rotated(_rotation) * projectile.speed
+
+	# calculate direction vector to aim_component
+	var direction = (_aim_component_position - _position).normalized()
+
+	#projectile.velocity = Vector2.RIGHT.rotated(_rotation) * projectile.speed
+	projectile.velocity = direction * projectile.speed
 	projectile.scale = Vector2(_scale, _scale)
 	projectile.projectile_penetration = _projectile_penetration
 

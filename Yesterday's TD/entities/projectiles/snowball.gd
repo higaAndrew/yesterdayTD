@@ -11,8 +11,8 @@ var vfx_finished := false
 var sound_finished := false
 
 
-func start(_position: Vector2, _rotation: float, _speed: int, _damage: int, _scale: float, _projectile_penetration: int) -> void:
-	projectile_behavior_component.initialize_throw_behavior(_position, _rotation, _speed, _damage, _scale, _projectile_penetration)
+func start(_position: Vector2, _rotation: float, _speed: int, _damage: int, _scale: float, _projectile_penetration: int, _aim_component_position: Vector2) -> void:
+	projectile_behavior_component.initialize_throw_behavior(_position, _rotation, _speed, _damage, _scale, _projectile_penetration, _aim_component_position)
 
 
 func _physics_process(delta: float) -> void:

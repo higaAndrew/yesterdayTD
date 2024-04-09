@@ -70,7 +70,7 @@ position = Vector2(32, 32)
 shape = SubResource("CircleShape2D_1q27x")
 
 [node name="AimComponent" type="RayCast2D" parent="." node_paths=PackedStringArray("targeting_component")]
-target_position = Vector2(260, 0)
+target_position = Vector2(270, 0)
 script = ExtResource("3_wipvo")
 rotation_speed = 100.0
 targeting_component = NodePath("../TargetingComponent")
