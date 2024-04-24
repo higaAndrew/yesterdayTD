@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://k1hjjigt6gid"]
+[gd_scene load_steps=14 format=3 uid="uid://k1hjjigt6gid"]
 
 [ext_resource type="Script" path="res://maps/btd6_map.gd" id="1_1w58e"]
 [ext_resource type="PackedScene" uid="uid://bge2oxlkcpwm" path="res://maps/camera/camera_2d.tscn" id="1_8xxvl"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c3t3vfkkmarqe" path="res://maps/gamerules/gamerules.tscn" id="7_uh61t"]
 [ext_resource type="PackedScene" uid="uid://ds456n3wq4sok" path="res://maps/objective/objective.tscn" id="7_yo4ga"]
 [ext_resource type="PackedScene" uid="uid://c6w1k5raxa556" path="res://entities/towers/penguins/snowballer.tscn" id="8_xm0rq"]
+[ext_resource type="PackedScene" uid="uid://deg7fdp00k301" path="res://entities/towers/penguins/snowbomber.tscn" id="10_mhl3u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mjnxn"]
 texture = ExtResource("2_bb5m6")
@@ -469,7 +470,7 @@ _data = {
 }
 point_count = 25
 
-[node name="BTD6Map" type="Node2D"]
+[node name="Map" type="Node2D"]
 script = ExtResource("1_1w58e")
 
 [node name="Camera2D" parent="." instance=ExtResource("1_8xxvl")]
@@ -511,6 +512,9 @@ position = Vector2(768, 1081)
 
 [node name="Snowballer" parent="." instance=ExtResource("8_xm0rq")]
 position = Vector2(661, 363)
+
+[node name="Snowbomber" parent="." instance=ExtResource("10_mhl3u")]
+position = Vector2(379, 556)
 
 [editable path="Objective"]
 [editable path="Objective/HitboxComponent"]

@@ -1,0 +1,265 @@
+[gd_scene load_steps=38 format=3 uid="uid://dhc0ia08qpgcc"]
+
+[ext_resource type="Script" path="res://entities/projectiles/snowbomb_explosion.gd" id="1_mlx5x"]
+[ext_resource type="Texture2D" uid="uid://cxtjc3npmchq7" path="res://assets/effects/explosions/Effect_PuffAndStars_1_120x109.png" id="2_vo1p6"]
+[ext_resource type="AudioStream" uid="uid://c468j0egwe3to" path="res://assets/sounds/Small Fireball Impact C.wav" id="3_eblph"]
+[ext_resource type="Script" path="res://components/explosion_behavior_component.gd" id="3_p5i34"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w673s"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(0, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uilbx"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(120, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axexi"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(240, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rokro"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(360, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm4d5"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(480, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3er3"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(600, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l4yw"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(720, 0, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6xmt"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(0, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vj3gx"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(120, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndd3l"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(240, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_486j4"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(360, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hvpx"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(480, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wfu1"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(600, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf5en"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(720, 109, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohx6w"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(0, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b23cn"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(120, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u5yw"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(240, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhf2r"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(360, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8okt"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(480, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2yl1"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(600, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13blo"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(720, 218, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl7ot"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(0, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfkq7"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(120, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw2ou"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(240, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdb5w"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(360, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaprp"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(480, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa8wh"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(600, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jq12"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(720, 327, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iag2"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(0, 436, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d5wm"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(120, 436, 120, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufh64"]
+atlas = ExtResource("2_vo1p6")
+region = Rect2(240, 436, 120, 109)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eusrs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w673s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uilbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axexi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rokro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm4d5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3er3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l4yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6xmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vj3gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndd3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_486j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hvpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wfu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf5en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohx6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b23cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u5yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhf2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8okt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2yl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13blo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl7ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfkq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw2ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdb5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaprp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa8wh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jq12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iag2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d5wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufh64")
+}],
+"loop": false,
+"name": &"exploding",
+"speed": 60.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4a02"]
+radius = 40.0
+
+[node name="SnowbombExplosion" type="Area2D"]
+script = ExtResource("1_mlx5x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eusrs")
+animation = &"exploding"
+autoplay = "exploding"
+frame = 30
+frame_progress = 1.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_eblph")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d4a02")
+
+[node name="DamageWindow" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="ExplosionBehaviorComponent" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite", "collision_shape")]
+script = ExtResource("3_p5i34")
+animated_sprite = NodePath("../AnimatedSprite2D")
+collision_shape = NodePath("../CollisionShape2D")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="finished" from="ExplosionSound" to="." method="_on_explosion_sound_finished"]
+[connection signal="timeout" from="DamageWindow" to="." method="_on_damage_window_timeout"]

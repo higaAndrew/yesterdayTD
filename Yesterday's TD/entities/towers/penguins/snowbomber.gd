@@ -1,4 +1,4 @@
-class_name Snowballer
+class_name SnowBomber
 extends StaticBody2D
 
 @onready var aim_component := $AimComponent as AimComponent
@@ -14,4 +14,4 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_attack_component_attacking() -> void:
-	attack_component.throw_projectile_attack("snowball")
+	attack_component.throw_projectile_attack("snowbomb")

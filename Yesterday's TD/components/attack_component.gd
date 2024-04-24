@@ -19,6 +19,7 @@ signal attacking
 
 var projectiles := {
 	"snowball": preload("res://entities/projectiles/snowball.tscn"),
+	"snowbomb": preload("res://entities/projectiles/snowbomb.tscn"),
 }
 var melee_attacks := {
 

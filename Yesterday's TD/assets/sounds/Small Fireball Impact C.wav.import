@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c468j0egwe3to"
+path="res://.godot/imported/Small Fireball Impact C.wav-9e7e4e1abd24cc5d3e6e4fe0d84814dd.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Small Fireball Impact C.wav"
+dest_files=["res://.godot/imported/Small Fireball Impact C.wav-9e7e4e1abd24cc5d3e6e4fe0d84814dd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
