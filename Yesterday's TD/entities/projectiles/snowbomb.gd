@@ -8,9 +8,9 @@ var damage: int
 var velocity: Vector2
 var projectile_penetration: int
 var vfx_finished := false
-var sound_finished := false
-var explosive := "snowbomb_explosion"
+var explosion_type := preload("res://entities/projectiles/snowbomb_explosion.tscn")
 var explosive_scale := 2.0
+var exploded := false
 
 
 func start(_position: Vector2, _rotation: float, _speed: int, _damage: int, _scale: float, _projectile_penetration: int, _aim_component_position: Vector2) -> void:
@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _hit() -> void:
-	projectile_behavior_component.projectile_hit()
+	projectile_behavior_component.explosive_hit()
 
 
 func _on_hit_vfx_animation_finished() -> void:
@@ -31,7 +31,9 @@ func _on_hit_vfx_animation_finished() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	projectile_behavior_component.body_entered_explosive(body, explosive)
+	if not exploded:
+		projectile_behavior_component.body_entered_explosive(body, explosion_type)
+		exploded = true
 
 
 func _on_lifespan_timer_timeout() -> void:

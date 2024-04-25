@@ -64,7 +64,6 @@ func _on_group_timer_timeout() -> void:
 		z_level = 0
 		wave_timer.set_wait_time(wave_delay)
 		wave_timer.start()
-		print("next wave!")
 
 
 func _on_spawn_timer_timeout() -> void:
@@ -73,7 +72,6 @@ func _on_spawn_timer_timeout() -> void:
 		spawn_timer.set_wait_time(spawn_delay)
 		if spawn_delay == 0.0:
 			spawn_timer.set_wait_time(1)
-		print(enemy_iter)
 		var enemy: PathFollow2D = enemies[enemy_type].instantiate()
 		path.add_child(enemy)
 
@@ -83,11 +81,9 @@ func _on_spawn_timer_timeout() -> void:
 
 		enemy_iter += 1
 		spawn_timer.start()
-		print("next enemy!")
 	# if the last enemy has been spawned, reset the spawn count and proceed to the next group
 	elif enemy_iter == enemy_count:
 		enemy_iter = 0
 		current_group += 1
 		group_timer.set_wait_time(group_delay)
 		group_timer.start()
-		print("next group!")

@@ -2,6 +2,7 @@ class_name SnowbombExplosion
 extends Area2D
 
 @onready var explosion_behavior_component := $ExplosionBehaviorComponent as ExplosionBehaviorComponent
+@onready var explosion_sound := $ExplosionSound as AudioStreamPlayer
 
 var damage: int
 var projectile_penetration: int
@@ -11,6 +12,7 @@ var sound_finished := false
 
 func start(_position: Vector2, _rotation: float, _damage: int, _scale: float, _projectile_penetration: int) -> void:
 	explosion_behavior_component.initialize_explosion_behavior(_position, _rotation, _damage, _scale, _projectile_penetration)
+	explosion_sound.play()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

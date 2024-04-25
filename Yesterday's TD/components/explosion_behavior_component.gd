@@ -31,10 +31,14 @@ func explosion_finished(animation_finished: bool, sound_finished: bool) -> void:
 
 
 func body_entered(enemy: Node2D) -> void:
+	if enemy.is_in_group("enemy"):
+		print("enemy!")
+		print(explosion.projectile_penetration)
 	if enemy.is_in_group("enemy") and explosion.projectile_penetration > 0 and enemy not in enemies_hit:
 		enemies_hit.append(enemy)
 		enemy.health_component.take_damage(explosion.damage)
 		_reduce_penetration()
+		print("ay im walkin here")
 
 
 func despawn() -> void:

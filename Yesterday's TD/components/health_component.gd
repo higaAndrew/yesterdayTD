@@ -27,8 +27,6 @@ func take_damage(damage: float) -> void:
 	# if health is below zero, set it to zero
 	current_health -= damage
 	took_damage.emit(current_health)
-	print("ow")
-	print(current_health)
 	if max(0, current_health) == 0:
 		health_zero.emit()
 		die()

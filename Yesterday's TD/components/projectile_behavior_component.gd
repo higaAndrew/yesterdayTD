@@ -8,9 +8,6 @@ extends Node2D
 
 @onready var projectile := $"../" as Area2D
 
-var explosions := {
-	"snowbomb_explosion": preload("res://entities/projectiles/snowbomb_explosion.tscn"),
-}
 var map: Node
 
 
@@ -67,7 +64,7 @@ func body_entered(enemy: Node2D) -> void:
 		projectile_hit()
 
 
-func body_entered_explosive(enemy: Node2D, explosion_type: String) -> void:
+func body_entered_explosive(enemy: Node2D, explosion_type: PackedScene) -> void:
 	if enemy.is_in_group("enemy") and projectile.projectile_penetration > 0:
 		_reduce_penetration()
 		explosive_hit()
@@ -78,8 +75,8 @@ func despawn() -> void:
 	projectile.queue_free()
 
 
-func explode(explosion_type: String) -> void:
-	var explosion: Area2D = explosions[explosion_type].instantiate()
+func explode(explosion_type: PackedScene) -> void:
+	var explosion: Area2D = explosion_type.instantiate()
 	if is_instance_valid(map):
 		map.add_child(explosion)
 	else:

@@ -85,6 +85,8 @@ script = ExtResource("1_ejv72")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.317647, 0.317647, 0.317647, 1)
+light_mask = 16
+visibility_layer = 16
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_roemk")
 animation = &"idle"
@@ -107,12 +109,11 @@ frame_progress = 1.0
 wait_time = 2.0
 autostart = true
 
-[node name="ProjectileBehaviorComponent" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite", "collision_shape", "hit_vfx", "hit_sound")]
+[node name="ProjectileBehaviorComponent" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite", "collision_shape", "hit_vfx")]
 script = ExtResource("5_dii4g")
 animated_sprite = NodePath("../AnimatedSprite2D")
 collision_shape = NodePath("../CollisionShape2D")
 hit_vfx = NodePath("../HitVFX")
-hit_sound = NodePath("")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="HitVFX" to="." method="_on_hit_vfx_animation_finished"]
