@@ -60,7 +60,7 @@ script = ExtResource("1_u1vc3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cawe3")
-animation = &"throw"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Muzzle" type="Marker2D" parent="AnimatedSprite2D"]

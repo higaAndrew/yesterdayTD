@@ -11,8 +11,8 @@ signal dead
 var current_health
 
 
+# set starting health
 func initialize() -> void:
-	# set starting health
 	# if a starting health hasn't been set, just default to the max health
 	if starting_health == 0:
 		current_health = max_health
@@ -22,8 +22,8 @@ func initialize() -> void:
 		current_health = starting_health
 
 
+# deal damage and subtract it from health
 func take_damage(damage: float) -> void:
-	# deal damage and subtract it from health
 	# if health is below zero, set it to zero
 	current_health -= damage
 	took_damage.emit(current_health)
@@ -32,5 +32,6 @@ func take_damage(damage: float) -> void:
 		die()
 
 
+# die
 func die() -> void:
 	dead.emit()

@@ -6,34 +6,33 @@ extends Node2D
 var targets: Array[Node2D]
 
 
+# initializing properties and connecting signals
 func _ready() -> void:
-	# connecting signals
 	range_component.body_target_entered.connect(_add_body_target)
 	range_component.body_target_exited.connect(_remove_body_target)
 	range_component.area_target_entered.connect(_add_area_target)
 	range_component.area_target_exited.connect(_remove_area_target)
 
 
-
+# add a Node2D to the target list
 func _add_body_target(target: Node2D) -> void:
-	# add a Node2D to the target list
 	if target not in targets:
 		targets.append(target)
 
 
+# remove a Node2D from the target list
 func _remove_body_target(target: Node2D) -> void:
-	# remove a Node2D from the target list
 	if target in targets:
 		targets.erase(target)
 
 
+# add an Area2D to the target list
 func _add_area_target(target: Area2D) -> void:
-	# add an Area2D to the target list
 	if target not in targets:
 		targets.append(target)
 
 
+# remove an Area2D from the target list
 func _remove_area_target(target: Area2D) -> void:
-	# remove an Area2D from the target list
 	if target in targets:
 		targets.erase(target)

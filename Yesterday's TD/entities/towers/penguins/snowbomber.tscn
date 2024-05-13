@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://deg7fdp00k301"]
 
 [ext_resource type="Script" path="res://entities/towers/penguins/snowbomber.gd" id="1_w8hj7"]
-[ext_resource type="Texture2D" uid="uid://c2m8dbw2kae7w" path="res://assets/towers/64x64_triangle_white.png" id="2_ovywx"]
+[ext_resource type="Texture2D" uid="uid://5lolwl8orhg3" path="res://assets/towers/64x64_triangle_black.png" id="2_1draf"]
 [ext_resource type="Texture2D" uid="uid://obhi2r8e71sk" path="res://assets/towers/64x64_triangle_red.png" id="3_tos6g"]
 [ext_resource type="Script" path="res://components/aim_component.gd" id="4_2ioa7"]
 [ext_resource type="PackedScene" uid="uid://gk1h0f4x6sv7" path="res://components/attack_component.tscn" id="5_yyj5w"]
@@ -14,7 +14,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ovywx")
+"texture": ExtResource("2_1draf")
 }],
 "loop": true,
 "name": &"idle",
@@ -39,7 +39,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_tos6g")
 }],
-"loop": true,
+"loop": false,
 "name": &"throw",
 "speed": 15.0
 }]
@@ -59,7 +59,6 @@ collision_mask = 0
 script = ExtResource("1_w8hj7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
 sprite_frames = SubResource("SpriteFrames_cawe3")
 animation = &"idle"
 autoplay = "idle"
@@ -81,7 +80,6 @@ attacker = NodePath("..")
 rate_of_fire = 3.0
 attack_type = ExtResource("6_tjw58")
 projectile_scale = 0.1
-projectile_penetration = 20
 animated_sprite = NodePath("../AnimatedSprite2D")
 aim_component = NodePath("../AimComponent")
 

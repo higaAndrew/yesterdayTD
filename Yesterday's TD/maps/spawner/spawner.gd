@@ -29,16 +29,16 @@ var wave_delay := 10
 var z_level := 0
 
 
+# wait for map to be ready, fetch wave data, and start WaveTimer
 func _ready() -> void:
-	# wait for map to be ready, fetch waves data, and start WaveTimer
 	await owner.ready
 	waves = map.waves
 	wave_count = waves.size()
 	wave_timer.start()
 
 # i really REALLY wish i could have used for loops for this it would have made it so much easier for me
+# when WaveTimer ends, fetch specific wave data, and start GroupTimer
 func _on_wave_timer_timeout() -> void:
-	# when WaveTimer ends, fetch specific wave data, and start GroupTimer
 	if current_wave < wave_count:
 		wave = waves[current_wave]
 		group_count = wave.size()
@@ -48,8 +48,8 @@ func _on_wave_timer_timeout() -> void:
 		print("No more waves!")
 
 
+# when GroupTimer ends, fetch group data, and start SpawnTimer
 func _on_group_timer_timeout() -> void:
-	# when GroupTimer ends, fetch group data, and start SpawnTimer
 	if current_group < group_count:
 		group = wave[current_group]
 		enemy_type = group["enemy_type"]
@@ -57,7 +57,7 @@ func _on_group_timer_timeout() -> void:
 		spawn_delay = group["spawn_delay"]
 		group_delay = group["group_delay"]
 		spawn_timer.start()
-	# if the last group has been reached, reset the group count and proceed to the next wave
+	# if the final group has been reached, reset the group count and proceed to the next wave
 	elif current_group == group_count:
 		current_group = 0
 		current_wave += 1
@@ -66,8 +66,8 @@ func _on_group_timer_timeout() -> void:
 		wave_timer.start()
 
 
+# when SpawnTimer ends, spawn the enemy on the path, and set up the next SpawnTimer
 func _on_spawn_timer_timeout() -> void:
-	# when SpawnTimer ends, spawn the enemy on the path, and set up the next SpawnTimer
 	if enemy_iter < enemy_count:
 		spawn_timer.set_wait_time(spawn_delay)
 		if spawn_delay == 0.0:
@@ -77,11 +77,14 @@ func _on_spawn_timer_timeout() -> void:
 
 		# to prevent z-fighting
 		enemy.z_index = z_level
-		z_level += 1
+		if z_level > 100:
+			z_level = 0
+		else:
+			z_level += 1
 
 		enemy_iter += 1
 		spawn_timer.start()
-	# if the last enemy has been spawned, reset the spawn count and proceed to the next group
+	# if the final enemy has been spawned, reset the spawn count and proceed to the next group
 	elif enemy_iter == enemy_count:
 		enemy_iter = 0
 		current_group += 1

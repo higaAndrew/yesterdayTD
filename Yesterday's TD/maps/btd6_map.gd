@@ -7,6 +7,8 @@ extends Node2D
 @onready var gamerules := $Gamerules as Gamerules
 @onready var spawner := $Spawner as Spawner
 
+
+# set spawn waves for map
 # spawn group format:
 # {"enemy_type": "", "enemy_count": , "spawn_delay": , "group_delay": },
 var classic_waves := [
@@ -22,6 +24,7 @@ var classic_waves := [
 ]
 
 
+# set gamemode
 func _ready() -> void:
 	if gamerules.gamemode == "classic":
 		waves = classic_waves

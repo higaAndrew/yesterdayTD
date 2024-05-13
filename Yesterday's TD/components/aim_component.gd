@@ -6,6 +6,8 @@ extends RayCast2D
 
 @onready var attacker := $"../" as Node2D
 
+
+# if check for targets and rotate towards them
 func rotate_towards_target(delta: float) -> void:
 	# check to see if there are targets
 	# if there are, rotate towards them
@@ -15,5 +17,6 @@ func rotate_towards_target(delta: float) -> void:
 		attacker.rotation = lerp_angle(attacker.rotation, target_rotation, rotation_speed * delta)
 
 
+# returns the position of the aiming reticle
 func get_reticle_position() -> Vector2:
 	return self.get_collision_point()

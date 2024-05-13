@@ -8,6 +8,7 @@ extends Node2D
 var stopped := false
 
 
+# every physics frame, follow along the set path
 func _physics_process(delta: float) -> void:
 	# follow along the map's path
 	path.set_progress(path.get_progress() + velocity_component.speed * delta)
