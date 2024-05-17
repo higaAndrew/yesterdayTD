@@ -28,12 +28,14 @@ var melee_attacks := {
 var can_attack := true
 var _position: Vector2
 var _aim_component_position: Vector2
-var map: Node
+var map: Node2D
+var projectilePath: CanvasLayer
 
 
 # locate the parent map for spawning the projectiles into
 func _ready() -> void:
 	map = find_parent("Map")
+	projectilePath = map.find_child("Projectiles")
 
 
 # rotate towards target and attack
@@ -65,7 +67,7 @@ func throw_projectile_attack(projectile_type: String) -> void:
 	var projectile: Area2D = projectiles[projectile_type].instantiate()
 	# spawn projectiles in the map
 	if is_instance_valid(map):
-		map.add_child(projectile)
+		projectilePath.add_child(projectile)
 	# make the attacker the parent (this shouldn't ever really happen)
 	else:
 		owner.add_child(projectile)

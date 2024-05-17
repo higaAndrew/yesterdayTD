@@ -496,12 +496,6 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_40nko")
-
-[node name="PistonPath" parent="Path2D" instance=ExtResource("5_ddxkx")]
-position = Vector2(-79, 445)
-
 [node name="Spawner" parent="." instance=ExtResource("5_ux7xf")]
 position = Vector2(-79, 445)
 
@@ -510,11 +504,31 @@ position = Vector2(768, 1081)
 
 [node name="Gamerules" parent="." instance=ExtResource("7_uh61t")]
 
-[node name="Snowballer" parent="." instance=ExtResource("8_xm0rq")]
+[node name="GroundEnemies" type="CanvasLayer" parent="."]
+
+[node name="GroundEnemyPath" type="Path2D" parent="GroundEnemies"]
+curve = SubResource("Curve2D_40nko")
+
+[node name="PistonPath" parent="GroundEnemies/GroundEnemyPath" instance=ExtResource("5_ddxkx")]
+position = Vector2(-79, 445)
+
+[node name="VehicleEnemies" type="CanvasLayer" parent="."]
+
+[node name="Towers" type="CanvasLayer" parent="."]
+
+[node name="Snowballer" parent="Towers" instance=ExtResource("8_xm0rq")]
 position = Vector2(661, 363)
 
-[node name="Snowbomber" parent="." instance=ExtResource("10_mhl3u")]
+[node name="Snowbomber" parent="Towers" instance=ExtResource("10_mhl3u")]
 position = Vector2(379, 556)
+
+[node name="Bosses" type="CanvasLayer" parent="."]
+
+[node name="AirEnemies" type="CanvasLayer" parent="."]
+
+[node name="Effects" type="CanvasLayer" parent="."]
+
+[node name="Projectiles" type="CanvasLayer" parent="."]
 
 [editable path="Objective"]
 [editable path="Objective/HitboxComponent"]

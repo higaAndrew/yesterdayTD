@@ -27,11 +27,7 @@ import/blender/enabled=false
 
 [layer_names]
 
-2d_render/layer_1="grounded_enemies"
-2d_render/layer_2="vehicular_enemies"
-2d_render/layer_3="flying_enemies"
-2d_render/layer_4="towers"
-2d_render/layer_5="projectiles"
+2d_render/layer_1="enemies"
 2d_physics/layer_1="enemy"
 2d_physics/layer_2="tower"
 2d_physics/layer_3="projectile"

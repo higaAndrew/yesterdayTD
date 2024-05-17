@@ -8,12 +8,15 @@ extends Node2D
 
 @onready var projectile := $"../" as Area2D
 
-var map: Node
+var map: Node2D
+var explosionPath: CanvasLayer
 
 
 # locate parent map for spawning projectiles
 func _ready() -> void:
 	map = find_parent("Map")
+	explosionPath = map.find_child("Effects")
+
 
 
 # initialize explosion properties
@@ -77,7 +80,7 @@ func body_entered_explosive(enemy: Node2D, explosion_type: PackedScene) -> void:
 	if enemy.is_in_group("enemy") and projectile.pierce > 0:
 		_reduce_pierce()
 		explosive_hit()
-		explode(explosion_type)
+		create_explosion(explosion_type)
 
 
 # delete
@@ -86,10 +89,10 @@ func despawn() -> void:
 
 
 # spawn explosion at the explosive
-func explode(explosion_type: PackedScene) -> void:
+func create_explosion(explosion_type: PackedScene) -> void:
 	var explosion: Area2D = explosion_type.instantiate()
-	if is_instance_valid(map):
-		map.add_child(explosion)
+	if is_instance_valid(explosionPath):
+		explosionPath.add_child(explosion)
 	else:
 		owner.add_child(explosion)
 	explosion.start(projectile.position, projectile.rotation, projectile.damage, projectile.explosive_scale, projectile.pierce)

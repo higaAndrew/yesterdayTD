@@ -2,7 +2,7 @@ class_name Spawner
 extends Node2D
 
 @onready var map := $"../" as Node2D
-@onready var path := $"../Path2D" as Path2D
+@onready var path := $"../GroundEnemies/GroundEnemyPath" as Path2D
 @onready var wave_timer := $WaveTimer as Timer
 @onready var group_timer := $GroupTimer as Timer
 @onready var spawn_timer := $SpawnTimer as Timer
@@ -61,7 +61,7 @@ func _on_group_timer_timeout() -> void:
 	elif current_group == group_count:
 		current_group = 0
 		current_wave += 1
-		z_level = 0
+		#z_level = 0
 		wave_timer.set_wait_time(wave_delay)
 		wave_timer.start()
 
@@ -76,11 +76,11 @@ func _on_spawn_timer_timeout() -> void:
 		path.add_child(enemy)
 
 		# to prevent z-fighting
-		enemy.z_index = z_level
-		if z_level > 100:
-			z_level = 0
-		else:
-			z_level += 1
+		#enemy.z_index = z_level
+		#if z_level > 100:
+			#z_level = 0
+		#else:
+			#z_level += 1
 
 		enemy_iter += 1
 		spawn_timer.start()
