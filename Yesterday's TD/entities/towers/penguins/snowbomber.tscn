@@ -80,6 +80,7 @@ attacker = NodePath("..")
 rate_of_fire = 3.0
 attack_type = ExtResource("6_tjw58")
 projectile_scale = 0.1
+projectile_pierce = 2
 animated_sprite = NodePath("../AnimatedSprite2D")
 aim_component = NodePath("../AimComponent")
 
