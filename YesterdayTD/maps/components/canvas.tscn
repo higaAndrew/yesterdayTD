@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c33yetp828yaf"]
+
+[node name="Canvas" type="Node"]
+
+[node name="GroundEnemies" type="CanvasLayer" parent="."]
+
+[node name="VehicleEnemies" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Towers" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Projectiles" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Explosions" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="GroundBosses" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="AirEnemies" type="CanvasLayer" parent="."]
+layer = 7
+
+[node name="AirBosses" type="CanvasLayer" parent="."]
+layer = 8

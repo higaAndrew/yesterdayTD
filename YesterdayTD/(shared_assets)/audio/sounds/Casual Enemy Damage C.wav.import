@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://s3busndd4ewv"
+path="res://.godot/imported/Casual Enemy Damage C.wav-b0088165ce75c9fe3d5c6438b02745bb.sample"
+
+[deps]
+
+source_file="res://(shared_assets)/audio/sounds/Casual Enemy Damage C.wav"
+dest_files=["res://.godot/imported/Casual Enemy Damage C.wav-b0088165ce75c9fe3d5c6438b02745bb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
