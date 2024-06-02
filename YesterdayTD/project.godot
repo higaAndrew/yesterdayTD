@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="YesterdayTD"
-run/main_scene="res://(debug)/btd6_monkey_meadow.tscn"
+run/main_scene="res://0_debug/btd6_monkey_meadow.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,3 +25,10 @@ window/stretch/mode="viewport"
 
 import/blender/enabled=false
 import/fbx/enabled=false
+
+[layer_names]
+
+2d_physics/layer_1="enemy"
+2d_physics/layer_2="tower"
+2d_physics/layer_3="projectile"
+2d_physics/layer_4="objective"

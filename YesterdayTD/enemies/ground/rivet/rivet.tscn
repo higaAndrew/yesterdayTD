@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmdeyfgmoud2j"]
+
+[ext_resource type="Script" path="res://0_shared_assets/state_machine/state_machine.gd" id="2_4prv3"]
+
+[node name="RivetPath" type="PathFollow2D"]
+
+[node name="Rivet" type="Area2D" parent="."]
+
+[node name="Animations" type="AnimatedSprite2D" parent="Rivet"]
+
+[node name="Hitbox" type="CollisionShape2D" parent="Rivet"]
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Rivet"]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Rivet"]
+
+[node name="SpawnPoint" type="Marker2D" parent="Rivet"]
+
+[node name="DespawnPoint" type="Marker2D" parent="Rivet"]
+
+[node name="StateMachine" type="Node" parent="Rivet"]
+script = ExtResource("2_4prv3")

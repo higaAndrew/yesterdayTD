@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bcavmlfsw62od"
-path="res://.godot/imported/Material Layer Metal C.wav-b04884de5b45f7598dd466ae4d285a81.sample"
+path="res://.godot/imported/Material Layer Metal C.wav-ec5b9236a0541a7978af68df32d8e45a.sample"
 
 [deps]
 
-source_file="res://(shared_assets)/audio/sounds/Material Layer Metal C.wav"
-dest_files=["res://.godot/imported/Material Layer Metal C.wav-b04884de5b45f7598dd466ae4d285a81.sample"]
+source_file="res://0_shared_assets/audio/sounds/Material Layer Metal C.wav"
+dest_files=["res://.godot/imported/Material Layer Metal C.wav-ec5b9236a0541a7978af68df32d8e45a.sample"]
 
 [params]
 

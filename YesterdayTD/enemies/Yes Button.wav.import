@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b3c6j0mprxgcq"
+path="res://.godot/imported/Yes Button.wav-15e67f3e1759570fcb6911f2c6f9b7bb.sample"
+
+[deps]
+
+source_file="res://enemies/Yes Button.wav"
+dest_files=["res://.godot/imported/Yes Button.wav-15e67f3e1759570fcb6911f2c6f9b7bb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

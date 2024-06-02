@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://y7yageimaynj"
+path="res://.godot/imported/Quick Click Double.wav-ad02d00b966c183b9a9c33034a210ae1.sample"
+
+[deps]
+
+source_file="res://enemies/Quick Click Double.wav"
+dest_files=["res://.godot/imported/Quick Click Double.wav-ad02d00b966c183b9a9c33034a210ae1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

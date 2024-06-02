@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bao55o08exsjq"
+path="res://.godot/imported/Hollow Clicks Double.wav-773d2c1261c71a4cda5750d77cc9914d.sample"
+
+[deps]
+
+source_file="res://enemies/Hollow Clicks Double.wav"
+dest_files=["res://.godot/imported/Hollow Clicks Double.wav-773d2c1261c71a4cda5750d77cc9914d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

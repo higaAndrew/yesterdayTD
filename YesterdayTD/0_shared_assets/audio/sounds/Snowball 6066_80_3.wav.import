@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dr4e7ao7ryjfg"
-path="res://.godot/imported/Snowball 6066_80_3.wav-144d7227a1328de78f62d66359c0ad1f.sample"
+path="res://.godot/imported/Snowball 6066_80_3.wav-8f4f057a7d0dd3054fbfec53e70ff48e.sample"
 
 [deps]
 
-source_file="res://(shared_assets)/audio/sounds/Snowball 6066_80_3.wav"
-dest_files=["res://.godot/imported/Snowball 6066_80_3.wav-144d7227a1328de78f62d66359c0ad1f.sample"]
+source_file="res://0_shared_assets/audio/sounds/Snowball 6066_80_3.wav"
+dest_files=["res://.godot/imported/Snowball 6066_80_3.wav-8f4f057a7d0dd3054fbfec53e70ff48e.sample"]
 
 [params]
 

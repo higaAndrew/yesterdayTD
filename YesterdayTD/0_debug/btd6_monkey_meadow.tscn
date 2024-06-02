@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca0oc8wyuuym7"]
+[gd_scene load_steps=8 format=3 uid="uid://ca0oc8wyuuym7"]
 
-[ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_7h6iv"]
-[ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_gh81h"]
-[ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="3_06v1q"]
+[ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_1yt3a"]
+[ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_nvtt2"]
+[ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="3_v8dut"]
+[ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground/piston/piston.tscn" id="4_p10xa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgo40"]
-texture = ExtResource("2_gh81h")
+texture = ExtResource("2_nvtt2")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -456,7 +457,7 @@ sources/0 = SubResource("TileSetAtlasSource_fgo40")
 
 [sub_resource type="Curve2D" id="Curve2D_h4wvv"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -64, 448, -58.8728, 2.81484, 58.8728, -2.81484, 768, 448, 0, 63.5678, 0, -63.5678, 832, 384, 1.49831, 64.9726, -1.49831, -64.9726, 832, 256, 60.3894, -1.05946, -60.3894, 1.05946, 768, 192, 66.3203, 0, -66.3203, 0, 640, 192, -1.05946, -65.6867, 1.05946, 65.6867, 576, 256, -0.620616, -61.4306, 0.620616, 61.4306, 576, 768, 62.5083, -2.11893, -62.5083, 2.11893, 512, 832, 65.3049, 2.99661, -65.3049, -2.99661, 384, 832, -1.05946, 62.5083, 1.05946, -62.5083, 320, 768, -0.877684, 65.8062, 0.877684, -65.8062, 320, 704, -64.6272, -2.11893, 64.6272, 2.11893, 384, 640, -63.443, 1.75538, 63.443, -1.75538, 960, 640, 0, 62.5083, 0, -62.5083, 1024, 576, -0.695915, 64.7596, 0.695915, -64.7596, 1024, 448, -64.6272, 1.05946, 64.6272, -1.05946, 1088, 384, -63.5678, 9.53674e-07, 63.5678, -9.53674e-07, 1152, 384, -1.49831, -63.2613, 1.49831, 63.2613, 1216, 448, 0, -66.3643, 0, 66.3643, 1216, 704, 62.5083, -1.05946, -62.5083, 1.05946, 1152, 768, 64.3653, 0.0752988, -64.3653, -0.0752988, 832, 768, -1.05946, -62.5083, 1.05946, 62.5083, 768, 832, 0, 0, 0, 0, 768, 1152)
+"points": PackedVector2Array(0, 0, 0, 0, -64, 448, -63.9657, 0.00485291, 63.9657, -0.00485291, 768, 448, -2.98023e-08, 63.8484, 2.98023e-08, -63.8484, 832, 384, -0.0450754, 63.9904, 0.0450754, -63.9904, 832, 256, 64.0374, -0.0773048, -64.0374, 0.0773048, 768, 192, 63.9351, 0.420923, -63.9351, -0.420923, 640, 192, 0.0630026, -64.2836, -0.0630026, 64.2836, 576, 256, 0.0872898, -64.2622, -0.0872898, 64.2622, 576, 768, 63.8848, 0.20027, -63.8848, -0.20027, 512, 832, 64.206, -0.0472651, -64.206, 0.0472651, 384, 832, -0.115586, 63.9241, 0.115586, -63.9241, 320, 768, -0.0280437, 63.5857, 0.0280437, -63.5857, 320, 704, -63.9201, 0.00239086, 63.9201, -0.00239086, 384, 640, -63.443, -0.365941, 63.443, 0.365941, 960, 640, -0.353553, 63.9225, 0.353553, -63.9225, 1024, 576, 0.364745, 63.6989, -0.364745, -63.6989, 1024, 448, -64.4279, -0.20046, 64.4279, 0.20046, 1088, 384, -61.8, 5.96046e-07, 61.8, -5.96046e-07, 1152, 384, 0.269457, -63.9684, -0.269457, 63.9684, 1216, 448, 0, -64.243, 0, 64.243, 1216, 704, 63.9225, 0.354755, -63.9225, -0.354755, 1152, 768, 64.0117, 0.428852, -64.0117, -0.428852, 832, 768, -0.352353, -63.9225, 0.352353, 63.9225, 768, 832, 0, 0, 0, 0, 768, 1152)
 }
 point_count = 24
 
@@ -466,9 +467,10 @@ point_count = 24
 anchor_mode = 0
 
 [node name="Background" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_7h6iv")
+offset_left = -8.0
+offset_right = 1911.0
+offset_bottom = 1079.0
+texture = ExtResource("1_1yt3a")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_mvleh")
@@ -483,21 +485,49 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Canvas" parent="." instance=ExtResource("3_06v1q")]
+[node name="Canvas" parent="." instance=ExtResource("3_v8dut")]
+
+[node name="GroundEnemies" parent="Canvas" index="0"]
+follow_viewport_enabled = true
 
 [node name="GroundEnemyPath" type="Path2D" parent="Canvas/GroundEnemies" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
+[node name="PistonPath" parent="Canvas/GroundEnemies/GroundEnemyPath" instance=ExtResource("4_p10xa")]
+position = Vector2(-64, 448)
+
+[node name="VehicleEnemies" parent="Canvas" index="1"]
+follow_viewport_enabled = true
+
 [node name="VehicleEnemyPath" type="Path2D" parent="Canvas/VehicleEnemies" index="0"]
 curve = SubResource("Curve2D_h4wvv")
+
+[node name="Towers" parent="Canvas" index="2"]
+follow_viewport_enabled = true
+
+[node name="Projectiles" parent="Canvas" index="3"]
+follow_viewport_enabled = true
+
+[node name="Explosions" parent="Canvas" index="4"]
+follow_viewport_enabled = true
+
+[node name="GroundBosses" parent="Canvas" index="5"]
+follow_viewport_enabled = true
 
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
+[node name="AirEnemies" parent="Canvas" index="6"]
+follow_viewport_enabled = true
+
 [node name="AirEnemyPath" type="Path2D" parent="Canvas/AirEnemies" index="0"]
 curve = SubResource("Curve2D_h4wvv")
+
+[node name="AirBosses" parent="Canvas" index="7"]
+follow_viewport_enabled = true
 
 [node name="AirBossPath" type="Path2D" parent="Canvas/AirBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
 [editable path="Canvas"]
+[editable path="Canvas/GroundEnemies/GroundEnemyPath/PistonPath"]

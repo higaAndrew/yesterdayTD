@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cgr2l7bbpefej"
+path="res://.godot/imported/Soft Button.wav-a62bd1380edbba8c328ae407fb398392.sample"
+
+[deps]
+
+source_file="res://enemies/Soft Button.wav"
+dest_files=["res://.godot/imported/Soft Button.wav-a62bd1380edbba8c328ae407fb398392.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
