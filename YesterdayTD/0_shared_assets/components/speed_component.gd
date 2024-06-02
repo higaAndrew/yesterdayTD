@@ -1,4 +1,4 @@
-class_name Speed
+class_name SpeedComponent
 extends Node
 
 var parent: Node2D

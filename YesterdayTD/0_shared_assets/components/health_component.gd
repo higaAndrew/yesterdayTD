@@ -1,4 +1,4 @@
-class_name Health
+class_name HealthComponent
 extends Node
 
 var parent: Node2D

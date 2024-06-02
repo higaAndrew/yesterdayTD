@@ -4,10 +4,9 @@ extends Area2D
 @export var stats: EnemyStats
 
 @onready var state_machine := $StateMachine as StateMachine
-@onready var health := $Health as Health
-@onready var speed := $Speed as Speed
-
-@onready var path_movement := $PathMovement as PathMovement
+@onready var health := $HealthComponent as HealthComponent
+@onready var speed := $SpeedComponent as SpeedComponent
+@onready var path_movement := $PathMovementComponent as PathMovementComponent
 
 
 ## init statemachine and components

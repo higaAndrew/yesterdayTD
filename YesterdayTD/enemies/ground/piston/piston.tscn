@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://q3l0ex5ibdmm"]
+[gd_scene load_steps=21 format=3 uid="uid://q3l0ex5ibdmm"]
 
 [ext_resource type="Script" path="res://enemies/ground/piston/piston.gd" id="1_sn8i6"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="1_xyu1i"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_kux8k"]
 [ext_resource type="Script" path="res://0_shared_assets/state_machine/state_machine.gd" id="4_4t2d8"]
 [ext_resource type="Script" path="res://0_shared_assets/state_machine/states/follow_path.gd" id="5_gsrm0"]
-[ext_resource type="Script" path="res://0_shared_assets/components/health.gd" id="6_lr3bi"]
-[ext_resource type="Script" path="res://0_shared_assets/components/path_movement.gd" id="7_hq5qu"]
-[ext_resource type="Script" path="res://0_shared_assets/components/speed.gd" id="8_e0fe8"]
+[ext_resource type="Script" path="res://0_shared_assets/components/health_component.gd" id="7_knbjp"]
+[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/die.gd" id="7_xbb7k"]
+[ext_resource type="Script" path="res://0_shared_assets/components/speed_component.gd" id="8_0hqio"]
+[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/damage_objective.gd" id="8_o8gd8"]
+[ext_resource type="Script" path="res://0_shared_assets/components/path_movement_component.gd" id="9_p81yy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccv6x"]
 radius = 16.0
@@ -69,6 +71,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8m3o2"]
+radius = 0.01
+
 [node name="PistonPath" type="PathFollow2D"]
 loop = false
 
@@ -93,8 +98,11 @@ autoplay = "idle"
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
 position = Vector2(16, 0)
 
-[node name="DespawnPoint" type="Marker2D" parent="Piston"]
+[node name="DespawnPoint" type="Area2D" parent="Piston"]
 position = Vector2(-16, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Piston/DespawnPoint"]
+shape = SubResource("CircleShape2D_8m3o2")
 
 [node name="StateMachine" type="Node" parent="Piston" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_4t2d8")
@@ -103,13 +111,21 @@ initial_state = NodePath("FollowPath")
 [node name="FollowPath" type="Node" parent="Piston/StateMachine"]
 script = ExtResource("5_gsrm0")
 
-[node name="Health" type="Node" parent="Piston"]
-script = ExtResource("6_lr3bi")
+[node name="Die" type="Node" parent="Piston/StateMachine"]
+script = ExtResource("7_xbb7k")
 
-[node name="Speed" type="Node" parent="Piston"]
-script = ExtResource("8_e0fe8")
+[node name="DamageObjective" type="Node" parent="Piston/StateMachine"]
+script = ExtResource("8_o8gd8")
 
-[node name="PathMovement" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed")]
-script = ExtResource("7_hq5qu")
+[node name="HealthComponent" type="Node" parent="Piston"]
+script = ExtResource("7_knbjp")
+
+[node name="SpeedComponent" type="Node" parent="Piston"]
+script = ExtResource("8_0hqio")
+
+[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point")]
+script = ExtResource("9_p81yy")
 path = NodePath("../..")
-speed = NodePath("../Speed")
+speed = NodePath("../SpeedComponent")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
