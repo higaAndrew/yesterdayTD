@@ -7,9 +7,7 @@ extends Area2D
 @onready var health := $HealthComponent as HealthComponent
 
 func _ready() -> void:
-	if not is_instance_valid(stats):
-		printerr("Objective has no ObjectiveStats resource!")
-		return
+	GlobalScripts.verify(self, stats, "stats")
 
 	state_machine.init(self)
 	health.init(self)

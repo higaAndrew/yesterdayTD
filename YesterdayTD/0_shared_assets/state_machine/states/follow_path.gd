@@ -10,9 +10,8 @@ func enter() -> void:
 	path_movement = parent.path_movement
 	health = parent.health
 
-	if not is_instance_valid(path_movement) or not is_instance_valid(health):
-		printerr("FollowPath's parent is missing one or more components!")
-		return
+	GlobalScripts.verify(parent, path_movement, "path_movement")
+	GlobalScripts.verify(parent, health, "health")
 
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 

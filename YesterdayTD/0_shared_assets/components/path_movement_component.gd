@@ -4,29 +4,28 @@ extends Node
 signal reached_end
 
 @export var path: PathFollow2D
-@export var parent: Node2D
 @export var speed: SpeedComponent
 @export var spawn_point: Marker2D
 @export var despawn_point: Area2D
+@export var parent: Area2D
 
 var phase := 0
-var spawn_position: int
-var despawn_position: int
+var spawn_position: float
+var despawn_position: float
 
 
 ## ensure the necessary nodes are connected
 func _ready() -> void:
-	if not is_instance_valid(path) or not is_instance_valid(speed):
-		printerr("PathMovementComponent is missing a PathComponent or a SpeedComponent!")
-		return
+	GlobalScripts.verify(self, path, "path")
+	GlobalScripts.verify(self, speed, "speed")
 	set_spawn_despawn_points()
 
 
 ## adjusts the path position to the front of the sprite
 func set_spawn_despawn_points() -> void:
 	if is_instance_valid(spawn_point) and is_instance_valid(despawn_point):
-		spawn_position = int(spawn_point.position.x) * parent.scale.x
-		despawn_position = int(despawn_point.position.x) * parent.scale.x
+		spawn_position = spawn_point.position.x * parent.scale.x
+		despawn_position = despawn_point.position.x * parent.scale.x
 		path.h_offset -= spawn_position
 	else:
 		printerr("PathMovementComponent is missing a SpawnPoint or DespawnPoint!")

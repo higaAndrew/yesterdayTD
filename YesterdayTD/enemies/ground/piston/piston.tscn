@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://enemies/ground/piston/piston.gd" id="1_sn8i6"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="1_xyu1i"]
-[ext_resource type="Resource" uid="uid://c5a8a7eftsdow" path="res://enemies/ground/piston/piston_stats.tres" id="2_hk48n"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_kux8k"]
+[ext_resource type="Resource" uid="uid://c5a8a7eftsdow" path="res://enemies/ground/piston/piston_stats.tres" id="2_oay5v"]
 [ext_resource type="Script" path="res://0_shared_assets/state_machine/state_machine.gd" id="4_4t2d8"]
 [ext_resource type="Script" path="res://0_shared_assets/state_machine/states/follow_path.gd" id="5_gsrm0"]
 [ext_resource type="Script" path="res://0_shared_assets/components/health_component.gd" id="7_knbjp"]
@@ -80,7 +80,7 @@ loop = false
 [node name="Piston" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
 collision_mask = 4
 script = ExtResource("1_sn8i6")
-stats = ExtResource("2_hk48n")
+stats = ExtResource("2_oay5v")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Piston"]
 shape = SubResource("CapsuleShape2D_ccv6x")
@@ -123,10 +123,10 @@ script = ExtResource("7_knbjp")
 [node name="SpeedComponent" type="Node" parent="Piston"]
 script = ExtResource("8_0hqio")
 
-[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "parent", "speed", "spawn_point", "despawn_point")]
+[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point", "parent")]
 script = ExtResource("9_p81yy")
 path = NodePath("../..")
-parent = NodePath("..")
 speed = NodePath("../SpeedComponent")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
+parent = NodePath("..")

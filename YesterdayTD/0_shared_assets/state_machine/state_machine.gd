@@ -9,8 +9,7 @@ var current_state: State
 
 ## creation/initialization of state machine
 func init(parent: Node2D) -> void:
-	if not is_instance_valid(parent):
-		printerr("StateMachine has no parent! Did you forget to call init(self)?")
+	GlobalScripts.verify(self, parent, "parent")
 	for child in get_children():
 		if child is State:
 			states.append(child)
