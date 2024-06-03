@@ -61,7 +61,7 @@ script = ExtResource("1_yw4fi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rivet"]
 sprite_frames = SubResource("SpriteFrames_ga8m1")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rivet"]
