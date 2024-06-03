@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca0oc8wyuuym7"]
+[gd_scene load_steps=9 format=3 uid="uid://ca0oc8wyuuym7"]
 
 [ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_1yt3a"]
 [ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_nvtt2"]
+[ext_resource type="PackedScene" uid="uid://dehl3iglcj2hu" path="res://maps/components/objective.tscn" id="3_7q337"]
 [ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="3_v8dut"]
 [ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground/piston/piston.tscn" id="4_p10xa"]
 
@@ -484,6 +485,9 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
+
+[node name="Objective" parent="." instance=ExtResource("3_7q337")]
+position = Vector2(768, 1152)
 
 [node name="Canvas" parent="." instance=ExtResource("3_v8dut")]
 

@@ -9,6 +9,8 @@ var current_state: State
 
 ## creation/initialization of state machine
 func init(parent: Node2D) -> void:
+	if not is_instance_valid(parent):
+		printerr("StateMachine has no parent! Did you forget to call init(self)?")
 	for child in get_children():
 		if child is State:
 			states.append(child)
@@ -18,7 +20,8 @@ func init(parent: Node2D) -> void:
 	if is_instance_valid(initial_state):
 		change_state(initial_state)
 	else:
-		printerr("No initial state has been set.")
+		printerr("No initial state has been set!")
+		return
 
 
 ## handle state transitions
@@ -30,7 +33,7 @@ func on_state_transition(state: State, new_state: State):
 	if new_state in states:
 		change_state(new_state)
 	else:
-		printerr("The state you are trying to transition to is not in the list of states.")
+		printerr("The state you are trying to transition to is not in the list of states!")
 		return
 
 

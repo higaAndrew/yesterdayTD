@@ -123,9 +123,10 @@ script = ExtResource("7_knbjp")
 [node name="SpeedComponent" type="Node" parent="Piston"]
 script = ExtResource("8_0hqio")
 
-[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point")]
+[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "parent", "speed", "spawn_point", "despawn_point")]
 script = ExtResource("9_p81yy")
 path = NodePath("../..")
+parent = NodePath("..")
 speed = NodePath("../SpeedComponent")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")

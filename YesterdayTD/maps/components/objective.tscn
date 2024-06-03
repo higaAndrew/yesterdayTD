@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://dehl3iglcj2hu"]
+
+[ext_resource type="Script" path="res://0_shared_assets/components/health_component.gd" id="1_bkbix"]
+[ext_resource type="Script" path="res://maps/components/objective.gd" id="1_c1r7e"]
+[ext_resource type="Resource" uid="uid://che5utklrqqsq" path="res://maps/components/objective_stats.tres" id="2_mugiu"]
+[ext_resource type="Script" path="res://0_shared_assets/state_machine/state_machine.gd" id="3_wv2hy"]
+[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/idle.gd" id="4_s17af"]
+[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/take_damage.gd" id="5_hgig2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8p5c1"]
+radius = 64.0
+
+[node name="Objective" type="Area2D" groups=["objectives"]]
+collision_layer = 8
+script = ExtResource("1_c1r7e")
+stats = ExtResource("2_mugiu")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8p5c1")
+
+[node name="LifeLostSound" type="AudioStreamPlayer" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_wv2hy")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_s17af")
+
+[node name="TakeDamage" type="Node" parent="StateMachine"]
+script = ExtResource("5_hgig2")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_bkbix")

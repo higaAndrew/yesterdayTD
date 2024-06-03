@@ -15,6 +15,10 @@ run/main_scene="res://0_debug/btd6_monkey_meadow.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalScripts="*res://game/global_scripts.gd"
+
 [display]
 
 window/size/viewport_width=1920
