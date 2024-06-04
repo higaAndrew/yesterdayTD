@@ -1,16 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://q3l0ex5ibdmm"]
+[gd_scene load_steps=20 format=3 uid="uid://q3l0ex5ibdmm"]
 
 [ext_resource type="Script" path="res://enemies/ground/piston/piston.gd" id="1_sn8i6"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="1_xyu1i"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_kux8k"]
 [ext_resource type="Resource" uid="uid://c5a8a7eftsdow" path="res://enemies/ground/piston/piston_stats.tres" id="2_oay5v"]
-[ext_resource type="Script" path="res://0_shared_assets/state_machine/state_machine.gd" id="4_4t2d8"]
-[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/follow_path.gd" id="5_gsrm0"]
-[ext_resource type="Script" path="res://0_shared_assets/components/health_component.gd" id="7_knbjp"]
-[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/die.gd" id="7_xbb7k"]
-[ext_resource type="Script" path="res://0_shared_assets/components/speed_component.gd" id="8_0hqio"]
-[ext_resource type="Script" path="res://0_shared_assets/state_machine/states/damage_objective.gd" id="8_o8gd8"]
-[ext_resource type="Script" path="res://0_shared_assets/components/path_movement_component.gd" id="9_p81yy"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_bhwre"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/follow_path.gd" id="6_wvvuc"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/die.gd" id="7_iylmw"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_rtvkk"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="9_u6f8i"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="10_gdnqo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccv6x"]
 radius = 16.0
@@ -100,31 +99,30 @@ position = Vector2(16, 0)
 
 [node name="DespawnPoint" type="Area2D" parent="Piston"]
 position = Vector2(-16, 0)
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Piston/DespawnPoint"]
 shape = SubResource("CircleShape2D_8m3o2")
 
 [node name="StateMachine" type="Node" parent="Piston" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_4t2d8")
+script = ExtResource("5_bhwre")
 initial_state = NodePath("FollowPath")
 
 [node name="FollowPath" type="Node" parent="Piston/StateMachine"]
-script = ExtResource("5_gsrm0")
+script = ExtResource("6_wvvuc")
 
 [node name="Die" type="Node" parent="Piston/StateMachine"]
-script = ExtResource("7_xbb7k")
-
-[node name="DamageObjective" type="Node" parent="Piston/StateMachine"]
-script = ExtResource("8_o8gd8")
+script = ExtResource("7_iylmw")
 
 [node name="HealthComponent" type="Node" parent="Piston"]
-script = ExtResource("7_knbjp")
+script = ExtResource("8_rtvkk")
 
 [node name="SpeedComponent" type="Node" parent="Piston"]
-script = ExtResource("8_0hqio")
+script = ExtResource("9_u6f8i")
 
 [node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point", "parent")]
-script = ExtResource("9_p81yy")
+script = ExtResource("10_gdnqo")
 path = NodePath("../..")
 speed = NodePath("../SpeedComponent")
 spawn_point = NodePath("../SpawnPoint")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmdeyfgmoud2j"]
 
-[ext_resource type="Script" path="res://0_shared_assets/state_machine/state_machine.gd" id="2_4prv3"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="2_4prv3"]
 
 [node name="RivetPath" type="PathFollow2D"]
 

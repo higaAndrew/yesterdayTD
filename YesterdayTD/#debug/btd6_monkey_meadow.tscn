@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://ca0oc8wyuuym7"]
 
-[ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_1yt3a"]
-[ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_nvtt2"]
-[ext_resource type="PackedScene" uid="uid://dehl3iglcj2hu" path="res://maps/components/objective.tscn" id="3_7q337"]
-[ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="3_v8dut"]
-[ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground/piston/piston.tscn" id="4_p10xa"]
+[ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_2gh83"]
+[ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_gjpah"]
+[ext_resource type="PackedScene" uid="uid://dehl3iglcj2hu" path="res://maps/components/objective.tscn" id="3_wpnfh"]
+[ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="4_ak50o"]
+[ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground/piston/piston.tscn" id="5_ivvkj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgo40"]
-texture = ExtResource("2_nvtt2")
+texture = ExtResource("2_gjpah")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -471,7 +471,7 @@ anchor_mode = 0
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 1919.0
 offset_bottom = 1079.0
-texture = ExtResource("1_1yt3a")
+texture = ExtResource("1_2gh83")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_mvleh")
@@ -481,10 +481,10 @@ layer_0/tile_data = PackedInt32Array(458752, 65536, 0, 458753, 65536, 0, 458754,
 layer_1/name = "Ground Objects"
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Objective" parent="." instance=ExtResource("3_7q337")]
+[node name="Objective" parent="." instance=ExtResource("3_wpnfh")]
 position = Vector2(768, 1152)
 
-[node name="Canvas" parent="." instance=ExtResource("3_v8dut")]
+[node name="Canvas" parent="." instance=ExtResource("4_ak50o")]
 
 [node name="GroundEnemies" parent="Canvas" index="0"]
 follow_viewport_enabled = true
@@ -492,7 +492,7 @@ follow_viewport_enabled = true
 [node name="GroundEnemyPath" type="Path2D" parent="Canvas/GroundEnemies" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
-[node name="PistonPath" parent="Canvas/GroundEnemies/GroundEnemyPath" instance=ExtResource("4_p10xa")]
+[node name="PistonPath" parent="Canvas/GroundEnemies/GroundEnemyPath" instance=ExtResource("5_ivvkj")]
 position = Vector2(-64, 448)
 
 [node name="VehicleEnemies" parent="Canvas" index="1"]
