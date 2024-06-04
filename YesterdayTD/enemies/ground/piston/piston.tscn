@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://q3l0ex5ibdmm"]
+[gd_scene load_steps=21 format=3 uid="uid://q3l0ex5ibdmm"]
 
 [ext_resource type="Script" path="res://enemies/ground/piston/piston.gd" id="1_sn8i6"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="1_xyu1i"]
@@ -6,7 +6,8 @@
 [ext_resource type="Resource" uid="uid://c5a8a7eftsdow" path="res://enemies/ground/piston/piston_stats.tres" id="2_oay5v"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_bhwre"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/states/follow_path.gd" id="6_wvvuc"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/die.gd" id="7_iylmw"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/die.gd" id="7_prp2g"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_mpo0l"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_rtvkk"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="9_u6f8i"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="10_gdnqo"]
@@ -97,7 +98,7 @@ autoplay = "idle"
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
 position = Vector2(16, 0)
 
-[node name="DespawnPoint" type="Area2D" parent="Piston"]
+[node name="DespawnPoint" type="Area2D" parent="Piston" groups=["despawn_points", "enemies"]]
 position = Vector2(-16, 0)
 collision_layer = 16
 collision_mask = 0
@@ -113,7 +114,10 @@ initial_state = NodePath("FollowPath")
 script = ExtResource("6_wvvuc")
 
 [node name="Die" type="Node" parent="Piston/StateMachine"]
-script = ExtResource("7_iylmw")
+script = ExtResource("7_prp2g")
+
+[node name="DamageComponent" type="Node" parent="Piston"]
+script = ExtResource("8_mpo0l")
 
 [node name="HealthComponent" type="Node" parent="Piston"]
 script = ExtResource("8_rtvkk")
@@ -121,10 +125,9 @@ script = ExtResource("8_rtvkk")
 [node name="SpeedComponent" type="Node" parent="Piston"]
 script = ExtResource("9_u6f8i")
 
-[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point", "parent")]
+[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point")]
 script = ExtResource("10_gdnqo")
 path = NodePath("../..")
 speed = NodePath("../SpeedComponent")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
-parent = NodePath("..")

@@ -7,15 +7,16 @@ signal reached_end
 @export var speed: SpeedComponent
 @export var spawn_point: Marker2D
 @export var despawn_point: Area2D
-@export var parent: Area2D
 
+var parent: Node2D
 var phase := 0
 var spawn_position: float
 var despawn_position: float
 
 
 ## ensure the necessary nodes are connected
-func _ready() -> void:
+func init(_parent: Node2D) -> void:
+	parent = _parent
 	GlobalScripts.verify(self, path, "path")
 	GlobalScripts.verify(self, speed, "speed")
 	set_spawn_despawn_points()
@@ -28,7 +29,7 @@ func set_spawn_despawn_points() -> void:
 		despawn_position = despawn_point.position.x * parent.scale.x
 		path.h_offset -= spawn_position
 	else:
-		printerr("PathMovementComponent is missing a SpawnPoint or DespawnPoint!")
+		printerr("PathMovementComponent is missing a SpawnPoint(Marker2D) or DespawnPoint(Area2D)!")
 		return
 
 
@@ -36,6 +37,10 @@ func set_spawn_despawn_points() -> void:
 func follow_path(delta: float) -> void:
 	path.set_progress(path.get_progress() + speed.current_speed * delta)
 	check_phase()
+
+
+func reverse_path(delta: float) -> void:
+	path.set_progress(path.get_progress() - speed.current_speed * delta)
 
 
 ## adjusts the parent's path position so that the path begins at the front of the sprite and ends at the back of it
@@ -54,4 +59,9 @@ func check_phase() -> void:
 	elif path.get_progress_ratio() >= 1 and phase == 2:
 		phase = 3
 		reached_end.emit()
-		print("reached end!")
+
+
+## delete the path, and by extension, the object travelling it
+func delete() -> void:
+	path.queue_free()
+

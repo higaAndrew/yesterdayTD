@@ -26,3 +26,11 @@ func process(_delta: float) -> void:
 ## called every physics frame
 func physics_process(_delta: float) -> void:
 	pass
+
+
+## simple function to check if the state is the state machine's current state
+## may be bad practice to use get_parent but states should only be children to state machines anyway
+func current_state() -> bool:
+	if self.get_parent().current_state == self:
+		return true
+	return false
