@@ -1,11 +1,11 @@
 class_name FollowPath
 extends State
 
-var path_movement = PathMovementComponent
-var health = HealthComponent
+var path_movement: PathMovementComponent
+var health: HealthComponent
 
 
-## make reference to parent's components
+## get parent's components
 func enter() -> void:
 	path_movement = parent.path_movement
 	health = parent.health

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://d32ye0v3rlw6q"]
+
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="1_a8g05"]
+[ext_resource type="Script" path="res://maps/components/spawner/spawner.gd" id="1_j4cku"]
+[ext_resource type="Texture2D" uid="uid://cp8a4tpiy3vmf" path="res://maps/components/64x64_game_objects.png" id="1_tuyxe"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawner_idle.gd" id="2_nbehf"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawn_wave.gd" id="3_lqlne"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawn_group.gd" id="4_qrpsx"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawn_enemy.gd" id="5_ywy3j"]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource("1_j4cku")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_tuyxe")
+region_enabled = true
+region_rect = Rect2(128, 0, 64, 64)
+
+[node name="WaveTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="GroupTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_a8g05")
+initial_state = NodePath("SpawnerIdle")
+
+[node name="SpawnerIdle" type="Node" parent="StateMachine"]
+script = ExtResource("2_nbehf")
+
+[node name="SpawnWave" type="Node" parent="StateMachine"]
+script = ExtResource("3_lqlne")
+
+[node name="SpawnGroup" type="Node" parent="StateMachine"]
+script = ExtResource("4_qrpsx")
+
+[node name="SpawnEnemy" type="Node" parent="StateMachine"]
+script = ExtResource("5_ywy3j")

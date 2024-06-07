@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://di3js6o28p3yg"
-path="res://.godot/imported/Synth Ominous B.wav-5c21e0cc2649df4b135490750e4a6b02.sample"
+path="res://.godot/imported/Synth Ominous B.wav-b8e96daf193b4a5242c99945164dfd54.sample"
 
 [deps]
 
-source_file="res://maps/components/objective/Synth Ominous B.wav"
-dest_files=["res://.godot/imported/Synth Ominous B.wav-5c21e0cc2649df4b135490750e4a6b02.sample"]
+source_file="res://maps/components/exit/Synth Ominous B.wav"
+dest_files=["res://.godot/imported/Synth Ominous B.wav-b8e96daf193b4a5242c99945164dfd54.sample"]
 
 [params]
 

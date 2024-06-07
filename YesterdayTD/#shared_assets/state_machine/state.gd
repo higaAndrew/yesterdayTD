@@ -6,10 +6,23 @@ extends Node
 signal transitioned
 
 var parent: Node2D
+var initialized := false
+
+## called when the state is created
+func init() -> void:
+	pass
+
+## called if using init, this code is called every time state is entered
+func loop() -> void:
+	pass
 
 
 ## called when state is entered
 func enter() -> void:
+	if not initialized:
+		init()
+		initialized = true
+	loop()
 	pass
 
 

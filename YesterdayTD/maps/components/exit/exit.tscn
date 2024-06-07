@@ -1,22 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://dehl3iglcj2hu"]
+[gd_scene load_steps=11 format=3 uid="uid://dehl3iglcj2hu"]
 
-[ext_resource type="Script" path="res://maps/components/objective/objective.gd" id="1_c1r7e"]
-[ext_resource type="Resource" uid="uid://sngduahstjji" path="res://maps/components/objective/objective_stats.tres" id="2_mugiu"]
+[ext_resource type="Script" path="res://maps/components/exit/exit.gd" id="1_c1r7e"]
+[ext_resource type="Resource" uid="uid://sngduahstjji" path="res://maps/components/exit/exit_stats.tres" id="2_mugiu"]
 [ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://#shared_assets/audio/sounds/Casual Enemy Damage C.wav" id="3_7tmrw"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="3_e66nl"]
-[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/objective/Synth Ominous B.wav" id="4_a0il7"]
+[ext_resource type="Texture2D" uid="uid://cp8a4tpiy3vmf" path="res://maps/components/64x64_game_objects.png" id="3_h503k"]
+[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/exit/Synth Ominous B.wav" id="4_a0il7"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/states/objective_idle.gd" id="4_k80om"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/states/objective_die.gd" id="5_yn61m"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="6_s2cik"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8p5c1"]
-radius = 64.0
+radius = 32.0
 
-[node name="Objective" type="Area2D" groups=["objectives"]]
+[node name="Exit" type="Area2D" groups=["objectives"]]
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_c1r7e")
 stats = ExtResource("2_mugiu")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_h503k")
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8p5c1")

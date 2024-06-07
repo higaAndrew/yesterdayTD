@@ -1,4 +1,4 @@
-class_name Objective
+class_name Exit
 extends Area2D
 
 @export var stats: Stats
@@ -8,6 +8,7 @@ extends Area2D
 @onready var hitbox := $Hitbox as CollisionShape2D
 
 
+## init state machine and components
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 

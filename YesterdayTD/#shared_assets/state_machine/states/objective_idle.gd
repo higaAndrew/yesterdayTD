@@ -5,7 +5,7 @@ var health: HealthComponent
 var hitbox: CollisionShape2D
 
 
-## get reference to parent's components
+## get parent's components
 func enter() -> void:
 	health = parent.health
 	hitbox = parent.hitbox
@@ -18,7 +18,6 @@ func enter() -> void:
 	GlobalScripts.connect_signal(health, "health_zero", self, "_on_health_zero")
 
 
-## TODO check health
 func physics_process(delta: float) -> void:
 	pass
 
@@ -41,6 +40,8 @@ func _on_took_damage(damage: float, current_health: float) -> void:
 	
 	# after taking damage, check to see if health is zero
 	print("The objective took %s damage! Its health is now %s!" %[damage, current_health])
+	
+	# might want to remove this to make the code more modular
 	health.check_health_zero()
 
 
@@ -50,6 +51,12 @@ func _on_health_zero() -> void:
 		return
 	
 	# transition to die state
-	# HACK might need to change the set_disabled method
-	hitbox.set_disabled(true)
+	disable_hitbox()
 	transitioned.emit(self, "die")
+	print(parent.health.current_health)
+
+
+## the debugger gets pissy when you use set_disabled, so this is a passable workaround
+func disable_hitbox() -> void:
+	hitbox.global_position = Vector2(-64, -64)
+	hitbox.set_deferred("disabled", true)

@@ -51,6 +51,7 @@ func take_damage(damage: float) -> void:
 func check_health_zero() -> void:
 	if max(0, current_health) == 0:
 		health_zero.emit()
+		death_sound.play()
 
 
 ## play hurt sound
@@ -62,5 +63,3 @@ func play_hurt_sound() -> void:
 func play_death_sound() -> void:
 	GlobalScripts.verify(parent, death_sound, "death_sound")
 	death_sound.play()
-
-## TODO mult/divide health

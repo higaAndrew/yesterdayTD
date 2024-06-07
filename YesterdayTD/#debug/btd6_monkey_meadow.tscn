@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca0oc8wyuuym7"]
+[gd_scene load_steps=11 format=3 uid="uid://ca0oc8wyuuym7"]
 
 [ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_2gh83"]
 [ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_gjpah"]
-[ext_resource type="PackedScene" uid="uid://dehl3iglcj2hu" path="res://maps/components/objective/objective.tscn" id="3_wpnfh"]
+[ext_resource type="PackedScene" uid="uid://d32ye0v3rlw6q" path="res://maps/components/spawner/spawner.tscn" id="3_jo0ox"]
+[ext_resource type="PackedScene" uid="uid://dehl3iglcj2hu" path="res://maps/components/exit/exit.tscn" id="3_wpnfh"]
 [ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="4_ak50o"]
+[ext_resource type="Script" path="res://#debug/btd6_monkey_meadow_wave_data.gd" id="4_wfr5x"]
 [ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground/piston/piston.tscn" id="5_ivvkj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgo40"]
@@ -481,13 +483,22 @@ layer_0/tile_data = PackedInt32Array(458752, 65536, 0, 458753, 65536, 0, 458754,
 layer_1/name = "Ground Objects"
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Objective" parent="." instance=ExtResource("3_wpnfh")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("wave_data", "ground_enemies", "ground_vehicles", "ground_bosses", "air_enemies", "air_vehicles", "air_bosses") instance=ExtResource("3_jo0ox")]
+wave_data = NodePath("Btd6MonkeyMeadowWaveData")
+ground_enemies = NodePath("../Canvas/GroundEnemies/GroundEnemyPath")
+ground_vehicles = NodePath("../Canvas/GroundVehicles/GroundVehiclePath")
+ground_bosses = NodePath("../Canvas/GroundBosses/GroundBossPath")
+air_enemies = NodePath("../Canvas/AirEnemies/AirEnemyPath")
+air_vehicles = NodePath("../Canvas/AirVehicles/AirVehiclePath")
+air_bosses = NodePath("../Canvas/AirBosses/AirBossPath")
+
+[node name="Btd6MonkeyMeadowWaveData" type="Node" parent="Spawner"]
+script = ExtResource("4_wfr5x")
+
+[node name="Exit" parent="." instance=ExtResource("3_wpnfh")]
 position = Vector2(768, 1152)
 
 [node name="Canvas" parent="." instance=ExtResource("4_ak50o")]
-
-[node name="GroundEnemies" parent="Canvas" index="0"]
-follow_viewport_enabled = true
 
 [node name="GroundEnemyPath" type="Path2D" parent="Canvas/GroundEnemies" index="0"]
 curve = SubResource("Curve2D_h4wvv")
@@ -495,35 +506,17 @@ curve = SubResource("Curve2D_h4wvv")
 [node name="PistonPath" parent="Canvas/GroundEnemies/GroundEnemyPath" instance=ExtResource("5_ivvkj")]
 position = Vector2(-64, 448)
 
-[node name="VehicleEnemies" parent="Canvas" index="1"]
-follow_viewport_enabled = true
-
-[node name="VehicleEnemyPath" type="Path2D" parent="Canvas/VehicleEnemies" index="0"]
+[node name="GroundVehiclePath" type="Path2D" parent="Canvas/GroundVehicles" index="0"]
 curve = SubResource("Curve2D_h4wvv")
-
-[node name="Towers" parent="Canvas" index="2"]
-follow_viewport_enabled = true
-
-[node name="Projectiles" parent="Canvas" index="3"]
-follow_viewport_enabled = true
-
-[node name="Explosions" parent="Canvas" index="4"]
-follow_viewport_enabled = true
-
-[node name="GroundBosses" parent="Canvas" index="5"]
-follow_viewport_enabled = true
 
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
-[node name="AirEnemies" parent="Canvas" index="6"]
-follow_viewport_enabled = true
-
 [node name="AirEnemyPath" type="Path2D" parent="Canvas/AirEnemies" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
-[node name="AirBosses" parent="Canvas" index="7"]
-follow_viewport_enabled = true
+[node name="AirVehiclePath" type="Path2D" parent="Canvas/AirVehicles" index="0"]
+curve = SubResource("Curve2D_h4wvv")
 
 [node name="AirBossPath" type="Path2D" parent="Canvas/AirBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")

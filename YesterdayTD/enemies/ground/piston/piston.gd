@@ -10,7 +10,7 @@ extends Area2D
 @onready var path_movement := $PathMovementComponent as PathMovementComponent
 
 
-# init statemachine and components
+# init state machine and components
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 
