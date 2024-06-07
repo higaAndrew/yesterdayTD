@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_q2h6h")
 base_health = 2.0
-base_speed = 1000.0
+base_speed = 100.0
 base_damage = 1
 base_monet = 1
 children = 0

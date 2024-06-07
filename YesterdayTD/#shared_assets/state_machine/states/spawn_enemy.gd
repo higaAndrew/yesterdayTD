@@ -9,6 +9,7 @@ var p: Node2D
 ## preload every enemy
 var enemies := {
 	"piston": preload("res://enemies/ground/piston/piston.tscn"),
+	"rivet": preload("res://enemies/ground/rivet/rivet.tscn"),
 }
 
 ## setup spawn timer
