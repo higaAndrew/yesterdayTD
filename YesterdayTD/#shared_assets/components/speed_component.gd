@@ -25,3 +25,8 @@ func increase_speed(amount: float) -> void:
 func decrease_speed(amount: float) -> void:
 	current_speed -= amount
 	speed_changed.emit(amount, current_speed)
+
+
+## reset speed
+func reset_speed() -> void:
+	current_speed = base_speed

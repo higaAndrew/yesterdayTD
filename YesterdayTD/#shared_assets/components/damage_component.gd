@@ -15,13 +15,16 @@ func init(_parent: Node2D) -> void:
 
 
 ## add damage
-func increase_damage(modifier: float) -> void:
-	current_damage += modifier
+func increase_damage(amount: float) -> void:
+	current_damage += amount
 
 
 ## subtract damage
-func decrease_damage(modifier: float) -> void:
-	current_damage -= modifier
+func decrease_damage(amount: float) -> void:
+	current_damage -= amount
 
+
+func reset_damage() -> void:
+	current_damage = base_damage
 
 ## TODO mult/div damage

@@ -82,4 +82,4 @@ func get_waves() -> void:
 		6:
 			waves = wave_data.eggs_waves
 			print("eggs waves!")
-## FIXME do wave data better
+## HACK do wave data better

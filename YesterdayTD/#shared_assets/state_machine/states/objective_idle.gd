@@ -52,7 +52,7 @@ func _on_health_zero() -> void:
 	
 	# transition to die state
 	disable_hitbox()
-	transitioned.emit(self, "die")
+	transitioned.emit(self, "Die")
 	print(parent.health.current_health)
 
 

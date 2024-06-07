@@ -1,7 +1,7 @@
 class_name SpawnWave
 extends State
 
-# so i don't have to type parent 50 times
+## so i don't have to type parent 50 times
 var p: Node2D
 
 
@@ -24,7 +24,7 @@ func _on_wave_timer_timeout() -> void:
 	
 	if p.current_wave < p.wave_count:
 		p.wave = p.waves[p.current_wave]
-		transitioned.emit(self, "spawngroup")
+		transitioned.emit(self, "SpawnGroup")
 	else:
-		transitioned.emit(self, "spawneridle")
+		transitioned.emit(self, "SpawnerIdle")
 

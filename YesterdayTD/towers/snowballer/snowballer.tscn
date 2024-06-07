@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://dtdhyq4f6jvew"]
+
+[ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_uep4e"]
+[ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_1bcql"]
+[ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="2_tfaqp"]
+[ext_resource type="Script" path="res://#debug/range_preview.gd" id="4_mv23i"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="4_o05pg"]
+[ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="5_5nx16"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/tower_idle.gd" id="6_kmy0w"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/tower_aim.gd" id="6_kq8et"]
+[ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="6_wmbby"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sy8xc"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbcjf"]
+radius = 100.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy84u"]
+atlas = ExtResource("2_tfaqp")
+region = Rect2(128, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6usw8"]
+atlas = ExtResource("2_tfaqp")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2184c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jy84u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6usw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6usw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6usw8")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[node name="Snowballer" type="Area2D" groups=["towers"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_uep4e")
+stats = ExtResource("2_1bcql")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sy8xc")
+
+[node name="DetectionRange" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_sbcjf")
+
+[node name="RangePreview" type="Node" parent="DetectionRange/RangeHitbox"]
+script = ExtResource("4_mv23i")
+stats = ExtResource("2_1bcql")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2184c")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Muzzle" type="Marker2D" parent="Animations"]
+position = Vector2(-32, 32)
+
+[node name="Sightline" type="RayCast2D" parent="."]
+target_position = Vector2(0, 200)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_o05pg")
+initial_state = NodePath("TowerIdle")
+
+[node name="TowerIdle" type="Node" parent="StateMachine"]
+script = ExtResource("6_kmy0w")
+
+[node name="TowerAim" type="Node" parent="StateMachine"]
+script = ExtResource("6_kq8et")
+
+[node name="TargetsComponent" type="Node" parent="."]
+script = ExtResource("5_5nx16")
+
+[node name="RangeComponent" type="Node" parent="." node_paths=PackedStringArray("range_hitbox")]
+script = ExtResource("6_wmbby")
+range_hitbox = NodePath("../DetectionRange/RangeHitbox")

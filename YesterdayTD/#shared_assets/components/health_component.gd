@@ -30,6 +30,11 @@ func decrease_health(amount: float) -> void:
 	current_health -= amount
 
 
+## reset health
+func reset_health() -> void:
+	current_health = base_health
+
+
 ## restore health
 func restore_health(heal: float) -> void:
 	current_health += heal

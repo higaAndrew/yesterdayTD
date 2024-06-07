@@ -50,18 +50,18 @@ func _on_spawn_timer_timeout() -> void:
 		else:
 			p.spawn_timer.set_wait_time(p.spawn_delay)
 		
-		transitioned.emit(self, "spawnenemy")
+		transitioned.emit(self, "SpawnEnemy")
 	
 	# if there's no more enemies in the group, move on to the next
 	elif p.current_enemy == p.enemy_count:
 		p.current_enemy = 0
 		p.current_group += 1
 		p.group_timer.set_wait_time(p.group_delay)
-		transitioned.emit(self, "spawngroup")
+		transitioned.emit(self, "SpawnGroup")
 
 
 ## determine the path that the enemy is spawned on
-## FIXME might want to redo
+## HACK might want to redo
 func assign_path(_enemy: PathFollow2D) -> void:
 	if _enemy.is_in_group("ground_enemies"):
 		path = p.ground_enemies
