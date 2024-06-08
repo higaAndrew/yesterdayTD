@@ -507,7 +507,7 @@ curve = SubResource("Curve2D_h4wvv")
 curve = SubResource("Curve2D_h4wvv")
 
 [node name="Snowballer" parent="Canvas/Towers" index="0" instance=ExtResource("7_xennj")]
-position = Vector2(333, 545)
+position = Vector2(755, 575)
 
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")

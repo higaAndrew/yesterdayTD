@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_lx3rv")
-base_rotation_speed = 1.0
-base_range = 100.0
+base_rotation_speed = 20.0
+base_range = 200.0
+target_priority = "First"

@@ -14,9 +14,9 @@
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbcjf"]
-radius = 100.0
+radius = 200.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jy84u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_btb3g"]
 atlas = ExtResource("2_tfaqp")
 region = Rect2(128, 256, 64, 64)
 
@@ -28,7 +28,7 @@ region = Rect2(320, 128, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jy84u")
+"texture": SubResource("AtlasTexture_btb3g")
 }],
 "loop": true,
 "name": &"idle",
@@ -64,9 +64,10 @@ collision_layer = 0
 [node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
 shape = SubResource("CircleShape2D_sbcjf")
 
-[node name="RangePreview" type="Node" parent="DetectionRange/RangeHitbox"]
+[node name="RangePreview" type="Node" parent="DetectionRange/RangeHitbox" node_paths=PackedStringArray("sightline")]
 script = ExtResource("4_mv23i")
 stats = ExtResource("2_1bcql")
+sightline = NodePath("../../../Sightline")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2184c")
@@ -74,10 +75,10 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="Muzzle" type="Marker2D" parent="Animations"]
-position = Vector2(-32, 32)
+position = Vector2(32, 32)
 
 [node name="Sightline" type="RayCast2D" parent="."]
-target_position = Vector2(0, 200)
+target_position = Vector2(250, 0)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_o05pg")

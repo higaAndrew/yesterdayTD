@@ -18,21 +18,21 @@ enum WaveSets {debug, story, standard, x2, x10, extraction, eggs,}
 @onready var group_timer := $GroupTimer as Timer
 @onready var spawn_timer := $SpawnTimer as Timer
 
-var debug_waves := []
-var story_waves := []
-var standard_waves := []
-var x2_waves := []
-var x10_waves := []
-var extraction_waves := []
-var eggs_waves := []
+var debug_waves: Array
+var story_waves: Array
+var standard_waves: Array
+var x2_waves: Array
+var x10_waves: Array
+var extraction_waves: Array
+var eggs_waves: Array
 
-var waves := [[{}]]
+var waves: Array
 
-var wave := [{}]
+var wave: Array
 var current_wave := 0
 var wave_count: int
 
-var group := {}
+var group: Dictionary
 var current_group := 0
 var group_count: int
 

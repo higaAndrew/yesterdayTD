@@ -12,6 +12,7 @@ var parent: Node2D
 var phase := 0
 var spawn_position: float
 var despawn_position: float
+var progress: float
 
 
 ## ensure the necessary nodes are connected
@@ -36,11 +37,14 @@ func set_spawn_despawn_points() -> void:
 ## progresses the path based on the current speed
 func follow_path(delta: float) -> void:
 	path.set_progress(path.get_progress() + speed.current_speed * delta)
+	progress = path.get_progress()
 	check_phase()
 
 
+## reverses the path based on the current speed
 func reverse_path(delta: float) -> void:
 	path.set_progress(path.get_progress() - speed.current_speed * delta)
+	progress = path.get_progress()
 
 
 ## adjusts the parent's path position so that the path begins at the front of the sprite and ends at the back of it

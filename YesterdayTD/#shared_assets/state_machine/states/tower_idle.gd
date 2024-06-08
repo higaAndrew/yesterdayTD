@@ -19,9 +19,11 @@ func physics_process(_delta: float) -> void:
 		transitioned.emit(self, "TowerAim")
 
 
+## constantly running
 func _on_detection_range_area_entered(area: Area2D) -> void:
 	targets.add_target(area)
 
 
+## constantly running
 func _on_detection_range_area_exited(area: Area2D) -> void:
 	targets.remove_target(area)
