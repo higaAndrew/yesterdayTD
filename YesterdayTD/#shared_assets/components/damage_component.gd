@@ -1,7 +1,6 @@
 class_name DamageComponent
 extends Node
 
-
 var parent: Node2D
 var base_damage: float
 var current_damage: float

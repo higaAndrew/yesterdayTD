@@ -4,6 +4,8 @@ extends State
 var health: HealthComponent
 var hitbox: CollisionShape2D
 
+var enemy: Area2D
+
 
 ## get parent's components
 func enter() -> void:
@@ -18,9 +20,6 @@ func enter() -> void:
 	GlobalScripts.connect_signal(health, "health_zero", self, "_on_health_zero")
 
 
-func physics_process(delta: float) -> void:
-	pass
-
 ## handles collisions with objective
 func _on_area_entered(area: Area2D) -> void:
 	if not current_state():
@@ -28,9 +27,9 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	# if an enemy collides, take damage and delete it
 	if area.is_in_group("enemies") and area.is_in_group("despawn_points"):
-		var enemy = area.get_parent()
-		enemy.queue_free()
+		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
+		enemy.queue_free()
 
 
 ## handles taking damage
@@ -51,12 +50,8 @@ func _on_health_zero() -> void:
 		return
 	
 	# transition to die state
-	disable_hitbox()
 	transitioned.emit(self, "Die")
 	print(parent.health.current_health)
 
 
-## the debugger gets pissy when you use set_disabled, so this is a passable workaround
-func disable_hitbox() -> void:
-	hitbox.global_position = Vector2(-64, -64)
-	hitbox.set_deferred("disabled", true)
+

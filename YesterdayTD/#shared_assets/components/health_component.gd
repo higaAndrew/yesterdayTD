@@ -7,6 +7,7 @@ signal health_zero
 
 @export var hurt_sound: AudioStreamPlayer
 @export var death_sound: AudioStreamPlayer
+@export var hitbox: CollisionShape2D
 
 var parent: Node2D
 var base_health: float
@@ -46,25 +47,33 @@ func restore_health(heal: float) -> void:
 func take_damage(damage: float) -> void:
 	decrease_health(damage)
 	
-	if is_instance_valid(hurt_sound):
-		hurt_sound.play()
+	play_hurt_sound()
 	
 	took_damage.emit(damage, current_health)
+	check_health_zero()
 
 
 ## check if health is gone
 func check_health_zero() -> void:
 	if max(0, current_health) == 0:
+		play_death_sound()
 		health_zero.emit()
-		death_sound.play()
 
 
 ## play hurt sound
 func play_hurt_sound() -> void:
 	GlobalScripts.verify(parent, hurt_sound, "hurt_sound")
-	hurt_sound.play()
+	if is_instance_valid(hurt_sound):
+		hurt_sound.play()
 
 
 func play_death_sound() -> void:
 	GlobalScripts.verify(parent, death_sound, "death_sound")
-	death_sound.play()
+	if is_instance_valid(death_sound):
+		death_sound.play()
+
+
+## the debugger gets pissy when you use set_disabled, so this is a passable workaround
+func disable_hitbox() -> void:
+	hitbox.global_position = Vector2(-64, -64)
+	hitbox.set_deferred("disabled", true)

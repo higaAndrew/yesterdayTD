@@ -1,0 +1,157 @@
+[gd_scene load_steps=24 format=3 uid="uid://bketea0lra044"]
+
+[ext_resource type="Script" path="res://towers/snowballer/snowball/snowball.gd" id="1_igkrt"]
+[ext_resource type="Resource" uid="uid://bfp1xuxqmhxaj" path="res://towers/snowballer/snowball/snowball_stats.tres" id="2_1vpye"]
+[ext_resource type="Texture2D" uid="uid://uffbi4of4bxc" path="res://towers/(projectiles)/snowball_spritesheet_3x2.png" id="2_h5l8p"]
+[ext_resource type="Texture2D" uid="uid://rlsa3hayw7y6" path="res://towers/(projectiles)/Retro Impact Effect Pack 3 F.png" id="3_6j6e6"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="4_veik1"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="5_i2cbu"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_t43q5"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/states/projectile_move.gd" id="6_8iahh"]
+[ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="7_e8bqd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uwf0q"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdk0f"]
+atlas = ExtResource("2_h5l8p")
+region = Rect2(0, 0, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_intou"]
+atlas = ExtResource("2_h5l8p")
+region = Rect2(512, 0, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6b6q"]
+atlas = ExtResource("2_h5l8p")
+region = Rect2(1024, 0, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1t4n"]
+atlas = ExtResource("2_h5l8p")
+region = Rect2(0, 385, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6fd4"]
+atlas = ExtResource("2_h5l8p")
+region = Rect2(512, 385, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xd5c"]
+atlas = ExtResource("2_h5l8p")
+region = Rect2(1024, 385, 512, 385)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pjw85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdk0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_intou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6b6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1t4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6fd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xd5c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5e8jk"]
+atlas = ExtResource("3_6j6e6")
+region = Rect2(0, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3uig"]
+atlas = ExtResource("3_6j6e6")
+region = Rect2(32, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yguh"]
+atlas = ExtResource("3_6j6e6")
+region = Rect2(96, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p704i"]
+atlas = ExtResource("3_6j6e6")
+region = Rect2(128, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37hhv"]
+atlas = ExtResource("3_6j6e6")
+region = Rect2(160, 256, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2vvne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5e8jk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3uig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yguh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yguh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p704i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p704i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37hhv")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 30.0
+}]
+
+[node name="Snowball" type="Area2D" groups=["projectiles"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_igkrt")
+stats = ExtResource("2_1vpye")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uwf0q")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -1)
+scale = Vector2(0.07, 0.07)
+sprite_frames = SubResource("SpriteFrames_pjw85")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.904096
+
+[node name="HitVFX" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_2vvne")
+animation = &"hit"
+autoplay = "hit"
+frame = 6
+frame_progress = 1.0
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+
+[node name="LifespanTimer" type="Timer" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_t43q5")
+
+[node name="ProjectileMove" type="Node" parent="StateMachine"]
+script = ExtResource("6_8iahh")
+
+[node name="DamageComponent" type="Node" parent="."]
+script = ExtResource("4_veik1")
+
+[node name="PierceComponent" type="Node" parent="."]
+script = ExtResource("7_e8bqd")
+
+[node name="SpeedComponent" type="Node" parent="."]
+script = ExtResource("5_i2cbu")

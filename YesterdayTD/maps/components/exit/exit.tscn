@@ -43,7 +43,8 @@ script = ExtResource("4_k80om")
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource("5_yn61m")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_sound", "death_sound", "hitbox")]
 script = ExtResource("6_s2cik")
 hurt_sound = NodePath("../LifeLostSound")
 death_sound = NodePath("../DeathSound")
+hitbox = NodePath("../Hitbox")

@@ -13,9 +13,9 @@ var debug_waves := [
 		{"enemy_type": "piston", "enemy_count": 30, "spawn_delay": 0.05, "group_delay": 0.0},
 	],
 ]
-var story_waves := [[{}]]
-var standard_waves := [[{}]]
-var x2_waves := [[{}]]
+var story_waves: Array
+var standard_waves: Array
+var x2_waves: Array
 var x10_waves := [[{}]]
 var extraction_waves := [[{}]]
 var eggs_waves := [[{}]]
