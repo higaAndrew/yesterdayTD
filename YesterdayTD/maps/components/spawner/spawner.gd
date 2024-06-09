@@ -3,20 +3,22 @@ extends Node2D
 
 
 @export var wave_data: WaveData
+enum WaveSets {debug, story, standard, x2, x10, extraction, eggs,}
+@export var wave_set: WaveSets
+@export var wave_delay := 1.0
+
 @export var ground_enemies: Path2D
 @export var ground_vehicles: Path2D
 @export var ground_bosses: Path2D
 @export var air_enemies: Path2D
 @export var air_vehicles: Path2D
 @export var air_bosses: Path2D
-enum WaveSets {debug, story, standard, x2, x10, extraction, eggs,}
-@export var wave_set: WaveSets
-@export var wave_delay := 1.0
 
-@onready var state_machine := $StateMachine as StateMachine
 @onready var wave_timer := $WaveTimer as Timer
 @onready var group_timer := $GroupTimer as Timer
 @onready var spawn_timer := $SpawnTimer as Timer
+@onready var state_machine := $StateMachine as StateMachine
+
 
 var debug_waves: Array
 var story_waves: Array

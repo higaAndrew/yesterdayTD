@@ -1,8 +1,6 @@
 class_name SpawnEnemy
 extends State
 
-var enemy: PathFollow2D
-var path: Path2D
 ## blah blah parent you get it
 var p: Node2D
 
@@ -11,6 +9,10 @@ var enemies := {
 	"piston": preload("res://enemies/ground/piston/piston.tscn"),
 	"rivet": preload("res://enemies/ground/rivet/rivet.tscn"),
 }
+
+var enemy: PathFollow2D
+var path: Path2D
+
 
 ## setup spawn timer
 func init() -> void:
@@ -36,7 +38,7 @@ func _on_spawn_timer_timeout() -> void:
 	# ensure the enemy type is valid
 	if p.current_enemy < p.enemy_count:
 		if p.enemy_type not in enemies:
-			printerr("The enemy type %s does not exist!" %p.enemy_type)
+			printerr("The enemy type %s does not exist!" % p.enemy_type)
 			return
 		
 		# spawn it
@@ -76,5 +78,5 @@ func assign_path(_enemy: PathFollow2D) -> void:
 	elif _enemy.is_in_group("air_bosses"):
 		path = p.air_bosses
 	else:
-		printerr("%s is not in an enemy group!" %_enemy.name)
+		printerr("%s is not in an enemy group!" % _enemy.name)
 	path.add_child(_enemy)

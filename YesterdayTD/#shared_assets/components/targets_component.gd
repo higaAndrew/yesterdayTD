@@ -1,7 +1,7 @@
 class_name TargetsComponent
 extends Node
 
-@export var range_hitbox: CollisionShape2D
+#@export var range_hitbox: CollisionShape2D
 
 var parent: Node2D
 var target_list: Array
@@ -10,13 +10,14 @@ var target_list: Array
 ## set targets values according to stats
 func init(_parent: Node2D) -> void:
 	parent = _parent
+	#GlobalScripts.verify(parent, range_hitbox, "range_hitbox")
 
 
 ## add a target to the list
 func add_target(target: Area2D) -> void:
 	if target not in target_list:
 		target_list.append(target)
-		target_priority("first")
+		target_priority("First")
 
 
 ## remove a target from the list
@@ -87,7 +88,7 @@ func sort_close(a, b) -> bool:
 
 ## prioritize targets randomly
 ## NOTE: this feels dangerous and unstable but it's quite funny so i'm keeping it
-func sort_random(a, b) -> bool:
+func sort_random(_a, _b) -> bool:
 	var coin = randi_range(0, 1)
 	if coin == 0:
 		return true

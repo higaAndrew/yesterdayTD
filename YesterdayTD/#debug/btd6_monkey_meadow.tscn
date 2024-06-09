@@ -513,6 +513,9 @@ position = Vector2(755, 575)
 [node name="Snowball" parent="Canvas/Projectiles" index="0" instance=ExtResource("8_w5j44")]
 position = Vector2(447, 449)
 
+[node name="Snowball2" parent="Canvas/Projectiles" index="1" instance=ExtResource("8_w5j44")]
+position = Vector2(501, 449)
+
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
@@ -524,8 +527,5 @@ curve = SubResource("Curve2D_h4wvv")
 
 [node name="AirBossPath" type="Path2D" parent="Canvas/AirBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")
-
-[node name="Snowball" parent="." instance=ExtResource("8_w5j44")]
-position = Vector2(501, 449)
 
 [editable path="Canvas"]

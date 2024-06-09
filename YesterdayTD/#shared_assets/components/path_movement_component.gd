@@ -3,10 +3,10 @@ extends Node
 
 signal reached_end
 
-@export var path: PathFollow2D
-@export var speed: SpeedComponent
 @export var spawn_point: Marker2D
 @export var despawn_point: Area2D
+@export var path: PathFollow2D
+@export var speed: SpeedComponent
 
 var parent: Node2D
 var phase := 0
@@ -18,12 +18,16 @@ var progress: float
 ## ensure the necessary nodes are connected
 func init(_parent: Node2D) -> void:
 	parent = _parent
+	
+	GlobalScripts.verify(self, spawn_point, "spawn_point")
+	GlobalScripts.verify(self, despawn_point, "despawn_point")
 	GlobalScripts.verify(self, path, "path")
 	GlobalScripts.verify(self, speed, "speed")
+	
 	set_spawn_despawn_points()
 
 
-## adjusts the path position to the front of the sprite
+## adjusts the path position towards the front of the sprite
 func set_spawn_despawn_points() -> void:
 	if is_instance_valid(spawn_point) and is_instance_valid(despawn_point):
 		spawn_position = spawn_point.position.x * parent.scale.x
@@ -68,4 +72,3 @@ func check_phase() -> void:
 ## delete the path, and by extension, the object travelling it
 func delete() -> void:
 	path.queue_free()
-

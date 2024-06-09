@@ -1,13 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=22 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground/rivet/rivet_stats.tres" id="2_ekq5m"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="3_0w71e"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="4_rhamo"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h3mvm"]
-[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="6_o5ehy"]
-[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="7_rert0"]
+[ext_resource type="AudioStream" uid="uid://dr4e7ao7ryjfg" path="res://#shared_assets/audio/sounds/Snowball 6066_80_3.wav" id="5_knekc"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="7_12f1k"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_8kdpp"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="8_76578"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="9_pffkw"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_557si"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
@@ -93,7 +94,9 @@ sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="Rivet"]
+[node name="HurtSound" type="AudioStreamPlayer" parent="Rivet"]
+stream = ExtResource("5_knekc")
+volume_db = -10.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Rivet"]
 
@@ -113,23 +116,26 @@ script = ExtResource("5_h3mvm")
 initial_state = NodePath("FollowPath")
 
 [node name="FollowPath" type="Node" parent="Rivet/StateMachine"]
-script = ExtResource("6_o5ehy")
+script = ExtResource("7_12f1k")
 
 [node name="Die" type="Node" parent="Rivet/StateMachine"]
-script = ExtResource("7_rert0")
+script = ExtResource("8_76578")
 
 [node name="DamageComponent" type="Node" parent="Rivet"]
 script = ExtResource("8_8kdpp")
 
-[node name="HealthComponent" type="Node" parent="Rivet"]
+[node name="HealthComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
 script = ExtResource("9_pffkw")
+hitbox = NodePath("../Hitbox")
+hurt_sound = NodePath("../HurtSound")
+death_sound = NodePath("../HurtSound")
 
 [node name="SpeedComponent" type="Node" parent="Rivet"]
 script = ExtResource("10_557si")
 
-[node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point")]
+[node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
 script = ExtResource("11_06egf")
-path = NodePath("../..")
-speed = NodePath("../SpeedComponent")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
+path = NodePath("../..")
+speed = NodePath("../SpeedComponent")

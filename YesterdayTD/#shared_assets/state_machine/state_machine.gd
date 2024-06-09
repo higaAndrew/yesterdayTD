@@ -9,7 +9,6 @@ var current_state: State
 
 ## creation/initialization of state machine
 func init(parent: Node2D) -> void:
-	GlobalScripts.verify(self, parent, "parent")
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
@@ -19,7 +18,7 @@ func init(parent: Node2D) -> void:
 	if is_instance_valid(initial_state):
 		change_state(initial_state)
 	else:
-		printerr("No initial state has been set!")
+		printerr("No initial state has been set for %s's state machine!" % parent.name)
 		return
 
 
@@ -34,7 +33,7 @@ func on_state_transition(state: State, new_state_name: String):
 	if new_state_name in states:
 		change_state(states[new_state_name])
 	else:
-		printerr("The state you are trying to transition to (%s) is not in the list of states!" %new_state_name)
+		printerr("The state you are trying to transition to (%s) is not in the list of states!" % new_state_name)
 		return
 
 

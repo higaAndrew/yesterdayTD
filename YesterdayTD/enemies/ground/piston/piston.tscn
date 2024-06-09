@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="1_xyu1i"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_kux8k"]
 [ext_resource type="Resource" uid="uid://c5a8a7eftsdow" path="res://enemies/ground/piston/piston_stats.tres" id="2_oay5v"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://#shared_assets/audio/sounds/Material Layer Metal C.wav" id="5_2bq8g"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_bhwre"]
+[ext_resource type="AudioStream" uid="uid://cjy0qx1m2wjd2" path="res://enemies/Radiator Metal Impacts 001.wav" id="5_mlgi1"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="6_oanba"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="7_m3ky5"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_mpo0l"]
@@ -95,13 +95,10 @@ sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"die"
 autoplay = "idle"
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="Piston"]
-
 [node name="HurtSound" type="AudioStreamPlayer" parent="Piston"]
+stream = ExtResource("5_mlgi1")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Piston"]
-stream = ExtResource("5_2bq8g")
-volume_db = 5.0
 
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
 position = Vector2(16, 0)
@@ -127,17 +124,18 @@ script = ExtResource("7_m3ky5")
 [node name="DamageComponent" type="Node" parent="Piston"]
 script = ExtResource("8_mpo0l")
 
-[node name="HealthComponent" type="Node" parent="Piston" node_paths=PackedStringArray("death_sound", "hitbox")]
+[node name="HealthComponent" type="Node" parent="Piston" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
 script = ExtResource("8_rtvkk")
-death_sound = NodePath("../DeathSound")
 hitbox = NodePath("../Hitbox")
+hurt_sound = NodePath("../HurtSound")
+death_sound = NodePath("../DeathSound")
+
+[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
+script = ExtResource("10_gdnqo")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+path = NodePath("../..")
+speed = NodePath("../SpeedComponent")
 
 [node name="SpeedComponent" type="Node" parent="Piston"]
 script = ExtResource("9_u6f8i")
-
-[node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("path", "speed", "spawn_point", "despawn_point")]
-script = ExtResource("10_gdnqo")
-path = NodePath("../..")
-speed = NodePath("../SpeedComponent")
-spawn_point = NodePath("../SpawnPoint")
-despawn_point = NodePath("../DespawnPoint")

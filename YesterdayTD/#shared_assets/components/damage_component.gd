@@ -26,4 +26,5 @@ func decrease_damage(amount: float) -> void:
 func reset_damage() -> void:
 	current_damage = base_damage
 
+
 ## TODO mult/div damage

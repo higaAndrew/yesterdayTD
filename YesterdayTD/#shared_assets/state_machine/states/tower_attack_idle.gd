@@ -3,6 +3,7 @@ extends State
 
 var targets: TargetsComponent
 
+
 func init() -> void:
 	targets = parent.targets
 

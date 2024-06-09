@@ -8,11 +8,14 @@ signal transitioned
 var parent: Node2D
 var initialized := false
 
+
 ## called when the state is created
 func init() -> void:
 	pass
 
-## called if using init, this code is called every time state is entered
+
+## call if using init, this code is called every time state is entered
+## if not used, the looping actions will call before init
 func loop() -> void:
 	pass
 

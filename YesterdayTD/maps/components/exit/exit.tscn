@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://maps/components/exit/exit.gd" id="1_c1r7e"]
 [ext_resource type="Resource" uid="uid://sngduahstjji" path="res://maps/components/exit/exit_stats.tres" id="2_mugiu"]
-[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://#shared_assets/audio/sounds/Casual Enemy Damage C.wav" id="3_7tmrw"]
+[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://maps/components/exit/Casual Enemy Damage C.wav" id="3_7tmrw"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="3_e66nl"]
 [ext_resource type="Texture2D" uid="uid://cp8a4tpiy3vmf" path="res://maps/components/64x64_game_objects.png" id="3_h503k"]
 [ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/exit/Synth Ominous B.wav" id="4_a0il7"]
@@ -43,8 +43,8 @@ script = ExtResource("4_k80om")
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource("5_yn61m")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_sound", "death_sound", "hitbox")]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
 script = ExtResource("6_s2cik")
+hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../LifeLostSound")
 death_sound = NodePath("../DeathSound")
-hitbox = NodePath("../Hitbox")

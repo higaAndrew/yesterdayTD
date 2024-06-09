@@ -16,9 +16,6 @@ func init() -> void:
 	targets = parent.targets
 	rotation_speed = parent.stats.base_rotation_speed
 	target_priority = parent.stats.target_priority
-	
-	GlobalScripts.verify(parent, sightline, "sightline")
-	GlobalScripts.verify(parent, targets, "targets")
 
 
 ## every physics frame, sort the list of targets according to target priority

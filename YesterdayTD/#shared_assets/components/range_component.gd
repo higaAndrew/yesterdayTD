@@ -15,6 +15,8 @@ func init(_parent: Node2D) -> void:
 	parent = _parent
 	base_range = parent.stats.base_range
 	current_range = base_range
+	
+	GlobalScripts.verify(parent, range_hitbox, "range_hitbox")
 
 
 ## increase range

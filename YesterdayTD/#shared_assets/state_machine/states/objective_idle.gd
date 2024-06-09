@@ -11,9 +11,6 @@ var enemy: Area2D
 func enter() -> void:
 	health = parent.health
 	hitbox = parent.hitbox
-	
-	GlobalScripts.verify(parent, health, "health")
-	GlobalScripts.verify(parent, hitbox, "hitbox")
 
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 	GlobalScripts.connect_signal(health, "took_damage", self, "_on_took_damage")
@@ -29,6 +26,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies") and area.is_in_group("despawn_points"):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
+		health.play_hurt_sound()
 		enemy.queue_free()
 
 
@@ -38,7 +36,7 @@ func _on_took_damage(damage: float, current_health: float) -> void:
 		return
 	
 	# after taking damage, check to see if health is zero
-	print("The objective took %s damage! Its health is now %s!" %[damage, current_health])
+	print("The objective took %s damage! Its health is now %s!" % [damage, current_health])
 	
 	# might want to remove this to make the code more modular
 	health.check_health_zero()
