@@ -3,6 +3,8 @@ extends Area2D
 
 @export var stats: EnemyStats
 
+@onready var animations := $Animations as AnimatedSprite2D
+@onready var death_sound := $DeathSound as AudioStreamPlayer
 @onready var state_machine := $StateMachine as StateMachine
 @onready var damage := $DamageComponent as DamageComponent
 @onready var health := $HealthComponent as HealthComponent

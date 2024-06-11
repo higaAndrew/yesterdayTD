@@ -1,14 +1,16 @@
-[gd_scene load_steps=24 format=3 uid="uid://bketea0lra044"]
+[gd_scene load_steps=26 format=3 uid="uid://bketea0lra044"]
 
 [ext_resource type="Script" path="res://towers/snowballer/snowball/snowball.gd" id="1_igkrt"]
 [ext_resource type="Resource" uid="uid://bfp1xuxqmhxaj" path="res://towers/snowballer/snowball/snowball_stats.tres" id="2_1vpye"]
-[ext_resource type="Texture2D" uid="uid://uffbi4of4bxc" path="res://towers/(projectiles)/snowball_spritesheet_3x2.png" id="2_h5l8p"]
-[ext_resource type="Texture2D" uid="uid://rlsa3hayw7y6" path="res://towers/(projectiles)/Retro Impact Effect Pack 3 F.png" id="3_6j6e6"]
+[ext_resource type="Texture2D" uid="uid://uffbi4of4bxc" path="res://towers/#projectiles/snowball_spritesheet_3x2.png" id="2_h5l8p"]
+[ext_resource type="Texture2D" uid="uid://rlsa3hayw7y6" path="res://towers/#projectiles/Retro Impact Effect Pack 3 F.png" id="3_6j6e6"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="4_veik1"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="5_i2cbu"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_t43q5"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/projectile_move.gd" id="6_8iahh"]
+[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_move.gd" id="6_7e5w4"]
+[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_hit.gd" id="7_bfcdq"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="7_e8bqd"]
+[ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="10_adsfj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uwf0q"]
 radius = 8.0
@@ -122,12 +124,14 @@ stats = ExtResource("2_1vpye")
 shape = SubResource("CircleShape2D_uwf0q")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-position = Vector2(8, -1)
+position = Vector2(1, 0)
 scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_pjw85")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.904096
+frame_progress = 0.36641
+offset = Vector2(-136, -11)
+flip_h = true
 
 [node name="HitVFX" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -140,18 +144,28 @@ frame_progress = 1.0
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 
 [node name="LifespanTimer" type="Timer" parent="."]
+one_shot = true
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_t43q5")
+initial_state = NodePath("ProjectileMove")
 
 [node name="ProjectileMove" type="Node" parent="StateMachine"]
-script = ExtResource("6_8iahh")
+script = ExtResource("6_7e5w4")
 
-[node name="DamageComponent" type="Node" parent="."]
+[node name="ProjectileHit" type="Node" parent="StateMachine"]
+script = ExtResource("7_bfcdq")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("4_veik1")
+hit_sound = NodePath("../HitSound")
 
 [node name="PierceComponent" type="Node" parent="."]
 script = ExtResource("7_e8bqd")
 
 [node name="SpeedComponent" type="Node" parent="."]
 script = ExtResource("5_i2cbu")
+
+[node name="VelocityComponent" type="Node" parent="." node_paths=PackedStringArray("speed")]
+script = ExtResource("10_adsfj")
+speed = NodePath("../SpeedComponent")

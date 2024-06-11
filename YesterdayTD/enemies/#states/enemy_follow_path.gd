@@ -1,10 +1,11 @@
-class_name EnemyFollowPath
 extends State
 
 var health: HealthComponent
 var path_movement: PathMovementComponent
 
 var projectile: Area2D
+var explosion: Area2D
+var melee: Area2D
 
 
 ## get parent's components
@@ -23,13 +24,18 @@ func physics_process(delta: float) -> void:
 	path_movement.follow_path(delta)
 
 
+## TODO explosions and melee
 ## handle attack collisions
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("projectiles"):
 		projectile = area
 		health.take_damage(projectile.damage.current_damage)
 		health.play_hurt_sound()
-		print("took %s damage! health is now %s!" % [projectile.damage.current_damage, health.current_health])
+		## TODO projectile state change?
+	if area.is_in_group("explosions"):
+		pass
+	if area.is_in_group("melee_attacks"):
+		pass
 
 
 ## handle health reaching 0
@@ -40,4 +46,3 @@ func _on_health_zero() -> void:
 ## handle reaching the end of the path without colliding with objective
 func _on_reached_end() -> void:
 	path_movement.delete()
-	print("deleted!")

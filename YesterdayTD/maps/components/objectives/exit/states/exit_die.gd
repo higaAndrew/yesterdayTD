@@ -1,4 +1,3 @@
-class_name ObjectiveDie
 extends State
 
 var health: HealthComponent

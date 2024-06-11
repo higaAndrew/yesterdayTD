@@ -3,13 +3,13 @@ extends Node
 
 signal pierce_zero
 
-var parent: Node2D
+var parent: Area2D
 var base_pierce: int
 var current_pierce: int
 
 
 ## set pierce values according to stats
-func init(_parent: Node2D) -> void:
+func init(_parent: Area2D) -> void:
 	parent = _parent
 	base_pierce = parent.stats.base_pierce
 	current_pierce = base_pierce

@@ -113,12 +113,12 @@ shape = SubResource("CircleShape2D_8m3o2")
 
 [node name="StateMachine" type="Node" parent="Rivet" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_h3mvm")
-initial_state = NodePath("FollowPath")
+initial_state = NodePath("EnemyFollowPath")
 
-[node name="FollowPath" type="Node" parent="Rivet/StateMachine"]
+[node name="EnemyFollowPath" type="Node" parent="Rivet/StateMachine"]
 script = ExtResource("7_12f1k")
 
-[node name="Die" type="Node" parent="Rivet/StateMachine"]
+[node name="EnemyDie" type="Node" parent="Rivet/StateMachine"]
 script = ExtResource("8_76578")
 
 [node name="DamageComponent" type="Node" parent="Rivet"]

@@ -82,6 +82,9 @@ projectile_scale = 0.1
 animated_sprite = NodePath("../AnimatedSprite2D")
 aim_component = NodePath("../AimComponent")
 
+[node name="RateOfFireTimer" parent="AttackComponent" index="2"]
+wait_time = 0.01
+
 [node name="HitboxComponent" parent="." instance=ExtResource("5_gja0m")]
 collision_layer = 2
 collision_mask = 2

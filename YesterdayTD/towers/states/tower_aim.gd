@@ -1,4 +1,3 @@
-class_name TowerAim
 extends State
 
 var sightline: RayCast2D

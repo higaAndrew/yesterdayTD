@@ -1,4 +1,3 @@
-class_name SpawnWave
 extends State
 
 ## so i don't have to type parent 50 times

@@ -11,7 +11,7 @@ var current_state: State
 func init(parent: Node2D) -> void:
 	for child in get_children():
 		if child is State:
-			states[child.name] = child
+			states[child.name.to_lower()] = child
 			child.parent = parent
 			child.transitioned.connect(on_state_transition)
 
@@ -30,8 +30,8 @@ func on_state_transition(state: State, new_state_name: String):
 		return
 
 	# if the new state's name is in the states dictionary, change the state to the new state
-	if new_state_name in states:
-		change_state(states[new_state_name])
+	if new_state_name.to_lower() in states:
+		change_state(states[new_state_name.to_lower()])
 	else:
 		printerr("The state you are trying to transition to (%s) is not in the list of states!" % new_state_name)
 		return

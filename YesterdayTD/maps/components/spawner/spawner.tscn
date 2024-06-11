@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="1_a8g05"]
 [ext_resource type="Script" path="res://maps/components/spawner/spawner.gd" id="1_j4cku"]
 [ext_resource type="Texture2D" uid="uid://cp8a4tpiy3vmf" path="res://maps/components/64x64_game_objects.png" id="1_tuyxe"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawner_idle.gd" id="2_nbehf"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawn_wave.gd" id="3_lqlne"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawn_group.gd" id="4_qrpsx"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/spawn_enemy.gd" id="5_ywy3j"]
+[ext_resource type="Script" path="res://maps/components/spawner/states/spawner_idle.gd" id="2_nbehf"]
+[ext_resource type="Script" path="res://maps/components/spawner/states/spawn_wave.gd" id="3_lqlne"]
+[ext_resource type="Script" path="res://maps/components/spawner/states/spawn_group.gd" id="4_qrpsx"]
+[ext_resource type="Script" path="res://maps/components/spawner/states/spawn_enemy.gd" id="5_ywy3j"]
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_j4cku")

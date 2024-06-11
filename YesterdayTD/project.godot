@@ -41,6 +41,7 @@ import/fbx/enabled=false
 2d_physics/layer_3="projectile"
 2d_physics/layer_4="objective"
 2d_physics/layer_5="enemy_despawn_point"
+2d_physics/layer_6="tower_detection_range"
 
 [rendering]
 

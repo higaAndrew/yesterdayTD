@@ -1,5 +1,5 @@
 class_name EnemyStats
-extends Stats
+extends Resource
 
 
 ## default stats

@@ -3,13 +3,13 @@ extends Node
 
 signal speed_changed(amount: float, current_speed: float)
 
-var parent: Node2D
+var parent: Area2D
 var base_speed: float
 var current_speed: float
 
 
 ## set speed values according to stats
-func init(_parent: Node2D) -> void:
+func init(_parent: Area2D) -> void:
 	parent = _parent
 	base_speed = parent.stats.base_speed
 	current_speed = base_speed

@@ -9,20 +9,18 @@ signal health_zero
 @export var hurt_sound: AudioStreamPlayer
 @export var death_sound: AudioStreamPlayer
 
-var parent: Node2D
+var parent: Area2D
 var base_health: float
 var current_health: float
 
 
 ## set health values according to stats
-func init(_parent: Node2D) -> void:
+func init(_parent: Area2D) -> void:
 	parent = _parent
 	base_health = parent.stats.base_health
 	current_health = base_health
 	
 	GlobalScripts.verify(parent, hitbox, "hitbox")
-	GlobalScripts.verify(parent, hurt_sound, "hurt_sound")
-	GlobalScripts.verify(parent, death_sound, "death_sound")
 
 
 ## increase health
@@ -62,12 +60,14 @@ func check_health_zero() -> void:
 
 ## play hurt sound
 func play_hurt_sound() -> void:
+	GlobalScripts.verify(parent, hurt_sound, "hurt_sound")
 	if is_instance_valid(hurt_sound):
 		hurt_sound.play()
 
 
 ## play death sound
 func play_death_sound() -> void:
+	GlobalScripts.verify(parent, death_sound, "death_sound")
 	if is_instance_valid(death_sound):
 		death_sound.play()
 

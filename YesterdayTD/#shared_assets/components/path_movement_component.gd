@@ -8,7 +8,7 @@ signal reached_end
 @export var path: PathFollow2D
 @export var speed: SpeedComponent
 
-var parent: Node2D
+var parent: Area2D
 var phase := 0
 var spawn_position: float
 var despawn_position: float
@@ -16,7 +16,7 @@ var progress: float
 
 
 ## ensure the necessary nodes are connected
-func init(_parent: Node2D) -> void:
+func init(_parent: Area2D) -> void:
 	parent = _parent
 	
 	GlobalScripts.verify(self, spawn_point, "spawn_point")

@@ -1,10 +1,10 @@
-class_name SpawnEnemy
 extends State
 
 ## blah blah parent you get it
 var p: Node2D
 
 ## preload every enemy
+## HACK change to parent preload?
 var enemies := {
 	"piston": preload("res://enemies/ground/piston/piston.tscn"),
 	"rivet": preload("res://enemies/ground/rivet/rivet.tscn"),
@@ -58,6 +58,11 @@ func _on_spawn_timer_timeout() -> void:
 	elif p.current_enemy == p.enemy_count:
 		p.current_enemy = 0
 		p.current_group += 1
+		
+		# the debugger gets pissy if the timer is set to 0
+		if p.group_delay == 0:
+			p.group_delay = 0.001
+			
 		p.group_timer.set_wait_time(p.group_delay)
 		transitioned.emit(self, "SpawnGroup")
 

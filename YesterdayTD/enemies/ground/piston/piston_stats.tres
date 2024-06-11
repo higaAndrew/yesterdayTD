@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://c5a8a7eftsdow"]
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://dsmtt8ch7db06"]
 
 [ext_resource type="Script" path="res://enemies/enemy_stats.gd" id="1_q2h6h"]
 
 [resource]
 script = ExtResource("1_q2h6h")
-base_health = 3.0
+base_health = 2.0
 base_speed = 100.0
 base_damage = 1
-base_monet = 1
+base_monet = 2
 children = 0

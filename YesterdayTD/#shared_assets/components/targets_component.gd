@@ -1,16 +1,14 @@
 class_name TargetsComponent
 extends Node
 
-#@export var range_hitbox: CollisionShape2D
 
-var parent: Node2D
+var parent: Area2D
 var target_list: Array
 
 
 ## set targets values according to stats
-func init(_parent: Node2D) -> void:
+func init(_parent: Area2D) -> void:
 	parent = _parent
-	#GlobalScripts.verify(parent, range_hitbox, "range_hitbox")
 
 
 ## add a target to the list

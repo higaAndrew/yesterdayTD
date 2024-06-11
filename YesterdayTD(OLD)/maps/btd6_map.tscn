@@ -515,7 +515,7 @@ position = Vector2(-79, 445)
 position = Vector2(661, 363)
 
 [node name="Snowbomber" parent="Towers" instance=ExtResource("10_mhl3u")]
-position = Vector2(379, 556)
+position = Vector2(1327, 877)
 
 [node name="Bosses" type="CanvasLayer" parent="."]
 

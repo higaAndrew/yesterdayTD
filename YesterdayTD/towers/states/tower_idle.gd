@@ -1,4 +1,3 @@
-class_name TowerIdle
 extends State
 
 var detection_range: Area2D
@@ -15,7 +14,7 @@ func init() -> void:
 
 
 ## every physics frame, check if there are viable targets
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
 	if not targets.target_list.is_empty():
 		transitioned.emit(self, "TowerAim")
 

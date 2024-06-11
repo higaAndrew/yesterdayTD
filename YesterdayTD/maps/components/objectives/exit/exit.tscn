@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://dehl3iglcj2hu"]
 
-[ext_resource type="Script" path="res://maps/components/exit/exit.gd" id="1_c1r7e"]
-[ext_resource type="Resource" uid="uid://sngduahstjji" path="res://maps/components/exit/exit_stats.tres" id="2_mugiu"]
-[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://maps/components/exit/Casual Enemy Damage C.wav" id="3_7tmrw"]
+[ext_resource type="Script" path="res://maps/components/objectives/exit/exit.gd" id="1_c1r7e"]
+[ext_resource type="Resource" uid="uid://brtbqa81e61qh" path="res://maps/components/objectives/exit/exit_stats.tres" id="2_mugiu"]
+[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://maps/components/objectives/exit/Casual Enemy Damage C.wav" id="3_7tmrw"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="3_e66nl"]
 [ext_resource type="Texture2D" uid="uid://cp8a4tpiy3vmf" path="res://maps/components/64x64_game_objects.png" id="3_h503k"]
-[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/exit/Synth Ominous B.wav" id="4_a0il7"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/objective_idle.gd" id="4_k80om"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/states/objective_die.gd" id="5_yn61m"]
+[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/objectives/exit/Synth Ominous B.wav" id="4_a0il7"]
+[ext_resource type="Script" path="res://maps/components/objectives/exit/states/exit_idle.gd" id="4_k80om"]
+[ext_resource type="Script" path="res://maps/components/objectives/exit/states/exit_die.gd" id="5_yn61m"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="6_s2cik"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8p5c1"]
@@ -35,12 +35,12 @@ stream = ExtResource("4_a0il7")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_e66nl")
-initial_state = NodePath("ObjectiveIdle")
+initial_state = NodePath("ExitIdle")
 
-[node name="ObjectiveIdle" type="Node" parent="StateMachine"]
+[node name="ExitIdle" type="Node" parent="StateMachine"]
 script = ExtResource("4_k80om")
 
-[node name="Die" type="Node" parent="StateMachine"]
+[node name="ExitDie" type="Node" parent="StateMachine"]
 script = ExtResource("5_yn61m")
 
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]

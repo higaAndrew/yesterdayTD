@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="ObjectiveStats" load_steps=2 format=3 uid="uid://sngduahstjji"]
-
-[ext_resource type="Script" path="res://maps/components/exit/objective_stats.gd" id="1_8djv5"]
-
-[resource]
-script = ExtResource("1_8djv5")
-base_health = 10.0

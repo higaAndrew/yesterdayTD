@@ -1,12 +1,13 @@
 class_name Spawner
 extends Node2D
 
-
+## HACK change spawning to a component?
 @export var wave_data: WaveData
-enum WaveSets {debug, story, standard, x2, x10, extraction, eggs,}
-@export var wave_set: WaveSets
+@export_enum("debug", "story", "standard", "x2", "x10", "extraction", "eggs") var wave_set: String = "debug"
 @export var wave_delay := 1.0
 
+
+## TODO change to get node?
 @export var ground_enemies: Path2D
 @export var ground_vehicles: Path2D
 @export var ground_bosses: Path2D
@@ -63,25 +64,27 @@ func _ready() -> void:
 ## determines which wave set to use for the map
 func get_waves() -> void:
 	match wave_set:
-		0:
+		"debug":
 			waves = wave_data.debug_waves
 			print("debug waves!")
-		1:
+		"story":
 			waves = wave_data.story_waves
 			print("story waves!")
-		2:
+		"standard":
 			waves = wave_data.standard_waves
 			print("standard waves!")
-		3:
+		"x2":
 			waves = wave_data.x2_waves
 			print("x2 waves!")
-		4:
+		"x10":
 			waves = wave_data.x10_waves
 			print("x10 waves!")
-		5:
+		"extraction":
 			waves = wave_data.extraction_waves
 			print("extraction waves!")
-		6:
+		"eggs":
 			waves = wave_data.eggs_waves
 			print("eggs waves!")
+		_:
+			printerr("The %s set of waves doesn't exist! How did you even select that?" % wave_set)
 ## HACK do wave data better

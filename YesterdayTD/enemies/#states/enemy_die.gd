@@ -1,4 +1,3 @@
-class_name EnemyDie
 extends State
 
 signal died
@@ -23,7 +22,7 @@ func enter() -> void:
 	health = parent.health
 	path_movement = parent.path_movement
 	
-	animations.play("die")
+	GlobalScripts.play_animation(parent, animations, "die")
 	health.disable_hitbox()
 	health.play_death_sound()
 	died.emit()
@@ -31,7 +30,7 @@ func enter() -> void:
 
 ## handle death animation finishing
 func _on_animation_finished() -> void:
-	if animations.animation == ("die"):
+	if animations.animation == "die":
 		animation_done = true
 		check_delete()
 

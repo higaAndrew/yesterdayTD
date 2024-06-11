@@ -1,7 +1,7 @@
 class_name Exit
 extends Area2D
 
-@export var stats: Stats
+@export var stats: ObjectiveStats
 
 @onready var hitbox := $Hitbox as CollisionShape2D
 @onready var state_machine := $StateMachine as StateMachine
