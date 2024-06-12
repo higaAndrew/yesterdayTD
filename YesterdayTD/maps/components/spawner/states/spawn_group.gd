@@ -24,8 +24,8 @@ func _on_group_timer_timeout() -> void:
 	
 	if p.current_group < p.group_count:
 		p.group = p.wave[p.current_group]
-		transitioned.emit(self, "SpawnEnemy")
+		transition.emit(self, "SpawnEnemy")
 	elif p.current_group == p.group_count:
 		p.current_group = 0
 		p.current_wave += 1
-		transitioned.emit(self, "SpawnWave")
+		transition.emit(self, "SpawnWave")

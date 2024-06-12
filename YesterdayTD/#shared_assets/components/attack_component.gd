@@ -1,12 +1,13 @@
 class_name AttackComponent
 extends Node
-## originally this was only for attack cooldown, but i wanted to make the attack spawning a bit easier
+## originally this component was only for attack cooldown, but i wanted to make the attack spawning a bit easier
+## i combined these, because if you have multiple attacks, then you'll have to always have an attack cooldown component and an attack component, so i killed 2 bird with one stone
+## is there a more graceful solution? almost definitely. am I going to find it? hell no
 
 @export_enum("0", "1", "2") var attack_number: int = 0
 @export_enum("Projectiles", "Effects") var layer_id: String = "Projectiles"
 @export var muzzle: Marker2D
 @export var sightline: RayCast2D
-@export var targets: TargetsComponent
 
 var parent: Area2D
 var stats: Resource
@@ -19,7 +20,8 @@ var layer: CanvasLayer
 
 
 ## set attack speed values according to stats
-## select the appropriate attack stats file
+## but first, select the appropriate attack stats file
+## then set the canvas layer
 func init(_parent: Area2D) -> void:
 	parent = _parent
 	match attack_number:
@@ -39,10 +41,10 @@ func init(_parent: Area2D) -> void:
 
 
 ## ATTACK INIT STUFF
+## given a projectile, init all its velocity related values, and add it to the selected canvas layer
 func init_projectile(attack: Area2D) -> void:
 	muzzle_position = muzzle.global_position
 	destination = sightline.to_global(sightline.target_position)
-	#destination = targets.current_target.global_position
 	
 	layer.add_child(attack)
 	attack.velocity.set_global_position(muzzle_position)

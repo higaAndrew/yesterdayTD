@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://bfp1xuxqmhxaj" path="res://towers/snowballer/snowball/snowball_stats.tres" id="2_1vpye"]
 [ext_resource type="Texture2D" uid="uid://uffbi4of4bxc" path="res://towers/#projectiles/snowball_spritesheet_3x2.png" id="2_h5l8p"]
 [ext_resource type="Texture2D" uid="uid://rlsa3hayw7y6" path="res://towers/#projectiles/Retro Impact Effect Pack 3 F.png" id="3_6j6e6"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_efy2i"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="4_veik1"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="5_i2cbu"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_t43q5"]
@@ -12,7 +13,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="7_e8bqd"]
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="10_adsfj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uwf0q"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_70s10"]
 radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdk0f"]
@@ -65,10 +66,6 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5e8jk"]
-atlas = ExtResource("3_6j6e6")
-region = Rect2(0, 256, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3uig"]
 atlas = ExtResource("3_6j6e6")
 region = Rect2(32, 256, 32, 32)
@@ -89,9 +86,6 @@ region = Rect2(160, 256, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5e8jk")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_k3uig")
 }, {
 "duration": 1.0,
@@ -111,7 +105,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit",
-"speed": 30.0
+"speed": 15.0
 }]
 
 [node name="Snowball" type="Area2D" groups=["projectiles"]]
@@ -121,7 +115,8 @@ script = ExtResource("1_igkrt")
 stats = ExtResource("2_1vpye")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_uwf0q")
+shape = SubResource("CircleShape2D_70s10")
+script = ExtResource("3_efy2i")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
@@ -129,7 +124,7 @@ scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_pjw85")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.36641
+frame_progress = 0.405743
 offset = Vector2(-136, -11)
 flip_h = true
 
@@ -138,8 +133,7 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_2vvne")
 animation = &"hit"
 autoplay = "hit"
-frame = 6
-frame_progress = 1.0
+offset = Vector2(-1, 0)
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 
@@ -160,8 +154,9 @@ script = ExtResource("7_bfcdq")
 script = ExtResource("4_veik1")
 hit_sound = NodePath("../HitSound")
 
-[node name="PierceComponent" type="Node" parent="."]
+[node name="PierceComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_e8bqd")
+hitbox = NodePath("../Hitbox")
 
 [node name="SpeedComponent" type="Node" parent="."]
 script = ExtResource("5_i2cbu")

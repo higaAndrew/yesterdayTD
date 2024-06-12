@@ -52,7 +52,7 @@ func _on_spawn_timer_timeout() -> void:
 		else:
 			p.spawn_timer.set_wait_time(p.spawn_delay)
 		
-		transitioned.emit(self, "SpawnEnemy")
+		transition.emit(self, "SpawnEnemy")
 	
 	# if there's no more enemies in the group, move on to the next
 	elif p.current_enemy == p.enemy_count:
@@ -64,7 +64,7 @@ func _on_spawn_timer_timeout() -> void:
 			p.group_delay = 0.001
 			
 		p.group_timer.set_wait_time(p.group_delay)
-		transitioned.emit(self, "SpawnGroup")
+		transition.emit(self, "SpawnGroup")
 
 
 ## determine the path that the enemy is spawned on

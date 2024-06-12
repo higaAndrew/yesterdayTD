@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=23 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground/rivet/rivet_stats.tres" id="2_ekq5m"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="3_0w71e"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_3dlbc"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="4_rhamo"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h3mvm"]
 [ext_resource type="AudioStream" uid="uid://dr4e7ao7ryjfg" path="res://#shared_assets/audio/sounds/Snowball 6066_80_3.wav" id="5_knekc"]
@@ -13,7 +14,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_557si"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccv6x"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dv5sc"]
 radius = 17.0
 height = 48.0
 
@@ -86,7 +87,8 @@ script = ExtResource("1_hi6hr")
 stats = ExtResource("2_ekq5m")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Rivet"]
-shape = SubResource("CapsuleShape2D_ccv6x")
+shape = SubResource("CapsuleShape2D_dv5sc")
+script = ExtResource("3_3dlbc")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Rivet"]
 texture_filter = 2
@@ -130,12 +132,12 @@ hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../HurtSound")
 
-[node name="SpeedComponent" type="Node" parent="Rivet"]
-script = ExtResource("10_557si")
-
 [node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
 script = ExtResource("11_06egf")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="SpeedComponent" type="Node" parent="Rivet"]
+script = ExtResource("10_557si")

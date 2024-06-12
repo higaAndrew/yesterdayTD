@@ -13,7 +13,7 @@ func init(parent: Node2D) -> void:
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.parent = parent
-			child.transitioned.connect(on_state_transition)
+			child.transition.connect(on_state_transition)
 
 	if is_instance_valid(initial_state):
 		change_state(initial_state)

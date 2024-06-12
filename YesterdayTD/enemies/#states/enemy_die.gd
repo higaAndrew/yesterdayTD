@@ -2,6 +2,7 @@ extends State
 
 signal died
 
+var hitbox: Hitbox
 var animations: AnimatedSprite2D
 var death_sound: AudioStreamPlayer
 var health: HealthComponent
@@ -13,6 +14,8 @@ var sound_done := false
 
 ## get parent's components
 func enter() -> void:
+	hitbox = parent.hitbox
+	
 	animations = parent.animations
 	GlobalScripts.connect_signal(animations, "animation_finished", self, "_on_animation_finished")
 	
@@ -23,7 +26,7 @@ func enter() -> void:
 	path_movement = parent.path_movement
 	
 	GlobalScripts.play_animation(parent, animations, "die")
-	health.disable_hitbox()
+	hitbox.disable_hitbox()
 	health.play_death_sound()
 	died.emit()
 

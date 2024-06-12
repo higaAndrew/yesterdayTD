@@ -23,8 +23,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if not current_state():
 		return
 	
-	# if an enemy collides, take damage and delete it
-	if area.is_in_group("enemies") and area.is_in_group("despawn_points"):
+	# if an enemy collides, take damage and delete it (not kill it)
+	if area.is_in_group("enemies"):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()
@@ -49,7 +49,7 @@ func _on_health_zero() -> void:
 		return
 	
 	# transition to die state
-	transitioned.emit(self, "ExitDie")
+	transition.emit(self, "ExitDie")
 	print(parent.health.current_health)
 
 

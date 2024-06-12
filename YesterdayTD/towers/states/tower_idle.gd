@@ -16,7 +16,7 @@ func init() -> void:
 ## every physics frame, check if there are viable targets
 func physics_process(delta: float) -> void:
 	if not targets.target_list.is_empty():
-		transitioned.emit(self, "TowerAim")
+		transition.emit(self, "TowerAim")
 
 
 ## when enemy collides with range, add it to the target list

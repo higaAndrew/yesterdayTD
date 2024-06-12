@@ -3,6 +3,7 @@ extends Area2D
 
 @export var stats: EnemyStats
 
+@onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
 @onready var death_sound := $DeathSound as AudioStreamPlayer
 @onready var state_machine := $StateMachine as StateMachine

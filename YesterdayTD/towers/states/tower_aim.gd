@@ -26,4 +26,4 @@ func physics_process(delta: float) -> void:
 		target_rotation = parent.global_position.angle_to_point(target.global_position)
 		parent.rotation = lerp_angle(parent.rotation, target_rotation, rotation_speed * delta)
 	else:
-		transitioned.emit(self, "TowerIdle")
+		transition.emit(self, "TowerIdle")

@@ -6,7 +6,7 @@
 script = ExtResource("1_unvqp")
 base_damage = 1.0
 base_pierce = 1
-base_attack_cooldown = 0.5
-base_speed = 500.0
-base_lifespan = 10.0
+base_attack_cooldown = 1.0
+base_speed = 1000.0
+base_lifespan = 1.0
 base_scale = 1.0

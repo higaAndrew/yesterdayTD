@@ -2,8 +2,8 @@ class_name State
 extends Node
 
 ## emitting the signal will require self, as well as the new state
-## i.e. emit_signal("transitioned", self, new_state)
-signal transitioned
+## i.e. transition.emit(self, new_state)
+signal transition
 
 var parent: Node2D
 var initialized := false

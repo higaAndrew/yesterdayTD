@@ -1,5 +1,7 @@
 extends State
 
+signal collided
+
 var health: HealthComponent
 var path_movement: PathMovementComponent
 
@@ -29,9 +31,12 @@ func physics_process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("projectiles"):
 		projectile = area
-		health.take_damage(projectile.damage.current_damage)
-		health.play_hurt_sound()
-		## TODO projectile state change?
+		if not projectile.pierce.pierce_expended:
+			health.take_damage(projectile.damage.current_damage)
+			health.play_hurt_sound()
+			
+			projectile.hitbox.collide()
+	
 	if area.is_in_group("explosions"):
 		pass
 	if area.is_in_group("melee_attacks"):
@@ -40,7 +45,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 ## handle health reaching 0
 func _on_health_zero() -> void:
-	transitioned.emit(self, "EnemyDie")
+	transition.emit(self, "EnemyDie")
 
 
 ## handle reaching the end of the path without colliding with objective

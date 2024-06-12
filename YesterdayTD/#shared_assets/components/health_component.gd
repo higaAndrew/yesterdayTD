@@ -70,9 +70,3 @@ func play_death_sound() -> void:
 	GlobalScripts.verify(parent, death_sound, "death_sound")
 	if is_instance_valid(death_sound):
 		death_sound.play()
-
-
-## the debugger gets pissy when you use set_disabled, so this is a passable workaround
-func disable_hitbox() -> void:
-	hitbox.global_position = Vector2(-64, -64)
-	hitbox.set_deferred("disabled", true)

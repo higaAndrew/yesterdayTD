@@ -1,9 +1,13 @@
 class_name Snowball
 extends Area2D
+## FIXME fix multiple collisions happening despite single pierce
 
 @export var stats: ProjectileStats
 
+@onready var hitbox := $Hitbox as Hitbox
+@onready var animations := $Animations as AnimatedSprite2D
 @onready var hit_vfx := $HitVFX as AnimatedSprite2D
+@onready var hit_sound := $HitSound as AudioStreamPlayer
 @onready var lifespan_timer := $LifespanTimer as Timer
 @onready var state_machine := $StateMachine as StateMachine
 @onready var damage := $DamageComponent as DamageComponent

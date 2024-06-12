@@ -5,6 +5,6 @@ extends State
 ## prepare for the first wave
 func enter() -> void:
 	if parent.current_wave == 0:
-		transitioned.emit(self, "SpawnWave")
+		transition.emit(self, "SpawnWave")
 	else:
 		print("all done here!")

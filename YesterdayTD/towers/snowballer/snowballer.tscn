@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtdhyq4f6jvew"]
+[gd_scene load_steps=21 format=3 uid="uid://dtdhyq4f6jvew"]
 
 [ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_uep4e"]
 [ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_1bcql"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="4_o05pg"]
 [ext_resource type="Resource" uid="uid://bfp1xuxqmhxaj" path="res://towers/snowballer/snowball/snowball_stats.tres" id="4_x5etv"]
 [ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="5_5nx16"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="5_qut8l"]
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="6_kmy0w"]
 [ext_resource type="Script" path="res://towers/states/tower_aim.gd" id="6_kq8et"]
 [ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="6_wmbby"]
@@ -15,10 +16,10 @@
 [ext_resource type="Script" path="res://towers/snowballer/states/attack_throw_snowball.gd" id="9_gdi41"]
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="10_qt0t0"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sy8xc"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sbcjf"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0em43"]
 radius = 200.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btb3g"]
@@ -63,13 +64,15 @@ snowball_scene = ExtResource("9_gcepe")
 attack0_stats = ExtResource("4_x5etv")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_sy8xc")
+shape = SubResource("CircleShape2D_7ynkj")
+script = ExtResource("5_qut8l")
 
 [node name="DetectionRange" type="Area2D" parent="."]
 collision_layer = 32
 
 [node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
-shape = SubResource("CircleShape2D_sbcjf")
+shape = SubResource("CircleShape2D_0em43")
+script = ExtResource("5_qut8l")
 
 [node name="RangePreview" type="Node" parent="DetectionRange/RangeHitbox" node_paths=PackedStringArray("sightline")]
 script = ExtResource("4_mv23i")
@@ -85,7 +88,8 @@ autoplay = "idle"
 position = Vector2(32, 32)
 
 [node name="Sightline" type="RayCast2D" parent="."]
-target_position = Vector2(250, 0)
+target_position = Vector2(300, 0)
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -112,11 +116,10 @@ script = ExtResource("8_0clgy")
 [node name="AttackThrowSnowball" type="Node" parent="SnowballStateMachine"]
 script = ExtResource("9_gdi41")
 
-[node name="SnowballAttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle", "sightline", "targets")]
+[node name="SnowballAttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle", "sightline")]
 script = ExtResource("10_qt0t0")
 muzzle = NodePath("../Animations/Muzzle")
 sightline = NodePath("../Sightline")
-targets = NodePath("../TargetsComponent")
 
 [node name="RangeComponent" type="Node" parent="." node_paths=PackedStringArray("range_hitbox")]
 script = ExtResource("6_wmbby")
