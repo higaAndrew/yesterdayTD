@@ -38,7 +38,8 @@ func target_priority(priority: String) -> void:
 		"Close":
 			target_list.sort_custom(sort_close)
 		"Random":
-			target_list.sort_custom(sort_random)
+			# doesn't need sorting
+			pass
 
 
 ## prioritize target with most progress along path

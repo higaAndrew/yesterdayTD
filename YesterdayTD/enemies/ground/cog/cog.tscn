@@ -1,5 +1,127 @@
-[gd_scene format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=20 format=3 uid="uid://dl4gpt52rgyue"]
+
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
+[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="2_kjqqa"]
+[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_urub2"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="4_7h3sy"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="5_3r286"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="6_5tju8"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="7_ykfl4"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_k268f"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="9_swlxc"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
+radius = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
+atlas = ExtResource("2_kjqqa")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qq4e"]
+atlas = ExtResource("2_kjqqa")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q1m0"]
+atlas = ExtResource("2_kjqqa")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6c3"]
+atlas = ExtResource("2_kjqqa")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqyou"]
+atlas = ExtResource("2_kjqqa")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvutj"]
+atlas = ExtResource("2_urub2")
+region = Rect2(152, 0, 76, 76)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pcoky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te42r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qq4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q1m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6c3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqyou")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"die",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvutj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r7bba"]
+radius = 0.01
 
 [node name="CogPath" type="PathFollow2D"]
 
 [node name="Cog" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="Hitbox" type="CollisionShape2D" parent="Cog"]
+shape = SubResource("CircleShape2D_e3j37")
+script = ExtResource("1_24smv")
+
+[node name="Animations" type="AnimatedSprite2D" parent="Cog"]
+scale = Vector2(1.4, 1.4)
+sprite_frames = SubResource("SpriteFrames_pcoky")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="Cog"]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Cog"]
+
+[node name="SpawnPoint" type="Marker2D" parent="Cog"]
+
+[node name="DespawnPoint" type="Area2D" parent="Cog"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cog/DespawnPoint"]
+shape = SubResource("CircleShape2D_r7bba")
+
+[node name="StateMachine" type="Node" parent="Cog"]
+script = ExtResource("4_7h3sy")
+
+[node name="EnemyFollowPath" type="Node" parent="Cog/StateMachine"]
+script = ExtResource("5_3r286")
+
+[node name="EnemyDie" type="Node" parent="Cog/StateMachine"]
+script = ExtResource("6_5tju8")
+
+[node name="DamageComponent" type="Node" parent="Cog"]
+script = ExtResource("7_ykfl4")
+
+[node name="HealthComponent" type="Node" parent="Cog" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+script = ExtResource("8_k268f")
+hitbox = NodePath("../Hitbox")
+hurt_sound = NodePath("../HurtSound")
+death_sound = NodePath("../DeathSound")
+
+[node name="PathMovementComponent" type="Node" parent="Cog" node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("9_swlxc")
+spawn_point = NodePath("../SpawnPoint")
+
+[node name="SpeedComponent" type="Node" parent="Cog"]
+script = ExtResource("10_degqw")

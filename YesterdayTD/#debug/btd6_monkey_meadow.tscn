@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca0oc8wyuuym7"]
+[gd_scene load_steps=12 format=3 uid="uid://ca0oc8wyuuym7"]
 
 [ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_2gh83"]
 [ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_gjpah"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="4_ak50o"]
 [ext_resource type="Script" path="res://#debug/btd6_monkey_meadow_wave_data.gd" id="4_wfr5x"]
 [ext_resource type="PackedScene" uid="uid://dtdhyq4f6jvew" path="res://towers/snowballer/snowballer.tscn" id="7_xennj"]
+[ext_resource type="PackedScene" uid="uid://3no4bpnihcj4" path="res://#debug/debug_tower.tscn" id="8_nikvn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgo40"]
 texture = ExtResource("2_gjpah")
@@ -467,7 +468,6 @@ point_count = 24
 [node name="BTD6MonkeyMeadow" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(-163, 126)
 anchor_mode = 0
 
 [node name="Background" type="TextureRect" parent="."]
@@ -507,7 +507,10 @@ curve = SubResource("Curve2D_h4wvv")
 curve = SubResource("Curve2D_h4wvv")
 
 [node name="Snowballer" parent="Canvas/Towers" index="0" instance=ExtResource("7_xennj")]
-position = Vector2(755, 575)
+position = Vector2(920, 925)
+
+[node name="DebugTower" parent="Canvas/Towers" index="1" instance=ExtResource("8_nikvn")]
+position = Vector2(833, 517)
 
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")

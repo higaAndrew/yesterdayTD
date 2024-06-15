@@ -1,0 +1,125 @@
+[gd_scene load_steps=15 format=3 uid="uid://cy8jh5c3n032f"]
+
+[ext_resource type="Script" path="res://#debug/debug_projectile.gd" id="1_bbqvc"]
+[ext_resource type="Resource" uid="uid://da0u6bj6rhx38" path="res://#debug/debug_projectile_stats.tres" id="2_exvro"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_yn4c2"]
+[ext_resource type="Texture2D" uid="uid://dy3n6irl8xf8d" path="res://icon.svg" id="4_a56sx"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_76oll"]
+[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_move.gd" id="7_ylkms"]
+[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_hit.gd" id="8_p6lgm"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="9_hl5s5"]
+[ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_wt1l2"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="11_u1guu"]
+[ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="12_x5m2v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70s10"]
+radius = 20.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pjw85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2vvne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a56sx")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 15.0
+}]
+
+[node name="DebugProjectile" type="Area2D" groups=["projectiles"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_bbqvc")
+stats = ExtResource("2_exvro")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_70s10")
+script = ExtResource("3_yn4c2")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.22, 0.22)
+sprite_frames = SubResource("SpriteFrames_pjw85")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.405743
+
+[node name="HitVFX" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(0.63058, 0.00968953, 4.81308e-08, 1)
+rotation = -1.5708
+scale = Vector2(0.22, 0.22)
+sprite_frames = SubResource("SpriteFrames_2vvne")
+animation = &"hit"
+autoplay = "hit"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+
+[node name="LifespanTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_76oll")
+initial_state = NodePath("ProjectileMove")
+
+[node name="ProjectileMove" type="Node" parent="StateMachine"]
+script = ExtResource("7_ylkms")
+
+[node name="ProjectileHit" type="Node" parent="StateMachine"]
+script = ExtResource("8_p6lgm")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
+script = ExtResource("9_hl5s5")
+hit_sound = NodePath("../HitSound")
+
+[node name="PierceComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("10_wt1l2")
+hitbox = NodePath("../Hitbox")
+
+[node name="SpeedComponent" type="Node" parent="."]
+script = ExtResource("11_u1guu")
+
+[node name="VelocityComponent" type="Node" parent="." node_paths=PackedStringArray("speed")]
+script = ExtResource("12_x5m2v")
+speed = NodePath("../SpeedComponent")

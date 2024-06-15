@@ -1,4 +1,4 @@
-class_name Snowball
+class_name DebugProjectile
 extends Area2D
 
 @export var stats: AttackStats

@@ -1,0 +1,124 @@
+[gd_scene load_steps=21 format=3 uid="uid://3no4bpnihcj4"]
+
+[ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
+[ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
+[ext_resource type="PackedScene" uid="uid://cy8jh5c3n032f" path="res://#debug/debug_projectile.tscn" id="3_xap02"]
+[ext_resource type="Resource" uid="uid://da0u6bj6rhx38" path="res://#debug/debug_projectile_stats.tres" id="4_hqoiv"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="5_872gq"]
+[ext_resource type="Script" path="res://#debug/range_preview.gd" id="6_syu5h"]
+[ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="7_cxpwy"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_3d60e"]
+[ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="9_lxmvp"]
+[ext_resource type="Script" path="res://towers/states/tower_aim.gd" id="10_004ew"]
+[ext_resource type="Script" path="res://#debug/#states/attack_idle_debug_projectile.gd" id="12_haiwt"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="13_23vcv"]
+[ext_resource type="Script" path="res://#debug/#states/attack_throw_debug_projectile.gd" id="13_w0s8o"]
+[ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="14_i1qbu"]
+[ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="15_7wf75"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0em43"]
+radius = 250.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8c5ot"]
+atlas = ExtResource("7_cxpwy")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6usw8"]
+atlas = ExtResource("7_cxpwy")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2184c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8c5ot")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6usw8")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[node name="DebugTower" type="Area2D" groups=["towers"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_yi6y1")
+stats = ExtResource("2_g434y")
+attack0_scene = ExtResource("3_xap02")
+attack0_stats = ExtResource("4_hqoiv")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ynkj")
+script = ExtResource("5_872gq")
+
+[node name="DetectionRange" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_0em43")
+script = ExtResource("5_872gq")
+
+[node name="RangePreview" type="Node" parent="DetectionRange/RangeHitbox" node_paths=PackedStringArray("sightline")]
+script = ExtResource("6_syu5h")
+stats = ExtResource("2_g434y")
+sightline = NodePath("../../../Sightline")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2184c")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Muzzle" type="Marker2D" parent="Animations"]
+position = Vector2(32, 0)
+
+[node name="Sightline" type="RayCast2D" parent="."]
+target_position = Vector2(260, 0)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_3d60e")
+initial_state = NodePath("TowerIdle")
+
+[node name="TowerIdle" type="Node" parent="StateMachine"]
+script = ExtResource("9_lxmvp")
+
+[node name="TowerAim" type="Node" parent="StateMachine"]
+script = ExtResource("10_004ew")
+
+[node name="DebugProjCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DebugProjStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_3d60e")
+initial_state = NodePath("AttackIdleDebugProj")
+
+[node name="AttackIdleDebugProj" type="Node" parent="DebugProjStateMachine"]
+script = ExtResource("12_haiwt")
+
+[node name="AttackThrowDebugProj" type="Node" parent="DebugProjStateMachine"]
+script = ExtResource("13_w0s8o")
+
+[node name="DebugProjAttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle", "sightline", "targets")]
+script = ExtResource("13_23vcv")
+muzzle = NodePath("../Animations/Muzzle")
+sightline = NodePath("../Sightline")
+targets = NodePath("../TargetsComponent")
+
+[node name="RangeComponent" type="Node" parent="." node_paths=PackedStringArray("range_hitbox")]
+script = ExtResource("14_i1qbu")
+range_hitbox = NodePath("../DetectionRange/RangeHitbox")
+
+[node name="TargetsComponent" type="Node" parent="."]
+script = ExtResource("15_7wf75")

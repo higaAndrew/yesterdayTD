@@ -2,7 +2,7 @@ class_name Piston
 extends Area2D
 
 @export var stats: EnemyStats
-
+## FIXME finish cog
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
 @onready var hurt_sound := $HurtSound as AudioStreamPlayer

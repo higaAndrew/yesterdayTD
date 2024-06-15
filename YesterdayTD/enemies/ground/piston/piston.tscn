@@ -15,9 +15,8 @@
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="9_u6f8i"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="10_gdnqo"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a47vm"]
-radius = 16.0
-height = 48.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0eun"]
+radius = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
 atlas = ExtResource("1_xyu1i")
@@ -39,7 +38,7 @@ region = Rect2(192, 64, 64, 64)
 atlas = ExtResource("1_xyu1i")
 region = Rect2(256, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_72u7w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxd5e"]
 atlas = ExtResource("2_kux8k")
 region = Rect2(0, 0, 76, 76)
 
@@ -70,7 +69,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_72u7w")
+"texture": SubResource("AtlasTexture_gxd5e")
 }],
 "loop": true,
 "name": &"idle",
@@ -89,14 +88,16 @@ script = ExtResource("1_sn8i6")
 stats = ExtResource("2_oay5v")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Piston"]
-shape = SubResource("CapsuleShape2D_a47vm")
+shape = SubResource("CircleShape2D_e0eun")
 script = ExtResource("3_dpm61")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Piston"]
 texture_filter = 2
+scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.927092
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Piston"]
 stream = ExtResource("5_mlgi1")

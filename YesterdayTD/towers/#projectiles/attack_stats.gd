@@ -1,4 +1,4 @@
-class_name ProjectileStats
+class_name AttackStats
 extends Resource
 
 ## TODO Tiered upgrades

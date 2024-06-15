@@ -9,6 +9,8 @@ var target: Area2D
 var target_rotation: float
 
 
+## HACK maybe don't rotate towards targets and just immediately face it?
+## HACK raycast from muzzle???
 ##  get parent's components
 func init() -> void:
 	sightline = parent.sightline
@@ -23,7 +25,9 @@ func physics_process(delta: float) -> void:
 	if not targets.target_list.is_empty():
 		targets.target_priority(target_priority)
 		target = targets.target_list.front()
+		#target_rotation = parent.global_position.angle_to_point(target.global_position)-0.15
 		target_rotation = parent.global_position.angle_to_point(target.global_position)
-		parent.rotation = lerp_angle(parent.rotation, target_rotation, rotation_speed * delta)
+		#parent.rotation = lerp_angle(parent.rotation, target_rotation, rotation_speed * delta)
+		parent.rotation = target_rotation
 	else:
 		transition.emit(self, "TowerIdle")

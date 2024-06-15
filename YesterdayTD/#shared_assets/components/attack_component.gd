@@ -8,6 +8,7 @@ extends Node
 @export_enum("Projectiles", "Effects") var layer_id: String = "Projectiles"
 @export var muzzle: Marker2D
 @export var sightline: RayCast2D
+@export var targets: TargetsComponent
 
 var parent: Area2D
 var stats: Resource
@@ -44,7 +45,13 @@ func init(_parent: Area2D) -> void:
 ## given a projectile, init all its velocity related values, and add it to the selected canvas layer
 func init_projectile(attack: Area2D) -> void:
 	muzzle_position = muzzle.global_position
-	destination = sightline.to_global(sightline.target_position)
+	## HACK is this viable?
+	
+	# shoot at the tip of the sightline
+	#destination = sightline.to_global(sightline.target_position)
+	# shoot at the center of the first target on the target list
+	#destination = targets.target_list.front().global_position
+	
 	
 	layer.add_child(attack)
 	attack.velocity.set_global_position(muzzle_position)

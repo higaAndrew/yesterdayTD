@@ -1,4 +1,4 @@
-class_name Snowballer
+class_name DebugTower
 extends Area2D
 
 @export var stats: TowerStats
@@ -13,9 +13,9 @@ extends Area2D
 @onready var targets := $TargetsComponent as TargetsComponent
 @onready var range_component := $RangeComponent as RangeComponent
 
-@onready var snowball_state_machine := $SnowballStateMachine as StateMachine
-@onready var snowball_cooldown_timer := $SnowballCooldownTimer as Timer
-@onready var snowball_attack := $SnowballAttackComponent as AttackComponent
+@onready var debug_projectile_state_machine := $DebugProjStateMachine as StateMachine
+@onready var debug_projectile_cooldown_timer := $DebugProjCooldownTimer as Timer
+@onready var debug_projectile_attack := $DebugProjAttackComponent as AttackComponent
 
 
 ## init state machines and components
@@ -25,7 +25,7 @@ func _ready() -> void:
 	GlobalScripts.verify(self, attack0_stats, "attack0_stats")
 	
 	state_machine.init(self)
-	snowball_state_machine.init(self)
+	debug_projectile_state_machine.init(self)
 	targets.init(self)
 	range_component.init(self)
-	snowball_attack.init(self)
+	debug_projectile_attack.init(self)

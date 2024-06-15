@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=24 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground/rivet/rivet_stats.tres" id="2_ekq5m"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_3dlbc"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="4_rhamo"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h3mvm"]
-[ext_resource type="AudioStream" uid="uid://dr4e7ao7ryjfg" path="res://#shared_assets/audio/sounds/Snowball 6066_80_3.wav" id="5_knekc"]
+[ext_resource type="AudioStream" uid="uid://cul30ugwvk5hc" path="res://enemies/Radiator Metal Impacts 002.wav" id="6_5evyb"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="7_12f1k"]
+[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_56ygc"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_8kdpp"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="8_76578"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="9_pffkw"]
@@ -59,6 +60,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oqyou")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": false,
 "name": &"die",
@@ -93,14 +97,15 @@ script = ExtResource("3_3dlbc")
 [node name="Animations" type="AnimatedSprite2D" parent="Rivet"]
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_7fp7q")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Rivet"]
-stream = ExtResource("5_knekc")
+stream = ExtResource("6_5evyb")
 volume_db = -10.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Rivet"]
+stream = ExtResource("7_56ygc")
 
 [node name="SpawnPoint" type="Marker2D" parent="Rivet"]
 position = Vector2(16, 0)
@@ -130,7 +135,7 @@ script = ExtResource("8_8kdpp")
 script = ExtResource("9_pffkw")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
-death_sound = NodePath("../HurtSound")
+death_sound = NodePath("../DeathSound")
 
 [node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
 script = ExtResource("11_06egf")

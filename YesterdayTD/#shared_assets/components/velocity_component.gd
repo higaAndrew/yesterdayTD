@@ -23,14 +23,17 @@ func set_rotation(_rotation: float) -> void:
 	parent.rotation = _rotation
 
 
-## set the parent's destination
+## set the parent's direction based on destination
 func set_direction(_destination: Vector2) -> void:
 	direction = (_destination - parent.global_position).normalized()
 
 
-## set the parent's velocity
+## set the parent's velocity based on 
 func set_velocity() -> void:
-	velocity = direction * speed.current_speed
+	# normal velocity calculation
+	#velocity = direction * speed.current_speed
+	# go straight forwards
+	velocity = Vector2.RIGHT.rotated(parent.rotation) * speed.current_speed
 
 
 ## update the parent's velocity
