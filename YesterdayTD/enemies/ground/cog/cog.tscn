@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=25 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
 [ext_resource type="Script" path="res://enemies/ground/cog/cog.gd" id="1_udpip"]
 [ext_resource type="Resource" uid="uid://0k6ayifnlay3" path="res://enemies/ground/cog/cog_stats.tres" id="2_3nlni"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="2_kjqqa"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_urub2"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="3_frmfv"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="4_7h3sy"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="5_3r286"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="6_5tju8"]
@@ -16,7 +17,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
-radius = 36.0
+radius = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
 atlas = ExtResource("2_kjqqa")
@@ -86,12 +87,18 @@ collision_mask = 4
 script = ExtResource("1_udpip")
 stats = ExtResource("2_3nlni")
 
+[node name="SpawnDespawnPointPreview" type="Node" parent="Cog" node_paths=PackedStringArray("hitbox", "spawn_point", "despawn_point")]
+script = ExtResource("3_frmfv")
+hitbox = NodePath("../Hitbox")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+
 [node name="Hitbox" type="CollisionShape2D" parent="Cog"]
 shape = SubResource("CircleShape2D_e3j37")
 script = ExtResource("1_24smv")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Cog"]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_pcoky")
 animation = &"idle"
 autoplay = "idle"
@@ -104,10 +111,10 @@ volume_db = -5.0
 stream = ExtResource("7_t5dv2")
 
 [node name="SpawnPoint" type="Marker2D" parent="Cog"]
-position = Vector2(36, 0)
+position = Vector2(32, 0)
 
 [node name="DespawnPoint" type="Area2D" parent="Cog" groups=["despawn_points", "enemies"]]
-position = Vector2(-36, 0)
+position = Vector2(-32, 0)
 collision_layer = 16
 collision_mask = 0
 

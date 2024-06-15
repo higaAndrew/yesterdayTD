@@ -6,6 +6,8 @@ extends Area2D
 @onready var animations := $Animations as AnimatedSprite2D
 @onready var hurt_sound := $HurtSound as AudioStreamPlayer
 @onready var death_sound := $DeathSound as AudioStreamPlayer
+@onready var spawn_point := $SpawnPoint as Marker2D
+@onready var despawn_point := $DespawnPoint as Area2D
 @onready var state_machine := $StateMachine as StateMachine
 @onready var damage := $DamageComponent as DamageComponent
 @onready var health := $HealthComponent as HealthComponent

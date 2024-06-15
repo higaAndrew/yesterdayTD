@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=25 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground/rivet/rivet_stats.tres" id="2_ekq5m"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="3_0w71e"]
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_3dlbc"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="3_pxof8"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="4_rhamo"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h3mvm"]
 [ext_resource type="AudioStream" uid="uid://cul30ugwvk5hc" path="res://enemies/Radiator Metal Impacts 002.wav" id="6_5evyb"]
@@ -16,7 +17,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6agfr"]
-radius = 34.0
+radius = 29.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
 atlas = ExtResource("3_0w71e")
@@ -89,13 +90,19 @@ collision_mask = 4
 script = ExtResource("1_hi6hr")
 stats = ExtResource("2_ekq5m")
 
+[node name="SpawnDespawnPointPreview" type="Node" parent="Rivet" node_paths=PackedStringArray("hitbox", "spawn_point", "despawn_point")]
+script = ExtResource("3_pxof8")
+hitbox = NodePath("../Hitbox")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+
 [node name="Hitbox" type="CollisionShape2D" parent="Rivet"]
 shape = SubResource("CircleShape2D_6agfr")
 script = ExtResource("3_3dlbc")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Rivet"]
 texture_filter = 2
-scale = Vector2(1.45, 1.45)
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
 autoplay = "idle"
@@ -108,10 +115,10 @@ volume_db = -10.0
 stream = ExtResource("7_56ygc")
 
 [node name="SpawnPoint" type="Marker2D" parent="Rivet"]
-position = Vector2(34, 0)
+position = Vector2(29, 0)
 
 [node name="DespawnPoint" type="Area2D" parent="Rivet" groups=["despawn_points", "enemies"]]
-position = Vector2(-34, 0)
+position = Vector2(-29, 0)
 collision_layer = 16
 collision_mask = 0
 
