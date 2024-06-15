@@ -4,18 +4,24 @@
 
 ### ENEMIES
 #### Ground Enemies
-- [ ] piston
-- [ ] rivet
+- [x] piston
+- [x] rivet
 - [ ] cog
+#### Ground Vehicles
+- [ ] at least one
 #### Flying Enemies
+- [ ] at least one
+#### Flying Vehicles
 - [ ] at least one
 #### Ground Bosses
 - [ ] at least one
 #### Flying Bosses
 - [ ] at least one
 ### TOWERS
-- [ ] snowballer
-	- [ ] snowball
+- [x] debug
+	- [x] debug projectile
+- [x] snowballer
+	- [x] snowball
 - [ ] snowbomber
 	- [ ] snowbomb
 	- [ ] snowbomb explosion
@@ -24,31 +30,48 @@
 #### Tilemaps
 - [x] snowy
 ### OBJECTS
-- [ ] spawner
-- [ ] objective
+- [x] spawner
+- [x] ~~objective~~
+#### Objectives
+- [x] map exit
+- [ ] eggs?
 ### SCRIPTS
 #### Misc.
 - [x] global shortcuts for object verification
 - [x] stats as a custom resource
+- [x] tower targeting priorities
 #### Components
-- [ ] health
+- [x] attack
+- [x] damage
+- [x] health
+- [x] hitbox
 - [x] path_movement
+- [x] pierce
+- [x] range
 - [x] speed
-- [ ] 
+- [x] targets
+- [x] velocity
 #### State Machine
 - [x] reusable base state machine
 ##### States
 - [x] reusable base state
-- [ ] enemy_followpath
-- [ ] enemy_die
-- [ ] objective_idle
-- [ ] objective_damage
-- [ ] objective_die
+- [x] enemy
+- [x] ~~objective_idle~~
+- [x] ~~objective_damage~~
+- [x] ~~objective_die~~
+- [x] map_exit
+- [x] spawner
+- [x] tower
+- [x] projectile
 ### MISC. FEATURES
 - [x] debug map
 - [x] figure out how to consistently draw certain elements over others, regardless of their z-index
 	- [x] done: canvaslayers
 - [x] enemy path navigation
 	- [x] done: path2d, make every enemy an area2d inside a pathfollow2d
+- [x] aiming
+	- [x] done: array of enemies in range, according to target priority, pick the front enemy
+- [x] attacking
+	- [x] done: spawn projectiles, tower passes velocity data, projectile handles the rest
 ---
 ## Ideas

@@ -1,18 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=24 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
+[ext_resource type="Script" path="res://enemies/ground/cog/cog.gd" id="1_udpip"]
+[ext_resource type="Resource" uid="uid://0k6ayifnlay3" path="res://enemies/ground/cog/cog_stats.tres" id="2_3nlni"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="2_kjqqa"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_urub2"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="4_7h3sy"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="5_3r286"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="6_5tju8"]
+[ext_resource type="AudioStream" uid="uid://jwq4p026lt1f" path="res://enemies/Hollow Clicks.wav" id="6_tuiqv"]
+[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_t5dv2"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="7_ykfl4"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_k268f"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="9_swlxc"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
-radius = 32.0
+radius = 36.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
 atlas = ExtResource("2_kjqqa")
@@ -75,34 +79,44 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7bba"]
 radius = 0.01
 
-[node name="CogPath" type="PathFollow2D"]
+[node name="CogPath" type="PathFollow2D" groups=["enemies", "ground_enemies"]]
 
-[node name="Cog" type="Area2D" parent="."]
+[node name="Cog" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
 collision_mask = 4
+script = ExtResource("1_udpip")
+stats = ExtResource("2_3nlni")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Cog"]
 shape = SubResource("CircleShape2D_e3j37")
 script = ExtResource("1_24smv")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Cog"]
-scale = Vector2(1.4, 1.4)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_pcoky")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Cog"]
+stream = ExtResource("6_tuiqv")
+volume_db = -5.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Cog"]
+stream = ExtResource("7_t5dv2")
 
 [node name="SpawnPoint" type="Marker2D" parent="Cog"]
+position = Vector2(36, 0)
 
-[node name="DespawnPoint" type="Area2D" parent="Cog"]
+[node name="DespawnPoint" type="Area2D" parent="Cog" groups=["despawn_points", "enemies"]]
+position = Vector2(-36, 0)
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cog/DespawnPoint"]
 shape = SubResource("CircleShape2D_r7bba")
 
-[node name="StateMachine" type="Node" parent="Cog"]
+[node name="StateMachine" type="Node" parent="Cog" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_7h3sy")
+initial_state = NodePath("EnemyFollowPath")
 
 [node name="EnemyFollowPath" type="Node" parent="Cog/StateMachine"]
 script = ExtResource("5_3r286")
@@ -119,9 +133,12 @@ hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
 
-[node name="PathMovementComponent" type="Node" parent="Cog" node_paths=PackedStringArray("spawn_point")]
+[node name="PathMovementComponent" type="Node" parent="Cog" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
 script = ExtResource("9_swlxc")
 spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+path = NodePath("../..")
+speed = NodePath("../SpeedComponent")
 
 [node name="SpeedComponent" type="Node" parent="Cog"]
 script = ExtResource("10_degqw")

@@ -1,4 +1,4 @@
-class_name Piston
+class_name Cog
 extends Area2D
 
 @export var stats: EnemyStats

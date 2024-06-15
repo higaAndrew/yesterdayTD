@@ -35,6 +35,7 @@ func _on_area_entered(area: Area2D) -> void:
 			health.take_damage(projectile.damage.current_damage)
 			health.play_hurt_sound()
 			
+			# tell the projectile that it has hit something
 			projectile.hitbox.collide()
 	
 	if area.is_in_group("explosions"):

@@ -15,9 +15,8 @@
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_557si"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dv5sc"]
-radius = 17.0
-height = 48.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_6agfr"]
+radius = 34.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
 atlas = ExtResource("3_0w71e")
@@ -91,13 +90,14 @@ script = ExtResource("1_hi6hr")
 stats = ExtResource("2_ekq5m")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Rivet"]
-shape = SubResource("CapsuleShape2D_dv5sc")
+shape = SubResource("CircleShape2D_6agfr")
 script = ExtResource("3_3dlbc")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Rivet"]
 texture_filter = 2
+scale = Vector2(1.45, 1.45)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Rivet"]
@@ -108,10 +108,10 @@ volume_db = -10.0
 stream = ExtResource("7_56ygc")
 
 [node name="SpawnPoint" type="Marker2D" parent="Rivet"]
-position = Vector2(16, 0)
+position = Vector2(34, 0)
 
 [node name="DespawnPoint" type="Area2D" parent="Rivet" groups=["despawn_points", "enemies"]]
-position = Vector2(-16, 0)
+position = Vector2(-34, 0)
 collision_layer = 16
 collision_mask = 0
 

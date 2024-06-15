@@ -97,7 +97,7 @@ scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.927092
+frame_progress = 0.166236
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Piston"]
 stream = ExtResource("5_mlgi1")
@@ -107,10 +107,10 @@ volume_db = -15.0
 stream = ExtResource("7_gotpe")
 
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
-position = Vector2(16, 0)
+position = Vector2(32, 0)
 
 [node name="DespawnPoint" type="Area2D" parent="Piston" groups=["despawn_points", "enemies"]]
-position = Vector2(-16, 0)
+position = Vector2(-32, 0)
 collision_layer = 16
 collision_mask = 0
 

@@ -75,7 +75,7 @@ sightline = NodePath("../../../Sightline")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2184c")
-animation = &"throw"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Muzzle" type="Marker2D" parent="Animations"]

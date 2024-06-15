@@ -8,6 +8,7 @@ var p: Node2D
 var enemies := {
 	"piston": preload("res://enemies/ground/piston/piston.tscn"),
 	"rivet": preload("res://enemies/ground/rivet/rivet.tscn"),
+	"cog": preload("res://enemies/ground/cog/cog.tscn"),
 }
 
 var enemy: PathFollow2D
