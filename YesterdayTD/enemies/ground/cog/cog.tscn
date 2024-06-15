@@ -87,15 +87,14 @@ collision_mask = 4
 script = ExtResource("1_udpip")
 stats = ExtResource("2_3nlni")
 
-[node name="SpawnDespawnPointPreview" type="Node" parent="Cog" node_paths=PackedStringArray("hitbox", "spawn_point", "despawn_point")]
-script = ExtResource("3_frmfv")
-hitbox = NodePath("../Hitbox")
-spawn_point = NodePath("../SpawnPoint")
-despawn_point = NodePath("../DespawnPoint")
-
 [node name="Hitbox" type="CollisionShape2D" parent="Cog"]
 shape = SubResource("CircleShape2D_e3j37")
 script = ExtResource("1_24smv")
+
+[node name="SpawnDespawnPointPreview" type="Node" parent="Cog/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
+script = ExtResource("3_frmfv")
+spawn_point = NodePath("../../SpawnPoint")
+despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Cog"]
 scale = Vector2(1.4, 1.4)

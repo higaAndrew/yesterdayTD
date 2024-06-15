@@ -90,15 +90,14 @@ collision_mask = 4
 script = ExtResource("1_hi6hr")
 stats = ExtResource("2_ekq5m")
 
-[node name="SpawnDespawnPointPreview" type="Node" parent="Rivet" node_paths=PackedStringArray("hitbox", "spawn_point", "despawn_point")]
-script = ExtResource("3_pxof8")
-hitbox = NodePath("../Hitbox")
-spawn_point = NodePath("../SpawnPoint")
-despawn_point = NodePath("../DespawnPoint")
-
 [node name="Hitbox" type="CollisionShape2D" parent="Rivet"]
 shape = SubResource("CircleShape2D_6agfr")
 script = ExtResource("3_3dlbc")
+
+[node name="SpawnDespawnPointPreview" type="Node" parent="Rivet/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
+script = ExtResource("3_pxof8")
+spawn_point = NodePath("../../SpawnPoint")
+despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Rivet"]
 texture_filter = 2
