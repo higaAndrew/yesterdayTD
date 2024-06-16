@@ -1,46 +1,46 @@
 [gd_scene load_steps=25 format=3 uid="uid://q3l0ex5ibdmm"]
 
-[ext_resource type="Script" path="res://enemies/ground/piston/piston.gd" id="1_sn8i6"]
-[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="1_xyu1i"]
-[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_kux8k"]
-[ext_resource type="Resource" uid="uid://dsmtt8ch7db06" path="res://enemies/ground/piston/piston_stats.tres" id="2_oay5v"]
-[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_dpm61"]
-[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="3_g2xxn"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_bhwre"]
-[ext_resource type="AudioStream" uid="uid://cjy0qx1m2wjd2" path="res://enemies/Radiator Metal Impacts 001.wav" id="5_mlgi1"]
-[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="6_oanba"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_gotpe"]
-[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="7_m3ky5"]
-[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_mpo0l"]
-[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_rtvkk"]
-[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="9_u6f8i"]
-[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="10_gdnqo"]
+[ext_resource type="Script" path="res://enemies/ground_enemies/piston/piston.gd" id="1_2n75l"]
+[ext_resource type="Resource" uid="uid://dsmtt8ch7db06" path="res://enemies/ground_enemies/piston/piston_stats.tres" id="2_7skus"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_f81y6"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_jhdfm"]
+[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_x3wgc"]
+[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="6_73dmv"]
+[ext_resource type="AudioStream" uid="uid://cjy0qx1m2wjd2" path="res://enemies/Radiator Metal Impacts 001.wav" id="7_b4pbf"]
+[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_6lpcu"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_oy3y4"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_5ihlu"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_341mb"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_glwpi"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_1isje"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_3bm62"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_3xc1n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e0eun"]
 radius = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
-atlas = ExtResource("1_xyu1i")
+atlas = ExtResource("5_x3wgc")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qq4e"]
-atlas = ExtResource("1_xyu1i")
+atlas = ExtResource("5_x3wgc")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0q1m0"]
-atlas = ExtResource("1_xyu1i")
+atlas = ExtResource("5_x3wgc")
 region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6u6c3"]
-atlas = ExtResource("1_xyu1i")
+atlas = ExtResource("5_x3wgc")
 region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqyou"]
-atlas = ExtResource("1_xyu1i")
+atlas = ExtResource("5_x3wgc")
 region = Rect2(256, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gxd5e"]
-atlas = ExtResource("2_kux8k")
+atlas = ExtResource("6_73dmv")
 region = Rect2(0, 0, 76, 76)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7fp7q"]
@@ -85,15 +85,15 @@ loop = false
 
 [node name="Piston" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
 collision_mask = 4
-script = ExtResource("1_sn8i6")
-stats = ExtResource("2_oay5v")
+script = ExtResource("1_2n75l")
+stats = ExtResource("2_7skus")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Piston"]
 shape = SubResource("CircleShape2D_e0eun")
-script = ExtResource("3_dpm61")
+script = ExtResource("3_f81y6")
 
 [node name="SpawnDespawnPointPreview" type="Node" parent="Piston/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
-script = ExtResource("3_g2xxn")
+script = ExtResource("4_jhdfm")
 spawn_point = NodePath("../../SpawnPoint")
 despawn_point = NodePath("../../DespawnPoint")
 
@@ -106,11 +106,11 @@ autoplay = "idle"
 frame_progress = 0.166236
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Piston"]
-stream = ExtResource("5_mlgi1")
+stream = ExtResource("7_b4pbf")
 volume_db = -15.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Piston"]
-stream = ExtResource("7_gotpe")
+stream = ExtResource("8_6lpcu")
 
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
 position = Vector2(26, 0)
@@ -124,30 +124,30 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_8m3o2")
 
 [node name="StateMachine" type="Node" parent="Piston" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_bhwre")
+script = ExtResource("9_oy3y4")
 initial_state = NodePath("EnemyFollowPath")
 
 [node name="EnemyFollowPath" type="Node" parent="Piston/StateMachine"]
-script = ExtResource("6_oanba")
+script = ExtResource("10_5ihlu")
 
 [node name="EnemyDie" type="Node" parent="Piston/StateMachine"]
-script = ExtResource("7_m3ky5")
+script = ExtResource("11_341mb")
 
 [node name="DamageComponent" type="Node" parent="Piston"]
-script = ExtResource("8_mpo0l")
+script = ExtResource("12_glwpi")
 
 [node name="HealthComponent" type="Node" parent="Piston" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
-script = ExtResource("8_rtvkk")
+script = ExtResource("13_1isje")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
 
 [node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
-script = ExtResource("10_gdnqo")
+script = ExtResource("14_3bm62")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path = NodePath("../..")
 speed = NodePath("../SpeedComponent")
 
 [node name="SpeedComponent" type="Node" parent="Piston"]
-script = ExtResource("9_u6f8i")
+script = ExtResource("15_3xc1n")

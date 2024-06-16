@@ -6,9 +6,10 @@ var p: Node2D
 ## preload every enemy
 ## HACK change to parent preload?
 var enemies := {
-	"piston": preload("res://enemies/ground/piston/piston.tscn"),
-	"rivet": preload("res://enemies/ground/rivet/rivet.tscn"),
-	"cog": preload("res://enemies/ground/cog/cog.tscn"),
+	"piston": preload("res://enemies/ground_enemies/piston/piston.tscn"),
+	"rivet": preload("res://enemies/ground_enemies/rivet/rivet.tscn"),
+	"cog": preload("res://enemies/ground_enemies/cog/cog.tscn"),
+	"tank": preload("res://enemies/ground_vehicles/tank/tank.tscn"),
 }
 
 var enemy: PathFollow2D

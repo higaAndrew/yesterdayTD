@@ -10,6 +10,7 @@
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_j4cku")
+wave_delay = 5.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_tuyxe")

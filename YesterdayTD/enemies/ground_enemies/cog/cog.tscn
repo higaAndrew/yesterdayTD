@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
-[ext_resource type="Script" path="res://enemies/ground/cog/cog.gd" id="1_udpip"]
-[ext_resource type="Resource" uid="uid://0k6ayifnlay3" path="res://enemies/ground/cog/cog_stats.tres" id="2_3nlni"]
+[ext_resource type="Script" path="res://enemies/ground_enemies/cog/cog.gd" id="1_udpip"]
+[ext_resource type="Resource" uid="uid://0k6ayifnlay3" path="res://enemies/ground_enemies/cog/cog_stats.tres" id="2_3nlni"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="2_kjqqa"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_urub2"]
 [ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="3_frmfv"]

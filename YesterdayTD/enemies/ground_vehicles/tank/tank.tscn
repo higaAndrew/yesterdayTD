@@ -1,0 +1,156 @@
+[gd_scene load_steps=25 format=3 uid="uid://djv1104dc3q6v"]
+
+[ext_resource type="Script" path="res://enemies/ground_vehicles/tank/tank.gd" id="1_6ipfw"]
+[ext_resource type="Resource" uid="uid://b4exhkl70uay1" path="res://enemies/ground_vehicles/tank/tank_stats.tres" id="2_840dd"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_h74dr"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_ewvbl"]
+[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_maare"]
+[ext_resource type="Texture2D" uid="uid://til4c6ooqoat" path="res://enemies/ground_vehicles/kenney_top_down_tanks_tanks-sheet.png" id="6_o8qy3"]
+[ext_resource type="AudioStream" uid="uid://cuu0q8vqll77x" path="res://enemies/Radiator Metal Impacts 003.wav" id="7_ug4sh"]
+[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_5lpcn"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_io4hn"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_bbgsd"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_ve0jq"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_lj77x"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_h4cve"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_a8tke"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_hps2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pawm0"]
+size = Vector2(54, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5fi5"]
+atlas = ExtResource("5_maare")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwp4j"]
+atlas = ExtResource("5_maare")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syxr0"]
+atlas = ExtResource("5_maare")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v4px"]
+atlas = ExtResource("5_maare")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4o72"]
+atlas = ExtResource("5_maare")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e86ir"]
+atlas = ExtResource("6_o8qy3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7fp7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5fi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwp4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syxr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2v4px")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4o72")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"die",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e86ir")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8m3o2"]
+radius = 0.01
+
+[node name="TankPath" type="PathFollow2D" groups=["enemies", "ground_enemies", "vehicles"]]
+loop = false
+
+[node name="Tank" type="Area2D" parent="." groups=["enemies", "ground_enemies", "vehicles"]]
+scale = Vector2(1.5, 1.5)
+collision_layer = 65
+collision_mask = 4
+script = ExtResource("1_6ipfw")
+stats = ExtResource("2_840dd")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Tank"]
+shape = SubResource("RectangleShape2D_pawm0")
+script = ExtResource("3_h74dr")
+
+[node name="SpawnDespawnPointPreview" type="Node" parent="Tank/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
+script = ExtResource("4_ewvbl")
+spawn_point = NodePath("../../SpawnPoint")
+despawn_point = NodePath("../../DespawnPoint")
+
+[node name="Animations" type="AnimatedSprite2D" parent="Tank"]
+texture_filter = 2
+scale = Vector2(1.125, 1.125)
+sprite_frames = SubResource("SpriteFrames_7fp7q")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="Tank"]
+stream = ExtResource("7_ug4sh")
+volume_db = -5.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Tank"]
+stream = ExtResource("8_5lpcn")
+volume_db = 5.0
+
+[node name="SpawnPoint" type="Marker2D" parent="Tank"]
+position = Vector2(27, 0)
+
+[node name="DespawnPoint" type="Area2D" parent="Tank" groups=["despawn_points", "enemies"]]
+position = Vector2(-27, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/DespawnPoint"]
+shape = SubResource("CircleShape2D_8m3o2")
+
+[node name="StateMachine" type="Node" parent="Tank" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_io4hn")
+initial_state = NodePath("EnemyFollowPath")
+
+[node name="EnemyFollowPath" type="Node" parent="Tank/StateMachine"]
+script = ExtResource("10_bbgsd")
+
+[node name="EnemyDie" type="Node" parent="Tank/StateMachine"]
+script = ExtResource("11_ve0jq")
+
+[node name="DamageComponent" type="Node" parent="Tank" node_paths=PackedStringArray("hit_sound")]
+script = ExtResource("12_lj77x")
+hit_sound = NodePath("../HurtSound")
+
+[node name="HealthComponent" type="Node" parent="Tank" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+script = ExtResource("13_h4cve")
+hitbox = NodePath("../Hitbox")
+hurt_sound = NodePath("../HurtSound")
+death_sound = NodePath("../DeathSound")
+
+[node name="PathMovementComponent" type="Node" parent="Tank" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
+script = ExtResource("14_a8tke")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+path = NodePath("../..")
+speed = NodePath("../SpeedComponent")
+
+[node name="SpeedComponent" type="Node" parent="Tank"]
+script = ExtResource("15_hps2a")
