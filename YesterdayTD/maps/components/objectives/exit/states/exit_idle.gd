@@ -17,14 +17,13 @@ func enter() -> void:
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 
 
-
 ## handles collisions with objective
 func _on_area_entered(area: Area2D) -> void:
 	if not current_state():
 		return
 	
 	# if an enemy collides, take damage and delete it (not kill it)
-	if area.is_in_group("enemies"):
+	if area.is_in_group("despawn_points"):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()
@@ -49,8 +48,5 @@ func _on_health_zero() -> void:
 		return
 	
 	# transition to die state
-	transition.emit(self, "ExitDie")
+	transitioned.emit(self, "ExitDie")
 	print(parent.health.current_health)
-
-
-

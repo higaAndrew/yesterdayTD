@@ -13,7 +13,7 @@ func init(parent: Node2D) -> void:
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.parent = parent
-			child.transition.connect(on_state_transition)
+			child.transitioned.connect(on_state_transition)
 
 	if is_instance_valid(initial_state):
 		change_state(initial_state)
@@ -26,7 +26,7 @@ func init(parent: Node2D) -> void:
 func on_state_transition(state: State, new_state_name: String):
 	# if the transitioning state isn't the current state then stop caring
 	if state != current_state:
-		printerr("An inactive state attempted to transition!")
+		printerr("An inactive state (%s) attempted to transition!" % state.name)
 		return
 
 	# if the new state's name is in the states dictionary, change the state to the new state

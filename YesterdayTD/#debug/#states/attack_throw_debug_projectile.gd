@@ -1,9 +1,13 @@
 extends State
 
+var debug_projectile_scene: PackedScene
 var animations: AnimatedSprite2D
 var debug_projectile_cooldown_timer: Timer
-var debug_projectile_scene: PackedScene
+var targets: TargetsComponent
+var target_priority:String
+var target: Area2D
 
+var target_rotation: float
 var debug_projectile: Area2D
 var projectiles: CanvasLayer
 
@@ -17,13 +21,20 @@ func init() -> void:
 	GlobalScripts.connect_signal(debug_projectile_cooldown_timer, "timeout", self, "_on_cooldown_timer_timeout")
 	
 	debug_projectile_scene = parent.attack0_scene
+	targets = parent.targets
+	target_priority = parent.stats.target_priority
 
 
-## every loop, create a debug projectile
-## init its velocity
-## reset the timer's count according to the stats
-## start said timer
+## every loop,
+## get the target at the front of the target list (according to target priority), and rotate towards it
+## create a debug projectile and init its velocity
+## reset the timer's count according to the stats, and start it
 func loop() -> void:
+	targets.get_target(target_priority)
+	target = targets.target
+	target_rotation = parent.global_position.angle_to_point(target.global_position)
+	parent.rotation = target_rotation
+	
 	GlobalScripts.play_animation(parent, animations, "throw")
 	debug_projectile = debug_projectile_scene.instantiate()
 	parent.debug_projectile_attack.init_projectile(debug_projectile)
@@ -39,4 +50,4 @@ func _on_animation_finished() -> void:
 
 ## when timer is up, return to idle state to prepare for another attack
 func _on_cooldown_timer_timeout() -> void:
-	transition.emit(self, "AttackIdleDebugProj")
+	transitioned.emit(self, "AttackIdleDebugProj")

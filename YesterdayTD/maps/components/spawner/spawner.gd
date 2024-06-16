@@ -6,8 +6,7 @@ extends Node2D
 @export_enum("debug", "story", "standard", "x2", "x10", "extraction", "eggs") var wave_set: String = "debug"
 @export var wave_delay := 1.0
 
-
-## TODO change to get node?
+## HACK change to get node?
 @export var ground_enemies: Path2D
 @export var ground_vehicles: Path2D
 @export var ground_bosses: Path2D
@@ -19,7 +18,6 @@ extends Node2D
 @onready var group_timer := $GroupTimer as Timer
 @onready var spawn_timer := $SpawnTimer as Timer
 @onready var state_machine := $StateMachine as StateMachine
-
 
 var debug_waves: Array
 var story_waves: Array

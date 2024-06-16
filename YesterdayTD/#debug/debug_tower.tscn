@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://3no4bpnihcj4"]
+[gd_scene load_steps=20 format=3 uid="uid://3no4bpnihcj4"]
 
 [ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
 [ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="7_cxpwy"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_3d60e"]
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="9_lxmvp"]
-[ext_resource type="Script" path="res://towers/states/tower_aim.gd" id="10_004ew"]
 [ext_resource type="Script" path="res://#debug/#states/attack_idle_debug_projectile.gd" id="12_haiwt"]
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="13_23vcv"]
 [ext_resource type="Script" path="res://#debug/#states/attack_throw_debug_projectile.gd" id="13_w0s8o"]
@@ -46,7 +45,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"throw",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [node name="DebugTower" type="Area2D" groups=["towers"]]
@@ -94,11 +93,9 @@ initial_state = NodePath("TowerIdle")
 [node name="TowerIdle" type="Node" parent="StateMachine"]
 script = ExtResource("9_lxmvp")
 
-[node name="TowerAim" type="Node" parent="StateMachine"]
-script = ExtResource("10_004ew")
-
 [node name="DebugProjCooldownTimer" type="Timer" parent="."]
 one_shot = true
+autostart = true
 
 [node name="DebugProjStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_3d60e")
@@ -116,9 +113,8 @@ muzzle = NodePath("../Animations/Muzzle")
 sightline = NodePath("../Sightline")
 targets = NodePath("../TargetsComponent")
 
-[node name="RangeComponent" type="Node" parent="." node_paths=PackedStringArray("range_hitbox")]
+[node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("14_i1qbu")
-range_hitbox = NodePath("../DetectionRange/RangeHitbox")
 
 [node name="TargetsComponent" type="Node" parent="."]
 script = ExtResource("15_7wf75")

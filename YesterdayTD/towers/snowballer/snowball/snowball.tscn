@@ -13,9 +13,6 @@
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="7_e8bqd"]
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="10_adsfj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_70s10"]
-radius = 8.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdk0f"]
 atlas = ExtResource("2_h5l8p")
 region = Rect2(0, 0, 512, 385)
@@ -66,6 +63,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_70s10"]
+radius = 15.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3uig"]
 atlas = ExtResource("3_6j6e6")
 region = Rect2(32, 256, 32, 32)
@@ -114,19 +114,18 @@ collision_mask = 0
 script = ExtResource("1_igkrt")
 stats = ExtResource("2_1vpye")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_70s10")
-script = ExtResource("3_efy2i")
-
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, 0)
-scale = Vector2(0.07, 0.07)
+scale = Vector2(0.13, 0.13)
 sprite_frames = SubResource("SpriteFrames_pjw85")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.405743
-offset = Vector2(-136, -11)
+offset = Vector2(-123, -11)
 flip_h = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_70s10")
+script = ExtResource("3_efy2i")
 
 [node name="HitVFX" type="AnimatedSprite2D" parent="."]
 visible = false

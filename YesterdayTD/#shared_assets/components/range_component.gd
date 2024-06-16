@@ -3,8 +3,6 @@ extends Node
 
 signal range_updated(amount: float, current_range: float)
 
-@export var range_hitbox: CollisionShape2D
-
 var parent: Area2D
 var base_range: float
 var current_range: float
@@ -15,8 +13,6 @@ func init(_parent: Area2D) -> void:
 	parent = _parent
 	base_range = parent.stats.base_range
 	current_range = base_range
-	
-	GlobalScripts.verify(parent, range_hitbox, "range_hitbox")
 
 
 ## increase range

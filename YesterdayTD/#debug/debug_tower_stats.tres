@@ -6,4 +6,4 @@
 script = ExtResource("1_cb4pv")
 base_rotation_speed = 10.0
 base_range = 250.0
-target_priority = "Random"
+target_priority = "First"

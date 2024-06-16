@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="12_x5m2v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70s10"]
-radius = 20.0
+radius = 15.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pjw85"]
 animations = [{
@@ -79,7 +79,7 @@ script = ExtResource("3_yn4c2")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 rotation = -1.5708
-scale = Vector2(0.22, 0.22)
+scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_pjw85")
 animation = &"idle"
 autoplay = "idle"

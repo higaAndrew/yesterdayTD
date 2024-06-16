@@ -1,7 +1,5 @@
 extends State
 
-signal collided
-
 var health: HealthComponent
 var path_movement: PathMovementComponent
 
@@ -46,7 +44,9 @@ func _on_area_entered(area: Area2D) -> void:
 
 ## handle health reaching 0
 func _on_health_zero() -> void:
-	transition.emit(self, "EnemyDie")
+	if not current_state():
+		return
+	transitioned.emit(self, "EnemyDie")
 
 
 ## handle reaching the end of the path without colliding with objective

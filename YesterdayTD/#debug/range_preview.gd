@@ -6,7 +6,7 @@ extends Node
 
 
 ## see the range and sightline update in the editor
-func _physics_process(delta) -> void:
+func _physics_process(_delta) -> void:
 	if Engine.is_editor_hint():
 		get_parent().shape.radius = stats.base_range
 		sightline.set_target_position(Vector2(stats.base_range + 10, 0))

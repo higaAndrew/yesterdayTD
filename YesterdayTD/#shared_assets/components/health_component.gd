@@ -58,14 +58,14 @@ func check_health_zero() -> void:
 		health_zero.emit()
 
 
-## play hurt sound
+## play/verify hurt sound
 func play_hurt_sound() -> void:
 	GlobalScripts.verify(parent, hurt_sound, "hurt_sound")
 	if is_instance_valid(hurt_sound):
 		hurt_sound.play()
 
 
-## play death sound
+## play/verify death sound
 func play_death_sound() -> void:
 	GlobalScripts.verify(parent, death_sound, "death_sound")
 	if is_instance_valid(death_sound):

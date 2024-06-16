@@ -11,6 +11,6 @@ func init() -> void:
 
 
 ## if there are targets in range, transition to throw state
-func physics_process(delta: float) -> void:
-	if not targets.target_list.is_empty() and sightline.is_colliding():
-		transition.emit(self, "AttackThrowSnowball")
+func physics_process(_delta: float) -> void:
+	if not targets.target_list.is_empty():
+		transitioned.emit(self, "AttackThrowSnowball")

@@ -7,16 +7,9 @@ var targets: TargetsComponent
 ## get parent's components
 func init() -> void:
 	detection_range = parent.detection_range
+	targets = parent.targets
 	GlobalScripts.connect_signal(detection_range, "area_entered", self, "_on_detection_range_area_entered")
 	GlobalScripts.connect_signal(detection_range, "area_exited", self, "_on_detection_range_area_exited")
-	
-	targets = parent.targets
-
-
-## every physics frame, check if there are viable targets
-func physics_process(delta: float) -> void:
-	if not targets.target_list.is_empty():
-		transition.emit(self, "TowerAim")
 
 
 ## when enemy collides with range, add it to the target list

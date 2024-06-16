@@ -19,10 +19,12 @@ func init() -> void:
 	hit_vfx = parent.hit_vfx
 	GlobalScripts.connect_signal(hit_vfx, "animation_finished", self, "_on_hit_vfx_animation_finished")
 	
+	hit_sound = parent.hit_sound
+	GlobalScripts.connect_signal(hit_sound, "finished", self, "_on_hit_sound_finished")
+	
 	pierce = parent.pierce
 	GlobalScripts.connect_signal(pierce, "pierce_zero", self, "_on_pierce_zero")
 	
-	hit_sound = parent.hit_sound
 	damage = parent.damage
 
 
@@ -31,7 +33,7 @@ func loop() -> void:
 	damage.play_hit_sound()
 	pierce.reduce_pierce()
 	if pierce.current_pierce >= 1:
-		transition.emit(self, "ProjectileMove")
+		transitioned.emit(self, "ProjectileMove")
 
 
 ## when pierce runs out, destroy self
@@ -39,7 +41,6 @@ func _on_pierce_zero() -> void:
 	animations.hide()
 	hit_vfx.show()
 	GlobalScripts.play_animation(parent, hit_vfx, "hit")
-	#pierce.destroy_hitbox()
 	hitbox.disable_hitbox()
 
 
@@ -48,6 +49,12 @@ func _on_hit_vfx_animation_finished() -> void:
 	if hit_vfx.animation == "hit":
 		animation_done = true
 		check_delete()
+
+
+## when hit sound is finished
+func _on_hit_sound_finished() -> void:
+	sound_done = true
+	check_delete()
 
 
 ## if the hit animation and the hit sound are finished, delete the snowball

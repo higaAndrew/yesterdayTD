@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dtdhyq4f6jvew"]
+[gd_scene load_steps=20 format=3 uid="uid://dtdhyq4f6jvew"]
 
 [ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_uep4e"]
 [ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_1bcql"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="5_5nx16"]
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="5_qut8l"]
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="6_kmy0w"]
-[ext_resource type="Script" path="res://towers/states/tower_aim.gd" id="6_kq8et"]
 [ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="6_wmbby"]
 [ext_resource type="Script" path="res://towers/snowballer/states/attack_idle_snowball.gd" id="8_0clgy"]
 [ext_resource type="PackedScene" uid="uid://bketea0lra044" path="res://towers/snowballer/snowball/snowball.tscn" id="9_gcepe"]
@@ -79,9 +78,9 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="Muzzle" type="Marker2D" parent="Animations"]
+position = Vector2(32, 0)
 
 [node name="Sightline" type="RayCast2D" parent="."]
-position = Vector2(32, 16)
 target_position = Vector2(210, 0)
 hit_from_inside = true
 collide_with_areas = true
@@ -94,10 +93,8 @@ initial_state = NodePath("TowerIdle")
 [node name="TowerIdle" type="Node" parent="StateMachine"]
 script = ExtResource("6_kmy0w")
 
-[node name="TowerAim" type="Node" parent="StateMachine"]
-script = ExtResource("6_kq8et")
-
 [node name="SnowballCooldownTimer" type="Timer" parent="."]
+process_callback = 0
 one_shot = true
 
 [node name="SnowballStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -116,9 +113,8 @@ muzzle = NodePath("../Animations/Muzzle")
 sightline = NodePath("../Sightline")
 targets = NodePath("../TargetsComponent")
 
-[node name="RangeComponent" type="Node" parent="." node_paths=PackedStringArray("range_hitbox")]
+[node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("6_wmbby")
-range_hitbox = NodePath("../DetectionRange/RangeHitbox")
 
 [node name="TargetsComponent" type="Node" parent="."]
 script = ExtResource("5_5nx16")

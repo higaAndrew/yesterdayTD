@@ -3,6 +3,7 @@ extends State
 var hitbox: Hitbox
 var health: HealthComponent
 
+
 ## objective is destroyed
 func enter() -> void:
 	hitbox = parent.hitbox

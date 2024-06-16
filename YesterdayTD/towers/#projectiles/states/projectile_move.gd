@@ -29,7 +29,7 @@ func _on_hitbox_collided() -> void:
 	if not current_state():
 		return
 	
-	transition.emit(self, "ProjectileHit")
+	transitioned.emit(self, "ProjectileHit")
 
 
 ## if lifespan timer times out before hitting anything, despawn

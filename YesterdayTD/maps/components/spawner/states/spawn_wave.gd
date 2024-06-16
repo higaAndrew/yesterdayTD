@@ -23,7 +23,7 @@ func _on_wave_timer_timeout() -> void:
 	
 	if p.current_wave < p.wave_count:
 		p.wave = p.waves[p.current_wave]
-		transition.emit(self, "SpawnGroup")
+		transitioned.emit(self, "SpawnGroup")
 	else:
-		transition.emit(self, "SpawnerIdle")
+		transitioned.emit(self, "SpawnerIdle")
 

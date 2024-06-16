@@ -13,5 +13,5 @@ func collide() -> void:
 ## disable hitbox
 ## the debugger gets pissy when you use set_disabled, so this is a passable workaround
 func disable_hitbox() -> void:
-	self.global_position = Vector2(-64, -64)
+	self.global_position = Vector2(-128, -128)
 	self.set_deferred("disabled", true)
