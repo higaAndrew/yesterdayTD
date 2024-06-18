@@ -9,6 +9,7 @@ var creator
 var enemy: PathFollow2D
 var path_movement: PathMovementComponent
 var layer: Path2D
+var multi_child_distance: float
 
 
 ## set children values according to stats
@@ -18,12 +19,18 @@ func init(_parent: Area2D) -> void:
 	number_children = parent.stats.number_children
 
 
+## handles spawning children
 func spawn_children() -> void:
 	if not children.is_empty() or not number_children.is_empty():
+		# for every spawnable type
 		for child in children.size():
-			enemy = children[child].instantiate()
-			assign_path(enemy)
-			enemy.get_child(0).starting_progress = parent.path_movement.progress
+			multi_child_distance = 0.0
+			# spawn the number of requested children
+			for child_iter in number_children[child]:
+				enemy = children[child].instantiate()
+				assign_path(enemy)
+				enemy.get_child(0).starting_progress = parent.path_movement.progress - multi_child_distance
+				multi_child_distance += 20.0
 
 
 func assign_path(_enemy: PathFollow2D) -> void:

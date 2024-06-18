@@ -1,6 +1,6 @@
 class_name Tank
 extends Area2D
-## TODO layered enemies
+## TODO projectile spawning enemies immunity
 
 @export var stats: EnemyStats
 @export var starting_progress := 0.0
