@@ -1,6 +1,8 @@
 class_name LayersComponent
 extends Node
 
+@export var child_distance_value := 15.0
+
 var parent: Area2D
 var children: Array[PackedScene]
 var number_children: Array[int]
@@ -30,9 +32,10 @@ func spawn_children() -> void:
 				enemy = children[child].instantiate()
 				assign_path(enemy)
 				enemy.get_child(0).starting_progress = parent.path_movement.progress - multi_child_distance
-				multi_child_distance += 20.0
+				multi_child_distance += child_distance_value
 
 
+## sort the children to their respective layers
 func assign_path(_enemy: PathFollow2D) -> void:
 	if _enemy.is_in_group("ground_enemies"):
 		layer = find_parent("Canvas").find_child("GroundEnemyPath")
@@ -48,4 +51,5 @@ func assign_path(_enemy: PathFollow2D) -> void:
 		layer = find_parent("Canvas").find_child("AirBossPath")
 	else:
 		printerr("%s is not in an enemy group!" % _enemy.name)
+		return
 	layer.call_deferred("add_child", _enemy)

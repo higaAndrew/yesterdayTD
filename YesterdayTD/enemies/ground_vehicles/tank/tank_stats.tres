@@ -10,4 +10,4 @@ base_speed = 100.0
 base_damage = 100
 base_monet = 100
 children = Array[PackedScene]([ExtResource("1_78m50")])
-number_children = Array[int]([2])
+number_children = Array[int]([5])
