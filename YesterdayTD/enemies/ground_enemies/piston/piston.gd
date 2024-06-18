@@ -14,6 +14,8 @@ extends Area2D
 @onready var path_movement := $PathMovementComponent as PathMovementComponent
 @onready var speed := $SpeedComponent as SpeedComponent
 
+var progenitor_attack: Area2D
+
 
 # init state machine and components
 func _ready() -> void:

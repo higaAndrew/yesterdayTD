@@ -14,12 +14,15 @@ var spawn_position: float
 var despawn_position: float
 var progress: float
 var starting_progress: float
+#var progenitor_attack: Area2D
+var current_attack: Area2D
 
 
 ## ensure the necessary nodes are connected
 func init(_parent: Area2D) -> void:
 	parent = _parent
 	starting_progress = parent.starting_progress
+	#progenitor_attack = parent.progenitor_attack
 	
 	GlobalScripts.verify(self, spawn_point, "spawn_point")
 	GlobalScripts.verify(self, despawn_point, "despawn_point")

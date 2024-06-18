@@ -1,6 +1,5 @@
 class_name Tank
 extends Area2D
-## TODO projectile spawning enemies immunity
 
 @export var stats: EnemyStats
 @export var starting_progress := 0.0
@@ -15,6 +14,8 @@ extends Area2D
 @onready var layers := $LayersComponent as LayersComponent
 @onready var path_movement := $PathMovementComponent as PathMovementComponent
 @onready var speed := $SpeedComponent as SpeedComponent
+
+var progenitor_attack: Area2D
 
 
 # init state machine and components

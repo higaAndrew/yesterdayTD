@@ -36,4 +36,5 @@ func _on_hitbox_collided() -> void:
 func _on_lifespan_timer_timeout() -> void:
 	if not current_state():
 		return
+	
 	parent.queue_free()

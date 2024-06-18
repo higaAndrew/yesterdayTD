@@ -81,6 +81,7 @@ animations = [{
 radius = 0.01
 
 [node name="CogPath" type="PathFollow2D" groups=["enemies", "ground_enemies"]]
+loop = false
 
 [node name="Cog" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
 collision_mask = 4

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://b4exhkl70uay1"]
 
-[ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground_enemies/piston/piston.tscn" id="1_78m50"]
+[ext_resource type="PackedScene" uid="uid://dl4gpt52rgyue" path="res://enemies/ground_enemies/cog/cog.tscn" id="1_2hefv"]
 [ext_resource type="Script" path="res://enemies/enemy_stats.gd" id="1_bjcg1"]
 
 [resource]
@@ -9,5 +9,5 @@ base_health = 1.0
 base_speed = 100.0
 base_damage = 100
 base_monet = 100
-children = Array[PackedScene]([ExtResource("1_78m50")])
-number_children = Array[int]([5])
+children = Array[PackedScene]([ExtResource("1_2hefv")])
+number_children = Array[int]([2])

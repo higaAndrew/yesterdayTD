@@ -32,6 +32,7 @@ func spawn_children() -> void:
 				enemy = children[child].instantiate()
 				assign_path(enemy)
 				enemy.get_child(0).starting_progress = parent.path_movement.progress - multi_child_distance
+				enemy.get_child(0).progenitor_attack = parent.path_movement.current_attack
 				multi_child_distance += child_distance_value
 
 

@@ -2,6 +2,7 @@ extends State
 
 var health: HealthComponent
 var path_movement: PathMovementComponent
+var progenitor_attack: Area2D
 
 var projectile: Area2D
 var explosion: Area2D
@@ -17,6 +18,8 @@ func enter() -> void:
 	GlobalScripts.connect_signal(path_movement, "reached_end", self, "_on_reached_end")
 	
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
+	
+	progenitor_attack = parent.progenitor_attack
 
 
 ## every physics frame, call follow_path function
@@ -27,6 +30,10 @@ func physics_process(delta: float) -> void:
 ## TODO explosions and melee
 ## handle attack collisions
 func _on_area_entered(area: Area2D) -> void:
+	# if this attack spawned the enemy, ignore it
+	if area == progenitor_attack:
+		return
+	path_movement.current_attack = area
 	if area.is_in_group("projectiles"):
 		projectile = area
 		if not projectile.pierce.pierce_expended:
