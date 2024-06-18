@@ -1,0 +1,165 @@
+[gd_scene load_steps=26 format=3 uid="uid://bdjv8smefnv0b"]
+
+[ext_resource type="Script" path="res://towers/snowbomber/snowbomb/snowbomb.gd" id="1_e6epq"]
+[ext_resource type="Resource" uid="uid://cta4mmql4jnbf" path="res://towers/snowbomber/snowbomb/snowbomb_stats.tres" id="2_4xdcl"]
+[ext_resource type="Texture2D" uid="uid://uffbi4of4bxc" path="res://towers/#projectiles/snowball_spritesheet_3x2.png" id="3_1d2kq"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="4_a12xg"]
+[ext_resource type="Texture2D" uid="uid://rlsa3hayw7y6" path="res://towers/#projectiles/Retro Impact Effect Pack 3 F.png" id="5_rymhd"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_m6lf7"]
+[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_move.gd" id="7_x456j"]
+[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_hit.gd" id="8_4kion"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="9_at73u"]
+[ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_g57kp"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="11_cb1sq"]
+[ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="12_bdhvi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdk0f"]
+atlas = ExtResource("3_1d2kq")
+region = Rect2(0, 0, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_intou"]
+atlas = ExtResource("3_1d2kq")
+region = Rect2(512, 0, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6b6q"]
+atlas = ExtResource("3_1d2kq")
+region = Rect2(1024, 0, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1t4n"]
+atlas = ExtResource("3_1d2kq")
+region = Rect2(0, 385, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6fd4"]
+atlas = ExtResource("3_1d2kq")
+region = Rect2(512, 385, 512, 385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xd5c"]
+atlas = ExtResource("3_1d2kq")
+region = Rect2(1024, 385, 512, 385)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pjw85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdk0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_intou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6b6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1t4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6fd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xd5c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70s10"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3uig"]
+atlas = ExtResource("5_rymhd")
+region = Rect2(32, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yguh"]
+atlas = ExtResource("5_rymhd")
+region = Rect2(96, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p704i"]
+atlas = ExtResource("5_rymhd")
+region = Rect2(128, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37hhv"]
+atlas = ExtResource("5_rymhd")
+region = Rect2(160, 256, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2vvne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3uig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yguh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yguh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p704i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p704i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37hhv")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 15.0
+}]
+
+[node name="Snowbomb" type="Area2D" groups=["projectiles"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_e6epq")
+stats = ExtResource("2_4xdcl")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.13, 0.13)
+sprite_frames = SubResource("SpriteFrames_pjw85")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.405743
+offset = Vector2(-123, -11)
+flip_h = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_70s10")
+script = ExtResource("4_a12xg")
+
+[node name="HitVFX" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_2vvne")
+animation = &"hit"
+autoplay = "hit"
+offset = Vector2(-1, 0)
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+
+[node name="LifespanTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_m6lf7")
+initial_state = NodePath("ProjectileMove")
+
+[node name="ProjectileMove" type="Node" parent="StateMachine"]
+script = ExtResource("7_x456j")
+
+[node name="ProjectileHit" type="Node" parent="StateMachine"]
+script = ExtResource("8_4kion")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
+script = ExtResource("9_at73u")
+hit_sound = NodePath("../HitSound")
+
+[node name="PierceComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("10_g57kp")
+hitbox = NodePath("../Hitbox")
+
+[node name="SpeedComponent" type="Node" parent="."]
+script = ExtResource("11_cb1sq")
+
+[node name="VelocityComponent" type="Node" parent="." node_paths=PackedStringArray("speed")]
+script = ExtResource("12_bdhvi")
+speed = NodePath("../SpeedComponent")

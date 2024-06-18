@@ -468,7 +468,7 @@ point_count = 24
 [node name="BTD6MonkeyMeadow" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(-85, 124)
+position = Vector2(-132, 172)
 anchor_mode = 0
 
 [node name="Background" type="TextureRect" parent="."]

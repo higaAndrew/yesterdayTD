@@ -6,6 +6,7 @@ var hitbox: Hitbox
 var animations: AnimatedSprite2D
 var death_sound: AudioStreamPlayer
 var health: HealthComponent
+var layers: LayersComponent
 var path_movement: PathMovementComponent
 
 var animation_done := false
@@ -24,7 +25,10 @@ func enter() -> void:
 	
 	health = parent.health
 	path_movement = parent.path_movement
-	
+	if not parent.stats.children.is_empty():
+		layers = parent.layers
+		layers.spawn_children()
+		
 	GlobalScripts.play_animation(parent, animations, "die")
 	hitbox.disable_hitbox()
 	health.play_death_sound()

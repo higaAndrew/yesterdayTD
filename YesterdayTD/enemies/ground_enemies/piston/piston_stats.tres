@@ -8,4 +8,5 @@ base_health = 2.0
 base_speed = 100.0
 base_damage = 2
 base_monet = 2
-children = {}
+children = Array[PackedScene]([])
+number_children = Array[int]([])

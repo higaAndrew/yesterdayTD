@@ -1,7 +1,9 @@
 class_name Tank
 extends Area2D
+## TODO layered enemies
 
 @export var stats: EnemyStats
+@export var starting_progress := 0.0
 
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
@@ -10,6 +12,7 @@ extends Area2D
 @onready var state_machine := $StateMachine as StateMachine
 @onready var damage := $DamageComponent as DamageComponent
 @onready var health := $HealthComponent as HealthComponent
+@onready var layers := $LayersComponent as LayersComponent
 @onready var path_movement := $PathMovementComponent as PathMovementComponent
 @onready var speed := $SpeedComponent as SpeedComponent
 
@@ -21,5 +24,6 @@ func _ready() -> void:
 	state_machine.init(self)
 	damage.init(self)
 	health.init(self)
+	layers.init(self)
 	path_movement.init(self)
 	speed.init(self)

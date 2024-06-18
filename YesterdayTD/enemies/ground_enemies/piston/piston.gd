@@ -2,6 +2,7 @@ class_name Piston
 extends Area2D
 
 @export var stats: EnemyStats
+@export var starting_progress := 0.0
 
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D

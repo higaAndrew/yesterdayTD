@@ -1,0 +1,121 @@
+[gd_scene load_steps=21 format=3 uid="uid://dd7tycif0g7ci"]
+
+[ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_61qmn"]
+[ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_21wsa"]
+[ext_resource type="Resource" uid="uid://cml3lsvcgbkb6" path="res://towers/snowbomber/snowbomber_stats.tres" id="2_rtiqs"]
+[ext_resource type="PackedScene" uid="uid://bketea0lra044" path="res://towers/snowballer/snowball/snowball.tscn" id="3_lmfdw"]
+[ext_resource type="Resource" uid="uid://bfp1xuxqmhxaj" path="res://towers/snowballer/snowball/snowball_stats.tres" id="4_fa3to"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="5_bakeh"]
+[ext_resource type="Script" path="res://#debug/range_preview.gd" id="6_owgqh"]
+[ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="7_ghbok"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_cchfl"]
+[ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="9_85bve"]
+[ext_resource type="Script" path="res://towers/snowballer/states/attack_idle_snowball.gd" id="10_upser"]
+[ext_resource type="Script" path="res://towers/snowballer/states/attack_throw_snowball.gd" id="11_inqp7"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="12_k4eia"]
+[ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="13_del1u"]
+[ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="14_ucpf4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0em43"]
+radius = 200.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btb3g"]
+atlas = ExtResource("7_ghbok")
+region = Rect2(128, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6usw8"]
+atlas = ExtResource("7_ghbok")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2184c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btb3g")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6usw8")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[node name="Snowballer" type="Area2D" groups=["towers"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_61qmn")
+stats = ExtResource("2_rtiqs")
+attack0_scene = ExtResource("3_lmfdw")
+attack0_stats = ExtResource("4_fa3to")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ynkj")
+script = ExtResource("5_bakeh")
+
+[node name="DetectionRange" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_0em43")
+script = ExtResource("5_bakeh")
+
+[node name="RangePreview" type="Node" parent="DetectionRange/RangeHitbox" node_paths=PackedStringArray("sightline")]
+script = ExtResource("6_owgqh")
+stats = ExtResource("2_21wsa")
+sightline = NodePath("../../../Sightline")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2184c")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Muzzle" type="Marker2D" parent="Animations"]
+position = Vector2(32, 0)
+
+[node name="Sightline" type="RayCast2D" parent="."]
+target_position = Vector2(210, 0)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_cchfl")
+initial_state = NodePath("TowerIdle")
+
+[node name="TowerIdle" type="Node" parent="StateMachine"]
+script = ExtResource("9_85bve")
+
+[node name="SnowballCooldownTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="SnowballStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_cchfl")
+initial_state = NodePath("AttackIdleSnowball")
+
+[node name="AttackIdleSnowball" type="Node" parent="SnowballStateMachine"]
+script = ExtResource("10_upser")
+
+[node name="AttackThrowSnowball" type="Node" parent="SnowballStateMachine"]
+script = ExtResource("11_inqp7")
+
+[node name="SnowballAttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle", "sightline", "targets")]
+script = ExtResource("12_k4eia")
+muzzle = NodePath("../Animations/Muzzle")
+sightline = NodePath("../Sightline")
+targets = NodePath("../TargetsComponent")
+
+[node name="RangeComponent" type="Node" parent="."]
+script = ExtResource("13_del1u")
+
+[node name="TargetsComponent" type="Node" parent="."]
+script = ExtResource("14_ucpf4")

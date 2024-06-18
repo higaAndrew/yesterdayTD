@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://djv1104dc3q6v"]
+[gd_scene load_steps=26 format=3 uid="uid://djv1104dc3q6v"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/tank/tank.gd" id="1_6ipfw"]
 [ext_resource type="Resource" uid="uid://b4exhkl70uay1" path="res://enemies/ground_vehicles/tank/tank_stats.tres" id="2_840dd"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_ve0jq"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_lj77x"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_h4cve"]
+[ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="14_1bn4e"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_a8tke"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_hps2a"]
 
@@ -80,10 +81,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_8m3o2"]
 radius = 0.01
 
-[node name="TankPath" type="PathFollow2D" groups=["enemies", "ground_enemies", "vehicles"]]
+[node name="TankPath" type="PathFollow2D" groups=["enemies", "ground_vehicles"]]
 loop = false
 
-[node name="Tank" type="Area2D" parent="." groups=["enemies", "ground_enemies", "vehicles"]]
+[node name="Tank" type="Area2D" parent="." groups=["enemies", "ground_vehicles"]]
 scale = Vector2(1.5, 1.5)
 collision_layer = 65
 collision_mask = 4
@@ -144,6 +145,9 @@ script = ExtResource("13_h4cve")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
+
+[node name="LayersComponent" type="Node" parent="Tank"]
+script = ExtResource("14_1bn4e")
 
 [node name="PathMovementComponent" type="Node" parent="Tank" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
 script = ExtResource("14_a8tke")
