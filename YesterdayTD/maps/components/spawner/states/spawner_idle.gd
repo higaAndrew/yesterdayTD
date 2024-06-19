@@ -1,10 +1,15 @@
 extends State
 
+var spawning: SpawningComponent
+
 
 ## TODO between rounds
 ## prepare for the first wave
-func enter() -> void:
-	if parent.current_wave == 0:
+func init() -> void:
+	spawning = parent.spawning
+
+func loop() -> void:
+	if spawning.current_wave == 0:
 		transitioned.emit(self, "SpawnWave")
 	else:
-		print("all done here!")
+		print("All the waves are done!")

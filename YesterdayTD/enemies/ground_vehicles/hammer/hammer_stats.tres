@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://b4exhkl70uay1"]
+
+[ext_resource type="PackedScene" uid="uid://dl4gpt52rgyue" path="res://enemies/ground_enemies/cog/cog.tscn" id="1_2puv6"]
+[ext_resource type="Script" path="res://enemies/enemy_stats.gd" id="2_bsjql"]
+
+[resource]
+script = ExtResource("2_bsjql")
+base_health = 25.0
+base_speed = 100.0
+base_damage = 100
+base_monet = 100
+children = Array[PackedScene]([ExtResource("1_2puv6")])
+number_children = Array[int]([2])

@@ -1,19 +1,21 @@
 extends State
 
-## so i don't have to type parent 50 times
-var p: Node2D
+var group_timer: Timer
+var spawning: SpawningComponent
 
 
-## setup group timer
+## setup group timer and spawning component
 func init() -> void:
-	p = parent
-	GlobalScripts.connect_signal(p.group_timer, "timeout", self, "_on_group_timer_timeout")
+	group_timer = parent.group_timer
+	GlobalScripts.connect_signal(group_timer, "timeout", self, "_on_group_timer_timeout")
+	
+	spawning = parent.spawning
 
 
-## every loop, extract the number of groups and start the group timer
+## every loop, prepare the upcoming wave and start the timer
 func loop() -> void:
-	p.group_count = p.wave.size()
-	p.group_timer.start()
+	spawning.prepare_wave()
+	group_timer.start()
 
 
 ## prepare to spawn next group
@@ -22,10 +24,8 @@ func _on_group_timer_timeout() -> void:
 	if not current_state():
 		return
 	
-	if p.current_group < p.group_count:
-		p.group = p.wave[p.current_group]
+	if spawning.current_group < spawning.group_count:
 		transitioned.emit(self, "SpawnEnemy")
-	elif p.current_group == p.group_count:
-		p.current_group = 0
-		p.current_wave += 1
+	elif spawning.current_group == spawning.group_count:
+		spawning.next_wave()
 		transitioned.emit(self, "SpawnWave")

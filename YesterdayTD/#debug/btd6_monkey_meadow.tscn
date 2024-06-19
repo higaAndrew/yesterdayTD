@@ -484,14 +484,9 @@ layer_0/tile_data = PackedInt32Array(458752, 65536, 0, 458753, 65536, 0, 458754,
 layer_1/name = "Ground Objects"
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Spawner" parent="." node_paths=PackedStringArray("wave_data", "ground_enemies", "ground_vehicles", "ground_bosses", "air_enemies", "air_vehicles", "air_bosses") instance=ExtResource("3_jo0ox")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("canvas", "wave_data") instance=ExtResource("3_jo0ox")]
+canvas = NodePath("../Canvas")
 wave_data = NodePath("Btd6MonkeyMeadowWaveData")
-ground_enemies = NodePath("../Canvas/GroundEnemies/GroundEnemyPath")
-ground_vehicles = NodePath("../Canvas/GroundVehicles/GroundVehiclePath")
-ground_bosses = NodePath("../Canvas/GroundBosses/GroundBossPath")
-air_enemies = NodePath("../Canvas/AirEnemies/AirEnemyPath")
-air_vehicles = NodePath("../Canvas/AirVehicles/AirVehiclePath")
-air_bosses = NodePath("../Canvas/AirBosses/AirBossPath")
 
 [node name="Btd6MonkeyMeadowWaveData" type="Node" parent="Spawner"]
 script = ExtResource("4_wfr5x")

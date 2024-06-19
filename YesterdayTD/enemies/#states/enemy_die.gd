@@ -52,6 +52,6 @@ func _on_death_sound_finished() -> void:
 ## alternatively, if the death animation is finished and there's no death sound for whatever reason
 func check_delete() -> void:
 	if animation_done and sound_done:
-		path_movement.path.queue_free()
+		path_movement.delete()
 	elif animation_done and not is_instance_valid(death_sound.stream):
-		path_movement.path.queue_free()
+		path_movement.delete()

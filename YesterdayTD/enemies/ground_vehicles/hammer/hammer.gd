@@ -1,4 +1,4 @@
-class_name Tank
+class_name Hammer
 extends Area2D
 
 @export var stats: EnemyStats

@@ -27,7 +27,7 @@ func _on_area_entered(area: Area2D) -> void:
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()
-		enemy.queue_free()
+		enemy.path_movement.delete()
 
 
 ## handles taking damage

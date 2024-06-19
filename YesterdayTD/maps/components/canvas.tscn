@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://c33yetp828yaf"]
+[gd_scene load_steps=2 format=3 uid="uid://c33yetp828yaf"]
+
+[ext_resource type="Script" path="res://maps/components/canvas.gd" id="1_odfvh"]
 
 [node name="Canvas" type="Node"]
+script = ExtResource("1_odfvh")
 
 [node name="GroundEnemies" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
