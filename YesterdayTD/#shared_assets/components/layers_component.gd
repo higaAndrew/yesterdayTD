@@ -8,7 +8,8 @@ var children: Array[PackedScene]
 var number_children: Array[int]
 
 var creator
-var enemy: PathFollow2D
+var enemy_path: PathFollow2D
+var enemy: Area2D
 var path_movement: PathMovementComponent
 var layer: Path2D
 var multi_child_distance: float
@@ -29,28 +30,29 @@ func spawn_children() -> void:
 			multi_child_distance = 0.0
 			# spawn the number of requested children
 			for child_iter in number_children[child]:
-				enemy = children[child].instantiate()
-				assign_path(enemy)
-				enemy.get_child(0).starting_progress = parent.path_movement.progress - multi_child_distance
-				enemy.get_child(0).progenitor_attack = parent.path_movement.current_attack
+				enemy_path = children[child].instantiate()
+				enemy = enemy_path.get_child(0)
+				assign_path()
+				enemy.starting_progress = parent.path_movement.progress - multi_child_distance
+				enemy.progenitor_attack = parent.path_movement.current_attack
 				multi_child_distance += child_distance_value
 
 
 ## sort the children to their respective layers
-func assign_path(_enemy: PathFollow2D) -> void:
-	if _enemy.is_in_group("ground_enemies"):
+func assign_path() -> void:
+	if enemy.is_in_group("ground_enemies"):
 		layer = find_parent("Canvas").find_child("GroundEnemyPath")
-	elif _enemy.is_in_group("ground_vehicles"):
+	elif enemy.is_in_group("ground_vehicles"):
 		layer = find_parent("Canvas").find_child("GroundVehiclePath")
-	elif _enemy.is_in_group("ground_bosses"):
+	elif enemy.is_in_group("ground_bosses"):
 		layer = find_parent("Canvas").find_child("GroundBossPath")
-	elif _enemy.is_in_group("air_enemies"):
+	elif enemy.is_in_group("air_enemies"):
 		layer = find_parent("Canvas").find_child("AirEnemyPath")
-	elif _enemy.is_in_group("air_vehicles"):
+	elif enemy.is_in_group("air_vehicles"):
 		layer = find_parent("Canvas").find_child("AirVehiclePath")
-	elif _enemy.is_in_group("air_bosses"):
+	elif enemy.is_in_group("air_bosses"):
 		layer = find_parent("Canvas").find_child("AirBossPath")
 	else:
-		printerr("%s is not in an enemy group!" % _enemy.name)
+		printerr("The child %s is not in an enemy group!" % enemy.name)
 		return
-	layer.call_deferred("add_child", _enemy)
+	layer.call_deferred("add_child", enemy_path)

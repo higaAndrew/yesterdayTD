@@ -133,27 +133,27 @@ func verify_enemy() -> void:
 func spawn_enemy() -> void:
 	enemy_path = enemies[enemy_type].instantiate()
 	enemy = enemy_path.get_child(0)
-	assign_path(enemy_path, enemy)
+	assign_path()
 	current_enemy += 1
 
 
 ## determine the canvas layer that the enemy is spawned on
-func assign_path(_enemy_path: PathFollow2D, _enemy: Area2D) -> void:
-	if _enemy.is_in_group("ground_enemies"):
+func assign_path() -> void:
+	if enemy.is_in_group("ground_enemies"):
 		path = ground_enemies
-	elif _enemy.is_in_group("ground_vehicles"):
+	elif enemy.is_in_group("ground_vehicles"):
 		path = ground_vehicles
-	elif _enemy.is_in_group("ground_bosses"):
+	elif enemy.is_in_group("ground_bosses"):
 		path = ground_bosses
-	elif _enemy.is_in_group("air_enemies"):
+	elif enemy.is_in_group("air_enemies"):
 		path = air_enemies
-	elif _enemy.is_in_group("air_vehicles"):
+	elif enemy.is_in_group("air_vehicles"):
 		path = air_vehicles
-	elif _enemy.is_in_group("air_bosses"):
+	elif enemy.is_in_group("air_bosses"):
 		path = air_bosses
 	else:
-		printerr("%s is not in an enemy group!" % _enemy.name)
-	path.add_child(_enemy_path)
+		printerr("The enemy %s is not in an enemy group!" % enemy.name)
+	path.add_child(enemy_path)
 	
 func next_group() -> void:
 	current_enemy = 0

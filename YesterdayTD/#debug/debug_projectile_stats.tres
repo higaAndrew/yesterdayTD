@@ -6,7 +6,7 @@
 script = ExtResource("1_evi20")
 base_damage = 1.0
 base_pierce = 1
-base_attack_cooldown = 0.1
+base_attack_cooldown = 0.01
 base_speed = 1500.0
 base_lifespan = 2.0
 base_scale = 1.0

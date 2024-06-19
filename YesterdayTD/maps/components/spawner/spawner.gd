@@ -17,5 +17,5 @@ extends Node2D
 func _ready() -> void:
 	GlobalScripts.verify(self, wave_data, "wave_data")
 	
-	spawning.init(self)
 	state_machine.init(self)
+	spawning.init(self)
