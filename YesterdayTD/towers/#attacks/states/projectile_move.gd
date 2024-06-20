@@ -1,5 +1,6 @@
 extends State
 
+
 var hitbox: Hitbox
 var lifespan_timer: Timer
 var velocity: VelocityComponent
@@ -13,9 +14,8 @@ func init() -> void:
 	lifespan_timer = parent.lifespan_timer
 	GlobalScripts.connect_signal(lifespan_timer, "timeout", self, "_on_lifespan_timer_timeout")
 	
-	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
-	
 	velocity = parent.velocity
+	
 	lifespan_timer.start(parent.stats.base_lifespan)
 
 

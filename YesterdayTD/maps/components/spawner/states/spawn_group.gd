@@ -1,15 +1,16 @@
 extends State
 
+
 var group_timer: Timer
 var spawning: SpawningComponent
 
 
 ## setup group timer and spawning component
 func init() -> void:
+	spawning = parent.spawning
+	
 	group_timer = parent.group_timer
 	GlobalScripts.connect_signal(group_timer, "timeout", self, "_on_group_timer_timeout")
-	
-	spawning = parent.spawning
 
 
 ## every loop, prepare the upcoming wave and start the timer

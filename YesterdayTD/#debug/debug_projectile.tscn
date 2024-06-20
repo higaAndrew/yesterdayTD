@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_yn4c2"]
 [ext_resource type="Texture2D" uid="uid://dy3n6irl8xf8d" path="res://icon.svg" id="4_a56sx"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_76oll"]
-[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_move.gd" id="7_ylkms"]
-[ext_resource type="Script" path="res://towers/#projectiles/states/projectile_hit.gd" id="8_p6lgm"]
+[ext_resource type="Script" path="res://towers/#attacks/states/projectile_move.gd" id="6_dn8j7"]
+[ext_resource type="Script" path="res://towers/#attacks/states/projectile_hit.gd" id="7_cgr1j"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="9_hl5s5"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_wt1l2"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="11_u1guu"]
@@ -70,6 +70,7 @@ animations = [{
 [node name="DebugProjectile" type="Area2D" groups=["projectiles"]]
 collision_layer = 4
 collision_mask = 0
+monitoring = false
 script = ExtResource("1_bbqvc")
 stats = ExtResource("2_exvro")
 
@@ -104,18 +105,17 @@ script = ExtResource("6_76oll")
 initial_state = NodePath("ProjectileMove")
 
 [node name="ProjectileMove" type="Node" parent="StateMachine"]
-script = ExtResource("7_ylkms")
+script = ExtResource("6_dn8j7")
 
 [node name="ProjectileHit" type="Node" parent="StateMachine"]
-script = ExtResource("8_p6lgm")
+script = ExtResource("7_cgr1j")
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("9_hl5s5")
 hit_sound = NodePath("../HitSound")
 
-[node name="PierceComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="PierceComponent" type="Node" parent="."]
 script = ExtResource("10_wt1l2")
-hitbox = NodePath("../Hitbox")
 
 [node name="SpeedComponent" type="Node" parent="."]
 script = ExtResource("11_u1guu")

@@ -1,9 +1,10 @@
 class_name WaveData
 extends Node
 
+
 ## generic wave data class just so i can call for it specifically from the editor
 ## debug waves are preset
-var debug_waves := [
+var debug_waves: Array = [
 	[	# wave 1
 		{"enemy_type": "hammer", "enemy_count": 10, "spawn_delay": 0.5, "group_delay": 2.0},
 		{"enemy_type": "rivet", "enemy_count": 10, "spawn_delay": 0.25, "group_delay": 5.0},
@@ -18,7 +19,7 @@ var debug_waves := [
 var story_waves: Array
 var standard_waves: Array
 var x2_waves: Array
-var x10_waves := [[{}]]
-var extraction_waves := [[{}]]
-var eggs_waves := [[{}]]
+var x10_waves: Array
+var extraction_waves: Array
+var eggs_waves: Array
 

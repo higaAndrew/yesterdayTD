@@ -1,7 +1,6 @@
 class_name RangeComponent
 extends Node
 
-signal range_updated(amount: float, current_range: float)
 
 var parent: Area2D
 var base_range: float
@@ -18,13 +17,11 @@ func init(_parent: Area2D) -> void:
 ## increase range
 func increase_range(amount: float) -> void:
 	current_range += amount
-	range_updated.emit(amount, current_range)
 
 
 ## decrease range
 func decrease_range(amount: float) -> void:
 	current_range -= amount
-	range_updated.emit(-amount, current_range)
 
 
 ## reset range

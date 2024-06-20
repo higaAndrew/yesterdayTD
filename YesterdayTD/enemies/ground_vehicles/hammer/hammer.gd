@@ -1,8 +1,11 @@
 class_name Hammer
 extends Area2D
 
+
 @export var stats: EnemyStats
-@export var starting_progress := 0.0
+@export var starting_progress: float = 0.0
+
+var progenitor_attack: Area2D
 
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
@@ -14,8 +17,6 @@ extends Area2D
 @onready var layers := $LayersComponent as LayersComponent
 @onready var path_movement := $PathMovementComponent as PathMovementComponent
 @onready var speed := $SpeedComponent as SpeedComponent
-
-var progenitor_attack: Area2D
 
 
 # init state machine and components

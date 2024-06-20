@@ -1,21 +1,21 @@
 extends State
 
+
 var wave_timer: Timer
 var spawning: SpawningComponent
 
 
 ## setup timer and wave count
 func init() -> void:
+	spawning = parent.spawning
+	
 	wave_timer = parent.wave_timer
 	GlobalScripts.connect_signal(wave_timer, "timeout", self, "_on_wave_timer_timeout")
-	
-	spawning = parent.spawning
 
 
 ## every loop, start the wave timer
 func loop() -> void:
-	wave_timer.set_wait_time(parent.wave_delay)
-	wave_timer.start()
+	wave_timer.start(parent.wave_delay)
 
 
 ## when the wave timer finishes, prepare the next group

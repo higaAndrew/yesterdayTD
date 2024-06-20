@@ -1,4 +1,4 @@
-class_name DebugTower
+class_name Snowbomber
 extends Area2D
 
 
@@ -6,13 +6,13 @@ extends Area2D
 
 @export var attack0_scene: PackedScene
 @export var attack0_stats: AttackStats
-@onready var attack0_cooldown_timer := $DebugProjectileCooldownTimer as Timer
+@onready var attack0_cooldown_timer := $SnowbombCooldownTimer as Timer
 
 @onready var detection_range := $DetectionRange as Area2D
 @onready var animations := $Animations as AnimatedSprite2D
 @onready var sightline := $Sightline as RayCast2D
 @onready var state_machine := $StateMachine as StateMachine
-@onready var debug_projectile_state_machine := $DebugProjectileStateMachine as AttackStateMachine
+@onready var snowbomb_state_machine := $SnowbombStateMachine as StateMachine
 @onready var attack := $AttackComponent as AttackComponent
 @onready var cooldown := $CooldownComponent as CooldownComponent
 @onready var range_component := $RangeComponent as RangeComponent
@@ -22,11 +22,11 @@ extends Area2D
 ## init state machines and components
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
-	GlobalScripts.verify(self, attack0_scene, "debug projectile scene")
-	GlobalScripts.verify(self, attack0_stats, "debug projectile stats")
+	GlobalScripts.verify(self, attack0_scene, "snowbomb_scene")
+	GlobalScripts.verify(self, attack0_stats, "attack0_stats")
 	
 	state_machine.init(self)
-	debug_projectile_state_machine.init(self)
+	snowbomb_state_machine.init(self)
 	attack.init(self)
 	cooldown.init(self)
 	range_component.init(self)

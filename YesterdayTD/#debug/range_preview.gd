@@ -1,6 +1,7 @@
 @tool
 extends Node
 
+
 @export var stats: TowerStats
 @export var sightline: RayCast2D
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="YesterdayTD"
-run/main_scene="res://#debug/btd6_monkey_meadow.tscn"
+run/main_scene="res://#debug/maps/btd6_monkey_meadow.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -38,11 +38,12 @@ import/fbx/enabled=false
 
 2d_physics/layer_1="enemy"
 2d_physics/layer_2="tower"
-2d_physics/layer_3="projectile"
+2d_physics/layer_3="attack"
 2d_physics/layer_4="objective"
 2d_physics/layer_5="enemy_despawn_point"
 2d_physics/layer_6="tower_detection_range"
 2d_physics/layer_7="vehicle"
+2d_physics/layer_8="explosion"
 
 [rendering]
 

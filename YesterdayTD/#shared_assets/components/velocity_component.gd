@@ -1,11 +1,11 @@
 class_name VelocityComponent
 extends Node
 
+
 @export var speed: SpeedComponent
 
 var parent: Area2D
 var velocity: Vector2
-var direction: Vector2
 
 
 ## get speed and set velocity values

@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca0oc8wyuuym7"]
+[gd_scene load_steps=13 format=3 uid="uid://ca0oc8wyuuym7"]
 
 [ext_resource type="Texture2D" uid="uid://cs45g0o57gs6e" path="res://maps/monkey_meadow.png" id="1_2gh83"]
 [ext_resource type="Texture2D" uid="uid://doq55rxrk655u" path="res://maps/towerDefense_tilesheet(snow).png" id="2_gjpah"]
 [ext_resource type="PackedScene" uid="uid://d32ye0v3rlw6q" path="res://maps/components/spawner/spawner.tscn" id="3_jo0ox"]
 [ext_resource type="PackedScene" uid="uid://dehl3iglcj2hu" path="res://maps/components/objectives/exit/exit.tscn" id="3_wpnfh"]
 [ext_resource type="PackedScene" uid="uid://c33yetp828yaf" path="res://maps/components/canvas.tscn" id="4_ak50o"]
-[ext_resource type="Script" path="res://#debug/btd6_monkey_meadow_wave_data.gd" id="4_wfr5x"]
+[ext_resource type="Script" path="res://#debug/maps/btd6_monkey_meadow_wave_data.gd" id="4_wfr5x"]
 [ext_resource type="PackedScene" uid="uid://dtdhyq4f6jvew" path="res://towers/snowballer/snowballer.tscn" id="7_xennj"]
 [ext_resource type="PackedScene" uid="uid://3no4bpnihcj4" path="res://#debug/debug_tower.tscn" id="8_nikvn"]
+[ext_resource type="PackedScene" uid="uid://dd7tycif0g7ci" path="res://towers/snowbomber/snowbomber.tscn" id="9_eiguu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgo40"]
 texture = ExtResource("2_gjpah")
@@ -503,10 +504,13 @@ curve = SubResource("Curve2D_h4wvv")
 curve = SubResource("Curve2D_h4wvv")
 
 [node name="Snowballer" parent="Canvas/Towers" index="0" instance=ExtResource("7_xennj")]
-position = Vector2(746, 609)
+position = Vector2(276, 534)
 
 [node name="DebugTower" parent="Canvas/Towers" index="1" instance=ExtResource("8_nikvn")]
-position = Vector2(481, 539)
+position = Vector2(485, 364)
+
+[node name="Snowbomber" parent="Canvas/Towers" index="2" instance=ExtResource("9_eiguu")]
+position = Vector2(171, 530)
 
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")

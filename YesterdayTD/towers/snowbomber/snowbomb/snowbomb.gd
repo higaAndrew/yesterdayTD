@@ -1,7 +1,11 @@
 class_name Snowbomb
 extends Area2D
 
+## TODO change bomb behavior
 @export var stats: AttackStats
+
+@export var explosion_scene: PackedScene
+@export var explosion_stats: AttackStats
 
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
@@ -17,6 +21,8 @@ extends Area2D
 
 ## init state machine and components
 func _ready() -> void:
+	GlobalScripts.verify(self, stats, "stats")
+	
 	state_machine.init(self)
 	damage.init(self)
 	pierce.init(self)

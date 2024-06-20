@@ -146,14 +146,15 @@ hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
 
-[node name="LayersComponent" type="Node" parent="Hammer"]
+[node name="LayersComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("path_movement")]
 script = ExtResource("14_i4848")
+path_movement = NodePath("../PathMovementComponent")
 
-[node name="PathMovementComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
+[node name="PathMovementComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
 script = ExtResource("15_kfj01")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
-path = NodePath("../..")
+path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
 
 [node name="SpeedComponent" type="Node" parent="Hammer"]

@@ -1,20 +1,20 @@
 extends State
 
+
 var hitbox: Hitbox
-var animations: AnimatedSprite2D
 var hit_vfx: AnimatedSprite2D
 var hit_sound: AudioStreamPlayer
 var damage: DamageComponent
 var pierce: PierceComponent
 
-var animation_done := false
-var sound_done := false
+var animation_done: bool = false
+var sound_done: bool = false
 
 
 ## get parent's components
 func init() -> void:
 	hitbox = parent.hitbox
-	animations = parent.animations
+	damage = parent.damage
 	
 	hit_vfx = parent.hit_vfx
 	GlobalScripts.connect_signal(hit_vfx, "animation_finished", self, "_on_hit_vfx_animation_finished")
@@ -23,22 +23,22 @@ func init() -> void:
 	GlobalScripts.connect_signal(hit_sound, "finished", self, "_on_hit_sound_finished")
 	
 	pierce = parent.pierce
-	GlobalScripts.connect_signal(pierce, "pierce_zero", self, "_on_pierce_zero")
+	GlobalScripts.connect_signal(pierce, "pierce_depleted", self, "_on_pierce_depleted")
 	
-	damage = parent.damage
 
 
 ## every loop, perform hit functions
 func loop() -> void:
 	damage.play_hit_sound()
 	pierce.reduce_pierce()
+	
 	if pierce.current_pierce >= 1:
 		transitioned.emit(self, "ProjectileMove")
 
 
 ## when pierce runs out, destroy self
-func _on_pierce_zero() -> void:
-	animations.hide()
+func _on_pierce_depleted() -> void:
+	parent.animations.hide()
 	hit_vfx.show()
 	GlobalScripts.play_animation(parent, hit_vfx, "hit")
 	hitbox.disable_hitbox()

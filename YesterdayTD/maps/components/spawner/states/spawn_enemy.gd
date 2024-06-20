@@ -1,21 +1,18 @@
 extends State
 
-## blah blah parent you get it
+
 var group_timer: Timer
 var spawn_timer: Timer
 var spawning: SpawningComponent
-
-var enemy: PathFollow2D
-var path: Path2D
 
 
 ## setup spawn timer and spawning component
 func init() -> void:
 	group_timer = parent.group_timer
+	spawning = parent.spawning
+	
 	spawn_timer = parent.spawn_timer
 	GlobalScripts.connect_signal(spawn_timer, "timeout", self, "_on_spawn_timer_timeout")
-	
-	spawning = parent.spawning
 
 
 ## every loop, prepare the upcoming wave and start the timer
@@ -31,10 +28,8 @@ func _on_spawn_timer_timeout() -> void:
 		return
 	
 	if spawning.current_enemy < spawning.enemy_count:
-		# ensure the enemy type is valid
+		# ensure the enemy type is valid and spawn it
 		spawning.verify_enemy()
-		
-		# spawn it
 		spawning.spawn_enemy()
 		
 		# prepare to spawn the next one, setting up timer delays
@@ -50,8 +45,8 @@ func _on_spawn_timer_timeout() -> void:
 		spawning.next_group()
 		
 		# the debugger gets pissy if the timer is set to 0
-		if spawning.group_delay == 0:
+		if spawning.group_delay == 0.0:
 			spawning.group_delay = 0.0001
+		
 		group_timer.set_wait_time(spawning.group_delay)
-			
 		transitioned.emit(self, "SpawnGroup")

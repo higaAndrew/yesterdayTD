@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_ndb2v")
-base_range = 100.0
+base_range = 200.0
 target_priority = "First"

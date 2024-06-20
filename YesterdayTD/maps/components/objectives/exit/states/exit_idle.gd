@@ -8,13 +8,12 @@ var enemy: Area2D
 
 ## get parent's components
 func enter() -> void:
+	hitbox = parent.hitbox
+	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
+	
 	health = parent.health
 	GlobalScripts.connect_signal(health, "took_damage", self, "_on_took_damage")
-	GlobalScripts.connect_signal(health, "health_zero", self, "_on_health_zero")
-	
-	hitbox = parent.hitbox
-
-	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
+	GlobalScripts.connect_signal(health, "health_depleted", self, "_on_health_depleted")
 
 
 ## handles collisions with objective
@@ -28,6 +27,7 @@ func _on_area_entered(area: Area2D) -> void:
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()
 		enemy.path_movement.delete()
+		## FIXME groups gone
 
 
 ## handles taking damage
@@ -37,16 +37,13 @@ func _on_took_damage(damage: float, current_health: float) -> void:
 	
 	# after taking damage, check to see if health is zero
 	print("The objective took %s damage! Its health is now %s!" % [damage, current_health])
-	
-	# might want to remove this to make the code more modular
-	health.check_health_zero()
+	# HACK might want to remove this to make the code more modular
+	health.check_health_depleted()
 
 
 ## handles health reaching zero
-func _on_health_zero() -> void:
+func _on_health_depleted() -> void:
 	if not current_state():
 		return
 	
-	# transition to die state
 	transitioned.emit(self, "ExitDie")
-	print(parent.health.current_health)

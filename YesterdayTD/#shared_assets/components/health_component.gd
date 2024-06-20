@@ -1,9 +1,9 @@
 class_name HealthComponent
 extends Node
 
-signal healed(heal: float, current_health: float)
+
 signal took_damage(damage: float, current_health: float)
-signal health_zero
+signal health_depleted
 
 @export var hitbox: CollisionShape2D
 @export var hurt_sound: AudioStreamPlayer
@@ -39,28 +39,27 @@ func reset_health() -> void:
 
 
 ## restore health
-func restore_health(heal: float) -> void:
-	current_health += heal
-	
-	healed.emit(heal, current_health)
+func restore_health(amount: float) -> void:
+	current_health += amount
 
 
 ## take damage and reduce health
 func take_damage(damage: float) -> void:
 	decrease_health(damage)
 	took_damage.emit(damage, current_health)
-	check_health_zero()
+	check_health_depleted()
 
 
 ## check if health is gone
-func check_health_zero() -> void:
+func check_health_depleted() -> void:
 	if max(0, current_health) == 0:
-		health_zero.emit()
+		health_depleted.emit()
 
 
 ## play/verify hurt sound
 func play_hurt_sound() -> void:
 	GlobalScripts.verify(parent, hurt_sound, "hurt_sound")
+	
 	if is_instance_valid(hurt_sound):
 		hurt_sound.play()
 
@@ -68,5 +67,6 @@ func play_hurt_sound() -> void:
 ## play/verify death sound
 func play_death_sound() -> void:
 	GlobalScripts.verify(parent, death_sound, "death_sound")
+	
 	if is_instance_valid(death_sound):
 		death_sound.play()

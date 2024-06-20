@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://3no4bpnihcj4"]
+[gd_scene load_steps=22 format=3 uid="uid://3no4bpnihcj4"]
 
 [ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
 [ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
@@ -9,11 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="7_cxpwy"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_3d60e"]
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="9_lxmvp"]
-[ext_resource type="Script" path="res://#debug/#states/attack_idle_debug_projectile.gd" id="12_haiwt"]
+[ext_resource type="Script" path="res://towers/states/attack_projectile_idle.gd" id="11_oxv81"]
+[ext_resource type="Script" path="res://towers/states/attack_projectile_throw.gd" id="12_3chl1"]
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="13_23vcv"]
-[ext_resource type="Script" path="res://#debug/#states/attack_throw_debug_projectile.gd" id="13_w0s8o"]
 [ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="14_i1qbu"]
 [ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="15_7wf75"]
+[ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="15_qsebf"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/attack_state_machine.gd" id="16_owfle"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
 radius = 32.0
@@ -93,25 +95,26 @@ initial_state = NodePath("TowerIdle")
 [node name="TowerIdle" type="Node" parent="StateMachine"]
 script = ExtResource("9_lxmvp")
 
-[node name="DebugProjCooldownTimer" type="Timer" parent="."]
+[node name="DebugProjectileCooldownTimer" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
-[node name="DebugProjStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("8_3d60e")
-initial_state = NodePath("AttackIdleDebugProj")
+[node name="DebugProjectileStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("16_owfle")
+initial_state = NodePath("AttackProjectileIdle")
 
-[node name="AttackIdleDebugProj" type="Node" parent="DebugProjStateMachine"]
-script = ExtResource("12_haiwt")
+[node name="AttackProjectileIdle" type="Node" parent="DebugProjectileStateMachine"]
+script = ExtResource("11_oxv81")
 
-[node name="AttackThrowDebugProj" type="Node" parent="DebugProjStateMachine"]
-script = ExtResource("13_w0s8o")
+[node name="AttackProjectileThrow" type="Node" parent="DebugProjectileStateMachine"]
+script = ExtResource("12_3chl1")
 
-[node name="DebugProjAttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle", "sightline", "targets")]
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0", "sightline")]
 script = ExtResource("13_23vcv")
-muzzle = NodePath("../Animations/Muzzle")
+muzzle0 = NodePath("../Animations/Muzzle")
 sightline = NodePath("../Sightline")
-targets = NodePath("../TargetsComponent")
+
+[node name="CooldownComponent" type="Node" parent="."]
+script = ExtResource("15_qsebf")
 
 [node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("14_i1qbu")

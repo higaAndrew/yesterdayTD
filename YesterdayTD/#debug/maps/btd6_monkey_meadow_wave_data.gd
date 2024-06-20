@@ -1,5 +1,6 @@
 extends WaveData
 
+
 func _ready() -> void:
 	debug_waves = [
 		[	# wave 1
@@ -10,7 +11,7 @@ func _ready() -> void:
 			["hammer", 10, 2, 5],
 		],
 		[
-			["cog", 20, 0.5, 3],
+			["piston", 30, 0.1, 3],
 		]
 	]
 	pass

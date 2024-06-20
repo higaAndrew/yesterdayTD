@@ -1,5 +1,6 @@
 extends State
 
+
 signal died
 
 var hitbox: Hitbox
@@ -9,13 +10,15 @@ var health: HealthComponent
 var layers: LayersComponent
 var path_movement: PathMovementComponent
 
-var animation_done := false
-var sound_done := false
+var animation_done: bool = false
+var sound_done: bool = false
 
 
 ## get parent's components
 func enter() -> void:
 	hitbox = parent.hitbox
+	health = parent.health
+	path_movement = parent.path_movement
 	
 	animations = parent.animations
 	GlobalScripts.connect_signal(animations, "animation_finished", self, "_on_animation_finished")
@@ -23,12 +26,11 @@ func enter() -> void:
 	death_sound = parent.death_sound
 	GlobalScripts.connect_signal(death_sound, "finished", self, "_on_death_sound_finished")
 	
-	health = parent.health
-	path_movement = parent.path_movement
+	## if the enemy has children, spawn them
 	if not parent.stats.children.is_empty():
 		layers = parent.layers
 		layers.spawn_children()
-		
+	
 	GlobalScripts.play_animation(parent, animations, "die")
 	hitbox.disable_hitbox()
 	health.play_death_sound()

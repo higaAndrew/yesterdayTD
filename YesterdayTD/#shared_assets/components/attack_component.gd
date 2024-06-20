@@ -5,75 +5,55 @@ extends Node
 ## and an attack component, so i killed 2 birdies with one rock
 ## is there a more graceful solution? almost definitely. am I going to find it? hell no
 
-@export_enum("0", "1", "2") var attack_number: int = 0
-@export_enum("Projectiles", "Effects") var layer_id: String = "Projectiles"
-@export var muzzle: Marker2D
+## nvm i did it
+
+
+@export var muzzle0: Marker2D
+@export var muzzle1: Marker2D
+@export var muzzle2: Marker2D
+@export var muzzle3: Marker2D
 @export var sightline: RayCast2D
-@export var targets: TargetsComponent
 
 var parent: Area2D
-var stats: Resource
-var base_attack_cooldown: float
-var current_attack_cooldown: float
-
-var muzzle_position: Vector2
-var destination: Vector2
-var layer: CanvasLayer
+var projectiles: CanvasLayer
+var explosions: CanvasLayer
 
 
-## set attack speed values according to stats
-## but first, select the appropriate attack stats file
-## then set the canvas layer
+## get parent components and init canvas layers
 func init(_parent: Area2D) -> void:
 	parent = _parent
-	match attack_number:
-		0:
-			base_attack_cooldown = parent.attack0_stats.base_attack_cooldown
-		1:
-			base_attack_cooldown = parent.attack1_stats.base_attack_cooldown
-		2:
-			base_attack_cooldown = parent.attack2_stats.base_attack_cooldown
-		_:
-			printerr("%s has no attack%s_stats!" % [parent, attack_number])
-	layer = find_parent("Canvas").find_child(layer_id)
-	current_attack_cooldown = base_attack_cooldown
 	
-	GlobalScripts.verify(parent, muzzle, "muzzle")
+	GlobalScripts.verify(parent, muzzle0, "at least one muzzle")
 	GlobalScripts.verify(parent, sightline, "sightline")
-
-
-## ATTACK INIT STUFF
-## given a projectile, init all its velocity related values, and add it to the selected canvas layer
-func init_projectile(attack: Area2D) -> void:
-	muzzle_position = muzzle.global_position
 	
-	layer.add_child(attack)
-	attack.velocity.set_global_position(muzzle_position)
-	attack.velocity.set_rotation(parent.rotation)
-	attack.velocity.set_velocity()
+	init_layers()
 
 
-## ATTACK COOLDOWN STUFF
-## add attack cooldown
-func increase_attack_cooldown(amount: float) -> void:
-	current_attack_cooldown += amount
+## set up canvas layers for attacks
+func init_layers() -> void:
+	projectiles = find_parent("Canvas").find_child("Projectiles")
+	explosions = find_parent("Canvas").find_child("Explosions")
 
 
-## subtract attack cooldown
-func decrease_attack_cooldown(amount: float) -> void:
-	current_attack_cooldown -= amount
+## assign a given attack to a layer
+func assign_layer(attack: Area2D) -> void:
+	var layer: CanvasLayer
+	
+	if attack.is_in_group("projectiles"):
+		layer = projectiles
+		layer.add_child(attack)
+	
+	elif attack.is_in_group("explosions"):
+		layer = explosions
+		layer.add_child(attack)
 
 
-## multiply attack cooldown
-func multiply_attack_cooldown(amount: float) -> void:
-	current_attack_cooldown *= amount
-
-
-## divide attack cooldown
-func divide_attack_cooldown(amount: float) -> void:
-	current_attack_cooldown /= amount
-
-
-## restore attack cooldown to base value
-func reset_attack_cooldown() -> void:
-	current_attack_cooldown = base_attack_cooldown
+## given a projectile, init all its velocity related values, and add it to the selected canvas layer
+func init_projectile(attack_number: int, projectile: Area2D) -> void:
+	var muzzle = get("muzzle%s" % attack_number)
+	var muzzle_position = muzzle.global_position
+	
+	assign_layer(projectile)
+	projectile.velocity.set_global_position(muzzle_position)
+	projectile.velocity.set_rotation(parent.rotation)
+	projectile.velocity.set_velocity()

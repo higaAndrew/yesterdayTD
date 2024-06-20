@@ -1,12 +1,16 @@
 class_name State
 extends Node
 
+
 ## emitting the signal will require self, as well as the new state
 ## i.e. transitioned.emit(self, new_state)
 signal transitioned
 
 var parent: Node2D
-var initialized := false
+var initialized: bool = false
+
+## only for attacks
+var attack_number: int
 
 
 ## called when the state is created
@@ -15,7 +19,7 @@ func init() -> void:
 
 
 ## call if using init, this code is called every time state is entered
-## if not used, the looping actions will call before init
+## if not used, the code in enter() will always call before init
 func loop() -> void:
 	pass
 
@@ -25,8 +29,8 @@ func enter() -> void:
 	if not initialized:
 		init()
 		initialized = true
+	
 	loop()
-	pass
 
 
 ## called when state transitions and exits

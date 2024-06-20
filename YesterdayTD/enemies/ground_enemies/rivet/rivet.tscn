@@ -143,11 +143,11 @@ hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
 
-[node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("spawn_point", "despawn_point", "path", "speed")]
+[node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
 script = ExtResource("11_06egf")
 spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
-path = NodePath("../..")
+path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
 
 [node name="SpeedComponent" type="Node" parent="Rivet"]

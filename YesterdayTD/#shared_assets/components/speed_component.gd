@@ -1,7 +1,6 @@
 class_name SpeedComponent
 extends Node
 
-signal speed_changed(amount: float, current_speed: float)
 
 var parent: Area2D
 var base_speed: float
@@ -18,13 +17,11 @@ func init(_parent: Area2D) -> void:
 ## increase speed
 func increase_speed(amount: float) -> void:
 	current_speed += amount
-	speed_changed.emit(amount, current_speed)
 
 
 ## decrease speed
 func decrease_speed(amount: float) -> void:
 	current_speed -= amount
-	speed_changed.emit(amount, current_speed)
 
 
 ## reset speed

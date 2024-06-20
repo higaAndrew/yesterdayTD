@@ -23,6 +23,7 @@ func verify(emitter: Node, instance: Object, instance_name: String) -> void:
 ## ex: GlobalScripts.play_animation(parent, animations, "animation_x")
 func play_animation(emitter: Node, animated_sprite: AnimatedSprite2D, animation_name: String) -> void:
 	animated_sprite.play(animation_name)
+	
 	if animated_sprite.animation != animation_name:
 		printerr("%s has no animation called %s!" % [emitter.name, animation_name])
 		return

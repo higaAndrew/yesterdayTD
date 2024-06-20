@@ -1,6 +1,7 @@
 class_name TargetsComponent
 extends Node
 
+
 var parent: Area2D
 var target_list: Array
 var target: Area2D
@@ -64,29 +65,42 @@ func sort_last(a, b) -> bool:
 
 
 ## prioritize target with most base health
+## if they are the same, prioritize the target with the most progress
 func sort_strong(a, b) -> bool:
 	if a.health.base_health > b.health.base_health:
 		return true
+		
 	if a.health.base_health == b.health.base_health:
 		if a.path_movement.progress > b.path_movement.progress:
 			return true
 		return false
+	
 	return false
 
 
 ## prioritize target with least base health
+## if they are the same, prioritize the target with the most progress
 func sort_weak(a, b) -> bool:
 	if a.health.base_health < b.health.base_health:
 		return true
+	
 	if a.health.base_health == b.health.base_health:
 		if a.path_movement.progress > b.path_movement.progress:
 			return true
 		return false
+	
 	return false
 
 
-## prioritize targets close to the tower
+## prioritize targets closer to the tower
+## if they are the same, prioritize the target with the most progress
 func sort_close(a, b) -> bool:
 	if a.global_position.distance_to(parent.global_position) < b.global_position.distance_to(parent.global_position):
 		return true
+	
+	if a.global_position.distance_to(parent.global_position) == b.global_position.distance_to(parent.global_position):
+		if a.path_movement.progress > b.path_movement.progress:
+			return true
+		return false
+	
 	return false

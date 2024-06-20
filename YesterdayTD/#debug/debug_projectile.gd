@@ -1,6 +1,7 @@
 class_name DebugProjectile
 extends Area2D
 
+
 @export var stats: AttackStats
 
 @onready var hitbox := $Hitbox as Hitbox
@@ -17,6 +18,8 @@ extends Area2D
 
 ## init state machine and components
 func _ready() -> void:
+	GlobalScripts.verify(self, stats, "stats")
+	
 	state_machine.init(self)
 	damage.init(self)
 	pierce.init(self)
