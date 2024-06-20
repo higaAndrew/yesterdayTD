@@ -1,6 +1,6 @@
 extends State
 
-
+## TODO make explosions appear at the target instead of the contact point
 var hitbox: Hitbox
 var animations: AnimatedSprite2D
 var explosion_sound: AudioStreamPlayer

@@ -84,7 +84,7 @@ radius = 0.01
 loop = false
 
 [node name="Piston" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
-collision_mask = 4
+collision_mask = 132
 script = ExtResource("1_2n75l")
 stats = ExtResource("2_7skus")
 
@@ -115,7 +115,7 @@ stream = ExtResource("8_6lpcu")
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
 position = Vector2(26, 0)
 
-[node name="DespawnPoint" type="Area2D" parent="Piston" groups=["despawn_points", "enemies"]]
+[node name="DespawnPoint" type="Area2D" parent="Piston" groups=["enemies"]]
 position = Vector2(-26, 0)
 collision_layer = 16
 collision_mask = 0

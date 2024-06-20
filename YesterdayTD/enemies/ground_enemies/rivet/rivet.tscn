@@ -86,7 +86,7 @@ loop = false
 [node name="Rivet" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
 modulate = Color(1, 0.64, 0.64, 1)
 scale = Vector2(1.1, 1.1)
-collision_mask = 4
+collision_mask = 132
 script = ExtResource("1_hi6hr")
 stats = ExtResource("2_ekq5m")
 
@@ -116,7 +116,7 @@ stream = ExtResource("7_56ygc")
 [node name="SpawnPoint" type="Marker2D" parent="Rivet"]
 position = Vector2(29, 0)
 
-[node name="DespawnPoint" type="Area2D" parent="Rivet" groups=["despawn_points", "enemies"]]
+[node name="DespawnPoint" type="Area2D" parent="Rivet" groups=["enemies"]]
 position = Vector2(-29, 0)
 collision_layer = 16
 collision_mask = 0

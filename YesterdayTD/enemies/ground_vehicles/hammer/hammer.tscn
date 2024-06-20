@@ -87,7 +87,7 @@ loop = false
 [node name="Hammer" type="Area2D" parent="." groups=["enemies", "ground_vehicles"]]
 scale = Vector2(1.5, 1.5)
 collision_layer = 65
-collision_mask = 4
+collision_mask = 132
 script = ExtResource("1_aumqh")
 stats = ExtResource("2_2anm2")
 
@@ -118,7 +118,7 @@ volume_db = 5.0
 [node name="SpawnPoint" type="Marker2D" parent="Hammer"]
 position = Vector2(27, 0)
 
-[node name="DespawnPoint" type="Area2D" parent="Hammer" groups=["despawn_points", "enemies"]]
+[node name="DespawnPoint" type="Area2D" parent="Hammer" groups=["enemies"]]
 position = Vector2(-27, 0)
 collision_layer = 16
 collision_mask = 0

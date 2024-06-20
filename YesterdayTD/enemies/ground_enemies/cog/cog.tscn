@@ -84,7 +84,7 @@ radius = 0.01
 loop = false
 
 [node name="Cog" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
-collision_mask = 4
+collision_mask = 132
 script = ExtResource("1_udpip")
 stats = ExtResource("2_3nlni")
 
@@ -113,7 +113,7 @@ stream = ExtResource("7_t5dv2")
 [node name="SpawnPoint" type="Marker2D" parent="Cog"]
 position = Vector2(32, 0)
 
-[node name="DespawnPoint" type="Area2D" parent="Cog" groups=["despawn_points", "enemies"]]
+[node name="DespawnPoint" type="Area2D" parent="Cog" groups=["enemies"]]
 position = Vector2(-32, 0)
 collision_layer = 16
 collision_mask = 0

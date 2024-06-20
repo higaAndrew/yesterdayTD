@@ -233,8 +233,9 @@ animations = [{
 }]
 
 [node name="SnowbombExplosion" type="Area2D" groups=["explosions"]]
-collision_layer = 4
+collision_layer = 132
 collision_mask = 0
+monitoring = false
 script = ExtResource("1_el282")
 stats = ExtResource("2_57kf7")
 

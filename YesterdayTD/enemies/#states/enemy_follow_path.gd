@@ -4,6 +4,7 @@ var progenitor_attack: Area2D
 var health: HealthComponent
 var path_movement: PathMovementComponent
 
+var attack: Area2D
 var projectile: Area2D
 var explosion: Area2D
 var melee: Area2D
@@ -36,26 +37,34 @@ func _on_area_entered(area: Area2D) -> void:
 	# set the current attack for future comparison
 	path_movement.current_attack = area
 	
-	if area.is_in_group("projectiles"):
-		projectile = area
+	#if area.is_in_group("projectiles"):
+	if area.get_collision_layer_value(3):
+		#projectile = area
 		
-		if not projectile.pierce.pierce_expended:
-			health.take_damage(projectile.damage.current_damage)
-			health.play_hurt_sound()
-			# tell the projectile that it has hit something
-			projectile.hitbox.collide()
-	
-	elif area.is_in_group("explosions"):
-		explosion = area
+		#if not projectile.pierce.pierce_expended:
+			#health.take_damage(projectile.damage.current_damage)
+			#health.play_hurt_sound()
+			## tell the projectile that it has hit something
+			#projectile.hitbox.collide()
+		attack = area
 		
-		if not explosion.pierce.pierce_expended:
-			health.take_damage(explosion.damage.current_damage)
+		if not attack.pierce.pierce_expended:
+			health.take_damage(attack.damage.current_damage)
 			health.play_hurt_sound()
-			# tell the explosion that it has hit something
-			explosion.hitbox.collide()
+			# tell the attack that it has hit something
+			attack.hitbox.collide()
 	
-	elif area.is_in_group("melee_attacks"):
-		pass
+	#elif area.is_in_group("explosions"):
+		#explosion = area
+		#
+		#if not explosion.pierce.pierce_expended:
+			#health.take_damage(explosion.damage.current_damage)
+			#health.play_hurt_sound()
+			## tell the explosion that it has hit something
+			#explosion.hitbox.collide()
+	#
+	#elif area.is_in_group("melee_attacks"):
+		#pass
 
 
 ## handle health reaching 0
