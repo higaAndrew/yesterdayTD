@@ -22,6 +22,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	
 	# if an enemy collides, take damage and delete it (not kill it)
+	## collision layer
 	if area.get_collision_layer_value(5):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
@@ -37,7 +38,6 @@ func _on_took_damage(damage: float, current_health: float) -> void:
 	
 	# after taking damage, check to see if health is zero
 	print("The objective took %s damage! Its health is now %s!" % [damage, current_health])
-	# HACK might want to remove this to make the code more modular
 	health.check_health_depleted()
 
 

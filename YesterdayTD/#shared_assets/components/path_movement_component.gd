@@ -15,9 +15,6 @@ var spawn_position: float
 var despawn_position: float
 var phase: int = 0
 var progress: float
-## just for keeping track of the current attack
-## i just didn't want to declare it on the enemy script
-var current_attack: Area2D
 
 
 ## ensure the necessary nodes are connected

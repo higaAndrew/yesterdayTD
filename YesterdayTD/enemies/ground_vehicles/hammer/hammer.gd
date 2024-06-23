@@ -1,11 +1,8 @@
 class_name Hammer
-extends Area2D
+extends Enemy
 
 
 @export var stats: EnemyStats
-@export var starting_progress: float = 0.0
-
-var progenitor_attack: Area2D
 
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D

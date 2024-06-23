@@ -1,18 +1,17 @@
 extends State
 
 var progenitor_attack: Area2D
+var hitbox: Hitbox
 var health: HealthComponent
 var path_movement: PathMovementComponent
 
 var attack: Area2D
-var projectile: Area2D
-var explosion: Area2D
-var melee: Area2D
 
 
 ## get parent's components
 func enter() -> void:
 	progenitor_attack = parent.progenitor_attack
+	hitbox = parent.hitbox
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 	
 	health = parent.health
@@ -27,7 +26,6 @@ func physics_process(delta: float) -> void:
 	path_movement.follow_path(delta)
 
 
-## TODO melee
 ## handle attack collisions
 func _on_area_entered(area: Area2D) -> void:
 	# if this attack spawned the enemy, ignore it
@@ -35,17 +33,10 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	
 	# set the current attack for future comparison
-	path_movement.current_attack = area
+	hitbox.set_current_collision(area)
 	
-	#if area.is_in_group("projectiles"):
+	## collision layer
 	if area.get_collision_layer_value(3):
-		#projectile = area
-		
-		#if not projectile.pierce.pierce_expended:
-			#health.take_damage(projectile.damage.current_damage)
-			#health.play_hurt_sound()
-			## tell the projectile that it has hit something
-			#projectile.hitbox.collide()
 		attack = area
 		
 		if not attack.pierce.pierce_expended:
@@ -53,18 +44,6 @@ func _on_area_entered(area: Area2D) -> void:
 			health.play_hurt_sound()
 			# tell the attack that it has hit something
 			attack.hitbox.collide()
-	
-	#elif area.is_in_group("explosions"):
-		#explosion = area
-		#
-		#if not explosion.pierce.pierce_expended:
-			#health.take_damage(explosion.damage.current_damage)
-			#health.play_hurt_sound()
-			## tell the explosion that it has hit something
-			#explosion.hitbox.collide()
-	#
-	#elif area.is_in_group("melee_attacks"):
-		#pass
 
 
 ## handle health reaching 0

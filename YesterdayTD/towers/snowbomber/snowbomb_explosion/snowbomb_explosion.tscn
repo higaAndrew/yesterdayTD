@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cgi48nbv63ja0"]
+[gd_scene load_steps=44 format=3 uid="uid://cgi48nbv63ja0"]
 
 [ext_resource type="Script" path="res://towers/snowbomber/snowbomb_explosion/snowbomb_explosion.gd" id="1_el282"]
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_mtxi2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="5_pw3yv"]
 [ext_resource type="Script" path="res://towers/#attacks/states/explosion_exploding.gd" id="6_emeub"]
 [ext_resource type="Script" path="res://#shared_assets/components/size_component.gd" id="10_qnu74"]
+[ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="11_7npmo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_420u3"]
 radius = 32.0
@@ -274,3 +275,6 @@ script = ExtResource("5_pw3yv")
 
 [node name="SizeComponent" type="Node" parent="."]
 script = ExtResource("10_qnu74")
+
+[node name="VelocityComponent" type="Node" parent="."]
+script = ExtResource("11_7npmo")

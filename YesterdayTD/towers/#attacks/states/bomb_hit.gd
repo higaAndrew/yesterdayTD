@@ -7,6 +7,7 @@ var hitbox: Hitbox
 var animations: AnimatedSprite2D
 var hit_vfx: AnimatedSprite2D
 var hit_sound: AudioStreamPlayer
+var attack: AttackComponent
 var damage: DamageComponent
 var pierce: PierceComponent
 
@@ -21,6 +22,7 @@ func init() -> void:
 	explosion_scene = parent.explosion_scene
 	hitbox = parent.hitbox
 	animations = parent.animations
+	attack = parent.attack
 	damage = parent.damage
 	
 	hit_vfx = parent.hit_vfx
@@ -59,9 +61,8 @@ func _on_hit_sound_finished() -> void:
 func _on_pierce_depleted() -> void:
 	## TODO this is super messy, move to a component?
 	explosion = explosion_scene.instantiate()
-	explosion.global_position = parent.global_position
-	layer = find_parent("Canvas").find_child("Explosions")
-	layer.call_deferred("add_child", explosion)
+	
+	attack.call_deferred("init_explosion", explosion)
 	
 	animations.hide()
 	hit_vfx.show()

@@ -23,9 +23,6 @@ var explosions: CanvasLayer
 func init(_parent: Area2D) -> void:
 	parent = _parent
 	
-	GlobalScripts.verify(parent, muzzle0, "at least one muzzle")
-	GlobalScripts.verify(parent, sightline, "sightline")
-	
 	init_layers()
 
 
@@ -51,9 +48,19 @@ func assign_layer(attack: Area2D) -> void:
 ## given a projectile, init all its velocity related values, and add it to the selected canvas layer
 func init_projectile(attack_number: int, projectile: Area2D) -> void:
 	var muzzle = get("muzzle%s" % attack_number)
-	var muzzle_position = muzzle.global_position
+	var muzzle_position: Vector2
+	if not is_instance_valid(muzzle):
+		muzzle_position = parent.global_position
+	else:
+		muzzle_position = muzzle.global_position
 	
 	assign_layer(projectile)
 	projectile.velocity.set_global_position(muzzle_position)
 	projectile.velocity.set_rotation(parent.rotation)
 	projectile.velocity.set_velocity()
+
+
+func init_explosion(explosion: Area2D) -> void:
+	assign_layer(explosion)
+	explosion.velocity.set_global_position(parent.global_position)
+	explosion.velocity.set_rotation(parent.rotation)

@@ -4,7 +4,7 @@ extends Node
 
 @export var initial_state: State
 
-var states := {}
+var states: Dictionary = {}
 var current_state: State
 
 

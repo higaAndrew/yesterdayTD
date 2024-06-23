@@ -87,6 +87,7 @@ loop = false
 collision_mask = 132
 script = ExtResource("1_udpip")
 stats = ExtResource("2_3nlni")
+starting_progress = null
 
 [node name="Hitbox" type="CollisionShape2D" parent="Cog"]
 shape = SubResource("CircleShape2D_e3j37")

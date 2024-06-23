@@ -4,7 +4,7 @@ extends Node
 
 ## preload every enemy
 ## HACK would autoload be a good idea?
-@export var enemies := {
+@export var enemies: Dictionary = {
 	"piston": preload("res://enemies/ground_enemies/piston/piston.tscn"),
 	"rivet": preload("res://enemies/ground_enemies/rivet/rivet.tscn"),
 	"cog": preload("res://enemies/ground_enemies/cog/cog.tscn"),
@@ -60,7 +60,6 @@ func init(_parent: Node2D) -> void:
 	init_layers()
 	get_waves()
 	prepare_waves()
-	## FIXME :=
 
 
 ## init layers for spawning

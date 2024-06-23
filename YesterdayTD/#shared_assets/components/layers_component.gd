@@ -3,6 +3,7 @@ extends Node
 
 
 @export var child_separation_distance: float = 15.0
+@export var hitbox: Hitbox
 @export var path_movement: PathMovementComponent
 
 var parent: Area2D
@@ -37,8 +38,8 @@ func spawn_children() -> void:
 				enemy = path_follow.get_child(0)
 				assign_path()
 				
+				enemy.progenitor_attack = hitbox.current_collision
 				enemy.starting_progress = parent.path_movement.progress - distance
-				enemy.progenitor_attack = parent.path_movement.current_attack
 				distance += child_separation_distance
 
 

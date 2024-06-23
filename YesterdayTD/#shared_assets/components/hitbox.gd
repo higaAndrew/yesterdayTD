@@ -4,6 +4,8 @@ extends CollisionShape2D
 
 signal collided
 
+var current_collision: Area2D
+
 
 ## method for declaring a collsion, typically activated by outside scenes
 ## this method should only be read by the parent's state machine
@@ -16,3 +18,8 @@ func collide() -> void:
 func disable_hitbox() -> void:
 	self.global_position = Vector2(-128, -128)
 	self.set_deferred("disabled", true)
+
+
+## set the current collision
+func set_current_collision(area: Area2D) -> void:
+	current_collision = area

@@ -12,6 +12,7 @@ extends Area2D
 @onready var damage := $DamageComponent as DamageComponent
 @onready var pierce := $PierceComponent as PierceComponent
 @onready var size := $SizeComponent as SizeComponent
+@onready var velocity := $VelocityComponent as VelocityComponent
 
 
 ## init state machine and components
@@ -22,3 +23,4 @@ func _ready() -> void:
 	damage.init(self)
 	pierce.init(self)
 	size.init(self)
+	velocity.init(self)

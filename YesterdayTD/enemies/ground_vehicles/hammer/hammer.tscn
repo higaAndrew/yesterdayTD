@@ -90,6 +90,7 @@ collision_layer = 65
 collision_mask = 132
 script = ExtResource("1_aumqh")
 stats = ExtResource("2_2anm2")
+starting_progress = null
 
 [node name="Hitbox" type="CollisionShape2D" parent="Hammer"]
 shape = SubResource("RectangleShape2D_pawm0")
@@ -146,8 +147,9 @@ hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
 
-[node name="LayersComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("path_movement")]
+[node name="LayersComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("hitbox", "path_movement")]
 script = ExtResource("14_i4848")
+hitbox = NodePath("../Hitbox")
 path_movement = NodePath("../PathMovementComponent")
 
 [node name="PathMovementComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
