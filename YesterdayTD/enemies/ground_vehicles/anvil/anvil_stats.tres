@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://cg3xjj7751wxw"]
+
+[ext_resource type="PackedScene" uid="uid://djv1104dc3q6v" path="res://enemies/ground_vehicles/hammer/hammer.tscn" id="1_dmeki"]
+[ext_resource type="Script" path="res://enemies/enemy_stats.gd" id="2_ht7qx"]
+
+[resource]
+script = ExtResource("2_ht7qx")
+base_health = 50.0
+base_speed = 100.0
+base_damage = 1.0
+base_monet = 1
+children = Array[PackedScene]([ExtResource("1_dmeki")])
+number_children = Array[int]([2])

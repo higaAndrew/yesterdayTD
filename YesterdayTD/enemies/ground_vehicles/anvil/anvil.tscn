@@ -1,0 +1,163 @@
+[gd_scene load_steps=26 format=3 uid="uid://3fh62ivdq3b3"]
+
+[ext_resource type="Script" path="res://enemies/ground_vehicles/anvil/anvil.gd" id="1_fjmdw"]
+[ext_resource type="Resource" uid="uid://cg3xjj7751wxw" path="res://enemies/ground_vehicles/anvil/anvil_stats.tres" id="2_rncdl"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_yfsq5"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_pswho"]
+[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_0ca5v"]
+[ext_resource type="Texture2D" uid="uid://crholgyqb3u2t" path="res://enemies/ground_vehicles/kenney_top_down_tanks_big_tanks.png" id="5_xawnx"]
+[ext_resource type="AudioStream" uid="uid://cuu0q8vqll77x" path="res://enemies/Radiator Metal Impacts 003.wav" id="7_ah02s"]
+[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_h0oha"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_3k3pe"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_07ks4"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_ucqm0"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_njrur"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_v16bg"]
+[ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="14_qx55c"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_xd22p"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="16_8pvil"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pawm0"]
+size = Vector2(68, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5fi5"]
+atlas = ExtResource("5_0ca5v")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwp4j"]
+atlas = ExtResource("5_0ca5v")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syxr0"]
+atlas = ExtResource("5_0ca5v")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v4px"]
+atlas = ExtResource("5_0ca5v")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4o72"]
+atlas = ExtResource("5_0ca5v")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w81n"]
+atlas = ExtResource("5_xawnx")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7fp7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5fi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwp4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syxr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2v4px")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4o72")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"die",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w81n")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8m3o2"]
+radius = 0.01
+
+[node name="AnvilPath" type="PathFollow2D"]
+loop = false
+
+[node name="Anvil" type="Area2D" parent="." groups=["enemies", "ground_vehicles"]]
+scale = Vector2(1.75, 1.75)
+collision_layer = 65
+collision_mask = 132
+script = ExtResource("1_fjmdw")
+stats = ExtResource("2_rncdl")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Anvil"]
+shape = SubResource("RectangleShape2D_pawm0")
+script = ExtResource("3_yfsq5")
+
+[node name="SpawnDespawnPointPreview" type="Node" parent="Anvil/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
+script = ExtResource("4_pswho")
+spawn_point = NodePath("../../SpawnPoint")
+despawn_point = NodePath("../../DespawnPoint")
+
+[node name="Animations" type="AnimatedSprite2D" parent="Anvil"]
+texture_filter = 2
+scale = Vector2(1.125, 1.125)
+sprite_frames = SubResource("SpriteFrames_7fp7q")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="Anvil"]
+stream = ExtResource("7_ah02s")
+volume_db = -5.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Anvil"]
+stream = ExtResource("8_h0oha")
+volume_db = 5.0
+
+[node name="SpawnPoint" type="Marker2D" parent="Anvil"]
+position = Vector2(34, 0)
+
+[node name="DespawnPoint" type="Area2D" parent="Anvil" groups=["enemies"]]
+position = Vector2(-34, 0)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anvil/DespawnPoint"]
+shape = SubResource("CircleShape2D_8m3o2")
+
+[node name="StateMachine" type="Node" parent="Anvil" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_3k3pe")
+initial_state = NodePath("EnemyFollowPath")
+
+[node name="EnemyFollowPath" type="Node" parent="Anvil/StateMachine"]
+script = ExtResource("10_07ks4")
+
+[node name="EnemyDie" type="Node" parent="Anvil/StateMachine"]
+script = ExtResource("11_ucqm0")
+
+[node name="DamageComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hit_sound")]
+script = ExtResource("12_njrur")
+hit_sound = NodePath("../HurtSound")
+
+[node name="HealthComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+script = ExtResource("13_v16bg")
+hitbox = NodePath("../Hitbox")
+hurt_sound = NodePath("../HurtSound")
+death_sound = NodePath("../DeathSound")
+
+[node name="LayersComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hitbox", "path_movement")]
+script = ExtResource("14_qx55c")
+hitbox = NodePath("../Hitbox")
+path_movement = NodePath("../PathMovementComponent")
+
+[node name="PathMovementComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
+script = ExtResource("15_xd22p")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+path_follow = NodePath("../..")
+speed = NodePath("../SpeedComponent")
+
+[node name="SpeedComponent" type="Node" parent="Anvil"]
+script = ExtResource("16_8pvil")

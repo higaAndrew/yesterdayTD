@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="4_a12xg"]
 [ext_resource type="Texture2D" uid="uid://uffbi4of4bxc" path="res://towers/#attacks/snowball_spritesheet_3x2.png" id="4_c8fck"]
 [ext_resource type="Texture2D" uid="uid://rlsa3hayw7y6" path="res://towers/#attacks/Retro Impact Effect Pack 3 F.png" id="5_00ng5"]
-[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_m6lf7"]
 [ext_resource type="Script" path="res://towers/#attacks/states/bomb_move.gd" id="7_s2358"]
 [ext_resource type="Script" path="res://towers/#attacks/states/bomb_hit.gd" id="8_eod13"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/attack_state_machine.gd" id="8_rhqyq"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="9_at73u"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_g57kp"]
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="11_bjxah"]
@@ -147,14 +147,14 @@ offset = Vector2(-1, 0)
 [node name="LifespanTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("6_m6lf7")
+[node name="SnowbombExplosionStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_rhqyq")
 initial_state = NodePath("BombMove")
 
-[node name="BombMove" type="Node" parent="StateMachine"]
+[node name="BombMove" type="Node" parent="SnowbombExplosionStateMachine"]
 script = ExtResource("7_s2358")
 
-[node name="BombHit" type="Node" parent="StateMachine"]
+[node name="BombHit" type="Node" parent="SnowbombExplosionStateMachine"]
 script = ExtResource("8_eod13")
 
 [node name="AttackComponent" type="Node" parent="."]

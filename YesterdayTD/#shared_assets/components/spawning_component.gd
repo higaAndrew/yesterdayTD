@@ -9,6 +9,7 @@ extends Node
 	"rivet": preload("res://enemies/ground_enemies/rivet/rivet.tscn"),
 	"cog": preload("res://enemies/ground_enemies/cog/cog.tscn"),
 	"hammer": preload("res://enemies/ground_vehicles/hammer/hammer.tscn"),
+	"anvil": preload("res://enemies/ground_vehicles/anvil/anvil.tscn"),
 }
 
 ## variables from parent

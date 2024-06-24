@@ -2,6 +2,7 @@ extends State
 
 
 var hitbox: Hitbox
+var animations: AnimatedSprite2D
 var hit_vfx: AnimatedSprite2D
 var hit_sound: AudioStreamPlayer
 var damage: DamageComponent
@@ -14,6 +15,7 @@ var sound_done: bool = false
 ## get parent's components
 func init() -> void:
 	hitbox = parent.hitbox
+	animations = parent.animations
 	damage = parent.damage
 	
 	hit_vfx = parent.hit_vfx
@@ -38,7 +40,7 @@ func loop() -> void:
 
 ## when pierce runs out, destroy self
 func _on_pierce_depleted() -> void:
-	parent.animations.hide()
+	animations.hide()
 	hit_vfx.show()
 	GlobalScripts.play_animation(parent, hit_vfx, "hit")
 	hitbox.disable_hitbox()

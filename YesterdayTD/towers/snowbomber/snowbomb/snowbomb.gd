@@ -13,7 +13,7 @@ extends Area2D
 @onready var hit_vfx := $HitVFX as AnimatedSprite2D
 @onready var hit_sound := $HitSound as AudioStreamPlayer
 @onready var lifespan_timer := $LifespanTimer as Timer
-@onready var state_machine := $StateMachine as StateMachine
+@onready var snowbomb_explosion_state_machine := $SnowbombExplosionStateMachine as StateMachine
 @onready var attack := $AttackComponent as AttackComponent
 @onready var damage := $DamageComponent as DamageComponent
 @onready var pierce := $PierceComponent as PierceComponent
@@ -25,7 +25,7 @@ extends Area2D
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 	
-	state_machine.init(self)
+	snowbomb_explosion_state_machine.init(self)
 	attack.init(self)
 	damage.init(self)
 	pierce.init(self)
