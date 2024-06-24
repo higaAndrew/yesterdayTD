@@ -44,6 +44,7 @@ func _on_area_entered(area: Area2D) -> void:
 			health.play_hurt_sound()
 			# tell the attack that it has hit something
 			attack.hitbox.collide()
+			attack.hitbox.current_collision = parent
 
 
 ## handle health reaching 0

@@ -62,5 +62,5 @@ func init_projectile(attack_number: int, projectile: Area2D) -> void:
 
 func init_explosion(explosion: Area2D) -> void:
 	assign_layer(explosion)
-	explosion.velocity.set_global_position(parent.global_position)
+	explosion.velocity.set_global_position(parent.hitbox.current_collision.global_position)
 	explosion.velocity.set_rotation(parent.rotation)

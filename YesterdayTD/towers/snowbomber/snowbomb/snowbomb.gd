@@ -1,7 +1,7 @@
 class_name Snowbomb
 extends Area2D
 
-## FIXME ATTACK COMPONENT TO BOMBS
+
 ## TODO change bomb behavior
 @export var stats: AttackStats
 
