@@ -18,8 +18,3 @@ func collide() -> void:
 func disable_hitbox() -> void:
 	self.global_position = Vector2(-128, -128)
 	self.set_deferred("disabled", true)
-
-
-## set the current collision
-func set_current_collision(area: Area2D) -> void:
-	current_collision = area

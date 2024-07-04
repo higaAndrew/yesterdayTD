@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_lx3rv")
-base_range = 200.0
+base_range = 300.0
 target_priority = "First"
+can_hit_flying = false

@@ -3,11 +3,14 @@ extends State
 
 var hitbox: Hitbox
 var lifespan_timer: Timer
+var pierce_cooldown_timer: Timer
+var pierce: PierceComponent
 var velocity: VelocityComponent
 
 
 ## get parent's components
 func init() -> void:
+	pierce = parent.pierce
 	velocity = parent.velocity
 	
 	hitbox = parent.hitbox
@@ -15,6 +18,9 @@ func init() -> void:
 	
 	lifespan_timer = parent.lifespan_timer
 	GlobalScripts.connect_signal(lifespan_timer, "timeout", self, "_on_lifespan_timer_timeout")
+	
+	pierce_cooldown_timer = parent.pierce_cooldown_timer
+	GlobalScripts.connect_signal(pierce_cooldown_timer, "timeout", self, "_on_pierce_cooldown_timer_timeout")
 	
 	lifespan_timer.start(parent.stats.base_lifespan)
 
@@ -38,3 +44,9 @@ func _on_lifespan_timer_timeout() -> void:
 		return
 	
 	parent.queue_free()
+
+
+## if pierce cooldown timer times out, reenable collisions
+## always active
+func _on_pierce_cooldown_timer_timeout() -> void:
+	pierce.pierce_active = true

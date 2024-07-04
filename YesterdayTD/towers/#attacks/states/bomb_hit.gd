@@ -2,11 +2,12 @@ extends State
 
 
 var explosion_scene: PackedScene
-var hitbox: Hitbox
 
+var hitbox: Hitbox
 var animations: AnimatedSprite2D
 var hit_vfx: AnimatedSprite2D
 var hit_sound: AudioStreamPlayer
+var pierce_cooldown_timer: Timer
 var attack: AttackComponent
 var damage: DamageComponent
 var pierce: PierceComponent
@@ -19,9 +20,10 @@ var sound_done: bool = false
 
 ## get parent's components
 func init() -> void:
-	explosion_scene = parent.explosion_scene
+	explosion_scene = parent.get("attack%s_scene" % attack_number)
 	hitbox = parent.hitbox
 	animations = parent.animations
+	pierce_cooldown_timer = parent.pierce_cooldown_timer
 	attack = parent.attack
 	damage = parent.damage
 	
@@ -36,16 +38,25 @@ func init() -> void:
 
 
 ## every loop, perform hit functions
+## init explosion must be call_deferred for some reason
 func loop() -> void:
 	damage.play_hit_sound()
 	pierce.reduce_pierce()
 	
+	explosion = explosion_scene.instantiate()
+	attack.call_deferred("init_explosion", explosion)
+	
 	if pierce.current_pierce >= 1:
+		pierce.pierce_active = false
+		pierce_cooldown_timer.start(pierce.current_pierce_cooldown)
 		transitioned.emit(self, "BombMove")
 
 
 ## when hit vfx animation is finished
 func _on_hit_vfx_animation_finished() -> void:
+	if not current_state():
+		return
+	
 	if hit_vfx.animation == "hit":
 		animation_done = true
 		check_delete()
@@ -53,16 +64,19 @@ func _on_hit_vfx_animation_finished() -> void:
 
 ## when hit sound is finished
 func _on_hit_sound_finished() -> void:
-	sound_done = true
-	check_delete()
+	if not current_state():
+		return
+	
+	if pierce.pierce_expended:
+		sound_done = true
+		check_delete()
 
 
 ## when pierce runs out, destroy self
 func _on_pierce_depleted() -> void:
-	## TODO this is super messy, move to a component?
-	explosion = explosion_scene.instantiate()
-	
-	attack.call_deferred("init_explosion", explosion)
+	#explosion = explosion_scene.instantiate()
+	#
+	#attack.call_deferred("init_explosion", explosion)
 	
 	animations.hide()
 	hit_vfx.show()

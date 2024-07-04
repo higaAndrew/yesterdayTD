@@ -109,6 +109,11 @@ animations = [{
 "loop": false,
 "name": &"hit",
 "speed": 15.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [node name="Snowbomb" type="Area2D" groups=["projectiles"]]
@@ -117,8 +122,8 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_e6epq")
 stats = ExtResource("2_4xdcl")
-explosion_scene = ExtResource("3_60107")
-explosion_stats = ExtResource("4_87tpu")
+attack0_scene = ExtResource("3_60107")
+attack0_stats = ExtResource("4_87tpu")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_70s10")
@@ -138,13 +143,16 @@ flip_h = true
 visible = false
 modulate = Color(0.176419, 0.176419, 0.176419, 1)
 sprite_frames = SubResource("SpriteFrames_2vvne")
-animation = &"hit"
-autoplay = "hit"
+animation = &"idle"
+autoplay = "idle"
 offset = Vector2(-1, 0)
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 
 [node name="LifespanTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PierceCooldownTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="SnowbombExplosionStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

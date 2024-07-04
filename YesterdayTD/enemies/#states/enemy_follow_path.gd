@@ -32,8 +32,16 @@ func _on_area_entered(area: Area2D) -> void:
 	if area == progenitor_attack:
 		return
 	
+	# if this attack has already hit the enemy, ignore it
+	if parent in area.pierce.hit_list:
+		return
+	
+	# if this attack is still on pierce cooldown, ignore it
+	if not area.pierce.pierce_active:
+		return
+	
 	# set the current attack for future comparison
-	hitbox.set_current_collision(area)
+	hitbox.current_collision = area
 	
 	## collision layer
 	if area.get_collision_layer_value(3):
@@ -45,6 +53,7 @@ func _on_area_entered(area: Area2D) -> void:
 			# tell the attack that it has hit something
 			attack.hitbox.collide()
 			attack.hitbox.current_collision = parent
+			attack.pierce.hit_list.append(parent)
 
 
 ## handle health reaching 0

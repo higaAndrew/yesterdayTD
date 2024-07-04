@@ -4,6 +4,8 @@ extends Area2D
 
 @export var stats: TowerStats
 
+@export_group("Attacks")
+@export_subgroup("Attack0")
 @export var attack0_scene: PackedScene
 @export var attack0_stats: AttackStats
 @onready var attack0_cooldown_timer := $DebugProjectileCooldownTimer as Timer

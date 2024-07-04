@@ -1,4 +1,4 @@
-class_name Rivet
+class_name Bolt
 extends Enemy
 
 

@@ -4,9 +4,10 @@
 
 [resource]
 script = ExtResource("1_v5r2o")
-base_damage = 10.0
-base_pierce = 10
+base_damage = 1.0
+base_pierce = 2
 base_attack_cooldown = 0.0
 base_size = 2.0
 base_speed = 0.0
 base_lifespan = 0.1
+base_pierce_cooldown = 0.0

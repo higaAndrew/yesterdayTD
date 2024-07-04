@@ -12,7 +12,6 @@ extends Node
 @export var muzzle1: Marker2D
 @export var muzzle2: Marker2D
 @export var muzzle3: Marker2D
-@export var sightline: RayCast2D
 
 var parent: Area2D
 var projectiles: CanvasLayer
@@ -55,12 +54,14 @@ func init_projectile(attack_number: int, projectile: Area2D) -> void:
 		muzzle_position = muzzle.global_position
 	
 	assign_layer(projectile)
-	projectile.velocity.set_global_position(muzzle_position)
-	projectile.velocity.set_rotation(parent.rotation)
+	projectile.global_position = muzzle_position
+	projectile.rotation = parent.rotation
 	projectile.velocity.set_velocity()
 
 
+## given an explosion, init its location and rotation, and add it to the proper canvas layer
+## also, make sure the explosion originates at the center of the target, not at the point of contactx
 func init_explosion(explosion: Area2D) -> void:
 	assign_layer(explosion)
-	explosion.velocity.set_global_position(parent.hitbox.current_collision.global_position)
-	explosion.velocity.set_rotation(parent.rotation)
+	explosion.global_position = parent.hitbox.current_collision.global_position
+	explosion.rotation = parent.rotation

@@ -112,10 +112,9 @@ script = ExtResource("11_hk5fd")
 [node name="AttackProjectileThrow" type="Node" parent="SnowbombStateMachine"]
 script = ExtResource("12_0vjoa")
 
-[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0", "sightline")]
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0")]
 script = ExtResource("12_k4eia")
 muzzle0 = NodePath("../Animations/Muzzle")
-sightline = NodePath("../Sightline")
 
 [node name="CooldownComponent" type="Node" parent="."]
 script = ExtResource("13_uj1kf")

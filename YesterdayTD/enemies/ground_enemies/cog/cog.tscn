@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://enemies/ground_enemies/cog/cog.gd" id="1_udpip"]
 [ext_resource type="Resource" uid="uid://0k6ayifnlay3" path="res://enemies/ground_enemies/cog/cog_stats.tres" id="2_3nlni"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="2_kjqqa"]
-[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="2_urub2"]
 [ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="3_frmfv"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="4_7h3sy"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="5_3r286"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="6_5tju8"]
-[ext_resource type="AudioStream" uid="uid://jwq4p026lt1f" path="res://enemies/Hollow Clicks.wav" id="6_tuiqv"]
+[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/ground_enemies/kenney_top_down_shooter_robots.png" id="6_71uud"]
+[ext_resource type="AudioStream" uid="uid://jwq4p026lt1f" path="res://enemies/ground_enemies/cog/Hollow Clicks.wav" id="7_4ytd0"]
 [ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_t5dv2"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="7_ykfl4"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_k268f"]
@@ -40,7 +40,7 @@ atlas = ExtResource("2_kjqqa")
 region = Rect2(256, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvutj"]
-atlas = ExtResource("2_urub2")
+atlas = ExtResource("6_71uud")
 region = Rect2(152, 0, 76, 76)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pcoky"]
@@ -99,13 +99,14 @@ spawn_point = NodePath("../../SpawnPoint")
 despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Cog"]
+modulate = Color(0.55, 0.82, 1, 1)
 scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_pcoky")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Cog"]
-stream = ExtResource("6_tuiqv")
+stream = ExtResource("7_4ytd0")
 volume_db = -5.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Cog"]

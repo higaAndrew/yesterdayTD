@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bja1d5ey4uuci"
-path="res://.godot/imported/Quick Click.wav-d817e749760a39aed95927f349dc4249.sample"
+path="res://.godot/imported/Quick Click.wav-db80d1f89cbddddb579d85c55abce6c8.sample"
 
 [deps]
 
-source_file="res://enemies/Quick Click.wav"
-dest_files=["res://.godot/imported/Quick Click.wav-d817e749760a39aed95927f349dc4249.sample"]
+source_file="res://enemies/ground_enemies/bolt/Quick Click.wav"
+dest_files=["res://.godot/imported/Quick Click.wav-db80d1f89cbddddb579d85c55abce6c8.sample"]
 
 [params]
 

@@ -503,14 +503,14 @@ curve = SubResource("Curve2D_h4wvv")
 [node name="GroundVehiclePath" type="Path2D" parent="Canvas/GroundVehicles" index="0"]
 curve = SubResource("Curve2D_h4wvv")
 
-[node name="Snowballer" parent="Canvas/Towers" index="0" instance=ExtResource("7_xennj")]
-position = Vector2(501, 519)
+[node name="DebugTower" parent="Canvas/Towers" index="0" instance=ExtResource("8_nikvn")]
+position = Vector2(661, 366)
 
-[node name="DebugTower" parent="Canvas/Towers" index="1" instance=ExtResource("8_nikvn")]
-position = Vector2(485, 364)
+[node name="Snowballer" parent="Canvas/Towers" index="1" instance=ExtResource("7_xennj")]
+position = Vector2(659, 559)
 
 [node name="Snowbomber" parent="Canvas/Towers" index="2" instance=ExtResource("9_eiguu")]
-position = Vector2(238, 527)
+position = Vector2(327, 535)
 
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_h4wvv")

@@ -1,0 +1,154 @@
+[gd_scene load_steps=25 format=3 uid="uid://db1fnk3aiimjf"]
+
+[ext_resource type="Script" path="res://enemies/ground_enemies/bolt/bolt.gd" id="1_wqngp"]
+[ext_resource type="Resource" uid="uid://dmgg4hnc88opy" path="res://enemies/ground_enemies/bolt/bolt_stats.tres" id="2_elhcm"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_tlqe0"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_g08o0"]
+[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_sc4cj"]
+[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/ground_enemies/kenney_top_down_shooter_robots.png" id="6_k7emo"]
+[ext_resource type="AudioStream" uid="uid://bja1d5ey4uuci" path="res://enemies/ground_enemies/bolt/Quick Click.wav" id="6_q4mkt"]
+[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_gw5mg"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_6qm6a"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_hmywq"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_h1jtu"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_xr7ms"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_yd7dm"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_y7y1h"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_ji03n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0eun"]
+radius = 35.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
+atlas = ExtResource("5_sc4cj")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qq4e"]
+atlas = ExtResource("5_sc4cj")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q1m0"]
+atlas = ExtResource("5_sc4cj")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6c3"]
+atlas = ExtResource("5_sc4cj")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqyou"]
+atlas = ExtResource("5_sc4cj")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b1uh"]
+atlas = ExtResource("6_k7emo")
+region = Rect2(76, 76, 76, 76)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7fp7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te42r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qq4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q1m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6c3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqyou")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"die",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8b1uh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8m3o2"]
+radius = 0.01
+
+[node name="BoltPath" type="PathFollow2D"]
+loop = false
+
+[node name="Bolt" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
+collision_mask = 132
+script = ExtResource("1_wqngp")
+stats = ExtResource("2_elhcm")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Bolt"]
+shape = SubResource("CircleShape2D_e0eun")
+script = ExtResource("3_tlqe0")
+
+[node name="SpawnDespawnPointPreview" type="Node" parent="Bolt/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
+script = ExtResource("4_g08o0")
+spawn_point = NodePath("../../SpawnPoint")
+despawn_point = NodePath("../../DespawnPoint")
+
+[node name="Animations" type="AnimatedSprite2D" parent="Bolt"]
+modulate = Color(1.3, 1.3, 1.3, 1)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_7fp7q")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="Bolt"]
+stream = ExtResource("6_q4mkt")
+volume_db = -15.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Bolt"]
+stream = ExtResource("8_gw5mg")
+volume_db = -10.0
+
+[node name="SpawnPoint" type="Marker2D" parent="Bolt"]
+position = Vector2(35, 0)
+
+[node name="DespawnPoint" type="Area2D" parent="Bolt" groups=["enemies"]]
+position = Vector2(-35, 0)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bolt/DespawnPoint"]
+shape = SubResource("CircleShape2D_8m3o2")
+
+[node name="StateMachine" type="Node" parent="Bolt" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_6qm6a")
+initial_state = NodePath("EnemyFollowPath")
+
+[node name="EnemyFollowPath" type="Node" parent="Bolt/StateMachine"]
+script = ExtResource("10_hmywq")
+
+[node name="EnemyDie" type="Node" parent="Bolt/StateMachine"]
+script = ExtResource("11_h1jtu")
+
+[node name="DamageComponent" type="Node" parent="Bolt"]
+script = ExtResource("12_xr7ms")
+
+[node name="HealthComponent" type="Node" parent="Bolt" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+script = ExtResource("13_yd7dm")
+hitbox = NodePath("../Hitbox")
+hurt_sound = NodePath("../HurtSound")
+death_sound = NodePath("../DeathSound")
+
+[node name="PathMovementComponent" type="Node" parent="Bolt" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
+script = ExtResource("14_y7y1h")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+path_follow = NodePath("../..")
+speed = NodePath("../SpeedComponent")
+
+[node name="SpeedComponent" type="Node" parent="Bolt"]
+script = ExtResource("15_ji03n")

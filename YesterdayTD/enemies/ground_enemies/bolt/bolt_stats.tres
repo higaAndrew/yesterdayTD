@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://dmgg4hnc88opy"]
+
+[ext_resource type="Script" path="res://enemies/enemy_stats.gd" id="1_cq4ux"]
+
+[resource]
+script = ExtResource("1_cq4ux")
+base_health = 5.0
+base_speed = 500.0
+base_damage = 5.0
+base_monet = 5
+children = Array[PackedScene]([])
+number_children = Array[int]([])

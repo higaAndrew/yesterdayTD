@@ -8,6 +8,7 @@ extends Node
 	"piston": preload("res://enemies/ground_enemies/piston/piston.tscn"),
 	"rivet": preload("res://enemies/ground_enemies/rivet/rivet.tscn"),
 	"cog": preload("res://enemies/ground_enemies/cog/cog.tscn"),
+	"bolt": preload("res://enemies/ground_enemies/bolt/bolt.tscn"),
 	"hammer": preload("res://enemies/ground_vehicles/hammer/hammer.tscn"),
 	"anvil": preload("res://enemies/ground_vehicles/anvil/anvil.tscn"),
 }

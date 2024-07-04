@@ -13,11 +13,6 @@ func init(_parent: Area2D) -> void:
 	parent = _parent
 
 
-## set the parent's global position
-func set_global_position(_global_position: Vector2) -> void:
-	parent.global_position = _global_position
-
-
 ## set the parent's rotation
 func set_rotation(_rotation: float) -> void:
 	parent.rotation = _rotation

@@ -21,7 +21,7 @@
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0em43"]
-radius = 200.0
+radius = 300.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btb3g"]
 atlas = ExtResource("2_tfaqp")
@@ -86,7 +86,7 @@ autoplay = "idle"
 position = Vector2(32, 0)
 
 [node name="Sightline" type="RayCast2D" parent="."]
-target_position = Vector2(210, 0)
+target_position = Vector2(310, 0)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
@@ -112,10 +112,9 @@ script = ExtResource("10_a36ud")
 [node name="AttackProjectileThrow" type="Node" parent="SnowballStateMachine"]
 script = ExtResource("11_yl78m")
 
-[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0", "sightline")]
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0")]
 script = ExtResource("10_qt0t0")
 muzzle0 = NodePath("../Animations/Muzzle")
-sightline = NodePath("../Sightline")
 
 [node name="CooldownComponent" type="Node" parent="."]
 script = ExtResource("13_7t2oy")

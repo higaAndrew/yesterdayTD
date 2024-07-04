@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="3_f81y6"]
 [ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_jhdfm"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_x3wgc"]
-[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/kenney_top_down_shooter_robots.png" id="6_73dmv"]
-[ext_resource type="AudioStream" uid="uid://cjy0qx1m2wjd2" path="res://enemies/Radiator Metal Impacts 001.wav" id="7_b4pbf"]
+[ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/ground_enemies/kenney_top_down_shooter_robots.png" id="6_d06y0"]
+[ext_resource type="AudioStream" uid="uid://cjy0qx1m2wjd2" path="res://enemies/ground_enemies/piston/Radiator Metal Impacts 001.wav" id="7_65s8i"]
 [ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_6lpcu"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_oy3y4"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_5ihlu"]
@@ -40,7 +40,7 @@ atlas = ExtResource("5_x3wgc")
 region = Rect2(256, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gxd5e"]
-atlas = ExtResource("6_73dmv")
+atlas = ExtResource("6_d06y0")
 region = Rect2(0, 0, 76, 76)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7fp7q"]
@@ -87,7 +87,6 @@ loop = false
 collision_mask = 132
 script = ExtResource("1_2n75l")
 stats = ExtResource("2_7skus")
-starting_progress = null
 
 [node name="Hitbox" type="CollisionShape2D" parent="Piston"]
 shape = SubResource("CircleShape2D_e0eun")
@@ -99,7 +98,6 @@ spawn_point = NodePath("../../SpawnPoint")
 despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Piston"]
-texture_filter = 2
 scale = Vector2(1.125, 1.125)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
@@ -107,7 +105,7 @@ autoplay = "idle"
 frame_progress = 0.166236
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Piston"]
-stream = ExtResource("7_b4pbf")
+stream = ExtResource("7_65s8i")
 volume_db = -15.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Piston"]
