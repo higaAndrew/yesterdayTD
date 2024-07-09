@@ -40,5 +40,4 @@ func _on_hitbox_collided() -> void:
 func _on_lifespan_timer_timeout() -> void:
 	if not current_state():
 		return
-	print(parent.pierce.hit_list)
 	parent.queue_free()

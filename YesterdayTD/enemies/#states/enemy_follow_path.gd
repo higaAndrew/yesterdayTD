@@ -47,14 +47,13 @@ func _on_area_entered(area: Area2D) -> void:
 	hitbox.current_collision = area
 	
 	## collision layer
-	hit_flash.start_flash()
-	
 	if area.get_collision_layer_value(3):
 		attack = area
 		
 		if not attack.pierce.pierce_expended:
 			health.take_damage(attack.damage.current_damage)
 			health.play_hurt_sound()
+			hit_flash.start_flash()
 			# tell the attack that it has hit something
 			attack.hitbox.collide()
 			attack.hitbox.current_collision = parent

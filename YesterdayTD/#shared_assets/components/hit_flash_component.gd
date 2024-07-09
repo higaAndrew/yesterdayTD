@@ -5,7 +5,7 @@ extends Node
 @export var animations: AnimatedSprite2D
 @export var flash_color: Color = Color.WHITE
 @export_range(0.0, 1.0) var flash_duration: float = 0.05
-@export_range(0.0, 1.0) var flash_modifier: float = 0.25
+@export_range(0.0, 1.0) var flash_intensity: float = 0.25
 
 var parent: Area2D
 var hit_flash_shader = preload("res://enemies/hit_flash.gdshader")
@@ -28,13 +28,13 @@ func init(_parent: Area2D) -> void:
 
 ## trigger hit flash
 func start_flash() -> void:
-	animations.material.set_shader_parameter("flash_modifier", flash_modifier)
+	animations.material.set_shader_parameter("flash_intensity", flash_intensity)
 	var flash_timer = get_tree().create_timer(flash_duration, false)
 	flash_timer.connect("timeout", _on_flash_timer_timeout)
 
 
 func end_flash() -> void:
-	animations.material.set_shader_parameter("flash_modifier", 0.0)
+	animations.material.set_shader_parameter("flash_intensity", 0.0)
 
 
 func _on_flash_timer_timeout() -> void:
