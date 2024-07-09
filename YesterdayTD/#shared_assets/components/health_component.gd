@@ -14,6 +14,7 @@ var base_health: float
 var current_health: float
 
 
+
 ## set health values according to stats
 func init(_parent: Area2D) -> void:
 	parent = _parent

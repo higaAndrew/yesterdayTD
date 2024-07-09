@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://db1fnk3aiimjf"]
+[gd_scene load_steps=26 format=3 uid="uid://db1fnk3aiimjf"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/bolt/bolt.gd" id="1_wqngp"]
 [ext_resource type="Resource" uid="uid://dmgg4hnc88opy" path="res://enemies/ground_enemies/bolt/bolt_stats.tres" id="2_elhcm"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_h1jtu"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_xr7ms"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_yd7dm"]
+[ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_144ry"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_y7y1h"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_ji03n"]
 
@@ -142,6 +143,10 @@ script = ExtResource("13_yd7dm")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
+
+[node name="HitFlashComponent" type="Node" parent="Bolt" node_paths=PackedStringArray("animations")]
+script = ExtResource("14_144ry")
+animations = NodePath("../Animations")
 
 [node name="PathMovementComponent" type="Node" parent="Bolt" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
 script = ExtResource("14_y7y1h")

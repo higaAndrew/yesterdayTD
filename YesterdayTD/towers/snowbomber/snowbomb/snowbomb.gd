@@ -2,7 +2,6 @@ class_name Snowbomb
 extends Area2D
 
 
-## TODO bombs pierce cooldown?
 @export var stats: AttackStats
 
 @export_group("Attacks")

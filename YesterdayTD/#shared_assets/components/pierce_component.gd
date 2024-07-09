@@ -1,7 +1,7 @@
 class_name PierceComponent
 extends Node
 
-## FIXME pierce cooldown
+
 signal pierce_depleted
 
 var parent: Area2D

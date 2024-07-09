@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=26 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
 [ext_resource type="Script" path="res://enemies/ground_enemies/cog/cog.gd" id="1_udpip"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_k268f"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="9_swlxc"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
+[ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_vgt5g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
 radius = 32.0
@@ -87,7 +88,6 @@ loop = false
 collision_mask = 132
 script = ExtResource("1_udpip")
 stats = ExtResource("2_3nlni")
-starting_progress = null
 
 [node name="Hitbox" type="CollisionShape2D" parent="Cog"]
 shape = SubResource("CircleShape2D_e3j37")
@@ -142,6 +142,10 @@ script = ExtResource("8_k268f")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
+
+[node name="HitFlashComponent" type="Node" parent="Cog" node_paths=PackedStringArray("animations")]
+script = ExtResource("14_vgt5g")
+animations = NodePath("../Animations")
 
 [node name="PathMovementComponent" type="Node" parent="Cog" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
 script = ExtResource("9_swlxc")

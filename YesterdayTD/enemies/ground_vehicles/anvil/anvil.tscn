@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://3fh62ivdq3b3"]
+[gd_scene load_steps=27 format=3 uid="uid://3fh62ivdq3b3"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/anvil/anvil.gd" id="1_fjmdw"]
 [ext_resource type="Resource" uid="uid://cg3xjj7751wxw" path="res://enemies/ground_vehicles/anvil/anvil_stats.tres" id="2_rncdl"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_njrur"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_v16bg"]
 [ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="14_qx55c"]
+[ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_sldm7"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_xd22p"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="16_8pvil"]
 
@@ -145,6 +146,10 @@ script = ExtResource("13_v16bg")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
+
+[node name="HitFlashComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("animations")]
+script = ExtResource("14_sldm7")
+animations = NodePath("../Animations")
 
 [node name="LayersComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hitbox", "path_movement")]
 script = ExtResource("14_qx55c")

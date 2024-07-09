@@ -28,7 +28,6 @@ func _on_area_entered(area: Area2D) -> void:
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()
 		enemy.path_movement.delete()
-		## FIXME groups gone
 
 
 ## handles taking damage

@@ -3,6 +3,7 @@ extends State
 var progenitor_attack: Area2D
 var hitbox: Hitbox
 var health: HealthComponent
+var hit_flash: HitFlashComponent
 var path_movement: PathMovementComponent
 
 var attack: Area2D
@@ -16,6 +17,8 @@ func enter() -> void:
 	
 	health = parent.health
 	GlobalScripts.connect_signal(health, "health_depleted", self, "_on_health_depleted")
+	
+	hit_flash = parent.hit_flash
 	
 	path_movement = parent.path_movement
 	GlobalScripts.connect_signal(path_movement, "reached_end", self, "_on_reached_end")
@@ -44,6 +47,8 @@ func _on_area_entered(area: Area2D) -> void:
 	hitbox.current_collision = area
 	
 	## collision layer
+	hit_flash.start_flash()
+	
 	if area.get_collision_layer_value(3):
 		attack = area
 		
@@ -62,6 +67,11 @@ func _on_health_depleted() -> void:
 		return
 	
 	transitioned.emit(self, "EnemyDie")
+
+
+## handle hit flash ending
+func _on_hit_flash_timer_timeout() -> void:
+	hit_flash.end_flash()
 
 
 ## handle reaching the end of the path without colliding with objective

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=26 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground_enemies/rivet/rivet_stats.tres" id="2_ekq5m"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="9_pffkw"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_557si"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
+[ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_ousv1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6agfr"]
 radius = 29.0
@@ -142,6 +143,10 @@ script = ExtResource("9_pffkw")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
+
+[node name="HitFlashComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("animations")]
+script = ExtResource("14_ousv1")
+animations = NodePath("../Animations")
 
 [node name="PathMovementComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
 script = ExtResource("11_06egf")

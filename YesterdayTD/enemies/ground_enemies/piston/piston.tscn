@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://q3l0ex5ibdmm"]
+[gd_scene load_steps=26 format=3 uid="uid://q3l0ex5ibdmm"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/piston/piston.gd" id="1_2n75l"]
 [ext_resource type="Resource" uid="uid://dsmtt8ch7db06" path="res://enemies/ground_enemies/piston/piston_stats.tres" id="2_7skus"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_1isje"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_3bm62"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_3xc1n"]
+[ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="15_6htdk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e0eun"]
 radius = 26.0
@@ -142,6 +143,10 @@ script = ExtResource("13_1isje")
 hitbox = NodePath("../Hitbox")
 hurt_sound = NodePath("../HurtSound")
 death_sound = NodePath("../DeathSound")
+
+[node name="HitFlashComponent" type="Node" parent="Piston" node_paths=PackedStringArray("animations")]
+script = ExtResource("15_6htdk")
+animations = NodePath("../Animations")
 
 [node name="PathMovementComponent" type="Node" parent="Piston" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
 script = ExtResource("14_3bm62")
