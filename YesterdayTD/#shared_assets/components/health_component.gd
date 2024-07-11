@@ -2,7 +2,8 @@ class_name HealthComponent
 extends Node
 
 
-signal took_damage(damage: float, current_health: float)
+signal healed(amount: float, current_health: float)
+signal took_damage(amount: float, current_health: float)
 signal health_depleted
 
 @export var hitbox: CollisionShape2D
@@ -12,7 +13,6 @@ signal health_depleted
 var parent: Area2D
 var base_health: float
 var current_health: float
-
 
 
 ## set health values according to stats
@@ -41,13 +41,14 @@ func reset_health() -> void:
 
 ## restore health
 func restore_health(amount: float) -> void:
-	current_health += amount
+	increase_health(amount)
+	healed.emit(amount, current_health)
 
 
 ## take damage and reduce health
-func take_damage(damage: float) -> void:
-	decrease_health(damage)
-	took_damage.emit(damage, current_health)
+func take_damage(amount: float) -> void:
+	decrease_health(amount)
+	took_damage.emit(amount, current_health)
 	check_health_depleted()
 
 

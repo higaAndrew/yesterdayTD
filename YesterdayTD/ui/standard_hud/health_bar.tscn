@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://df4oq0hq8totx"]
+
+[ext_resource type="Texture2D" uid="uid://0dd568opd0dt" path="res://ui/standard_hud/square_shadow.png" id="1_m0vlp"]
+[ext_resource type="Texture2D" uid="uid://c1qro80dtt7kw" path="res://ui/standard_hud/squareWhite.png" id="2_buh7x"]
+[ext_resource type="Script" path="res://ui/standard_hud/health_bar.gd" id="2_xnlmf"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_xnlmf")
+
+[node name="HealthBarUnder" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 24.0
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+texture_under = ExtResource("1_m0vlp")
+texture_progress = ExtResource("2_buh7x")
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="HealthBarOver" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 24.0
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+texture_progress = ExtResource("2_buh7x")
+tint_progress = Color(0, 1, 0, 1)

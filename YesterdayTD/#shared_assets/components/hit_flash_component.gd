@@ -1,6 +1,7 @@
 class_name HitFlashComponent
 extends Node
 
+## TODO only flash if not dying animation
 
 @export var animations: AnimatedSprite2D
 @export var flash_color: Color = Color.WHITE
