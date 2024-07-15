@@ -37,7 +37,7 @@ func init() -> void:
 	GlobalScripts.connect_signal(pierce, "pierce_depleted", self, "_on_pierce_depleted")
 
 
-## every loop, perform hit functions
+## every loop, perform hit methods
 ## init explosion must be call_deferred for some reason
 func loop() -> void:
 	damage.play_hit_sound()

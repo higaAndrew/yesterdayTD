@@ -2,6 +2,8 @@ class_name SpawningComponent
 extends Node
 
 
+signal wave_completed
+
 ## preload every enemy
 ## HACK would autoload be a good idea?
 @export var enemies: Dictionary = {
@@ -126,6 +128,7 @@ func prepare_group() -> void:
 func next_wave() -> void:
 	current_group = 0
 	current_wave += 1
+	wave_completed.emit()
 
 
 ## iterate to next group

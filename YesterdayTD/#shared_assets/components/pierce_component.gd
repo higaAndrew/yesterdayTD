@@ -37,5 +37,5 @@ func reduce_pierce() -> void:
 ## HACK might want to make more efficient
 func clean_hit_list() -> void:
 	for item in hit_list:
-		if !is_instance_valid(item):
+		if not is_instance_valid(item):
 			hit_list.erase(item)

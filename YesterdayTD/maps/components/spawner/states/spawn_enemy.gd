@@ -45,6 +45,7 @@ func _on_spawn_timer_timeout() -> void:
 		spawning.next_group()
 		
 		# the debugger gets pissy if the timer is set to 0
+		## TODO better implementation
 		if spawning.group_delay == 0.0:
 			spawning.group_delay = 0.0001
 		

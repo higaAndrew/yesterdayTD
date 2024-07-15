@@ -8,8 +8,8 @@ var targets: TargetsComponent
 ## get parent's components
 func init() -> void:
 	detection_range = parent.detection_range
-	
 	targets = parent.targets
+	
 	GlobalScripts.connect_signal(detection_range, "area_entered", self, "_on_detection_range_area_entered")
 	GlobalScripts.connect_signal(detection_range, "area_exited", self, "_on_detection_range_area_exited")
 

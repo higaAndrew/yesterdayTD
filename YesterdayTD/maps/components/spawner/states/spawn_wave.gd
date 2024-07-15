@@ -1,6 +1,8 @@
 extends State
 
 
+signal wave_timer_started
+
 var wave_timer: Timer
 var spawning: SpawningComponent
 
@@ -16,6 +18,7 @@ func init() -> void:
 ## every loop, start the wave timer
 func loop() -> void:
 	wave_timer.start(parent.wave_delay)
+	wave_timer_started.emit()
 
 
 ## when the wave timer finishes, prepare the next group

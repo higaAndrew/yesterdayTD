@@ -29,7 +29,7 @@ func init() -> void:
 	
 
 
-## every loop, perform hit functions
+## every loop, perform hit methods
 func loop() -> void:
 	damage.play_hit_sound()
 	pierce.reduce_pierce()

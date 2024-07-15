@@ -34,9 +34,11 @@ func start_flash() -> void:
 	flash_timer.connect("timeout", _on_flash_timer_timeout)
 
 
+## end the hit flash
 func end_flash() -> void:
 	animations.material.set_shader_parameter("flash_intensity", 0.0)
 
 
+## if the flash timer ends, end the flash
 func _on_flash_timer_timeout() -> void:
 	end_flash()

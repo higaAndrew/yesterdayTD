@@ -1,7 +1,8 @@
 extends State
 
-var health: HealthComponent
+
 var hitbox: CollisionShape2D
+var health: HealthComponent
 
 var enemy: Area2D
 
@@ -9,6 +10,7 @@ var enemy: Area2D
 ## get parent's components
 func enter() -> void:
 	hitbox = parent.hitbox
+	
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 	
 	health = parent.health

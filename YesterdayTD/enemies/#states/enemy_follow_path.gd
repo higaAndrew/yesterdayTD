@@ -1,6 +1,8 @@
 extends State
 
+
 var progenitor_attack: Area2D
+
 var hitbox: Hitbox
 var health: HealthComponent
 var hit_flash: HitFlashComponent
@@ -13,18 +15,18 @@ var attack: Area2D
 func enter() -> void:
 	progenitor_attack = parent.progenitor_attack
 	hitbox = parent.hitbox
+	hit_flash = parent.hit_flash
+	
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 	
 	health = parent.health
 	GlobalScripts.connect_signal(health, "health_depleted", self, "_on_health_depleted")
 	
-	hit_flash = parent.hit_flash
-	
 	path_movement = parent.path_movement
 	GlobalScripts.connect_signal(path_movement, "reached_end", self, "_on_reached_end")
 
 
-## every physics frame, call follow_path function
+## every physics frame, call follow_path method
 func physics_process(delta: float) -> void:
 	path_movement.follow_path(delta)
 
@@ -66,11 +68,6 @@ func _on_health_depleted() -> void:
 		return
 	
 	transitioned.emit(self, "EnemyDie")
-
-
-## handle hit flash ending
-func _on_hit_flash_timer_timeout() -> void:
-	hit_flash.end_flash()
 
 
 ## handle reaching the end of the path without colliding with objective

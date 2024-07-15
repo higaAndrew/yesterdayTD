@@ -95,10 +95,11 @@ stats = ExtResource("2_rncdl")
 starting_progress = null
 
 [node name="HealthBar" parent="Anvil" node_paths=PackedStringArray("health_component") instance=ExtResource("3_nreyx")]
-offset_left = -118.857
-offset_top = -69.1429
-offset_right = -78.8571
-offset_bottom = -29.1429
+offset_left = -65.7143
+offset_top = -58.2857
+offset_right = 190.286
+offset_bottom = -34.2857
+scale = Vector2(0.5, 0.5)
 health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Anvil"]

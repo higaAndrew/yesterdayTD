@@ -41,7 +41,7 @@ func reset_health() -> void:
 
 ## restore health
 func restore_health(amount: float) -> void:
-	increase_health(amount)
+	increase_health(-amount)
 	healed.emit(amount, current_health)
 
 

@@ -28,5 +28,7 @@ func _on_group_timer_timeout() -> void:
 	if spawning.current_group < spawning.group_count:
 		transitioned.emit(self, "SpawnEnemy")
 	elif spawning.current_group == spawning.group_count:
+		##TODO set it to 0
+		group_timer.set_wait_time(0.1)
 		spawning.next_wave()
 		transitioned.emit(self, "SpawnWave")

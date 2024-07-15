@@ -15,7 +15,9 @@ var attack_number: int
 
 ## called when the state is created
 func init() -> void:
-	pass
+	if not get_parent() is StateMachine:
+		printerr("The state %s is not a child of a valid state machine!" % self.name)
+		return
 
 
 ## call if using init, this code is called every time state is entered
@@ -48,7 +50,7 @@ func physics_process(_delta: float) -> void:
 	pass
 
 
-## simple function to check if the state is the state machine's current state
+## simple method to check if the state is the state machine's current state
 ## may be bad practice to use get_parent but states should only be children to state machines anyway
 func current_state() -> bool:
 	if self.get_parent().current_state == self:

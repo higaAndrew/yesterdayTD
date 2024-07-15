@@ -99,6 +99,7 @@ initial_state = NodePath("TowerIdle")
 script = ExtResource("9_lxmvp")
 
 [node name="DebugProjectileCooldownTimer" type="Timer" parent="."]
+process_callback = 0
 one_shot = true
 
 [node name="DebugProjectileStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

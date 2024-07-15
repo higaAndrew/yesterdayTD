@@ -23,7 +23,7 @@ func init() -> void:
 
 ## every physics frame, move in specified direction
 func physics_process(delta: float) -> void:
-	if !pierce.hit_list.is_empty():
+	if not pierce.hit_list.is_empty():
 		pierce.clean_hit_list()
 	velocity.update_velocity(delta)
 
