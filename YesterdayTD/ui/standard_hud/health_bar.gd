@@ -153,10 +153,12 @@ func stop_pulse() -> void:
 
 ## VISIBLE DAMAGE METHODS
 
-## if damage tween is playing, kill it, then start the damage timer
+## if a tween is playing, kill it, then start the damage timer
 func visible_damage() -> void:
 	if is_instance_valid(damage_tween):
 		damage_tween.kill()
+	if is_instance_valid(healing_tween):
+		healing_tween.kill()
 	
 	if damage_delay > 0.0:
 		damage_timer.start()
@@ -171,10 +173,12 @@ func _on_damage_timer_timeout() -> void:
 
 ## VISIBLE HEALING METHODS
 
-## if healing tween is playing, kill it, then start the healing timer
+## if a tween is playing, kill it, then start the healing timer
 func visible_healing() -> void:
 	if is_instance_valid(healing_tween):
 		healing_tween.kill()
+	if is_instance_valid(damage_tween):
+		damage_tween.kill()
 	
 	if healing_delay > 0.0:
 		healing_timer.start()

@@ -1,15 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://diwe8wsg0rb4x"]
+[gd_scene load_steps=6 format=3 uid="uid://diwe8wsg0rb4x"]
 
 [ext_resource type="Texture2D" uid="uid://bx50ylqdtofod" path="res://ui/standard_hud/skoll_hearts.svg" id="1_7hmfr"]
 [ext_resource type="Script" path="res://ui/standard_hud/standard_hud.gd" id="1_bf2sa"]
 [ext_resource type="PackedScene" uid="uid://df4oq0hq8totx" path="res://ui/standard_hud/health_bar.tscn" id="2_7owf2"]
 [ext_resource type="Texture2D" uid="uid://dydgne7juflnq" path="res://ui/standard_hud/lorc_cash.svg" id="3_7ra0r"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwl57"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fwa0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w6pvi"]
+[ext_resource type="PackedScene" uid="uid://batx2euegatsr" path="res://ui/build_menu.tscn" id="5_lg6xy"]
 
 [node name="StandardHUD" type="CanvasLayer"]
 script = ExtResource("1_bf2sa")
@@ -29,7 +24,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
+anchor_right = 0.85
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
@@ -65,7 +60,6 @@ alignment = 1
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qwl57")
 text = "Next Wave In: "
 horizontal_alignment = 1
 
@@ -73,7 +67,6 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_2fwa0")
 text = "???"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -91,6 +84,8 @@ mouse_filter = 2
 [node name="Rows" type="VBoxContainer" parent="Control/Rows/HealthAndMonet"]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 alignment = 1
 
@@ -130,7 +125,10 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_w6pvi")
 text = "Monet: Bruh"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BuildMenu" parent="." node_paths=PackedStringArray("hud") instance=ExtResource("5_lg6xy")]
+unique_name_in_owner = true
+hud = NodePath("..")

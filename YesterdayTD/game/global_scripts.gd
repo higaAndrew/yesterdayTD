@@ -11,6 +11,28 @@ func connect_signal(emitter: Node, signal_name: String, target: Object, method: 
 		return
 
 
+## signal verification and connection
+## with added object parameter
+func connect_signal_object(emitter: Node, signal_name: String, target: Object, method: String, object: Object) -> void:
+	if emitter.has_signal(signal_name):
+		var callable = Callable(target, method).bind(object)
+		emitter.connect(signal_name, callable)
+	else:
+		printerr("%s is missing %s signal!" % [emitter.name, signal_name])
+		return
+
+
+## signal verification and connection
+## with added variant parameter
+func connect_signal_variant(emitter: Node, signal_name: String, target: Object, method: String, variant: Variant) -> void:
+	if emitter.has_signal(signal_name):
+		var callable = Callable(target, method).bind(variant)
+		emitter.connect(signal_name, callable)
+	else:
+		printerr("%s is missing %s signal!" % [emitter.name, signal_name])
+		return
+
+
 ## simple instance verification, used for export variables
 ## ex: GlobalScripts.verify(self, component_x, "component_x")
 func verify(emitter: Node, instance: Object, instance_name: String) -> void:

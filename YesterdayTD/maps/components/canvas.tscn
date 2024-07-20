@@ -5,6 +5,8 @@
 [node name="Canvas" type="Node"]
 script = ExtResource("1_odfvh")
 
+[node name="Map" type="CanvasLayer" parent="."]
+
 [node name="GroundEnemies" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
@@ -39,3 +41,5 @@ follow_viewport_enabled = true
 [node name="AirBosses" type="CanvasLayer" parent="."]
 layer = 8
 follow_viewport_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]

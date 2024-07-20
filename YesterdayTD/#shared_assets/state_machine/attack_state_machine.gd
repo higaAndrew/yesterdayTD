@@ -6,7 +6,7 @@ extends StateMachine
 
 
 ## creation/initialization of state machine
-func init(parent: Node2D) -> void:
+func init(parent: Node) -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child

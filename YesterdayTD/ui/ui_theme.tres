@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b2uf511omyh5g" path="res://ui/greySheet.png" id="1_qacjm"]
 [ext_resource type="Texture2D" uid="uid://wck1xldlaq7w" path="res://ui/blueSheet.png" id="1_qw83d"]
-[ext_resource type="FontFile" uid="uid://bo0dbho31q71a" path="res://ui/fonts/Kaph-Regular.ttf" id="2_uq6ek"]
+[ext_resource type="FontFile" uid="uid://dqvcpwpxxtrvm" path="res://ui/fonts/ZeroCool.ttf" id="3_k2o3h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vmwb"]
 texture = ExtResource("1_qacjm")
@@ -55,14 +55,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(190, 49, 190, 45)
 modulate_color = Color(0.745098, 0.745098, 0.745098, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rpsry"]
-texture = ExtResource("1_qacjm")
-texture_margin_left = 6.0
-texture_margin_top = 6.0
-texture_margin_right = 6.0
-texture_margin_bottom = 6.0
-region_rect = Rect2(0, 98, 190, 45)
-modulate_color = Color(0.466667, 0.466667, 0.466667, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x85pq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wbabj"]
 texture = ExtResource("1_qacjm")
@@ -73,10 +66,10 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(190, 98, 100, 100)
 
 [resource]
-default_font = ExtResource("2_uq6ek")
+default_font = ExtResource("3_k2o3h")
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/constants/outline_size = 4
+Button/constants/outline_size = 0
 Button/styles/disabled = SubResource("StyleBoxTexture_7vmwb")
 Button/styles/focus = SubResource("StyleBoxFlat_32q7r")
 Button/styles/hover = SubResource("StyleBoxTexture_6c6aq")
@@ -84,6 +77,6 @@ Button/styles/normal = SubResource("StyleBoxTexture_4d2up")
 Button/styles/pressed = SubResource("StyleBoxTexture_rlc4f")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 4
-Label/styles/normal = SubResource("StyleBoxTexture_rpsry")
+Label/constants/outline_size = 5
+Label/styles/normal = SubResource("StyleBoxEmpty_x85pq")
 Panel/styles/panel = SubResource("StyleBoxTexture_wbabj")

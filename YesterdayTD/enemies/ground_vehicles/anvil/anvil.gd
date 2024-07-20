@@ -4,7 +4,6 @@ extends Enemy
 
 @export var stats: EnemyStats
 
-@onready var health_bar := $HealthBar as HealthBar
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
 @onready var hurt_sound := $HurtSound as AudioStreamPlayer
@@ -25,7 +24,6 @@ func _ready() -> void:
 	state_machine.init(self)
 	damage.init(self)
 	health.init(self)
-	health_bar.init(self)
 	hit_flash.init(self)
 	layers.init(self)
 	path_movement.init(self)

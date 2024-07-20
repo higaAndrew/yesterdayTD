@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bjyxw12breq2d"
-path="res://.godot/imported/Kenney Mini.ttf-7e780c9866999f0485093589046c75e2.fontdata"
+uid="uid://dqvcpwpxxtrvm"
+path="res://.godot/imported/ZeroCool.ttf-dc6bd85a63886d40c9c8f24f9ea77899.fontdata"
 
 [deps]
 
-source_file="res://ui/fonts/Kenney Mini.ttf"
-dest_files=["res://.godot/imported/Kenney Mini.ttf-7e780c9866999f0485093589046c75e2.fontdata"]
+source_file="res://ui/fonts/ZeroCool.ttf"
+dest_files=["res://.godot/imported/ZeroCool.ttf-dc6bd85a63886d40c9c8f24f9ea77899.fontdata"]
 
 [params]
 

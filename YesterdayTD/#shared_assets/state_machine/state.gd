@@ -6,7 +6,7 @@ extends Node
 ## i.e. transitioned.emit(self, new_state)
 signal transitioned
 
-var parent: Node2D
+var parent: Node
 var initialized: bool = false
 
 ## only for attacks

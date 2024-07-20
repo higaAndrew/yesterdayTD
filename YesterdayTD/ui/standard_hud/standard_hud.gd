@@ -10,9 +10,10 @@ var wave_timer_is_active: bool = true
 @onready var wave_label := %WaveLabel as Label
 @onready var next_wave := %NextWave as PanelContainer
 @onready var countdown := %Countdown as Label
-@onready var wave_timer = %WaveTimer as Timer
-@onready var health_bar = %HealthBar as HealthBar
-@onready var amount = %Amount as Label
+@onready var wave_timer := %WaveTimer as Timer
+@onready var health_bar := %HealthBar as HealthBar
+@onready var amount := %Amount as Label
+@onready var build_menu := %BuildMenu as BuildMenu
 
 
 func _ready() -> void:
@@ -25,6 +26,8 @@ func _ready() -> void:
 	
 	health_bar.health_component = exit.health
 	health_bar.init(exit)
+	build_menu.hud = self
+	
 	wave_label.text = ("Wave: %s" % (spawner.spawning.current_wave + 1))
 
 
