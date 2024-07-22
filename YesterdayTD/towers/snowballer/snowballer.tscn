@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dtdhyq4f6jvew"]
+[gd_scene load_steps=23 format=3 uid="uid://dtdhyq4f6jvew"]
 
 [ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_uep4e"]
 [ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_1bcql"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="6_kmy0w"]
 [ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="6_wmbby"]
 [ext_resource type="PackedScene" uid="uid://bketea0lra044" path="res://towers/snowballer/snowball/snowball.tscn" id="9_gcepe"]
+[ext_resource type="Script" path="res://towers/states/tower_preview.gd" id="9_yg40d"]
 [ext_resource type="Script" path="res://towers/states/attack_projectile_idle.gd" id="10_a36ud"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/attack_state_machine.gd" id="10_oam8b"]
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="10_qt0t0"]
@@ -93,7 +94,10 @@ collide_with_bodies = false
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_o05pg")
-initial_state = NodePath("TowerIdle")
+initial_state = NodePath("TowerPreview")
+
+[node name="TowerPreview" type="Node" parent="StateMachine"]
+script = ExtResource("9_yg40d")
 
 [node name="TowerIdle" type="Node" parent="StateMachine"]
 script = ExtResource("6_kmy0w")

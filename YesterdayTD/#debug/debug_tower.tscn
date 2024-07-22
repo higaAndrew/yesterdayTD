@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://3no4bpnihcj4"]
+[gd_scene load_steps=23 format=3 uid="uid://3no4bpnihcj4"]
 
 [ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
 [ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://#debug/range_preview.gd" id="6_syu5h"]
 [ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="7_cxpwy"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_3d60e"]
+[ext_resource type="Script" path="res://towers/states/tower_preview.gd" id="9_j5o7l"]
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="9_lxmvp"]
 [ext_resource type="Script" path="res://towers/states/attack_projectile_idle.gd" id="11_oxv81"]
 [ext_resource type="Script" path="res://towers/states/attack_projectile_throw.gd" id="12_3chl1"]
@@ -66,6 +67,7 @@ script = ExtResource("5_872gq")
 
 [node name="DetectionRange" type="Area2D" parent="."]
 collision_layer = 0
+input_pickable = false
 monitorable = false
 
 [node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
@@ -93,7 +95,10 @@ collide_with_bodies = false
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_3d60e")
-initial_state = NodePath("TowerIdle")
+initial_state = NodePath("TowerPreview")
+
+[node name="TowerPreview" type="Node" parent="StateMachine"]
+script = ExtResource("9_j5o7l")
 
 [node name="TowerIdle" type="Node" parent="StateMachine"]
 script = ExtResource("9_lxmvp")

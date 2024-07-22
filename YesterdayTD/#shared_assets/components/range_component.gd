@@ -27,3 +27,7 @@ func decrease_range(amount: float) -> void:
 ## reset range
 func reset_range() -> void:
 	current_range = base_range
+
+##TODO temp
+func change_color(color: Color) -> void:
+	parent.set_modulate(color)
