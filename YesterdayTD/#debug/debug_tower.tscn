@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://3no4bpnihcj4"]
+[gd_scene load_steps=27 format=3 uid="uid://3no4bpnihcj4"]
 
 [ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
 [ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="5_872gq"]
 [ext_resource type="Script" path="res://#debug/range_preview.gd" id="6_syu5h"]
 [ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="7_cxpwy"]
+[ext_resource type="Shader" path="res://#shared_assets/shaders/outline_sprite_sheet.gdshader" id="7_imevk"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_3d60e"]
 [ext_resource type="Script" path="res://towers/states/tower_preview.gd" id="9_j5o7l"]
 [ext_resource type="Script" path="res://towers/states/tower_idle.gd" id="9_lxmvp"]
@@ -16,10 +17,21 @@
 [ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="14_i1qbu"]
 [ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="15_7wf75"]
 [ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="15_qsebf"]
+[ext_resource type="Script" path="res://#shared_assets/components/outline_component.gd" id="16_bet01"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/attack_state_machine.gd" id="16_owfle"]
+[ext_resource type="Script" path="res://#shared_assets/components/u_i_component.gd" id="18_ta0ij"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
 radius = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2otlv"]
+shader = ExtResource("7_imevk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0em43"]
 radius = 250.0
@@ -53,9 +65,7 @@ animations = [{
 
 [node name="DebugTower" type="Area2D" groups=["towers"]]
 collision_layer = 2
-collision_mask = 0
-monitoring = false
-monitorable = false
+collision_mask = 2
 script = ExtResource("1_yi6y1")
 stats = ExtResource("2_g434y")
 attack0_scene = ExtResource("3_xap02")
@@ -66,11 +76,13 @@ shape = SubResource("CircleShape2D_7ynkj")
 script = ExtResource("5_872gq")
 
 [node name="DetectionRange" type="Area2D" parent="."]
+material = SubResource("ShaderMaterial_2otlv")
 collision_layer = 0
 input_pickable = false
 monitorable = false
 
 [node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_0em43")
 script = ExtResource("5_872gq")
 
@@ -124,8 +136,15 @@ muzzle0 = NodePath("../Animations/Muzzle")
 [node name="CooldownComponent" type="Node" parent="."]
 script = ExtResource("15_qsebf")
 
+[node name="OutlineComponent" type="Node" parent="." node_paths=PackedStringArray("animations")]
+script = ExtResource("16_bet01")
+animations = NodePath("../Animations")
+
 [node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("14_i1qbu")
 
 [node name="TargetsComponent" type="Node" parent="."]
 script = ExtResource("15_7wf75")
+
+[node name="UIComponent" type="Node" parent="."]
+script = ExtResource("18_ta0ij")

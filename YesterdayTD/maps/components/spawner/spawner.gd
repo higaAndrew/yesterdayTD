@@ -27,8 +27,8 @@ func _ready() -> void:
 	GlobalScripts.connect_signal(state_machine.find_child("SpawnWave"), "wave_timer_started", self, "_on_wave_timer_started")
 	GlobalScripts.connect_signal(spawning, "wave_completed", self, "_on_wave_completed")
 	
-	state_machine.init(self)
 	spawning.init(self)
+	state_machine.init(self)
 
 
 ## signal when wave timer times out

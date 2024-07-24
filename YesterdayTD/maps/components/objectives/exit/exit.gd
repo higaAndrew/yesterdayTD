@@ -15,5 +15,5 @@ extends Area2D
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 
-	state_machine.init(self)
 	health.init(self)
+	state_machine.init(self)

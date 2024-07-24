@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dd7tycif0g7ci"]
+[gd_scene load_steps=25 format=3 uid="uid://dd7tycif0g7ci"]
 
 [ext_resource type="Script" path="res://towers/snowbomber/snowbomber.gd" id="1_5pu5a"]
 [ext_resource type="Resource" uid="uid://cml3lsvcgbkb6" path="res://towers/snowbomber/snowbomber_stats.tres" id="2_rtiqs"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" path="res://#shared_assets/components/range_component.gd" id="13_del1u"]
 [ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="13_uj1kf"]
 [ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="14_ucpf4"]
+[ext_resource type="Script" path="res://#shared_assets/components/outline_component.gd" id="17_adqxg"]
+[ext_resource type="Script" path="res://#shared_assets/components/u_i_component.gd" id="18_7pykm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
 radius = 32.0
@@ -53,9 +55,7 @@ animations = [{
 
 [node name="Snowbomber" type="Area2D" groups=["towers"]]
 collision_layer = 2
-collision_mask = 0
-monitoring = false
-monitorable = false
+collision_mask = 2
 script = ExtResource("1_5pu5a")
 stats = ExtResource("2_rtiqs")
 attack0_scene = ExtResource("3_66tn2")
@@ -70,6 +70,7 @@ collision_layer = 0
 monitorable = false
 
 [node name="RangeHitbox" type="CollisionShape2D" parent="DetectionRange"]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_0em43")
 script = ExtResource("5_bakeh")
 
@@ -123,8 +124,15 @@ muzzle0 = NodePath("../Animations/Muzzle")
 [node name="CooldownComponent" type="Node" parent="."]
 script = ExtResource("13_uj1kf")
 
+[node name="OutlineComponent" type="Node" parent="." node_paths=PackedStringArray("animations")]
+script = ExtResource("17_adqxg")
+animations = NodePath("../Animations")
+
 [node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("13_del1u")
 
 [node name="TargetsComponent" type="Node" parent="."]
 script = ExtResource("14_ucpf4")
+
+[node name="UIComponent" type="Node" parent="."]
+script = ExtResource("18_7pykm")

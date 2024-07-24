@@ -81,7 +81,7 @@ func _on_pierce_depleted() -> void:
 	animations.hide()
 	hit_vfx.show()
 	GlobalScripts.play_animation(parent, hit_vfx, "hit")
-	hitbox.disable_hitbox()
+	hitbox.remove_hitbox()
 
 
 ## if the hit animation and the hit sound are finished, delete the snowball

@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://batx2euegatsr"]
+[gd_scene load_steps=20 format=3 uid="uid://batx2euegatsr"]
 
 [ext_resource type="Script" path="res://ui/build_menu.gd" id="1_2odb4"]
 [ext_resource type="Texture2D" uid="uid://bc34lkqmkqyly" path="res://ui/standard_hud/Icon_Play.png" id="1_6l5ia"]
 [ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="1_wx7ka"]
 [ext_resource type="Texture2D" uid="uid://6g32ut8hhjls" path="res://ui/standard_hud/Icon_Settings.png" id="2_jbpvx"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h6jci"]
-[ext_resource type="Script" path="res://ui/standard_hud/hud_idle.gd" id="6_f5yk2"]
-[ext_resource type="Script" path="res://ui/standard_hud/hud_building.gd" id="6_vuk84"]
+[ext_resource type="Texture2D" uid="uid://d3qcfdhmtje8s" path="res://#shared_assets/sprites/Retro Impact Effect Pack 2 F.png" id="5_jugyg"]
+[ext_resource type="AudioStream" uid="uid://cn6mpn1uqmct5" path="res://towers/Drop Paper C.wav" id="5_ll54c"]
 [ext_resource type="Script" path="res://#shared_assets/components/tower_builder_component.gd" id="8_7sq2x"]
+[ext_resource type="Script" path="res://ui/standard_hud/states/hud_idle.gd" id="8_gul4s"]
+[ext_resource type="Script" path="res://ui/standard_hud/states/hud_building.gd" id="9_u1hyk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gep31"]
 atlas = ExtResource("1_wx7ka")
@@ -20,6 +22,57 @@ region = Rect2(0, 192, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kp7jy"]
 atlas = ExtResource("1_wx7ka")
 region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w35ta"]
+atlas = ExtResource("5_jugyg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0srrm"]
+atlas = ExtResource("5_jugyg")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bpwj"]
+atlas = ExtResource("5_jugyg")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lj4j"]
+atlas = ExtResource("5_jugyg")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwx6u"]
+atlas = ExtResource("5_jugyg")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6g007"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w35ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0srrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bpwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lj4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwx6u")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"build",
+"speed": 15.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="BuildMenu" type="Control"]
 layout_mode = 3
@@ -136,15 +189,27 @@ icon = ExtResource("2_jbpvx")
 icon_alignment = 1
 expand_icon = true
 
+[node name="BuildAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6g007")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="BuildSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ll54c")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_h6jci")
 initial_state = NodePath("HUDIdle")
 
 [node name="HUDIdle" type="Node" parent="StateMachine"]
-script = ExtResource("6_f5yk2")
+script = ExtResource("8_gul4s")
 
 [node name="HUDBuilding" type="Node" parent="StateMachine"]
-script = ExtResource("6_vuk84")
+script = ExtResource("9_u1hyk")
 
-[node name="TowerBuilderComponent" type="Node" parent="."]
+[node name="TowerBuilderComponent" type="Node" parent="." node_paths=PackedStringArray("build_animation", "build_sound")]
 script = ExtResource("8_7sq2x")
+build_animation = NodePath("../BuildAnimation")
+build_sound = NodePath("../BuildSound")

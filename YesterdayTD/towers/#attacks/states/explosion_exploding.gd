@@ -60,7 +60,7 @@ func _on_lifespan_timer_timeout() -> void:
 
 ## when pierce runs out, destroy self
 func _on_pierce_depleted() -> void:
-	hitbox.disable_hitbox()
+	hitbox.remove_hitbox()
 
 
 ## if the explosion animation and sound are finished, delete the explosion

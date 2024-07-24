@@ -10,6 +10,6 @@ func enter() -> void:
 	hitbox = parent.hitbox
 	health = parent.health
 	
-	hitbox.disable_hitbox()
+	hitbox.remove_hitbox()
 	health.play_death_sound()
 	print("The objective is dead!")

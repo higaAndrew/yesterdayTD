@@ -1,6 +1,7 @@
 class_name BuildMenu
 extends Control
 
+
 @export var hud: CanvasLayer
 
 @onready var button_1 := %Button1 as Button
@@ -16,6 +17,8 @@ extends Control
 @onready var state_machine := $StateMachine as StateMachine
 @onready var tower_builder := $TowerBuilderComponent as TowerBuilderComponent
 
+
+## init state machine and components
 func _ready() -> void:
-	state_machine.init(self)
 	tower_builder.init(self)
+	state_machine.init(self)

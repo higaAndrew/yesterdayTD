@@ -32,7 +32,7 @@ func enter() -> void:
 		layers.spawn_children()
 	
 	GlobalScripts.play_animation(parent, animations, "die")
-	hitbox.disable_hitbox()
+	hitbox.remove_hitbox()
 	health.play_death_sound()
 	died.emit()
 

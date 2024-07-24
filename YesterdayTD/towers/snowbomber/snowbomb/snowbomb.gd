@@ -1,5 +1,5 @@
 class_name Snowbomb
-extends Area2D
+extends Attack
 
 
 @export var stats: AttackStats
@@ -29,9 +29,9 @@ func _ready() -> void:
 	GlobalScripts.verify(self, attack0_scene, "snowbomb explosion scene")
 	GlobalScripts.verify(self, attack0_stats, "snowbomb explosion stats")
 	
-	snowbomb_explosion_state_machine.init(self)
 	attack.init(self)
 	damage.init(self)
 	pierce.init(self)
 	speed.init(self)
 	velocity.init(self)
+	snowbomb_explosion_state_machine.init(self)

@@ -48,8 +48,7 @@ func _on_area_entered(area: Area2D) -> void:
 	# set the current attack for future comparison
 	hitbox.current_collision = area
 	
-	## collision layer
-	if area.get_collision_layer_value(3):
+	if area is Attack:
 		attack = area
 		
 		if not attack.pierce.pierce_expended:

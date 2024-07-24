@@ -1,5 +1,5 @@
 class_name SnowbombExplosion
-extends Area2D
+extends Attack
 
 
 @export var stats: AttackStats
@@ -19,8 +19,8 @@ extends Area2D
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 	
-	state_machine.init(self)
 	damage.init(self)
 	pierce.init(self)
 	size.init(self)
 	velocity.init(self)
+	state_machine.init(self)

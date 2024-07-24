@@ -1,46 +1,31 @@
 extends State
-##TODO desc
 
-var detection_range: Area2D
-var range_hitbox: CollisionShape2D
-var targets: TargetsComponent
 
-var mouse_hovering: bool = false
+var range_hitbox: Hitbox
+var outline: OutlineComponent
+var ui: UIComponent
 
 
 ## get parent's components
 func enter() -> void:
-	detection_range = parent.detection_range
-	targets = parent.targets
+	range_hitbox = parent.range_hitbox
+	outline = parent.outline
 	
-	range_hitbox = detection_range.find_child("RangeHitbox")
-	GlobalScripts.verify(parent, range_hitbox, "range_hitbox")
+	ui = parent.ui
+	GlobalScripts.connect_signal(ui, "tower_placed", self, "_on_tower_placed")
 	
 	GlobalScripts.connect_signal(parent, "mouse_entered", self, "_on_mouse_entered")
 	GlobalScripts.connect_signal(parent, "mouse_exited", self, "_on_mouse_exited")
 	
-	range_hitbox.set_visible(true)
+	# show the range but disable it
+	range_hitbox.reveal_hitbox()
+	range_hitbox.disable_hitbox()
+	outline.enable_outline()
 
 
-func _on_mouse_entered() -> void:
+## when the tower is placed, transition to idle state
+func _on_tower_placed() -> void:
 	if not current_state():
 		return
 	
-	mouse_hovering = true
-
-
-func _on_mouse_exited() -> void:
-	if not current_state():
-		return
-	
-	mouse_hovering = false
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not current_state():
-		return
-	
-	if event.is_action_released("ui_accept"):
-		if mouse_hovering:
-			range_hitbox.set_visible(!range_hitbox.visible)
-			transitioned.emit(self, "TowerIdle")
+	transitioned.emit(self, "TowerIdle")

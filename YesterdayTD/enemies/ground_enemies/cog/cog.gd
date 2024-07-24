@@ -20,9 +20,9 @@ extends Enemy
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 
-	state_machine.init(self)
 	damage.init(self)
 	health.init(self)
 	hit_flash.init(self)
 	path_movement.init(self)
 	speed.init(self)
+	state_machine.init(self)

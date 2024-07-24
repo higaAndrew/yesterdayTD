@@ -1,69 +1,63 @@
 extends State
-##TODO desc
+
 
 var detection_range: Area2D
-var range_hitbox: CollisionShape2D
+var outline: OutlineComponent
+var range_hitbox: Hitbox
 var targets: TargetsComponent
-
-var mouse_hovering: bool = true
+var ui: UIComponent
 
 
 ## get parent's components
 func init() -> void:
-	detection_range = parent.detection_range
 	targets = parent.targets
+	outline = parent.outline
+	ui = parent.ui
 	
-	range_hitbox = detection_range.find_child("RangeHitbox")
+	detection_range = parent.detection_range
+	GlobalScripts.connect_signal(detection_range, "area_entered", self, "_on_detection_range_area_entered")
+	GlobalScripts.connect_signal(detection_range, "area_exited", self, "_on_detection_range_area_exited")
+	
+	range_hitbox = parent.range_hitbox
 	GlobalScripts.verify(parent, range_hitbox, "range_hitbox")
 	
 	GlobalScripts.connect_signal(parent, "mouse_entered", self, "_on_mouse_entered")
 	GlobalScripts.connect_signal(parent, "mouse_exited", self, "_on_mouse_exited")
-	GlobalScripts.connect_signal(detection_range, "area_entered", self, "_on_detection_range_area_entered")
-	GlobalScripts.connect_signal(detection_range, "area_exited", self, "_on_detection_range_area_exited")
 	
-	range_hitbox.set_visible(false)
+	range_hitbox.hide_hitbox()
+	range_hitbox.enable_hitbox()
+	outline.disable_outline()
 
 
-## when enemy collides with range, add it to the target list
-## constantly running
+# when enemy collides with range, add it to the target list
+# constantly running
 func _on_detection_range_area_entered(area: Area2D) -> void:
-	if not current_state():
-		return
-	
 	targets.add_target(area)
 
 
-## when enemy stops colliding with range, remove it from the target list
-## constantly running
+# when enemy stops colliding with range, remove it from the target list
+# constantly running
 func _on_detection_range_area_exited(area: Area2D) -> void:
-	if not current_state():
-		return
-	
 	targets.remove_target(area)
 
 
-func _on_mouse_entered() -> void:
-	if not current_state():
-		return
-	
-	mouse_hovering = true
-
-
-func _on_mouse_exited() -> void:
-	if not current_state():
-		return
-	
-	mouse_hovering = false
-
-
+## handle input interaction
 func _unhandled_input(event: InputEvent) -> void:
 	if not current_state():
 		return
 	
+	# if clicked
+	# toggle if tower is clicked on, hide hitbox if not
 	if event.is_action_released("ui_accept"):
-		if mouse_hovering:
-			range_hitbox.set_visible(!range_hitbox.visible)
-		elif range_hitbox.visible:
-			range_hitbox.set_visible(false)
+		if ui.mouse_hovering and not ui.has_obstructions():
+			range_hitbox.toggle_hitbox_visibility()
+			outline.toggle_outline()
+		elif range_hitbox.hitbox_visible:
+			range_hitbox.hide_hitbox()
+			outline.disable_outline()
 	
-	
+	# if cancel is pressed, hide hitbox if it was visible
+	if event.is_action_released("ui_cancel"):
+		if range_hitbox.hitbox_visible:
+			range_hitbox.hide_hitbox()
+			outline.disable_outline()
