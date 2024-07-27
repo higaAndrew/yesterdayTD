@@ -11,7 +11,7 @@ extends Node
 @export var number_images: Vector2 = Vector2(7, 6)
 
 var parent: Area2D
-var outline_shader = preload("res://#shared_assets/shaders/outline_sprite_sheet.gdshader")
+var outline_shader: Shader = preload("res://#shared_assets/shaders/outline_sprite_sheet.gdshader")
 
 
 ## set parent and verify animations

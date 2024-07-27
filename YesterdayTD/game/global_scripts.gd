@@ -49,3 +49,34 @@ func play_animation(emitter: Node, animated_sprite: AnimatedSprite2D, animation_
 	if animated_sprite.animation != animation_name:
 		printerr("%s has no animation called %s!" % [emitter.name, animation_name])
 		return
+
+
+## format a given number into a string with commas designating thousands intervals
+## i was too lazy to write it myself so I got it from GPT
+## but it sucked and i had to fix it so much that i pretty much wrote it myself anyways
+func format_number(number: float) -> String:
+	var integer_part: int
+	var float_part: float
+	var integer_string: String
+	var pre_decimal_part: String
+	var post_decimal_part: String
+	
+	integer_part = abs(int(number))
+	integer_string = str(integer_part)
+	float_part = abs(number) - integer_part
+	
+	while integer_string.length() > 3:
+		pre_decimal_part = "," + integer_string.substr(integer_string.length() - 3, 3) + pre_decimal_part
+		integer_string = integer_string.substr(0, integer_string.length() - 3)
+	
+	pre_decimal_part = integer_string + pre_decimal_part
+	
+	if float_part == 0.0:
+		post_decimal_part = ""
+	else:
+		post_decimal_part = str(float_part).substr(1)
+	
+	if number < 0.0:
+		return "-" + pre_decimal_part + post_decimal_part
+	else:
+		return pre_decimal_part + post_decimal_part

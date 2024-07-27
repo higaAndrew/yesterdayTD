@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalScripts="*res://game/global_scripts.gd"
 Shaker="*res://addons/shaker/src/Shaker.gd"
+MapManager="*res://game/map_manager.gd"
 
 [display]
 

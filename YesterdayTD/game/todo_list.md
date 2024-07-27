@@ -6,9 +6,12 @@
 #### Ground Enemies
 - [x] piston
 - [x] rivet
-- [ ] cog
+- [x] cog
+- [x] bolt
 #### Ground Vehicles
-- [ ] at least one
+- [x] at least one
+- [x] hammer
+- [x] anvil
 #### Flying Enemies
 - [ ] at least one
 #### Flying Vehicles
@@ -22,9 +25,16 @@
 	- [x] debug projectile
 - [x] snowballer
 	- [x] snowball
-- [ ] snowbomber
-	- [ ] snowbomb
-	- [ ] snowbomb explosion
+	- [ ] double snowball
+	- [ ] range/pierce increase
+	- [ ] 
+- [x] snowbomber
+	- [x] snowbomb
+	- [x] snowbomb explosion
+	- [ ] bomb pierce
+	- [ ] missiles
+	- [ ] missile volley
+	- [ ] homing missile
 ### MAPS
 - [ ] at least one
 #### Tilemaps

@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://batx2euegatsr"]
+[gd_scene load_steps=21 format=3 uid="uid://batx2euegatsr"]
 
 [ext_resource type="Script" path="res://ui/build_menu.gd" id="1_2odb4"]
 [ext_resource type="Texture2D" uid="uid://bc34lkqmkqyly" path="res://ui/standard_hud/Icon_Play.png" id="1_6l5ia"]
 [ext_resource type="Texture2D" uid="uid://8ticdsl8ir1d" path="res://towers/64x64_towers.png" id="1_wx7ka"]
+[ext_resource type="PackedScene" uid="uid://cdanjqgumh64b" path="res://ui/tower_button.tscn" id="2_is7gd"]
 [ext_resource type="Texture2D" uid="uid://6g32ut8hhjls" path="res://ui/standard_hud/Icon_Settings.png" id="2_jbpvx"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h6jci"]
 [ext_resource type="Texture2D" uid="uid://d3qcfdhmtje8s" path="res://#shared_assets/sprites/Retro Impact Effect Pack 2 F.png" id="5_jugyg"]
@@ -11,15 +12,15 @@
 [ext_resource type="Script" path="res://ui/standard_hud/states/hud_idle.gd" id="8_gul4s"]
 [ext_resource type="Script" path="res://ui/standard_hud/states/hud_building.gd" id="9_u1hyk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gep31"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8cpj"]
 atlas = ExtResource("1_wx7ka")
 region = Rect2(128, 256, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwjvw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_es1wf"]
 atlas = ExtResource("1_wx7ka")
 region = Rect2(0, 192, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kp7jy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws00d"]
 atlas = ExtResource("1_wx7ka")
 region = Rect2(192, 128, 64, 64)
 
@@ -138,31 +139,22 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 2
 
-[node name="Snowballer" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/TowerList"]
+[node name="SnowballerButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/TowerList" instance=ExtResource("2_is7gd")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-size_flags_horizontal = 3
-icon = SubResource("AtlasTexture_gep31")
-icon_alignment = 1
-expand_icon = true
+icon = SubResource("AtlasTexture_x8cpj")
+tower_name = "snowballer"
 
-[node name="Snowbomber" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/TowerList"]
+[node name="SnowbomberButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/TowerList" instance=ExtResource("2_is7gd")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-size_flags_horizontal = 3
-icon = SubResource("AtlasTexture_iwjvw")
-expand_icon = true
+icon = SubResource("AtlasTexture_es1wf")
+tower_name = "snowbomber"
 
-[node name="DebugTower" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/TowerList"]
+[node name="DebugTowerButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/TowerList" instance=ExtResource("2_is7gd")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-size_flags_horizontal = 3
-icon = SubResource("AtlasTexture_kp7jy")
-icon_alignment = 1
-expand_icon = true
+icon = SubResource("AtlasTexture_ws00d")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -193,7 +185,7 @@ expand_icon = true
 visible = false
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_6g007")
-animation = &"idle"
+animation = &"build"
 autoplay = "idle"
 
 [node name="BuildSound" type="AudioStreamPlayer" parent="."]

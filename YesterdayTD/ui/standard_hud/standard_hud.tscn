@@ -25,6 +25,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.85
+anchor_bottom = 0.125
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
@@ -75,26 +76,25 @@ vertical_alignment = 1
 unique_name_in_owner = true
 one_shot = true
 
-[node name="HealthAndMonet" type="PanelContainer" parent="Control/Rows"]
-custom_minimum_size = Vector2(64, 64)
+[node name="HealthAndCoins" type="PanelContainer" parent="Control/Rows"]
+custom_minimum_size = Vector2(300, 64)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 
-[node name="Rows" type="VBoxContainer" parent="Control/Rows/HealthAndMonet"]
+[node name="Rows" type="VBoxContainer" parent="Control/Rows/HealthAndCoins"]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_filter = 2
 alignment = 1
 
-[node name="Health" type="HBoxContainer" parent="Control/Rows/HealthAndMonet/Rows"]
+[node name="Health" type="HBoxContainer" parent="Control/Rows/HealthAndCoins/Rows"]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Control/Rows/HealthAndMonet/Rows/Health"]
+[node name="Icon" type="TextureRect" parent="Control/Rows/HealthAndCoins/Rows/Health"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
@@ -102,18 +102,19 @@ texture = ExtResource("1_7hmfr")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HealthBar" parent="Control/Rows/HealthAndMonet/Rows/Health" instance=ExtResource("2_7owf2")]
+[node name="HealthBar" parent="Control/Rows/HealthAndCoins/Rows/Health" instance=ExtResource("2_7owf2")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Monet" type="HBoxContainer" parent="Control/Rows/HealthAndMonet/Rows"]
+[node name="Coins" type="HBoxContainer" parent="Control/Rows/HealthAndCoins/Rows"]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Control/Rows/HealthAndMonet/Rows/Monet"]
+[node name="Icon" type="TextureRect" parent="Control/Rows/HealthAndCoins/Rows/Coins"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
@@ -121,11 +122,13 @@ texture = ExtResource("3_7ra0r")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="Control/Rows/HealthAndMonet/Rows/Monet"]
+[node name="Amount" type="Label" parent="Control/Rows/HealthAndCoins/Rows/Coins"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-text = "Monet: Bruh"
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 36
+text = "[Coins]"
 horizontal_alignment = 1
 vertical_alignment = 1
 

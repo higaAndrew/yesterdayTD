@@ -537,5 +537,6 @@ curve = SubResource("Curve2D_6l847")
 [node name="StandardHUD" parent="Canvas/UI" index="0" node_paths=PackedStringArray("exit", "spawner") instance=ExtResource("10_ts2gm")]
 exit = NodePath("../../../Exit")
 spawner = NodePath("../../../Spawner")
+starting_coins = 10000
 
 [editable path="Canvas"]

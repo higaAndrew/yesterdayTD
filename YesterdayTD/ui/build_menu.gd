@@ -8,9 +8,9 @@ extends Control
 @onready var tower_name_label := %TowerNameLabel as Label
 @onready var tower_list := %TowerList as GridContainer
 
-@onready var snowballer := %Snowballer as Button
-@onready var snowbomber := %Snowbomber as Button
-@onready var debug_tower := %DebugTower as Button
+@onready var snowballer_button := %SnowballerButton as Button
+@onready var snowbomber_button := %SnowbomberButton as Button
+@onready var debug_tower_button := %DebugTowerButton as Button
 
 @onready var next_wave_button := %NextWaveButton as Button
 @onready var settings_button := %SettingsButton as Button

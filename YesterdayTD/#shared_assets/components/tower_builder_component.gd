@@ -1,5 +1,6 @@
 class_name TowerBuilderComponent
 extends Node
+## TODO build animation below tower
 
 
 @export var build_animation: AnimatedSprite2D
@@ -8,8 +9,8 @@ extends Node
 @export var invalid_range_color: Color = Color(1.0, 0.0, 0.0, 0.15)
 @export var invalid_outline_color: Color = Color.RED
 
-## preload every enemy
-@export var towers: Dictionary = {
+## preload every tower
+var towers: Dictionary = {
 	"snowballer": preload("res://towers/snowballer/snowballer.tscn"),
 	"snowbomber": preload("res://towers/snowbomber/snowbomber.tscn"),
 	"debug_tower": preload("res://#debug/debug_tower.tscn"),
@@ -23,6 +24,7 @@ var tower_layer: CanvasLayer
 
 ## local variables
 var current_tower: PackedScene
+var current_tower_stats: TowerStats
 var mouse_position: Vector2
 var tower_preview: Area2D
 var valid_location: bool = false
@@ -37,14 +39,19 @@ func init(_parent: Control) -> void:
 
 
 ## change the selected tower to be instantiated
+## and load its stats
 func set_current_tower(tower_name: String) -> void:
-	match tower_name.to_lower():
-		# tower names longer than one word need to be reformatted
-		"debugtower":
-			current_tower = towers["debug_tower"]
-		# default case
-		_:
-			current_tower = towers[tower_name.to_lower()]
+	if tower_name in towers:
+		current_tower = towers[tower_name]
+	else:
+		printerr("%s is either not a valid tower name, or is not in the tower list in Tower Builder Component" % tower_name)
+		return
+	
+	if tower_name in MapManager.tower_stats_list:
+		current_tower_stats = MapManager.tower_stats_list[tower_name]
+	else:
+		printerr("%s is either not a valid tower name, or is not in the tower list in MapManager" % tower_name)
+		return
 
 
 ## instantiate the new tower to be built, preparing its preview variables
@@ -55,6 +62,15 @@ func set_build_preview() -> void:
 	mouse_position = get_viewport().get_mouse_position()
 	tower_preview.global_position = mouse_position
 	tower_preview.detection_range.set_visible(true)
+
+
+## reset the selected tower in order to select new ones
+func reset_tower_preview() -> void:
+	if is_instance_valid(tower_preview):
+		tower_preview = null
+	else:
+		printerr("Tower preview doesn't need to be reset, it's already null!")
+		return
 
 
 ## as the mouse/preview tower moves, determine whether or not the proposed
@@ -96,14 +112,13 @@ func build_tower() -> void:
 	build_animation.set_visible(true)
 	build_animation.global_position = tower_preview.global_position
 	build_animation.play("build")
-	
-	tower_preview = null
 
 
 ## mercilessly kill the preview tower
 func cancel_build() -> void:
 	valid_location = false
 	tower_preview.queue_free()
+	reset_tower_preview()
 
 
 ## play/verify build sound

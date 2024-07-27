@@ -9,7 +9,7 @@ extends Node
 @export_range(0.0, 1.0) var flash_intensity: float = 0.25
 
 var parent: Area2D
-var hit_flash_shader = preload("res://enemies/hit_flash.gdshader")
+var hit_flash_shader: Shader = preload("res://enemies/hit_flash.gdshader")
 
 
 ## set parent and verify animations
