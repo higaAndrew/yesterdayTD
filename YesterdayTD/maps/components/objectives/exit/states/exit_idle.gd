@@ -23,13 +23,15 @@ func _on_area_entered(area: Area2D) -> void:
 	if not current_state():
 		return
 	
-	# if an enemy collides, take damage and delete it (not kill it)
-	## collision layer
-	if area.get_collision_layer_value(5):
+	# if an enemy collides, take damage and delete it (not kill it)z
+	if area.is_in_group("enemies"):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()
 		enemy.path_movement.delete()
+	
+	else:
+		printerr("Something collided with the exit, but it wasn't an enemy!")
 
 
 ## handles taking damage

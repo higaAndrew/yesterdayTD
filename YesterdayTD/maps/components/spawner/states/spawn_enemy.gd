@@ -18,7 +18,13 @@ func init() -> void:
 ## every loop, prepare the upcoming wave and start the timer
 func loop() -> void:
 	spawning.prepare_group()
-	spawn_timer.start()
+	
+	# the first enemy will not have a timer value, so skip the timer
+	if spawning.enemy_zero:
+		spawning.enemy_zero = false
+		_on_spawn_timer_timeout()
+	else:
+		spawn_timer.start()
 
 
 ## spawn the enemy, and either transition back to self
@@ -34,7 +40,7 @@ func _on_spawn_timer_timeout() -> void:
 		
 		# prepare to spawn the next one, setting up timer delays
 		if spawning.spawn_delay <= 0.0:
-			spawn_timer.set_wait_time(0.0001)
+			spawning.enemy_zero = true
 		else:
 			spawn_timer.set_wait_time(spawning.spawn_delay)
 		
@@ -45,9 +51,9 @@ func _on_spawn_timer_timeout() -> void:
 		spawning.next_group()
 		
 		# the debugger gets pissy if the timer is set to 0
-		## TODO better implementation
-		if spawning.group_delay == 0.0:
-			spawning.group_delay = 0.0001
+		if spawning.group_delay <= 0.0:
+			spawning.group_zero = true
+		else:
+			group_timer.set_wait_time(spawning.group_delay)
 		
-		group_timer.set_wait_time(spawning.group_delay)
 		transitioned.emit(self, "SpawnGroup")

@@ -1,8 +1,6 @@
 extends State
 
 
-signal died
-
 var hitbox: Hitbox
 var animations: AnimatedSprite2D
 var death_sound: AudioStreamPlayer
@@ -34,7 +32,6 @@ func enter() -> void:
 	GlobalScripts.play_animation(parent, animations, "die")
 	hitbox.remove_hitbox()
 	health.play_death_sound()
-	died.emit()
 
 
 ## handle death animation finishing
@@ -54,6 +51,12 @@ func _on_death_sound_finished() -> void:
 ## alternatively, if the death animation is finished and there's no death sound for whatever reason
 func check_delete() -> void:
 	if animation_done and sound_done:
-		path_movement.delete()
+		delete()
+	
 	elif animation_done and not is_instance_valid(death_sound.stream):
-		path_movement.delete()
+		delete()
+
+
+## remove the enemy from the list of remaining enemies, and delete the parent's pathfollow2d
+func delete() -> void:
+	path_movement.delete()

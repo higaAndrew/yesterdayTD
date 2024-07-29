@@ -24,6 +24,9 @@ func enter() -> void:
 	
 	path_movement = parent.path_movement
 	GlobalScripts.connect_signal(path_movement, "reached_end", self, "_on_reached_end")
+	
+	# add enemy to list of remaining enemies
+	#EnemyManager.add_enemy()
 
 
 ## every physics frame, call follow_path method

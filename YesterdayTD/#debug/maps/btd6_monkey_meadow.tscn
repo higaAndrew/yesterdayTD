@@ -488,7 +488,6 @@ layer_1/tile_data = PackedInt32Array()
 [node name="Spawner" parent="." node_paths=PackedStringArray("canvas", "wave_data") instance=ExtResource("3_jo0ox")]
 canvas = NodePath("../Canvas")
 wave_data = NodePath("Btd6MonkeyMeadowWaveData")
-wave_delay = 4.0
 
 [node name="Btd6MonkeyMeadowWaveData" type="Node" parent="Spawner"]
 script = ExtResource("4_wfr5x")
@@ -537,6 +536,5 @@ curve = SubResource("Curve2D_6l847")
 [node name="StandardHUD" parent="Canvas/UI" index="0" node_paths=PackedStringArray("exit", "spawner") instance=ExtResource("10_ts2gm")]
 exit = NodePath("../../../Exit")
 spawner = NodePath("../../../Spawner")
-starting_coins = 10000
 
 [editable path="Canvas"]

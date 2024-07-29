@@ -20,6 +20,9 @@ config/icon="res://icon.svg"
 GlobalScripts="*res://game/global_scripts.gd"
 Shaker="*res://addons/shaker/src/Shaker.gd"
 MapManager="*res://game/map_manager.gd"
+EnemyManager="*res://game/enemy_manager.gd"
+MoneyManager="*res://game/money_manager.gd"
+TowerManager="*res://game/tower_manager.gd"
 
 [display]
 

@@ -47,10 +47,10 @@ func set_current_tower(tower_name: String) -> void:
 		printerr("%s is either not a valid tower name, or is not in the tower list in Tower Builder Component" % tower_name)
 		return
 	
-	if tower_name in MapManager.tower_stats_list:
-		current_tower_stats = MapManager.tower_stats_list[tower_name]
+	if tower_name in TowerManager.tower_stats_list:
+		current_tower_stats = TowerManager.tower_stats_list[tower_name]
 	else:
-		printerr("%s is either not a valid tower name, or is not in the tower list in MapManager" % tower_name)
+		printerr("%s is either not a valid tower name, or is not in the tower list in TowerManager" % tower_name)
 		return
 
 

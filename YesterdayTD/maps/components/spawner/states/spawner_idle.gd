@@ -9,6 +9,7 @@ var spawning: SpawningComponent
 func init() -> void:
 	spawning = parent.spawning
 
+
 ## handle spawning waves
 func loop() -> void:
 	if spawning.current_wave == 0:

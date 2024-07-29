@@ -2,8 +2,6 @@ class_name SpawningComponent
 extends Node
 
 
-signal wave_completed
-
 ## preload every enemy
 ## HACK would autoload be a good idea?
 @export var enemies: Dictionary = {
@@ -47,11 +45,13 @@ var current_enemy: int = 0
 var enemy_type: String
 var enemy_count: int
 var group_delay: float
+var group_zero: bool = true
 
 ## enemy properties
 var enemy_path_follow: PathFollow2D
 var enemy: Area2D
 var spawn_delay: float
+var enemy_zero: bool = true
 
 
 ## set spawner values according to stats
@@ -63,7 +63,7 @@ func init(_parent: Node2D) -> void:
 	
 	init_layers()
 	get_waves()
-	prepare_waves()
+	count_waves()
 
 
 ## init layers for spawning
@@ -105,7 +105,7 @@ func get_waves() -> void:
 
 
 ## gets the wave count
-func prepare_waves() -> void:
+func count_waves() -> void:
 	wave_count = waves.size()
 
 
@@ -128,7 +128,6 @@ func prepare_group() -> void:
 func next_wave() -> void:
 	current_group = 0
 	current_wave += 1
-	wave_completed.emit()
 
 
 ## iterate to next group

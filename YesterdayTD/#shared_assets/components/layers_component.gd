@@ -15,7 +15,6 @@ var path: Path2D
 var path_follow: PathFollow2D
 
 
-
 ## set children values according to stats
 func init(_parent: Area2D) -> void:
 	parent = _parent

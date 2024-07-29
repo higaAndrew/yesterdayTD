@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://diwe8wsg0rb4x"]
+[gd_scene load_steps=8 format=3 uid="uid://diwe8wsg0rb4x"]
 
 [ext_resource type="Texture2D" uid="uid://bx50ylqdtofod" path="res://ui/standard_hud/skoll_hearts.svg" id="1_7hmfr"]
 [ext_resource type="Script" path="res://ui/standard_hud/standard_hud.gd" id="1_bf2sa"]
 [ext_resource type="PackedScene" uid="uid://df4oq0hq8totx" path="res://ui/standard_hud/health_bar.tscn" id="2_7owf2"]
+[ext_resource type="Texture2D" uid="uid://0dd568opd0dt" path="res://ui/standard_hud/square_shadow.png" id="2_ie5wo"]
 [ext_resource type="Texture2D" uid="uid://dydgne7juflnq" path="res://ui/standard_hud/lorc_cash.svg" id="3_7ra0r"]
 [ext_resource type="PackedScene" uid="uid://batx2euegatsr" path="res://ui/build_menu.tscn" id="5_lg6xy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_owgyf"]
+texture = ExtResource("2_ie5wo")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
 
 [node name="StandardHUD" type="CanvasLayer"]
 script = ExtResource("1_bf2sa")
@@ -36,12 +44,13 @@ alignment = 1
 
 [node name="WaveLabel" type="Label" parent="Control/Rows"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 8)
+custom_minimum_size = Vector2(300, 64)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Wave: ???"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_owgyf")
+text = "[Wave]"
 vertical_alignment = 1
 
 [node name="NextWave" type="PanelContainer" parent="Control/Rows"]
