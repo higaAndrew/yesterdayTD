@@ -1,44 +1,46 @@
-class_name CoinValueComponent
+class_name PriceComponent
 extends Node
 
 
 var parent: Area2D
-var base_coin_value: int
-var current_coin_value: int
+var base_price: int
+var current_price: int
+var sell_price: int
 
 
-## set health values according to stats
+## set price values according to stats
 func init(_parent: Area2D) -> void:
 	parent = _parent
-	base_coin_value = parent.stats.base_coin_value
-	current_coin_value = base_coin_value
+	base_price = parent.stats.base_price
+	current_price = base_price
+	sell_price = int(float(current_price) * 0.75)
 
 
-## increase coin value
-func increase_coin_value(amount: int) -> void:
-	current_coin_value += amount
+## increase price
+func increase_price(amount: int) -> void:
+	current_price += amount
 
 
-## decrease coin value
-func decrease_coin_value(amount: int) -> void:
-	current_coin_value -= amount
+## decrease price
+func decrease_price(amount: int) -> void:
+	current_price -= amount
 
 
-## reset coin value
-func reset_coin_value() -> void:
-	current_coin_value = base_coin_value
+## reset price
+func reset_price() -> void:
+	current_price = base_price
 
 
-## multiply coin value
-func multiply_coin_value(amount: float) -> void:
-	current_coin_value *= (1 + amount)
+## multiply price
+func multiply_price(amount: float) -> void:
+	current_price = int(float(current_price) * (1.0 + amount))
 
 
-## increase current game's coin count
-func gain_coins() -> void:
-	MoneyManager.gain_coins(current_coin_value)
+## sell the tower and increase current game's coin count
+func sell() -> void:
+	MoneyManager.gain_coins(sell_price)
 
 
-## decrease current game's coin count
-func lose_coins() -> void:
-	MoneyManager.spend_coins(current_coin_value)
+## purchase the tower and decrease current game's coin count
+func buy() -> void:
+	MoneyManager.spend_coins(current_price)

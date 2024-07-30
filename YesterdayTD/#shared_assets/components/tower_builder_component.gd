@@ -105,6 +105,7 @@ func on_path() -> bool:
 
 ## plop it down, dissociate with the tower
 func build_tower() -> void:
+	tower_preview.price.buy()
 	tower_preview.reparent(tower_layer)
 	tower_preview.ui.confirm_build()
 	

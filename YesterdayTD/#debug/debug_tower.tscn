@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://3no4bpnihcj4"]
+[gd_scene load_steps=28 format=3 uid="uid://3no4bpnihcj4"]
 
 [ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
 [ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="15_qsebf"]
 [ext_resource type="Script" path="res://#shared_assets/components/outline_component.gd" id="16_bet01"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/attack_state_machine.gd" id="16_owfle"]
+[ext_resource type="Script" path="res://#shared_assets/components/price_component.gd" id="18_g13r0"]
 [ext_resource type="Script" path="res://#shared_assets/components/u_i_component.gd" id="18_ta0ij"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
@@ -139,6 +140,9 @@ script = ExtResource("15_qsebf")
 [node name="OutlineComponent" type="Node" parent="." node_paths=PackedStringArray("animations")]
 script = ExtResource("16_bet01")
 animations = NodePath("../Animations")
+
+[node name="PriceComponent" type="Node" parent="."]
+script = ExtResource("18_g13r0")
 
 [node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("14_i1qbu")

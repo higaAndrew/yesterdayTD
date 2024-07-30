@@ -19,6 +19,7 @@ extends Tower
 @onready var attack := $AttackComponent as AttackComponent
 @onready var cooldown := $CooldownComponent as CooldownComponent
 @onready var outline := $OutlineComponent as OutlineComponent
+@onready var price := $PriceComponent as PriceComponent
 @onready var range_component := $RangeComponent as RangeComponent
 @onready var targets := $TargetsComponent as TargetsComponent
 @onready var ui := $UIComponent as UIComponent
@@ -33,6 +34,7 @@ func _ready() -> void:
 	attack.init(self)
 	cooldown.init(self)
 	outline.init(self)
+	price.init(self)
 	range_component.init(self)
 	targets.init(self)
 	ui.init(self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dtdhyq4f6jvew"]
+[gd_scene load_steps=26 format=3 uid="uid://dtdhyq4f6jvew"]
 
 [ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_uep4e"]
 [ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_1bcql"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://towers/states/attack_projectile_throw.gd" id="11_yl78m"]
 [ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="13_7t2oy"]
 [ext_resource type="Script" path="res://#shared_assets/components/outline_component.gd" id="16_n4ga3"]
+[ext_resource type="Script" path="res://#shared_assets/components/price_component.gd" id="17_mvw40"]
 [ext_resource type="Script" path="res://#shared_assets/components/u_i_component.gd" id="18_dd0pj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ynkj"]
@@ -127,6 +128,9 @@ script = ExtResource("13_7t2oy")
 [node name="OutlineComponent" type="Node" parent="." node_paths=PackedStringArray("animations")]
 script = ExtResource("16_n4ga3")
 animations = NodePath("../Animations")
+
+[node name="PriceComponent" type="Node" parent="."]
+script = ExtResource("17_mvw40")
 
 [node name="RangeComponent" type="Node" parent="."]
 script = ExtResource("6_wmbby")

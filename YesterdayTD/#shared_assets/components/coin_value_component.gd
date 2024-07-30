@@ -7,7 +7,7 @@ var base_coin_value: int
 var current_coin_value: int
 
 
-## set health values according to stats
+## set coin values according to stats
 func init(_parent: Area2D) -> void:
 	parent = _parent
 	base_coin_value = parent.stats.base_coin_value
