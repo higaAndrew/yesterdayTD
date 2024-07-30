@@ -113,6 +113,7 @@ volume_db = -15.0
 [node name="DeathSound" type="AudioStreamPlayer" parent="Piston"]
 stream = ExtResource("8_6lpcu")
 volume_db = -10.0
+stream_paused = true
 
 [node name="SpawnPoint" type="Marker2D" parent="Piston"]
 position = Vector2(26, 0)

@@ -62,14 +62,15 @@ ui_cancel={
 
 [layer_names]
 
-2d_physics/layer_1="enemy"
+2d_physics/layer_1="ground_enemy"
 2d_physics/layer_2="tower"
 2d_physics/layer_3="attack"
 2d_physics/layer_4="objective"
 2d_physics/layer_5="enemy_despawn_point"
 2d_physics/layer_6="tower_detection_range"
-2d_physics/layer_7="vehicle"
+2d_physics/layer_7="ground_vehicle"
 2d_physics/layer_8="explosion"
+2d_physics/layer_9="air_vehicles"
 
 [rendering]
 

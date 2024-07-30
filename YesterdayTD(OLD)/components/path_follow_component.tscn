@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://chtw0tear16rb"]
-
-[ext_resource type="Script" path="res://components/path_follow_component.gd" id="1_oj5fd"]
-
-[node name="PathFollowComponent" type="Node2D"]
-script = ExtResource("1_oj5fd")

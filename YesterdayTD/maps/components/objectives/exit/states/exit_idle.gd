@@ -24,7 +24,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	
 	# if an enemy collides, take damage and delete it (not kill it)z
-	if area.is_in_group("enemies"):
+	if area.get_parent().is_in_group("enemies"):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
 		health.play_hurt_sound()

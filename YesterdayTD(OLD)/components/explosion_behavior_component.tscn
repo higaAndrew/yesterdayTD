@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1s1tdvily3dn"]
-
-[ext_resource type="Script" path="res://components/explosion_behavior_component.gd" id="1_k82v7"]
-
-[node name="ExplosionBehaviorComponent" type="Node2D"]
-script = ExtResource("1_k82v7")
