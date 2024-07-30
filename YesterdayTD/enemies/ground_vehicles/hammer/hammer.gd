@@ -9,6 +9,7 @@ extends Enemy
 @onready var hurt_sound := $HurtSound as AudioStreamPlayer
 @onready var death_sound := $DeathSound as AudioStreamPlayer
 @onready var state_machine := $StateMachine as StateMachine
+@onready var coin_value := $CoinValueComponent as CoinValueComponent
 @onready var damage := $DamageComponent as DamageComponent
 @onready var health := $HealthComponent as HealthComponent
 @onready var hit_flash := $HitFlashComponent as HitFlashComponent
@@ -20,7 +21,8 @@ extends Enemy
 # init state machine and components
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
-
+	
+	coin_value.init(self)
 	damage.init(self)
 	health.init(self)
 	hit_flash.init(self)

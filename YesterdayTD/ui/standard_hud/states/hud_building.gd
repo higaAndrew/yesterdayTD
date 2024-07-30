@@ -32,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if tower_builder.valid_location and is_instance_valid(tower_builder.tower_preview):
 			tower_builder.build_tower()
 			tower_builder.play_build_sound()
-			MoneyManager.decrease_coins(tower_builder.tower_preview.stats.base_price)
+			MoneyManager.spend_coins(tower_builder.tower_preview.stats.base_price)
 			tower_builder.reset_tower_preview()
 			
 			transitioned.emit(self, "HUDIdle")

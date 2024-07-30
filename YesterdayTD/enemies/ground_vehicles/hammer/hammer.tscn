@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djv1104dc3q6v"]
+[gd_scene load_steps=28 format=3 uid="uid://djv1104dc3q6v"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/hammer/hammer.gd" id="1_aumqh"]
 [ext_resource type="Resource" uid="uid://b4exhkl70uay1" path="res://enemies/ground_vehicles/hammer/hammer_stats.tres" id="2_2anm2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_7lp6w"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_tqaj7"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_xhhw7"]
+[ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_0e3dr"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_4srmy"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_fd501"]
 [ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="14_i4848"]
@@ -136,6 +137,9 @@ script = ExtResource("10_tqaj7")
 
 [node name="EnemyDie" type="Node" parent="Hammer/StateMachine"]
 script = ExtResource("11_xhhw7")
+
+[node name="CoinValueComponent" type="Node" parent="Hammer"]
+script = ExtResource("12_0e3dr")
 
 [node name="DamageComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("12_4srmy")

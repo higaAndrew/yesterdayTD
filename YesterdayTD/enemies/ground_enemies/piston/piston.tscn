@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://q3l0ex5ibdmm"]
+[gd_scene load_steps=27 format=3 uid="uid://q3l0ex5ibdmm"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/piston/piston.gd" id="1_2n75l"]
 [ext_resource type="Resource" uid="uid://dsmtt8ch7db06" path="res://enemies/ground_enemies/piston/piston_stats.tres" id="2_7skus"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_oy3y4"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_5ihlu"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_341mb"]
+[ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_aauew"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_glwpi"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_1isje"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_3bm62"]
@@ -134,6 +135,9 @@ script = ExtResource("10_5ihlu")
 
 [node name="EnemyDie" type="Node" parent="Piston/StateMachine"]
 script = ExtResource("11_341mb")
+
+[node name="CoinValueComponent" type="Node" parent="Piston"]
+script = ExtResource("12_aauew")
 
 [node name="DamageComponent" type="Node" parent="Piston"]
 script = ExtResource("12_glwpi")

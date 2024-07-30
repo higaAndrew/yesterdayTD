@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://db1fnk3aiimjf"]
+[gd_scene load_steps=27 format=3 uid="uid://db1fnk3aiimjf"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/bolt/bolt.gd" id="1_wqngp"]
 [ext_resource type="Resource" uid="uid://dmgg4hnc88opy" path="res://enemies/ground_enemies/bolt/bolt_stats.tres" id="2_elhcm"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_6qm6a"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_hmywq"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_h1jtu"]
+[ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_pn5ge"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_xr7ms"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_yd7dm"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_144ry"]
@@ -134,6 +135,9 @@ script = ExtResource("10_hmywq")
 
 [node name="EnemyDie" type="Node" parent="Bolt/StateMachine"]
 script = ExtResource("11_h1jtu")
+
+[node name="CoinValueComponent" type="Node" parent="Bolt"]
+script = ExtResource("12_pn5ge")
 
 [node name="DamageComponent" type="Node" parent="Bolt"]
 script = ExtResource("12_xr7ms")

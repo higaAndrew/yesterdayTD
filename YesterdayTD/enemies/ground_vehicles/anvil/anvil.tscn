@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://3fh62ivdq3b3"]
+[gd_scene load_steps=28 format=3 uid="uid://3fh62ivdq3b3"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/anvil/anvil.gd" id="1_fjmdw"]
 [ext_resource type="Resource" uid="uid://cg3xjj7751wxw" path="res://enemies/ground_vehicles/anvil/anvil_stats.tres" id="2_rncdl"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_07ks4"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_ucqm0"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_njrur"]
+[ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_vwx82"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_v16bg"]
 [ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="14_qx55c"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_sldm7"]
@@ -136,6 +137,9 @@ script = ExtResource("10_07ks4")
 
 [node name="EnemyDie" type="Node" parent="Anvil/StateMachine"]
 script = ExtResource("11_ucqm0")
+
+[node name="CoinValueComponent" type="Node" parent="Anvil"]
+script = ExtResource("12_vwx82")
 
 [node name="DamageComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("12_njrur")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=27 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
 [ext_resource type="Script" path="res://enemies/ground_enemies/cog/cog.gd" id="1_udpip"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_k268f"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="9_swlxc"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
+[ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_owput"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_vgt5g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
@@ -133,6 +134,9 @@ script = ExtResource("5_3r286")
 
 [node name="EnemyDie" type="Node" parent="Cog/StateMachine"]
 script = ExtResource("6_5tju8")
+
+[node name="CoinValueComponent" type="Node" parent="Cog"]
+script = ExtResource("12_owput")
 
 [node name="DamageComponent" type="Node" parent="Cog"]
 script = ExtResource("7_ykfl4")

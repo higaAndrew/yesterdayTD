@@ -7,7 +7,7 @@
 script = ExtResource("2_ht7qx")
 base_health = 100.0
 base_speed = 100.0
-base_damage = 1.0
-base_coins = 1
+base_damage = 100.0
+base_coin_value = 100
 children = Array[PackedScene]([ExtResource("1_dmeki")])
 number_children = Array[int]([2])

@@ -5,7 +5,7 @@ extends CanvasLayer
 
 @export var exit: Exit
 @export var spawner: Spawner
-@export var starting_coins: int = 10000
+@export var starting_coin_count: int = 10000
 
 var ui_layer: CanvasLayer
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 	GlobalScripts.verify(self, spawner, "spawner")
 	
 	GlobalScripts.connect_signal(EnemyManager, "wave_completed", self, "_on_wave_completed")
-	GlobalScripts.connect_signal(MoneyManager, "coins_changed", self, "_on_coins_changed")
+	GlobalScripts.connect_signal(MoneyManager, "coin_count_changed", self, "_on_coin_count_changed")
 	
 	# set the visibility layer to the same as whatever the UI layer is
 	self.layer = ui_layer.layer
@@ -35,9 +35,9 @@ func _ready() -> void:
 	health_bar.health_component = exit.health
 	health_bar.init(exit)
 	
-	# init coins and label
-	MoneyManager.set_coins(starting_coins)
-	amount.text = MoneyManager.get_current_coins()
+	# init coin count and label
+	MoneyManager.set_coin_count(starting_coin_count)
+	amount.text = MoneyManager.get_current_coin_count()
 	
 	# init build menu
 	build_menu.hud = self
@@ -49,5 +49,5 @@ func _on_wave_completed() -> void:
 
 
 ## when the coin value changes, update the label
-func _on_coins_changed() -> void:
-	amount.text = MoneyManager.get_current_coins()
+func _on_coin_count_changed() -> void:
+	amount.text = MoneyManager.get_current_coin_count()

@@ -6,6 +6,7 @@ var animations: AnimatedSprite2D
 var death_sound: AudioStreamPlayer
 var health: HealthComponent
 var layers: LayersComponent
+var coin_value: CoinValueComponent
 var path_movement: PathMovementComponent
 
 var animation_done: bool = false
@@ -16,6 +17,7 @@ var sound_done: bool = false
 func enter() -> void:
 	hitbox = parent.hitbox
 	health = parent.health
+	coin_value = parent.coin_value
 	path_movement = parent.path_movement
 	
 	animations = parent.animations
@@ -29,6 +31,7 @@ func enter() -> void:
 		layers = parent.layers
 		layers.spawn_children()
 	
+	coin_value.gain_coins()
 	GlobalScripts.play_animation(parent, animations, "die")
 	hitbox.remove_hitbox()
 	health.play_death_sound()

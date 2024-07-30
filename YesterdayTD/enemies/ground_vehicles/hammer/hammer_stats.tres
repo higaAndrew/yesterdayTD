@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("2_bsjql")
 base_health = 25.0
-base_speed = 100.0
-base_damage = 1.0
-base_coins = 1
+base_speed = 200.0
+base_damage = 25.0
+base_coin_value = 25
 children = Array[PackedScene]([ExtResource("1_2puv6")])
 number_children = Array[int]([2])

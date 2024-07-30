@@ -13,7 +13,7 @@ func _ready() -> void:
 	get_tower_stats()
 	init_price()
 	
-	GlobalScripts.connect_signal(MoneyManager, "coins_changed", self, "_on_coins_changed")
+	GlobalScripts.connect_signal(MoneyManager, "coin_count_changed", self, "_on_coin_count_changed")
 
 
 ## based on the tower name, fetch the stats from autoload
@@ -32,8 +32,8 @@ func init_price() -> void:
 
 
 ## when the money amount changes, change the status of the button
-func _on_coins_changed() -> void:
-	if MoneyManager.current_coins < price:
+func _on_coin_count_changed() -> void:
+	if MoneyManager.current_coin_count < price:
 		self.set_disabled(true)
 	elif self.disabled:
 		self.set_disabled(false)
