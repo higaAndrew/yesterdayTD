@@ -85,6 +85,7 @@ func check_phase() -> void:
 
 ## delete the path, and by extension, the object travelling it
 func delete() -> void:
+	# remove from the list of remaining enemies
 	EnemyManager.remove_enemy()
 	path_follow.queue_free()
 

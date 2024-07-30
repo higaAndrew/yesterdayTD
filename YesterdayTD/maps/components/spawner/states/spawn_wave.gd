@@ -1,5 +1,5 @@
 extends State
-## FIXME rewrite spawning states
+
 
 var spawning: SpawningComponent
 

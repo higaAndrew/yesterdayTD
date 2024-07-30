@@ -8,12 +8,8 @@ extends CanvasLayer
 @export var starting_coins: int = 10000
 
 var ui_layer: CanvasLayer
-#var wave_timer_is_active: bool = true
 
 @onready var wave_label := %WaveLabel as Label
-@onready var next_wave := %NextWave as PanelContainer
-@onready var countdown := %Countdown as Label
-#@onready var wave_timer := %WaveTimer as Timer
 @onready var health_bar := %HealthBar as HealthBar
 @onready var amount := %Amount as Label
 @onready var build_menu := %BuildMenu as BuildMenu
@@ -26,8 +22,6 @@ func _ready() -> void:
 	GlobalScripts.verify(self, exit, "exit")
 	GlobalScripts.verify(self, spawner, "spawner")
 	
-	#GlobalScripts.connect_signal(spawner, "wave_timer_started", self, "_on_wave_timer_started")
-	#GlobalScripts.connect_signal(spawner, "wave_timer_timeout", self, "_on_wave_timer_timeout")
 	GlobalScripts.connect_signal(EnemyManager, "wave_completed", self, "_on_wave_completed")
 	GlobalScripts.connect_signal(MoneyManager, "coins_changed", self, "_on_coins_changed")
 	
@@ -49,28 +43,11 @@ func _ready() -> void:
 	build_menu.hud = self
 
 
-## show the wave timer if it is active
-#func _process(_delta: float) -> void:
-	#if wave_timer_is_active:
-		#countdown.text = str(int(spawner.wave_timer.time_left))
-
-
-## when the wave timer starts, make it visible
-#func _on_wave_timer_started() -> void:
-	#wave_timer_is_active = true
-	#next_wave.show()
-
-
-## when the wave timer ends, hide it
-#func _on_wave_timer_timeout() -> void:
-	#wave_timer_is_active = false
-	#next_wave.hide()
-
-
 ## when the wave is complete, update the wave counter label
 func _on_wave_completed() -> void:
 	wave_label.text = ("Wave: %s" % (spawner.spawning.current_wave + 1))
 
 
+## when the coin value changes, update the label
 func _on_coins_changed() -> void:
 	amount.text = MoneyManager.get_current_coins()

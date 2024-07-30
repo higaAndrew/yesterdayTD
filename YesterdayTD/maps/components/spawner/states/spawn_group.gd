@@ -40,6 +40,9 @@ func _on_group_timer_timeout() -> void:
 		spawning.next_wave()
 
 
+## when recieving the all clear from the enemy manager, launch the next wave
 func _on_wave_completed() -> void:
-	#if not current_state():
+	if not current_state():
+		return
+	
 	transitioned.emit(self, "SpawnWave")

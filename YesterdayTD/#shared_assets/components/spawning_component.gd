@@ -1,6 +1,8 @@
 class_name SpawningComponent
 extends Node
 
+##TODO simultaneous group spawns
+
 
 ## preload every enemy
 ## HACK would autoload be a good idea?
@@ -17,7 +19,6 @@ extends Node
 var parent: Node2D
 var wave_data: WaveData
 var wave_set: String
-var wave_delay: float
 
 ## individual paths for rendering layers
 var canvas: Canvas

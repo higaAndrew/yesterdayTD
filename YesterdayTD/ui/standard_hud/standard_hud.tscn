@@ -53,38 +53,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_owgyf")
 text = "[Wave]"
 vertical_alignment = 1
 
-[node name="NextWave" type="PanelContainer" parent="Control/Rows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 0
-mouse_filter = 2
-
-[node name="Columns" type="HBoxContainer" parent="Control/Rows/NextWave"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Title" type="Label" parent="Control/Rows/NextWave/Columns"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Next Wave In: "
-horizontal_alignment = 1
-
-[node name="Countdown" type="Label" parent="Control/Rows/NextWave/Columns"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-text = "???"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WaveTimer" type="Timer" parent="Control/Rows/NextWave"]
-unique_name_in_owner = true
-one_shot = true
-
 [node name="HealthAndCoins" type="PanelContainer" parent="Control/Rows"]
 custom_minimum_size = Vector2(300, 64)
 layout_mode = 2

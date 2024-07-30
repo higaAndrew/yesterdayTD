@@ -9,7 +9,6 @@ signal wave_spawns_finished
 @export var canvas: Canvas
 @export var wave_data: WaveData
 @export_enum("debug", "story", "standard", "x2", "x10", "extraction", "eggs") var wave_set: String = "debug"
-@export_range(0.001, 60) var wave_delay: float
 
 @onready var group_timer := $GroupTimer as Timer
 @onready var spawn_timer := $SpawnTimer as Timer
