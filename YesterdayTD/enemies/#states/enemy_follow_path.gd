@@ -7,6 +7,7 @@ var hitbox: Hitbox
 var health: HealthComponent
 var hit_flash: HitFlashComponent
 var path_movement: PathMovementComponent
+var properties: PropertiesComponent
 var sound: SoundComponent
 
 var attack: Area2D
@@ -17,6 +18,7 @@ func enter() -> void:
 	progenitor_attack = parent.progenitor_attack
 	hitbox = parent.hitbox
 	hit_flash = parent.hit_flash
+	properties = parent.properties
 	sound = parent.sound
 	
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
@@ -55,6 +57,11 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	if area is Attack:
 		attack = area
+		
+		# flying enemy handling
+		if properties.flying:
+			if not attack.attack_interactions.can_hit_flying:
+				return
 		
 		if not attack.pierce.pierce_expended:
 			health.take_damage(attack.damage.current_damage)

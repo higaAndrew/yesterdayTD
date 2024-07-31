@@ -11,3 +11,4 @@ base_damage = 25.0
 base_coin_value = 50
 children = Array[PackedScene]([ExtResource("1_mio36")])
 number_children = Array[int]([4])
+flying = true

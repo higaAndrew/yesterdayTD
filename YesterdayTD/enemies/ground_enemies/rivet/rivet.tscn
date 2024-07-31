@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=27 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground_enemies/rivet/rivet_stats.tres" id="2_ekq5m"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
 [ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_ep0u4"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_ousv1"]
+[ext_resource type="Script" path="res://#shared_assets/components/properties_component.gd" id="15_sbnvy"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="18_otutr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6agfr"]
@@ -148,6 +149,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="PropertiesComponent" type="Node" parent="Rivet"]
+script = ExtResource("15_sbnvy")
 
 [node name="SoundComponent" type="Node" parent="Rivet"]
 script = ExtResource("18_otutr")

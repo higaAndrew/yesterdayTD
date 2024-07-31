@@ -12,6 +12,7 @@ extends Enemy
 @onready var health := $HealthComponent as HealthComponent
 @onready var hit_flash := $HitFlashComponent as HitFlashComponent
 @onready var path_movement := $PathMovementComponent as PathMovementComponent
+@onready var properties := $PropertiesComponent as PropertiesComponent
 @onready var sound := $SoundComponent as SoundComponent
 @onready var speed := $SpeedComponent as SpeedComponent
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	health.init(self)
 	hit_flash.init(self)
 	path_movement.init(self)
+	properties.init(self)
 	sound.init(self)
 	speed.init(self)
 	state_machine.init(self)

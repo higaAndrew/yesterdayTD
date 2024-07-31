@@ -80,7 +80,7 @@ func play_sound_random_pitch(sound_list_name: String) -> void:
 	
 	var rng: int = randi_range(0, (sound_list.size() - 1))
 	var sound: AudioStreamPlayer = sound_list[rng]
-	sound.set_pitch_scale(randf_range(0.8, 1.2))
+	sound.set_pitch_scale(randf_range(0.9, 1.1))
 	
 	if is_instance_valid(sound.get_parent().find_child("Timer")):
 		var timer = sound.get_parent().find_child("Timer")

@@ -42,6 +42,7 @@ func loop() -> void:
 	GlobalScripts.play_animation(parent, animations, "throw")
 	
 	projectile = projectile_scene.instantiate()
+	
 	attack.init_projectile(attack_number, projectile)
 	cooldown_timer.start(cooldown.get_attack_cooldown(attack_number))
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cy8jh5c3n032f"]
+[gd_scene load_steps=17 format=3 uid="uid://cy8jh5c3n032f"]
 
 [ext_resource type="Script" path="res://#debug/debug_projectile.gd" id="1_bbqvc"]
 [ext_resource type="Resource" uid="uid://da0u6bj6rhx38" path="res://#debug/debug_projectile_stats.tres" id="2_exvro"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_76oll"]
 [ext_resource type="Script" path="res://towers/#attacks/states/projectile_move.gd" id="6_dn8j7"]
 [ext_resource type="Script" path="res://towers/#attacks/states/projectile_hit.gd" id="7_cgr1j"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_interactions_component.gd" id="8_37fnf"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="9_hl5s5"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_wt1l2"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="11_ls4h6"]
@@ -110,6 +111,9 @@ script = ExtResource("6_dn8j7")
 
 [node name="ProjectileHit" type="Node" parent="StateMachine"]
 script = ExtResource("7_cgr1j")
+
+[node name="AttackInteractionsComponent" type="Node" parent="."]
+script = ExtResource("8_37fnf")
 
 [node name="DamageComponent" type="Node" parent="."]
 script = ExtResource("9_hl5s5")

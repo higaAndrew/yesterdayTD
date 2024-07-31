@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://3fh62ivdq3b3"]
+[gd_scene load_steps=28 format=3 uid="uid://3fh62ivdq3b3"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/anvil/anvil.gd" id="1_fjmdw"]
 [ext_resource type="Resource" uid="uid://cg3xjj7751wxw" path="res://enemies/ground_vehicles/anvil/anvil_stats.tres" id="2_rncdl"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_sldm7"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_xd22p"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="16_8pvil"]
+[ext_resource type="Script" path="res://#shared_assets/components/properties_component.gd" id="16_rv5tj"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="19_hum2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pawm0"]
@@ -154,6 +155,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="PropertiesComponent" type="Node" parent="Anvil"]
+script = ExtResource("16_rv5tj")
 
 [node name="SoundComponent" type="Node" parent="Anvil"]
 script = ExtResource("19_hum2u")

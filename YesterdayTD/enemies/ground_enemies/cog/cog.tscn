@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=27 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
 [ext_resource type="Script" path="res://enemies/ground_enemies/cog/cog.gd" id="1_udpip"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
 [ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_owput"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_vgt5g"]
+[ext_resource type="Script" path="res://#shared_assets/components/properties_component.gd" id="15_ci6aj"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="18_y1686"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
@@ -147,6 +148,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="PropertiesComponent" type="Node" parent="Cog"]
+script = ExtResource("15_ci6aj")
 
 [node name="SoundComponent" type="Node" parent="Cog"]
 script = ExtResource("18_y1686")

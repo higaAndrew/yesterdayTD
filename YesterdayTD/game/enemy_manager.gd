@@ -18,13 +18,10 @@ func add_enemy() -> void:
 func remove_enemy() -> void:
 	remaining_enemies -= 1
 	
-	print(remaining_enemies)
-	
 	if spawns_finished:
 		if remaining_enemies == 0:
 			wave_completed.emit()
 			spawns_finished = false
-			print("hell yeah")
 
 
 ## acknowledge when the last enemy has spawned

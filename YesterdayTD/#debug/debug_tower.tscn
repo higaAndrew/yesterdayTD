@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://3no4bpnihcj4"]
+[gd_scene load_steps=29 format=3 uid="uid://3no4bpnihcj4"]
 
 [ext_resource type="Script" path="res://#debug/debug_tower.gd" id="1_yi6y1"]
 [ext_resource type="Resource" uid="uid://b5ccsgmnyskm7" path="res://#debug/debug_tower_stats.tres" id="2_g434y"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/targets_component.gd" id="15_7wf75"]
 [ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="15_qsebf"]
 [ext_resource type="Script" path="res://#shared_assets/components/outline_component.gd" id="16_bet01"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_interactions_component.gd" id="16_f502o"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/attack_state_machine.gd" id="16_owfle"]
 [ext_resource type="Script" path="res://#shared_assets/components/price_component.gd" id="18_g13r0"]
 [ext_resource type="Script" path="res://#shared_assets/components/u_i_component.gd" id="18_ta0ij"]
@@ -131,9 +132,13 @@ script = ExtResource("11_oxv81")
 [node name="AttackProjectileThrow" type="Node" parent="DebugProjectileStateMachine"]
 script = ExtResource("12_3chl1")
 
-[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0")]
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("attack_interactions", "muzzle0")]
 script = ExtResource("13_23vcv")
+attack_interactions = NodePath("../AttackInteractionsComponent")
 muzzle0 = NodePath("../Animations/Muzzle")
+
+[node name="AttackInteractionsComponent" type="Node" parent="."]
+script = ExtResource("16_f502o")
 
 [node name="CooldownComponent" type="Node" parent="."]
 script = ExtResource("15_qsebf")

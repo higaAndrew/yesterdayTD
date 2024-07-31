@@ -8,6 +8,8 @@ extends Node
 ## nvm i did it
 
 
+@export var attack_interactions: AttackInteractionsComponent
+
 @export var muzzle0: Marker2D
 @export var muzzle1: Marker2D
 @export var muzzle2: Marker2D
@@ -32,7 +34,7 @@ func init_layers() -> void:
 
 
 ## assign a given attack to a layer
-func assign_layer(attack: Area2D) -> void:
+func assign_layer(attack: Attack) -> void:
 	var layer: CanvasLayer
 	
 	if attack.is_in_group("projectiles"):
@@ -45,7 +47,7 @@ func assign_layer(attack: Area2D) -> void:
 
 
 ## given a projectile, init all its velocity related values, and add it to the selected canvas layer
-func init_projectile(attack_number: int, projectile: Area2D) -> void:
+func init_projectile(attack_number: int, projectile: Attack) -> void:
 	var muzzle = get("muzzle%s" % attack_number)
 	var muzzle_position: Vector2
 	if not is_instance_valid(muzzle):
@@ -57,11 +59,19 @@ func init_projectile(attack_number: int, projectile: Area2D) -> void:
 	projectile.global_position = muzzle_position
 	projectile.rotation = parent.rotation
 	projectile.velocity.set_velocity()
+	transfer_interactions(projectile)
 
 
 ## given an explosion, init its location and rotation, and add it to the proper canvas layer
 ## also, make sure the explosion originates at the center of the target, not at the point of contactx
-func init_explosion(explosion: Area2D) -> void:
+func init_explosion(explosion: Attack) -> void:
 	assign_layer(explosion)
 	explosion.global_position = parent.hitbox.current_collision.global_position
 	explosion.rotation = parent.rotation
+	transfer_interactions(explosion)
+
+
+func transfer_interactions(attack: Attack) -> void:
+	GlobalScripts.verify(self, attack_interactions, "attack_interactions")
+	
+	attack.attack_interactions.inherit_interactions(attack_interactions)

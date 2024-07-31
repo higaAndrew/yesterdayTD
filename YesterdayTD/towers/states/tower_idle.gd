@@ -2,6 +2,7 @@ extends State
 
 
 var detection_range: Area2D
+var attack_interactions: AttackInteractionsComponent
 var outline: OutlineComponent
 var range_hitbox: Hitbox
 var targets: TargetsComponent
@@ -10,6 +11,7 @@ var ui: UIComponent
 
 ## get parent's components
 func init() -> void:
+	attack_interactions = parent.attack_interactions
 	targets = parent.targets
 	outline = parent.outline
 	ui = parent.ui
@@ -32,7 +34,10 @@ func init() -> void:
 # when enemy collides with range, add it to the target list
 # constantly running
 func _on_detection_range_area_entered(area: Area2D) -> void:
-	targets.add_target(area)
+	if attack_interactions.determine_target(area):
+		targets.add_target(area)
+	else:
+		return
 
 
 # when enemy stops colliding with range, remove it from the target list

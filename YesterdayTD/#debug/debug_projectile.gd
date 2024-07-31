@@ -9,6 +9,7 @@ extends Attack
 @onready var hit_vfx := $HitVFX as AnimatedSprite2D
 @onready var lifespan_timer := $LifespanTimer as Timer
 @onready var state_machine := $StateMachine as StateMachine
+@onready var attack_interactions := $AttackInteractionsComponent as AttackInteractionsComponent
 @onready var damage := $DamageComponent as DamageComponent
 @onready var pierce := $PierceComponent as PierceComponent
 @onready var sound := $SoundComponent as SoundComponent
@@ -20,6 +21,7 @@ extends Attack
 func _ready() -> void:
 	GlobalScripts.verify(self, stats, "stats")
 	
+	attack_interactions.init(self)
 	damage.init(self)
 	pierce.init(self)
 	sound.init(self)

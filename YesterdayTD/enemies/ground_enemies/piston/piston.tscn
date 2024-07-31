@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://q3l0ex5ibdmm"]
+[gd_scene load_steps=27 format=3 uid="uid://q3l0ex5ibdmm"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/piston/piston.gd" id="1_2n75l"]
 [ext_resource type="Resource" uid="uid://dsmtt8ch7db06" path="res://enemies/ground_enemies/piston/piston_stats.tres" id="2_7skus"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_glwpi"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_1isje"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="14_3bm62"]
+[ext_resource type="Script" path="res://#shared_assets/components/properties_component.gd" id="15_2xrl1"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="15_3xc1n"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="15_6htdk"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="18_a2wu4"]
@@ -147,6 +148,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="PropertiesComponent" type="Node" parent="Piston"]
+script = ExtResource("15_2xrl1")
 
 [node name="SoundComponent" type="Node" parent="Piston"]
 script = ExtResource("18_a2wu4")
