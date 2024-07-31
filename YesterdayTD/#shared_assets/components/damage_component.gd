@@ -2,8 +2,6 @@ class_name DamageComponent
 extends Node
 
 
-@export var hit_sound: AudioStreamPlayer
-
 var parent: Area2D
 var base_damage: float
 var current_damage: float
@@ -39,11 +37,3 @@ func divide_damage(amount: float) -> void:
 ## restore damage to base value
 func reset_damage() -> void:
 	current_damage = base_damage
-
-
-## play hit sound
-func play_hit_sound() -> void:
-	GlobalScripts.verify(parent, hit_sound, "hit_sound")
-	
-	if is_instance_valid(hit_sound):
-		hit_sound.play()

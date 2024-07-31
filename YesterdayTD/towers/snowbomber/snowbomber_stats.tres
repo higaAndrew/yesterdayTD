@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_ndb2v")
+base_price = 100
 base_range = 200.0
 target_priority = "First"
 can_hit_flying = false

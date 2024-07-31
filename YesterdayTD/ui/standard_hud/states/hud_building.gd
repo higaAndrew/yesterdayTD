@@ -2,11 +2,13 @@ extends State
 ## TODO dynamic drag and drop
 
 
+var sound: SoundComponent
 var tower_builder: TowerBuilderComponent
 
 
 ## get parent components
 func init() -> void:
+	sound = parent.sound
 	tower_builder = parent.tower_builder
 
 
@@ -31,8 +33,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_accept"):
 		if tower_builder.valid_location and is_instance_valid(tower_builder.tower_preview):
 			tower_builder.build_tower()
-			tower_builder.play_build_sound()
 			tower_builder.reset_tower_preview()
+			sound.play_build_sound()
 			
 			transitioned.emit(self, "HUDIdle")
 	

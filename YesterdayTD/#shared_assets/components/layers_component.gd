@@ -50,12 +50,12 @@ func assign_path() -> void:
 		path = find_parent("Canvas").find_child("GroundVehiclePath")
 	elif enemy.is_in_group("ground_bosses"):
 		path = find_parent("Canvas").find_child("GroundBossPath")
-	elif enemy.is_in_group("air_enemies"):
-		path = find_parent("Canvas").find_child("AirEnemyPath")
-	elif enemy.is_in_group("air_vehicles"):
-		path = find_parent("Canvas").find_child("AirVehiclePath")
-	elif enemy.is_in_group("air_bosses"):
-		path = find_parent("Canvas").find_child("AirBossPath")
+	elif enemy.is_in_group("flying_enemies"):
+		path = find_parent("Canvas").find_child("FlyingEnemyPath")
+	elif enemy.is_in_group("flying_vehicles"):
+		path = find_parent("Canvas").find_child("FlyingVehiclePath")
+	elif enemy.is_in_group("flying_bosses"):
+		path = find_parent("Canvas").find_child("FlyingBossPath")
 	else:
 		printerr("The child %s is not in an enemy group!" % enemy.name)
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://crpw768pcjk61"]
+[gd_scene load_steps=26 format=3 uid="uid://crpw768pcjk61"]
 
 [ext_resource type="Script" path="res://enemies/ground_enemies/rivet/rivet.gd" id="1_hi6hr"]
 [ext_resource type="Resource" uid="uid://bewl0tnuio8su" path="res://enemies/ground_enemies/rivet/rivet_stats.tres" id="2_ekq5m"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h3mvm"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/ground_enemies/kenney_top_down_shooter_robots.png" id="6_5p6lj"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="7_12f1k"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_56ygc"]
-[ext_resource type="AudioStream" uid="uid://cul30ugwvk5hc" path="res://enemies/ground_enemies/rivet/Radiator Metal Impacts 002.wav" id="7_pangm"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_8kdpp"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="8_76578"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="9_pffkw"]
@@ -17,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="11_06egf"]
 [ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_ep0u4"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_ousv1"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="18_otutr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6agfr"]
 radius = 29.0
@@ -85,7 +84,7 @@ radius = 0.01
 [node name="RivetPath" type="PathFollow2D"]
 loop = false
 
-[node name="Rivet" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
+[node name="Rivet" type="Area2D" parent="." groups=["enemies", "ground_enemies", "robots"]]
 modulate = Color(1, 0.64, 0.64, 1)
 scale = Vector2(1.1, 1.1)
 collision_mask = 132
@@ -106,13 +105,6 @@ scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="Rivet"]
-stream = ExtResource("7_pangm")
-volume_db = -10.0
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="Rivet"]
-stream = ExtResource("7_56ygc")
 
 [node name="SpawnPoint" type="Marker2D" parent="Rivet"]
 position = Vector2(29, 0)
@@ -142,11 +134,9 @@ script = ExtResource("12_ep0u4")
 [node name="DamageComponent" type="Node" parent="Rivet"]
 script = ExtResource("8_8kdpp")
 
-[node name="HealthComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_pffkw")
 hitbox = NodePath("../Hitbox")
-hurt_sound = NodePath("../HurtSound")
-death_sound = NodePath("../DeathSound")
 
 [node name="HitFlashComponent" type="Node" parent="Rivet" node_paths=PackedStringArray("animations")]
 script = ExtResource("14_ousv1")
@@ -158,6 +148,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="SoundComponent" type="Node" parent="Rivet"]
+script = ExtResource("18_otutr")
 
 [node name="SpeedComponent" type="Node" parent="Rivet"]
 script = ExtResource("10_557si")

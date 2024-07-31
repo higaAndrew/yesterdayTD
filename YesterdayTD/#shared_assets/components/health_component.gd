@@ -7,8 +7,6 @@ signal took_damage(amount: float, current_health: float)
 signal health_depleted
 
 @export var hitbox: CollisionShape2D
-@export var hurt_sound: AudioStreamPlayer
-@export var death_sound: AudioStreamPlayer
 
 var parent: Area2D
 var base_health: float
@@ -56,19 +54,3 @@ func take_damage(amount: float) -> void:
 func check_health_depleted() -> void:
 	if max(0, current_health) == 0:
 		health_depleted.emit()
-
-
-## play/verify hurt sound
-func play_hurt_sound() -> void:
-	GlobalScripts.verify(parent, hurt_sound, "hurt_sound")
-	
-	if is_instance_valid(hurt_sound):
-		hurt_sound.play()
-
-
-## play/verify death sound
-func play_death_sound() -> void:
-	GlobalScripts.verify(parent, death_sound, "death_sound")
-	
-	if is_instance_valid(death_sound):
-		death_sound.play()

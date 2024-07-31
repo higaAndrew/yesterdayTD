@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://djv1104dc3q6v"]
+[gd_scene load_steps=27 format=3 uid="uid://djv1104dc3q6v"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/hammer/hammer.gd" id="1_aumqh"]
 [ext_resource type="Resource" uid="uid://b4exhkl70uay1" path="res://enemies/ground_vehicles/hammer/hammer_stats.tres" id="2_2anm2"]
@@ -6,8 +6,6 @@
 [ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_fdr6n"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_dj36a"]
 [ext_resource type="Texture2D" uid="uid://til4c6ooqoat" path="res://enemies/ground_vehicles/kenney_top_down_tanks_tanks-sheet.png" id="6_p6jof"]
-[ext_resource type="AudioStream" uid="uid://cuu0q8vqll77x" path="res://enemies/ground_vehicles/hammer/Radiator Metal Impacts 003.wav" id="7_oyb58"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_h6k2i"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_7lp6w"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_tqaj7"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_xhhw7"]
@@ -18,6 +16,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_k6fna"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_kfj01"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="16_o2ywc"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="19_jspvw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pawm0"]
 size = Vector2(54, 50)
@@ -86,7 +85,7 @@ radius = 0.01
 [node name="HammerPath" type="PathFollow2D"]
 loop = false
 
-[node name="Hammer" type="Area2D" parent="." groups=["enemies", "ground_vehicles"]]
+[node name="Hammer" type="Area2D" parent="." groups=["enemies", "ground_vehicles", "vehicles"]]
 scale = Vector2(1.5, 1.5)
 collision_layer = 64
 collision_mask = 132
@@ -107,14 +106,6 @@ scale = Vector2(1.125, 1.125)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="Hammer"]
-stream = ExtResource("7_oyb58")
-volume_db = -5.0
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="Hammer"]
-stream = ExtResource("8_h6k2i")
-volume_db = 5.0
 
 [node name="SpawnPoint" type="Marker2D" parent="Hammer"]
 position = Vector2(27, 0)
@@ -141,15 +132,12 @@ script = ExtResource("11_xhhw7")
 [node name="CoinValueComponent" type="Node" parent="Hammer"]
 script = ExtResource("12_0e3dr")
 
-[node name="DamageComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("hit_sound")]
+[node name="DamageComponent" type="Node" parent="Hammer"]
 script = ExtResource("12_4srmy")
-hit_sound = NodePath("../HurtSound")
 
-[node name="HealthComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_fd501")
 hitbox = NodePath("../Hitbox")
-hurt_sound = NodePath("../HurtSound")
-death_sound = NodePath("../DeathSound")
 
 [node name="HitFlashComponent" type="Node" parent="Hammer" node_paths=PackedStringArray("animations")]
 script = ExtResource("14_k6fna")
@@ -166,6 +154,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="SoundComponent" type="Node" parent="Hammer"]
+script = ExtResource("19_jspvw")
 
 [node name="SpeedComponent" type="Node" parent="Hammer"]
 script = ExtResource("16_o2ywc")

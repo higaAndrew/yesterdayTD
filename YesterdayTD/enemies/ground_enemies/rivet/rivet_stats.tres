@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_fk536")
-base_health = 5.0
+base_health = 4.0
 base_speed = 150.0
-base_damage = 5.0
-base_coin_value = 5
+base_damage = 4.0
+base_coin_value = 4
 children = Array[PackedScene]([])
 number_children = Array[int]([])

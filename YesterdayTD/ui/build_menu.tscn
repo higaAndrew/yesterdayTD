@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://6g32ut8hhjls" path="res://ui/standard_hud/Icon_Settings.png" id="2_jbpvx"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="5_h6jci"]
 [ext_resource type="Texture2D" uid="uid://d3qcfdhmtje8s" path="res://#shared_assets/sprites/Retro Impact Effect Pack 2 F.png" id="5_jugyg"]
-[ext_resource type="AudioStream" uid="uid://cn6mpn1uqmct5" path="res://towers/Drop Paper C.wav" id="5_ll54c"]
 [ext_resource type="Script" path="res://#shared_assets/components/tower_builder_component.gd" id="8_7sq2x"]
 [ext_resource type="Script" path="res://ui/standard_hud/states/hud_idle.gd" id="8_gul4s"]
 [ext_resource type="Script" path="res://ui/standard_hud/states/hud_building.gd" id="9_u1hyk"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="10_nij38"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8cpj"]
 atlas = ExtResource("1_wx7ka")
@@ -186,9 +186,6 @@ sprite_frames = SubResource("SpriteFrames_6g007")
 animation = &"build"
 autoplay = "idle"
 
-[node name="BuildSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_ll54c")
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_h6jci")
 initial_state = NodePath("HUDIdle")
@@ -199,7 +196,9 @@ script = ExtResource("8_gul4s")
 [node name="HUDBuilding" type="Node" parent="StateMachine"]
 script = ExtResource("9_u1hyk")
 
-[node name="TowerBuilderComponent" type="Node" parent="." node_paths=PackedStringArray("build_animation", "build_sound")]
+[node name="SoundComponent" type="Node" parent="."]
+script = ExtResource("10_nij38")
+
+[node name="TowerBuilderComponent" type="Node" parent="." node_paths=PackedStringArray("build_animation")]
 script = ExtResource("8_7sq2x")
 build_animation = NodePath("../BuildAnimation")
-build_sound = NodePath("../BuildSound")

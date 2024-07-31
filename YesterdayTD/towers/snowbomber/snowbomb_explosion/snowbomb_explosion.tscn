@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://htlhghcy4b5" path="res://towers/#attacks/Effect_PuffAndStars_1_120x109.png" id="2_bmgpa"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="3_pxoqw"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="5_6lkij"]
-[ext_resource type="AudioStream" uid="uid://dykxhmi5g2k1m" path="res://towers/#attacks/ExplosionHandGren 6075_93_3.wav" id="5_13fow"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="5_pw3yv"]
 [ext_resource type="Script" path="res://towers/#attacks/states/explosion_exploding.gd" id="6_emeub"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="10_h0ela"]
 [ext_resource type="Script" path="res://#shared_assets/components/size_component.gd" id="10_qnu74"]
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="11_7npmo"]
 
@@ -250,10 +250,6 @@ animation = &"idle"
 autoplay = "idle"
 offset = Vector2(5, -2)
 
-[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_13fow")
-volume_db = -5.0
-
 [node name="LifespanTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
@@ -266,15 +262,17 @@ initial_state = NodePath("ExplosionExploding")
 [node name="ExplosionExploding" type="Node" parent="StateMachine"]
 script = ExtResource("6_emeub")
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
+[node name="DamageComponent" type="Node" parent="."]
 script = ExtResource("5_6lkij")
-hit_sound = NodePath("../ExplosionSound")
 
 [node name="PierceComponent" type="Node" parent="."]
 script = ExtResource("5_pw3yv")
 
 [node name="SizeComponent" type="Node" parent="."]
 script = ExtResource("10_qnu74")
+
+[node name="SoundComponent" type="Node" parent="."]
+script = ExtResource("10_h0ela")
 
 [node name="VelocityComponent" type="Node" parent="."]
 script = ExtResource("11_7npmo")

@@ -2,14 +2,14 @@ extends State
 
 
 var hitbox: Hitbox
-var health: HealthComponent
+var sound: SoundComponent
 
 
 ## objective is destroyed
 func enter() -> void:
 	hitbox = parent.hitbox
-	health = parent.health
+	sound = parent.sound
 	
 	hitbox.remove_hitbox()
-	health.play_death_sound()
+	sound.play_death_sound()
 	print("The objective is dead!")

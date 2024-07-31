@@ -27,9 +27,9 @@ var path: Path2D
 var ground_enemies: Path2D
 var ground_vehicles: Path2D
 var ground_bosses: Path2D
-var air_enemies: Path2D
-var air_vehicles: Path2D
-var air_bosses: Path2D
+var flying_enemies: Path2D
+var flying_vehicles: Path2D
+var flying_bosses: Path2D
 
 ## wave set properties
 var waves: Array
@@ -73,9 +73,9 @@ func init_layers() -> void:
 	ground_enemies = canvas.find_child("GroundEnemyPath")
 	ground_vehicles = canvas.find_child("GroundVehiclePath")
 	ground_bosses = canvas.find_child("GroundBossPath")
-	air_enemies = canvas.find_child("AirEnemyPath")
-	air_vehicles = canvas.find_child("AirVehiclePath")
-	air_bosses = canvas.find_child("AirBossPath")
+	flying_enemies = canvas.find_child("FlyingEnemyPath")
+	flying_vehicles = canvas.find_child("FlyingVehiclePath")
+	flying_bosses = canvas.find_child("FlyingBossPath")
 
 
 ## determines which wave set to use for the map
@@ -161,12 +161,12 @@ func assign_path() -> void:
 		path = ground_vehicles
 	elif enemy.is_in_group("ground_bosses"):
 		path = ground_bosses
-	elif enemy.is_in_group("air_enemies"):
-		path = air_enemies
-	elif enemy.is_in_group("air_vehicles"):
-		path = air_vehicles
-	elif enemy.is_in_group("air_bosses"):
-		path = air_bosses
+	elif enemy.is_in_group("flying_enemies"):
+		path = flying_enemies
+	elif enemy.is_in_group("flying_vehicles"):
+		path = flying_vehicles
+	elif enemy.is_in_group("flying_bosses"):
+		path = flying_bosses
 	else:
 		printerr("The enemy %s is not in an enemy group!" % enemy.name)
 	

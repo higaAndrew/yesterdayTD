@@ -23,6 +23,7 @@ MapManager="*res://game/map_manager.gd"
 EnemyManager="*res://game/enemy_manager.gd"
 MoneyManager="*res://game/money_manager.gd"
 TowerManager="*res://game/tower_manager.gd"
+SoundManager="*res://game/sound_manager.tscn"
 
 [display]
 

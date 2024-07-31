@@ -3,6 +3,7 @@ extends State
 
 var hitbox: CollisionShape2D
 var health: HealthComponent
+var sound: SoundComponent
 
 var enemy: Area2D
 
@@ -10,6 +11,7 @@ var enemy: Area2D
 ## get parent's components
 func enter() -> void:
 	hitbox = parent.hitbox
+	sound = parent.sound
 	
 	GlobalScripts.connect_signal(parent, "area_entered", self, "_on_area_entered")
 	
@@ -27,7 +29,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group("enemies"):
 		enemy = area.get_parent()
 		health.take_damage(enemy.damage.current_damage)
-		health.play_hurt_sound()
+		sound.play_hurt_sound()
 		enemy.path_movement.delete()
 	
 	else:

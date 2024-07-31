@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://s3busndd4ewv"
-path="res://.godot/imported/Casual Enemy Damage C.wav-c4a70b32326d18f9fac1e142eafdf76f.sample"
+path="res://.godot/imported/objective_hurt(ovani).wav-c3e2cba8f8d3c8d144fe722d87b5ee53.sample"
 
 [deps]
 
-source_file="res://maps/components/objectives/exit/Casual Enemy Damage C.wav"
-dest_files=["res://.godot/imported/Casual Enemy Damage C.wav-c4a70b32326d18f9fac1e142eafdf76f.sample"]
+source_file="res://maps/components/objectives/objective_hurt(ovani).wav"
+dest_files=["res://.godot/imported/objective_hurt(ovani).wav-c3e2cba8f8d3c8d144fe722d87b5ee53.sample"]
 
 [params]
 

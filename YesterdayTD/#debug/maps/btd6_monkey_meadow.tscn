@@ -9,6 +9,13 @@
 [ext_resource type="Script" path="res://#debug/maps/btd6_monkey_meadow_wave_data.gd" id="4_wfr5x"]
 [ext_resource type="PackedScene" uid="uid://diwe8wsg0rb4x" path="res://ui/standard_hud/standard_hud.tscn" id="10_ts2gm"]
 
+[sub_resource type="Curve2D" id="Curve2D_6l847"]
+bake_interval = 50.0
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -64, 448, 0, 0, 0, 0, 784, 448, -2.11893, 45.5569, 2.11893, -45.5569, 832, 408, 0, 0, 0, 0, 832, 256, 51.9137, 0, -51.9137, 0, 784, 208, 0, 0, 0, 0, 600, 208, 2.11893, -40.2596, -2.11893, 40.2596, 560, 256, 0, 0, 0, 0, 560, 800, 47.6758, -3.17839, -47.6758, 3.17839, 512, 848, 0, 0, 0, 0, 344, 848, 2.11893, 34.9623, -2.11893, -34.9623, 304, 808, 0, 0, 0, 0, 304, 664, -50.8542, 1.05946, 50.8542, -1.05946, 352, 616, 0, 0, 0, 0, 1000, 616, -4.23785, 34.9623, 4.23785, -34.9623, 1040, 568, 0, 0, 0, 0, 1056, 408, -49.7948, 0, 49.7948, 0, 1096, 368, 0, 0, 0, 0, 1200, 368, 0, -33.9028, 0, 33.9028, 1240, 400, 0, 0, 0, 0, 1240, 704, 46.6164, -5.29732, -46.6164, 5.29732, 1192, 768, 0, 0, 0, 0, 792, 776, 2.11893, -27.546, -2.11893, 27.546, 752, 808, 0, 0, 0, 0, 744, 1208)
+}
+point_count = 24
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgo40"]
 texture = ExtResource("2_gjpah")
 texture_region_size = Vector2i(64, 64)
@@ -459,14 +466,16 @@ terrain_set_0/terrain_0/name = "Path (Snow)"
 terrain_set_0/terrain_0/color = Color(1, 0.160784, 0.176471, 1)
 sources/0 = SubResource("TileSetAtlasSource_fgo40")
 
-[sub_resource type="Curve2D" id="Curve2D_6l847"]
-bake_interval = 50.0
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -64, 448, 0, 0, 0, 0, 784, 448, -2.11893, 45.5569, 2.11893, -45.5569, 832, 408, 0, 0, 0, 0, 832, 256, 51.9137, 0, -51.9137, 0, 784, 208, 0, 0, 0, 0, 600, 208, 2.11893, -40.2596, -2.11893, 40.2596, 560, 256, 0, 0, 0, 0, 560, 800, 47.6758, -3.17839, -47.6758, 3.17839, 512, 848, 0, 0, 0, 0, 344, 848, 2.11893, 34.9623, -2.11893, -34.9623, 304, 808, 0, 0, 0, 0, 304, 664, -50.8542, 1.05946, 50.8542, -1.05946, 352, 616, 0, 0, 0, 0, 1000, 616, -4.23785, 34.9623, 4.23785, -34.9623, 1040, 568, 0, 0, 0, 0, 1056, 408, -49.7948, 0, 49.7948, 0, 1096, 368, 0, 0, 0, 0, 1200, 368, 0, -33.9028, 0, 33.9028, 1240, 400, 0, 0, 0, 0, 1240, 704, 46.6164, -5.29732, -46.6164, 5.29732, 1192, 768, 0, 0, 0, 0, 792, 776, 2.11893, -27.546, -2.11893, 27.546, 752, 808, 0, 0, 0, 0, 744, 1208)
-}
-point_count = 24
-
 [node name="BTD6MonkeyMeadow" type="Node2D"]
+
+[node name="Canvas_AirBosses#AirBossPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6l847")
+
+[node name="Canvas_AirVehicles#AirVehiclePath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6l847")
+
+[node name="Canvas_AirEnemies#AirEnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6l847")
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -500,20 +509,18 @@ position = Vector2(744, 1152)
 [node name="Center" type="Polygon2D" parent="Canvas/Map" index="0"]
 texture_repeat = 2
 texture = ExtResource("3_xa8of")
-polygon = PackedVector2Array(344, 672, 376, 648, 520, 656, 528, 704, 528, 752, 520, 784, 504, 816, 464, 816, 440, 824, 352, 816, 344, 808, 344, 752, 336, 736, 336, 712, 344, 696, 600, 424, 600, 248, 784, 248, 784, 416, 640, 240)
-polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13), PackedInt32Array(15, 16, 17, 18)]
+polygon = PackedVector2Array(344, 672, 376, 648, 520, 656, 528, 704, 528, 752, 520, 784, 504, 816, 464, 816, 440, 824, 352, 816, 344, 808, 344, 752, 336, 736, 336, 712, 344, 696, 712, 416, 600, 424, 592, 272, 616, 240, 640, 240, 784, 248, 800, 280, 792, 384, 784, 416, 640, 240)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13), PackedInt32Array(15, 16, 17, 18, 19, 20, 21, 22, 23)]
 
-[node name="Outer" type="Polygon2D" parent="Canvas/Map" index="1"]
+[node name="Outer1" type="Polygon2D" parent="Canvas/Map" index="1"]
 texture_repeat = 2
 texture = ExtResource("3_xa8of")
-invert_enabled = true
-polygon = PackedVector2Array(-80, 408, 192, 424, 336, 416, 464, 416, 520, 424, 520, 240, 536, 184, 616, 184, 736, 176, 832, 200, 872, 216, 880, 344, 880, 432, 848, 480, 792, 496, 616, 488, 600, 504, 608, 576, 680, 584, 944, 584, 1008, 552, 1008, 360, 1040, 336, 1152, 320, 1256, 344, 1280, 360, 1280, 704, 1272, 760, 1232, 792, 1104, 808, 824, 808, 800, 824, 784, 992, 784, 1200, 704, 1200, 704, 888, 712, 784, 736, 752, 808, 736, 888, 736, 984, 728, 1096, 736, 1176, 736, 1200, 688, 1200, 424, 1176, 400, 1128, 400, 1112, 424, 1096, 568, 1072, 616, 1008, 640, 904, 656, 608, 656, 616, 768, 608, 832, 544, 880, 440, 896, 384, 888, 344, 888, 304, 872, 256, 824, 248, 696, 272, 600, 336, 584, 512, 584, 512, 488, -80, 488)
+polygon = PackedVector2Array(-80, 408, 192, 424, 336, 416, 472, 416, 520, 424, 520, 248, 528, 208, 568, 184, 616, 184, 736, 176, 872, 216, 880, 344, 880, 432, 848, 480, 792, 496, 616, 488, 600, 504, 608, 576, 680, 584, 944, 584, 1008, 552, 1008, 360, 1040, 336, 1152, 320, 1256, 344, 1280, 360, 1280, 704, 1272, 760, 1232, 792, 1104, 808, 824, 808, 800, 824, 784, 992, 784, 1200, 792, 1080, 1920, 1080, 1920, 0, 0, 0, 0, 400)
 
-[node name="Polygon2D2" type="Polygon2D" parent="Canvas/Map" index="2"]
+[node name="Outer2" type="Polygon2D" parent="Canvas/Map" index="2"]
 texture_repeat = 2
 texture = ExtResource("3_xa8of")
-invert_enabled = true
-polygon = PackedVector2Array(-80, 408, 192, 424, 336, 416, 464, 416, 520, 424, 520, 240, 536, 184, 616, 184, 736, 176, 832, 200, 872, 216, 880, 344, 880, 432, 848, 480, 792, 496, 616, 488, 600, 504, 608, 576, 680, 584, 944, 584, 1008, 552, 1008, 360, 1040, 336, 1152, 320, 1256, 344, 1280, 360, 1280, 704, 1272, 760, 1232, 792, 1104, 808, 824, 808, 800, 824, 784, 992, 784, 1200, 704, 1200, 704, 888, 712, 784, 736, 752, 808, 736, 888, 736, 984, 728, 1096, 736, 1176, 736, 1200, 688, 1200, 424, 1176, 400, 1128, 400, 1112, 424, 1096, 568, 1072, 616, 1008, 640, 904, 656, 608, 656, 616, 768, 608, 832, 544, 880, 440, 896, 384, 888, 344, 888, 304, 872, 256, 824, 248, 696, 272, 600, 336, 584, 512, 584, 512, 488, -80, 488)
+polygon = PackedVector2Array(-80, 488, 512, 488, 512, 584, 336, 584, 272, 600, 248, 696, 256, 824, 304, 872, 344, 888, 384, 888, 440, 896, 544, 880, 608, 832, 616, 768, 608, 656, 904, 656, 1008, 640, 1072, 616, 1096, 568, 1112, 424, 1128, 400, 1176, 400, 1200, 424, 1200, 688, 1176, 736, 1096, 736, 984, 728, 888, 736, 808, 736, 736, 752, 712, 784, 704, 888, 704, 1200, 696, 1080, 0, 1080, 0, 496)
 
 [node name="GroundEnemyPath" type="Path2D" parent="Canvas/GroundEnemies" index="0"]
 curve = SubResource("Curve2D_6l847")
@@ -524,13 +531,13 @@ curve = SubResource("Curve2D_6l847")
 [node name="GroundBossPath" type="Path2D" parent="Canvas/GroundBosses" index="0"]
 curve = SubResource("Curve2D_6l847")
 
-[node name="AirEnemyPath" type="Path2D" parent="Canvas/AirEnemies" index="0"]
+[node name="FlyingEnemyPath" type="Path2D" parent="Canvas/FlyingEnemies" index="0"]
 curve = SubResource("Curve2D_6l847")
 
-[node name="AirVehiclePath" type="Path2D" parent="Canvas/AirVehicles" index="0"]
+[node name="FlyingVehiclePath" type="Path2D" parent="Canvas/FlyingVehicles" index="0"]
 curve = SubResource("Curve2D_6l847")
 
-[node name="AirBossPath" type="Path2D" parent="Canvas/AirBosses" index="0"]
+[node name="FlyingBossPath" type="Path2D" parent="Canvas/FlyingBosses" index="0"]
 curve = SubResource("Curve2D_6l847")
 
 [node name="StandardHUD" parent="Canvas/UI" index="0" node_paths=PackedStringArray("exit", "spawner") instance=ExtResource("10_ts2gm")]

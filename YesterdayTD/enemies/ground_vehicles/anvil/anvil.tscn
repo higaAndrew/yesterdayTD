@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://3fh62ivdq3b3"]
+[gd_scene load_steps=27 format=3 uid="uid://3fh62ivdq3b3"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/anvil/anvil.gd" id="1_fjmdw"]
 [ext_resource type="Resource" uid="uid://cg3xjj7751wxw" path="res://enemies/ground_vehicles/anvil/anvil_stats.tres" id="2_rncdl"]
@@ -6,8 +6,6 @@
 [ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="4_pswho"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="5_0ca5v"]
 [ext_resource type="Texture2D" uid="uid://crholgyqb3u2t" path="res://enemies/ground_vehicles/kenney_top_down_tanks_big_tanks.png" id="5_xawnx"]
-[ext_resource type="AudioStream" uid="uid://b8gn8gevghwqk" path="res://enemies/ground_vehicles/anvil/Radiator Metal Impacts 004.wav" id="7_6fkxv"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="8_h0oha"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="9_3k3pe"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="10_07ks4"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="11_ucqm0"]
@@ -18,6 +16,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_sldm7"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_xd22p"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="16_8pvil"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="19_hum2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pawm0"]
 size = Vector2(68, 60)
@@ -86,7 +85,7 @@ radius = 0.01
 [node name="AnvilPath" type="PathFollow2D"]
 loop = false
 
-[node name="Anvil" type="Area2D" parent="." groups=["enemies", "ground_vehicles"]]
+[node name="Anvil" type="Area2D" parent="." groups=["enemies", "ground_vehicles", "vehicles"]]
 scale = Vector2(1.75, 1.75)
 collision_layer = 64
 collision_mask = 132
@@ -107,14 +106,6 @@ scale = Vector2(1.125, 1.125)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="Anvil"]
-stream = ExtResource("7_6fkxv")
-volume_db = -5.0
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="Anvil"]
-stream = ExtResource("8_h0oha")
-volume_db = 5.0
 
 [node name="SpawnPoint" type="Marker2D" parent="Anvil"]
 position = Vector2(34, 0)
@@ -141,15 +132,12 @@ script = ExtResource("11_ucqm0")
 [node name="CoinValueComponent" type="Node" parent="Anvil"]
 script = ExtResource("12_vwx82")
 
-[node name="DamageComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hit_sound")]
+[node name="DamageComponent" type="Node" parent="Anvil"]
 script = ExtResource("12_njrur")
-hit_sound = NodePath("../HurtSound")
 
-[node name="HealthComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_v16bg")
 hitbox = NodePath("../Hitbox")
-hurt_sound = NodePath("../HurtSound")
-death_sound = NodePath("../DeathSound")
 
 [node name="HitFlashComponent" type="Node" parent="Anvil" node_paths=PackedStringArray("animations")]
 script = ExtResource("14_sldm7")
@@ -166,6 +154,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="SoundComponent" type="Node" parent="Anvil"]
+script = ExtResource("19_hum2u")
 
 [node name="SpeedComponent" type="Node" parent="Anvil"]
 script = ExtResource("16_8pvil")

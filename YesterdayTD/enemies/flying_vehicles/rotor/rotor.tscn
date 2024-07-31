@@ -4,11 +4,10 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="2_00x4y"]
 [ext_resource type="Resource" uid="uid://bioleje3rffvl" path="res://enemies/flying_vehicles/rotor/rotor_stats.tres" id="2_8wc0j"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="4_dhesj"]
-[ext_resource type="Texture2D" uid="uid://bfcm7rwlncl16" path="res://enemies/flying_vehicles/quiver_tower_defense_helicopter.png" id="5_qxg1x"]
-[ext_resource type="AudioStream" uid="uid://ipc3gxh715rg" path="res://enemies/flying_vehicles/rotor/Material Layer Metal B.wav" id="6_4dfax"]
+[ext_resource type="Texture2D" uid="uid://c1ce4d7wsssrp" path="res://enemies/flying_vehicles/shadow_move_00.png" id="4_e0e11"]
+[ext_resource type="Texture2D" uid="uid://cslribf3k53rj" path="res://enemies/flying_vehicles/quiver_tower_defense_helicopter.png" id="5_qxg1x"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_qwus5"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="7_f041u"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_idfbr"]
 [ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="7_liuuf"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="8_3gt4x"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="8_ef8sy"]
@@ -17,6 +16,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="11_1l7pn"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="12_rtmw4"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="13_yx7xu"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="19_3tl64"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgmu4"]
 radius = 32.0
@@ -42,27 +42,27 @@ region = Rect2(192, 0, 64, 64)
 atlas = ExtResource("4_dhesj")
 region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6swb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7qpp"]
 atlas = ExtResource("5_qxg1x")
 region = Rect2(0, 0, 200, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k58jc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l46k7"]
 atlas = ExtResource("5_qxg1x")
 region = Rect2(200, 0, 200, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tt5lg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_er2ob"]
 atlas = ExtResource("5_qxg1x")
 region = Rect2(400, 0, 200, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xkjfh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kuh5"]
 atlas = ExtResource("5_qxg1x")
 region = Rect2(600, 0, 200, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8fmke"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqsyu"]
 atlas = ExtResource("5_qxg1x")
 region = Rect2(800, 0, 200, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vns2n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcfwa"]
 atlas = ExtResource("5_qxg1x")
 region = Rect2(1000, 0, 200, 180)
 
@@ -93,26 +93,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v6swb")
+"texture": SubResource("AtlasTexture_x7qpp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k58jc")
+"texture": SubResource("AtlasTexture_l46k7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tt5lg")
+"texture": SubResource("AtlasTexture_er2ob")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xkjfh")
+"texture": SubResource("AtlasTexture_5kuh5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8fmke")
+"texture": SubResource("AtlasTexture_wqsyu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vns2n")
+"texture": SubResource("AtlasTexture_qcfwa")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 15.0
+"speed": 30.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vi3jk"]
@@ -121,7 +121,7 @@ radius = 0.01
 [node name="RotorPath" type="PathFollow2D"]
 loop = false
 
-[node name="Rotor" type="Area2D" parent="." groups=["air_vehicles", "enemies"]]
+[node name="Rotor" type="Area2D" parent="." groups=["enemies", "flying", "vehicles"]]
 collision_layer = 256
 collision_mask = 132
 script = ExtResource("1_uv30x")
@@ -132,17 +132,14 @@ rotation = 4.71239
 shape = SubResource("CapsuleShape2D_sgmu4")
 script = ExtResource("2_00x4y")
 
+[node name="ShadowAnimations" type="Sprite2D" parent="Rotor"]
+texture = ExtResource("4_e0e11")
+offset = Vector2(8, 32)
+
 [node name="Animations" type="AnimatedSprite2D" parent="Rotor"]
 sprite_frames = SubResource("SpriteFrames_s23vd")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="Rotor"]
-stream = ExtResource("6_4dfax")
-volume_db = -5.0
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="Rotor"]
-stream = ExtResource("7_idfbr")
 
 [node name="SpawnPoint" type="Marker2D" parent="Rotor"]
 position = Vector2(102, 0)
@@ -172,11 +169,9 @@ script = ExtResource("7_liuuf")
 [node name="DamageComponent" type="Node" parent="Rotor"]
 script = ExtResource("8_3gt4x")
 
-[node name="HealthComponent" type="Node" parent="Rotor" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="Rotor" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_6k02g")
 hitbox = NodePath("../Hitbox")
-hurt_sound = NodePath("../HurtSound")
-death_sound = NodePath("../DeathSound")
 
 [node name="HitFlashComponent" type="Node" parent="Rotor" node_paths=PackedStringArray("animations")]
 script = ExtResource("10_in80l")
@@ -193,6 +188,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="SoundComponent" type="Node" parent="Rotor"]
+script = ExtResource("19_3tl64")
 
 [node name="SpeedComponent" type="Node" parent="Rotor"]
 script = ExtResource("13_yx7xu")

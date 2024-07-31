@@ -12,13 +12,13 @@ extends Attack
 @onready var hitbox := $Hitbox as Hitbox
 @onready var animations := $Animations as AnimatedSprite2D
 @onready var hit_vfx := $HitVFX as AnimatedSprite2D
-@onready var hit_sound := $HitSound as AudioStreamPlayer
 @onready var lifespan_timer := $LifespanTimer as Timer
 @onready var pierce_cooldown_timer := $PierceCooldownTimer as Timer
 @onready var snowbomb_explosion_state_machine := $SnowbombExplosionStateMachine as StateMachine
 @onready var attack := $AttackComponent as AttackComponent
 @onready var damage := $DamageComponent as DamageComponent
 @onready var pierce := $PierceComponent as PierceComponent
+@onready var sound := $SoundComponent as SoundComponent
 @onready var speed := $SpeedComponent as SpeedComponent
 @onready var velocity := $VelocityComponent as VelocityComponent
 
@@ -32,6 +32,7 @@ func _ready() -> void:
 	attack.init(self)
 	damage.init(self)
 	pierce.init(self)
+	sound.init(self)
 	speed.init(self)
 	velocity.init(self)
 	snowbomb_explosion_state_machine.init(self)

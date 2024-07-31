@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1_405li")
 base_damage = 0.0
-base_pierce = 1
+base_pierce = 2
 base_attack_cooldown = 2.0
 base_size = 1.0
 base_speed = 1000.0
 base_lifespan = 0.5
-base_pierce_cooldown = 0.1
+base_pierce_cooldown = 0.05

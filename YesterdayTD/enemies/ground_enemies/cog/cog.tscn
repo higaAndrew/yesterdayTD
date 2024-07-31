@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dl4gpt52rgyue"]
+[gd_scene load_steps=26 format=3 uid="uid://dl4gpt52rgyue"]
 
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_24smv"]
 [ext_resource type="Script" path="res://enemies/ground_enemies/cog/cog.gd" id="1_udpip"]
@@ -9,14 +9,13 @@
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="5_3r286"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="6_5tju8"]
 [ext_resource type="Texture2D" uid="uid://dvsuaduw5tpgb" path="res://enemies/ground_enemies/kenney_top_down_shooter_robots.png" id="6_71uud"]
-[ext_resource type="AudioStream" uid="uid://jwq4p026lt1f" path="res://enemies/ground_enemies/cog/Hollow Clicks.wav" id="7_4ytd0"]
-[ext_resource type="AudioStream" uid="uid://bcavmlfsw62od" path="res://enemies/Material Layer Metal C.wav" id="7_t5dv2"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="7_ykfl4"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="8_k268f"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="9_swlxc"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="10_degqw"]
 [ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="12_owput"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_vgt5g"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="18_y1686"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3j37"]
 radius = 32.0
@@ -85,7 +84,7 @@ radius = 0.01
 [node name="CogPath" type="PathFollow2D"]
 loop = false
 
-[node name="Cog" type="Area2D" parent="." groups=["enemies", "ground_enemies"]]
+[node name="Cog" type="Area2D" parent="." groups=["enemies", "ground_enemies", "robots"]]
 collision_mask = 132
 script = ExtResource("1_udpip")
 stats = ExtResource("2_3nlni")
@@ -105,13 +104,6 @@ scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_pcoky")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="Cog"]
-stream = ExtResource("7_4ytd0")
-volume_db = -5.0
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="Cog"]
-stream = ExtResource("7_t5dv2")
 
 [node name="SpawnPoint" type="Marker2D" parent="Cog"]
 position = Vector2(32, 0)
@@ -141,11 +133,9 @@ script = ExtResource("12_owput")
 [node name="DamageComponent" type="Node" parent="Cog"]
 script = ExtResource("7_ykfl4")
 
-[node name="HealthComponent" type="Node" parent="Cog" node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="Cog" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("8_k268f")
 hitbox = NodePath("../Hitbox")
-hurt_sound = NodePath("../HurtSound")
-death_sound = NodePath("../DeathSound")
 
 [node name="HitFlashComponent" type="Node" parent="Cog" node_paths=PackedStringArray("animations")]
 script = ExtResource("14_vgt5g")
@@ -157,6 +147,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="SoundComponent" type="Node" parent="Cog"]
+script = ExtResource("18_y1686")
 
 [node name="SpeedComponent" type="Node" parent="Cog"]
 script = ExtResource("10_degqw")

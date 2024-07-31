@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://g5rdk8hjd1am"
-path="res://.godot/imported/Drop Paper A.wav-3abe156a64a92b3dc2424582b5459e09.sample"
+uid="uid://dmsevl6bmlqti"
+path="res://.godot/imported/tower_build2.wav-494c57379f1717085fcbcf62e621f3bc.sample"
 
 [deps]
 
-source_file="res://towers/Drop Paper A.wav"
-dest_files=["res://.godot/imported/Drop Paper A.wav-3abe156a64a92b3dc2424582b5459e09.sample"]
+source_file="res://towers/tower_build2.wav"
+dest_files=["res://.godot/imported/tower_build2.wav-494c57379f1717085fcbcf62e621f3bc.sample"]
 
 [params]
 

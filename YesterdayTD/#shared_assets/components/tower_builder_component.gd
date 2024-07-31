@@ -4,7 +4,6 @@ extends Node
 
 
 @export var build_animation: AnimatedSprite2D
-@export var build_sound: AudioStreamPlayer
 @export var path_distance: float = 65.0
 @export var invalid_range_color: Color = Color(1.0, 0.0, 0.0, 0.15)
 @export var invalid_outline_color: Color = Color.RED
@@ -120,11 +119,3 @@ func cancel_build() -> void:
 	valid_location = false
 	tower_preview.queue_free()
 	reset_tower_preview()
-
-
-## play/verify build sound
-func play_build_sound() -> void:
-	GlobalScripts.verify(parent, build_sound, "build_sound")
-	
-	if is_instance_valid(build_sound):
-		build_sound.play()

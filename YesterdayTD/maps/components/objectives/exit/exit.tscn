@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dehl3iglcj2hu"]
+[gd_scene load_steps=13 format=3 uid="uid://dehl3iglcj2hu"]
 
 [ext_resource type="Script" path="res://maps/components/objectives/exit/exit.gd" id="1_c1r7e"]
 [ext_resource type="Resource" uid="uid://brtbqa81e61qh" path="res://maps/components/objectives/exit/exit_stats.tres" id="2_mugiu"]
-[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://maps/components/objectives/exit/Casual Enemy Damage C.wav" id="3_7tmrw"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="3_e66nl"]
 [ext_resource type="Texture2D" uid="uid://cp8a4tpiy3vmf" path="res://maps/components/64x64_game_objects.png" id="3_h503k"]
-[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/objectives/exit/Synth Ominous B.wav" id="4_a0il7"]
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="4_ajdts"]
 [ext_resource type="Script" path="res://maps/components/objectives/exit/states/exit_idle.gd" id="4_k80om"]
+[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://maps/components/objectives/objective_hurt(ovani).wav" id="5_pxkf0"]
 [ext_resource type="Script" path="res://maps/components/objectives/exit/states/exit_die.gd" id="5_yn61m"]
+[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/objectives/objective_death(ovani).wav" id="6_8m0yh"]
 [ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="6_s2cik"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="11_05sq0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rrw5q"]
 radius = 32.0
@@ -30,10 +31,10 @@ shape = SubResource("CircleShape2D_rrw5q")
 script = ExtResource("4_ajdts")
 
 [node name="LifeLostSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_7tmrw")
+stream = ExtResource("5_pxkf0")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_a0il7")
+stream = ExtResource("6_8m0yh")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_e66nl")
@@ -45,8 +46,9 @@ script = ExtResource("4_k80om")
 [node name="ExitDie" type="Node" parent="StateMachine"]
 script = ExtResource("5_yn61m")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox", "hurt_sound", "death_sound")]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
 script = ExtResource("6_s2cik")
 hitbox = NodePath("../Hitbox")
-hurt_sound = NodePath("../LifeLostSound")
-death_sound = NodePath("../DeathSound")
+
+[node name="SoundComponent" type="Node" parent="."]
+script = ExtResource("11_05sq0")

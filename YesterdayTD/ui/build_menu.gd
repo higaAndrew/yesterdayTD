@@ -15,10 +15,12 @@ extends Control
 @onready var next_wave_button := %NextWaveButton as Button
 @onready var settings_button := %SettingsButton as Button
 @onready var state_machine := $StateMachine as StateMachine
+@onready var sound := $SoundComponent as SoundComponent
 @onready var tower_builder := $TowerBuilderComponent as TowerBuilderComponent
 
 
 ## init state machine and components
 func _ready() -> void:
+	sound.init(self)
 	tower_builder.init(self)
 	state_machine.init(self)

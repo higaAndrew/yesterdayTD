@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cslribf3k53rj"
-path="res://.godot/imported/quiver_tower_defense_helicopter.png-508cc2f11907ebb11bb15aedf5f1bcc7.ctex"
+uid="uid://c1ce4d7wsssrp"
+path="res://.godot/imported/shadow_move_00.png-e02fc810db2eb053844916c2407f0b94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/flying_vehicles/quiver_tower_defense_helicopter.png"
-dest_files=["res://.godot/imported/quiver_tower_defense_helicopter.png-508cc2f11907ebb11bb15aedf5f1bcc7.ctex"]
+source_file="res://enemies/flying_vehicles/shadow_move_00.png"
+dest_files=["res://.godot/imported/shadow_move_00.png-e02fc810db2eb053844916c2407f0b94.ctex"]
 
 [params]
 

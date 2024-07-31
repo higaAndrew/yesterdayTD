@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=3 uid="uid://4e5ux0fgkpla"]
+
+[ext_resource type="Script" path="res://game/sound_manager.gd" id="1_oumah"]
+[ext_resource type="AudioStream" uid="uid://cly5w3e4socjj" path="res://enemies/robot_death(ovani).wav" id="2_sfm75"]
+[ext_resource type="AudioStream" uid="uid://10c3jg3povcl" path="res://enemies/robot_damage(audio_hero).wav" id="3_hmgoh"]
+[ext_resource type="AudioStream" uid="uid://s3busndd4ewv" path="res://maps/components/objectives/objective_hurt(ovani).wav" id="4_pcvdv"]
+[ext_resource type="AudioStream" uid="uid://di3js6o28p3yg" path="res://maps/components/objectives/objective_death(ovani).wav" id="5_uthxe"]
+[ext_resource type="AudioStream" uid="uid://beue3c3yh7b8j" path="res://towers/tower_build1.wav" id="6_d7mwf"]
+[ext_resource type="AudioStream" uid="uid://dmsevl6bmlqti" path="res://towers/tower_build2.wav" id="7_8bxt4"]
+[ext_resource type="AudioStream" uid="uid://uqu1p2ylduaj" path="res://towers/tower_build3.wav" id="8_yny7n"]
+[ext_resource type="AudioStream" uid="uid://dykxhmi5g2k1m" path="res://towers/#attacks/explosion1(audio_hero).wav" id="9_pxw7m"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_oumah")
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Robots" type="Node" parent="Enemies"]
+
+[node name="RobotHurt" type="Node" parent="Enemies/Robots"]
+unique_name_in_owner = true
+
+[node name="HurtSound1" type="AudioStreamPlayer" parent="Enemies/Robots/RobotHurt"]
+stream = ExtResource("3_hmgoh")
+volume_db = -15.0
+bus = &"Sounds"
+
+[node name="Timer" type="Timer" parent="Enemies/Robots/RobotHurt"]
+process_callback = 0
+wait_time = 0.25
+one_shot = true
+
+[node name="RobotDeath" type="Node" parent="Enemies/Robots"]
+unique_name_in_owner = true
+
+[node name="DeathSound1" type="AudioStreamPlayer" parent="Enemies/Robots/RobotDeath"]
+stream = ExtResource("2_sfm75")
+volume_db = 5.0
+bus = &"Sounds"
+
+[node name="Timer" type="Timer" parent="Enemies/Robots/RobotDeath"]
+process_callback = 0
+wait_time = 0.25
+one_shot = true
+
+[node name="Vehicles" type="Node" parent="Enemies"]
+
+[node name="VehicleHurt" type="Node" parent="Enemies/Vehicles"]
+unique_name_in_owner = true
+
+[node name="HurtSound1" type="AudioStreamPlayer" parent="Enemies/Vehicles/VehicleHurt"]
+stream = ExtResource("3_hmgoh")
+volume_db = -15.0
+bus = &"Sounds"
+
+[node name="Timer" type="Timer" parent="Enemies/Vehicles/VehicleHurt"]
+process_callback = 0
+wait_time = 0.25
+one_shot = true
+
+[node name="VehicleDeath" type="Node" parent="Enemies/Vehicles"]
+unique_name_in_owner = true
+
+[node name="DeathSound1" type="AudioStreamPlayer" parent="Enemies/Vehicles/VehicleDeath"]
+stream = ExtResource("2_sfm75")
+volume_db = 5.0
+bus = &"Sounds"
+
+[node name="Timer" type="Timer" parent="Enemies/Vehicles/VehicleDeath"]
+process_callback = 0
+wait_time = 0.25
+one_shot = true
+
+[node name="Objectives" type="Node" parent="."]
+
+[node name="ObjectiveHurt" type="Node" parent="Objectives"]
+unique_name_in_owner = true
+
+[node name="HurtSound1" type="AudioStreamPlayer" parent="Objectives/ObjectiveHurt"]
+stream = ExtResource("4_pcvdv")
+max_polyphony = 2
+bus = &"Sounds"
+
+[node name="ObjectiveDeath" type="Node" parent="Objectives"]
+unique_name_in_owner = true
+
+[node name="DeathSound1" type="AudioStreamPlayer" parent="Objectives/ObjectiveDeath"]
+stream = ExtResource("5_uthxe")
+max_polyphony = 2
+bus = &"Sounds"
+
+[node name="Towers" type="Node" parent="."]
+
+[node name="TowerBuild" type="Node" parent="Towers"]
+unique_name_in_owner = true
+
+[node name="TowerBuild1" type="AudioStreamPlayer" parent="Towers/TowerBuild"]
+stream = ExtResource("6_d7mwf")
+bus = &"Sounds"
+
+[node name="TowerBuild2" type="AudioStreamPlayer" parent="Towers/TowerBuild"]
+stream = ExtResource("7_8bxt4")
+bus = &"Sounds"
+
+[node name="TowerBuild3" type="AudioStreamPlayer" parent="Towers/TowerBuild"]
+stream = ExtResource("8_yny7n")
+bus = &"Sounds"
+
+[node name="Snowballer" type="Node" parent="Towers"]
+
+[node name="Snowbomber" type="Node" parent="Towers"]
+
+[node name="Snowbomb" type="Node" parent="Towers/Snowbomber"]
+
+[node name="SnowbombExplosion" type="Node" parent="Towers/Snowbomber/Snowbomb"]
+unique_name_in_owner = true
+
+[node name="Explosion1" type="AudioStreamPlayer" parent="Towers/Snowbomber/Snowbomb/SnowbombExplosion"]
+stream = ExtResource("9_pxw7m")
+bus = &"Sounds"
+
+[node name="DebugTower" type="Node" parent="Towers"]
+
+[node name="UI" type="Node" parent="."]

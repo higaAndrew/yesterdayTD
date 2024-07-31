@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy8jh5c3n032f"]
+[gd_scene load_steps=16 format=3 uid="uid://cy8jh5c3n032f"]
 
 [ext_resource type="Script" path="res://#debug/debug_projectile.gd" id="1_bbqvc"]
 [ext_resource type="Resource" uid="uid://da0u6bj6rhx38" path="res://#debug/debug_projectile_stats.tres" id="2_exvro"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://towers/#attacks/states/projectile_hit.gd" id="7_cgr1j"]
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="9_hl5s5"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_wt1l2"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="11_ls4h6"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="11_u1guu"]
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="12_x5m2v"]
 
@@ -96,8 +97,6 @@ sprite_frames = SubResource("SpriteFrames_2vvne")
 animation = &"hit"
 autoplay = "hit"
 
-[node name="HitSound" type="AudioStreamPlayer" parent="."]
-
 [node name="LifespanTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
@@ -112,15 +111,17 @@ script = ExtResource("6_dn8j7")
 [node name="ProjectileHit" type="Node" parent="StateMachine"]
 script = ExtResource("7_cgr1j")
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
+[node name="DamageComponent" type="Node" parent="."]
 script = ExtResource("9_hl5s5")
-hit_sound = NodePath("../HitSound")
 
 [node name="PierceComponent" type="Node" parent="."]
 script = ExtResource("10_wt1l2")
 
 [node name="SpeedComponent" type="Node" parent="."]
 script = ExtResource("11_u1guu")
+
+[node name="SoundComponent" type="Node" parent="."]
+script = ExtResource("11_ls4h6")
 
 [node name="VelocityComponent" type="Node" parent="." node_paths=PackedStringArray("speed")]
 script = ExtResource("12_x5m2v")
