@@ -11,3 +11,4 @@ base_damage = 25.0
 base_coin_value = 25
 children = Array[PackedScene]([ExtResource("1_2puv6")])
 number_children = Array[int]([2])
+flying = false

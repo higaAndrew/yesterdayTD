@@ -13,6 +13,7 @@ extends Node
 	"bolt": preload("res://enemies/ground_enemies/bolt/bolt.tscn"),
 	"hammer": preload("res://enemies/ground_vehicles/hammer/hammer.tscn"),
 	"anvil": preload("res://enemies/ground_vehicles/anvil/anvil.tscn"),
+	"flying_piston": preload("res://enemies/flying_enemies/flying_piston/flying_piston.tscn"),
 	"rotor": preload("res://enemies/flying_vehicles/rotor/rotor.tscn"),
 }
 

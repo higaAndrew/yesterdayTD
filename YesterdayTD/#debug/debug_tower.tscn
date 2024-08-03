@@ -80,7 +80,7 @@ script = ExtResource("5_872gq")
 [node name="DetectionRange" type="Area2D" parent="."]
 material = SubResource("ShaderMaterial_2otlv")
 collision_layer = 0
-collision_mask = 321
+collision_mask = 833
 input_pickable = false
 monitorable = false
 

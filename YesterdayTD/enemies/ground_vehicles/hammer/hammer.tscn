@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djv1104dc3q6v"]
+[gd_scene load_steps=28 format=3 uid="uid://djv1104dc3q6v"]
 
 [ext_resource type="Script" path="res://enemies/ground_vehicles/hammer/hammer.gd" id="1_aumqh"]
 [ext_resource type="Resource" uid="uid://b4exhkl70uay1" path="res://enemies/ground_vehicles/hammer/hammer_stats.tres" id="2_2anm2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="14_i4848"]
 [ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_k6fna"]
 [ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_kfj01"]
+[ext_resource type="Script" path="res://#shared_assets/components/properties_component.gd" id="16_gwak5"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="16_o2ywc"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="19_jspvw"]
 
@@ -102,6 +103,7 @@ spawn_point = NodePath("../../SpawnPoint")
 despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Hammer"]
+unique_name_in_owner = true
 scale = Vector2(1.125, 1.125)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"
@@ -154,6 +156,9 @@ spawn_point = NodePath("../SpawnPoint")
 despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
+
+[node name="PropertiesComponent" type="Node" parent="Hammer"]
+script = ExtResource("16_gwak5")
 
 [node name="SoundComponent" type="Node" parent="Hammer"]
 script = ExtResource("19_jspvw")

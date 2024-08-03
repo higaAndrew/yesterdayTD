@@ -71,7 +71,8 @@ ui_cancel={
 2d_physics/layer_6="tower_detection_range"
 2d_physics/layer_7="ground_vehicle"
 2d_physics/layer_8="explosion"
-2d_physics/layer_9="air_vehicles"
+2d_physics/layer_9="flying_vehicles"
+2d_physics/layer_10="flying_enemies"
 
 [rendering]
 

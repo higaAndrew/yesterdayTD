@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="2_00x4y"]
 [ext_resource type="Resource" uid="uid://bioleje3rffvl" path="res://enemies/flying_vehicles/rotor/rotor_stats.tres" id="2_8wc0j"]
 [ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="4_dhesj"]
-[ext_resource type="Texture2D" uid="uid://c1ce4d7wsssrp" path="res://enemies/flying_vehicles/shadow_move_00.png" id="4_e0e11"]
 [ext_resource type="Texture2D" uid="uid://cslribf3k53rj" path="res://enemies/flying_vehicles/quiver_tower_defense_helicopter.png" id="5_qxg1x"]
+[ext_resource type="Texture2D" uid="uid://npjohbgqyqgh" path="res://enemies/flying_vehicles/quiver_tower_defense_helicopter_shadow.png" id="5_rtskp"]
 [ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="6_qwus5"]
 [ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="7_f041u"]
 [ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="7_liuuf"]
@@ -133,11 +133,15 @@ rotation = 4.71239
 shape = SubResource("CapsuleShape2D_sgmu4")
 script = ExtResource("2_00x4y")
 
-[node name="ShadowAnimations" type="Sprite2D" parent="Rotor"]
-texture = ExtResource("4_e0e11")
-offset = Vector2(8, 32)
+[node name="Shadow" type="Sprite2D" parent="Rotor"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.2)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_rtskp")
+offset = Vector2(-8, 40)
 
 [node name="Animations" type="AnimatedSprite2D" parent="Rotor"]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_s23vd")
 animation = &"idle"
 autoplay = "idle"
@@ -190,8 +194,9 @@ despawn_point = NodePath("../DespawnPoint")
 path_follow = NodePath("../..")
 speed = NodePath("../SpeedComponent")
 
-[node name="PropertiesComponent" type="Node" parent="Rotor"]
+[node name="PropertiesComponent" type="Node" parent="Rotor" node_paths=PackedStringArray("shadow")]
 script = ExtResource("16_u5jl6")
+shadow = NodePath("../Shadow")
 
 [node name="SoundComponent" type="Node" parent="Rotor"]
 script = ExtResource("19_3tl64")

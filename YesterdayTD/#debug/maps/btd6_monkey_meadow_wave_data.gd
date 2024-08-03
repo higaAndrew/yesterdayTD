@@ -14,6 +14,7 @@ func _ready() -> void:
 			#["anvil", 10, 3, 1],
 		#],
 		[# 3
+			["flying_piston", 10, 0.5, 1],
 			["rotor", 10, 3, 1],
 		],
 		[# everything

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dtdhyq4f6jvew"]
+[gd_scene load_steps=27 format=3 uid="uid://dtdhyq4f6jvew"]
 
 [ext_resource type="Script" path="res://towers/snowballer/snowballer.gd" id="1_uep4e"]
 [ext_resource type="Resource" uid="uid://oisn1plk8e17" path="res://towers/snowballer/snowballer_stats.tres" id="2_1bcql"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="10_qt0t0"]
 [ext_resource type="Script" path="res://towers/states/attack_projectile_throw.gd" id="11_yl78m"]
 [ext_resource type="Script" path="res://#shared_assets/components/cooldown_component.gd" id="13_7t2oy"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_interactions_component.gd" id="15_hteov"]
 [ext_resource type="Script" path="res://#shared_assets/components/outline_component.gd" id="16_n4ga3"]
 [ext_resource type="Script" path="res://#shared_assets/components/price_component.gd" id="17_mvw40"]
 [ext_resource type="Script" path="res://#shared_assets/components/u_i_component.gd" id="18_dd0pj"]
@@ -119,9 +120,13 @@ script = ExtResource("10_a36ud")
 [node name="AttackProjectileThrow" type="Node" parent="SnowballStateMachine"]
 script = ExtResource("11_yl78m")
 
-[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("muzzle0")]
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("attack_interactions", "muzzle0")]
 script = ExtResource("10_qt0t0")
+attack_interactions = NodePath("../AttackInteractionsComponent")
 muzzle0 = NodePath("../Animations/Muzzle")
+
+[node name="AttackInteractionsComponent" type="Node" parent="."]
+script = ExtResource("15_hteov")
 
 [node name="CooldownComponent" type="Node" parent="."]
 script = ExtResource("13_7t2oy")

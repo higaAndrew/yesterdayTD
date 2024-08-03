@@ -10,4 +10,6 @@ base_attack_cooldown = 2.0
 base_size = 1.0
 base_speed = 1000.0
 base_lifespan = 0.5
+inherits_interactions = true
+can_hit_flying = false
 base_pierce_cooldown = 0.05

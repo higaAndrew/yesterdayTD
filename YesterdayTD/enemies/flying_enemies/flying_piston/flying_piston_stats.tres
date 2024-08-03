@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://drd854im1m1et"]
+
+[ext_resource type="Script" path="res://enemies/enemy_stats.gd" id="1_bsj5a"]
+[ext_resource type="PackedScene" uid="uid://q3l0ex5ibdmm" path="res://enemies/ground_enemies/piston/piston.tscn" id="1_cv0pg"]
+
+[resource]
+script = ExtResource("1_bsj5a")
+base_health = 1.0
+base_speed = 200.0
+base_damage = 1.0
+base_coin_value = 1
+children = Array[PackedScene]([ExtResource("1_cv0pg")])
+number_children = Array[int]([1])
+flying = true

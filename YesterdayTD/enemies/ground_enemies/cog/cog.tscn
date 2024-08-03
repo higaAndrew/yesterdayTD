@@ -100,6 +100,7 @@ spawn_point = NodePath("../../SpawnPoint")
 despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Cog"]
+unique_name_in_owner = true
 modulate = Color(0.55, 0.82, 1, 1)
 scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_pcoky")

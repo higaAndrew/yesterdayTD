@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bdjv8smefnv0b"]
+[gd_scene load_steps=31 format=3 uid="uid://bdjv8smefnv0b"]
 
 [ext_resource type="Script" path="res://towers/snowbomber/snowbomb/snowbomb.gd" id="1_e6epq"]
 [ext_resource type="Resource" uid="uid://cta4mmql4jnbf" path="res://towers/snowbomber/snowbomb/snowbomb_stats.tres" id="2_4xdcl"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="10_g57kp"]
 [ext_resource type="Script" path="res://#shared_assets/components/attack_component.gd" id="11_bjxah"]
 [ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="11_cb1sq"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_interactions_component.gd" id="12_7lm1w"]
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="12_bdhvi"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="14_n2ydg"]
 
@@ -166,8 +167,12 @@ script = ExtResource("7_s2358")
 [node name="BombHit" type="Node" parent="SnowbombExplosionStateMachine"]
 script = ExtResource("8_eod13")
 
-[node name="AttackComponent" type="Node" parent="."]
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("attack_interactions")]
 script = ExtResource("11_bjxah")
+attack_interactions = NodePath("../AttackInteractionsComponent")
+
+[node name="AttackInteractionsComponent" type="Node" parent="."]
+script = ExtResource("12_7lm1w")
 
 [node name="DamageComponent" type="Node" parent="."]
 script = ExtResource("9_at73u")

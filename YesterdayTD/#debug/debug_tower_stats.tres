@@ -7,4 +7,6 @@ script = ExtResource("1_cb4pv")
 base_price = 1000
 base_range = 250.0
 target_priority = "First"
+base_path_1_tier = 0
+inherits_interactions = true
 can_hit_flying = true

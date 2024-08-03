@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cgi48nbv63ja0"]
+[gd_scene load_steps=45 format=3 uid="uid://cgi48nbv63ja0"]
 
 [ext_resource type="Script" path="res://towers/snowbomber/snowbomb_explosion/snowbomb_explosion.gd" id="1_el282"]
 [ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="1_mtxi2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="5_6lkij"]
 [ext_resource type="Script" path="res://#shared_assets/components/pierce_component.gd" id="5_pw3yv"]
 [ext_resource type="Script" path="res://towers/#attacks/states/explosion_exploding.gd" id="6_emeub"]
+[ext_resource type="Script" path="res://#shared_assets/components/attack_interactions_component.gd" id="7_q5oci"]
 [ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="10_h0ela"]
 [ext_resource type="Script" path="res://#shared_assets/components/size_component.gd" id="10_qnu74"]
 [ext_resource type="Script" path="res://#shared_assets/components/velocity_component.gd" id="11_7npmo"]
@@ -261,6 +262,9 @@ initial_state = NodePath("ExplosionExploding")
 
 [node name="ExplosionExploding" type="Node" parent="StateMachine"]
 script = ExtResource("6_emeub")
+
+[node name="AttackInteractionsComponent" type="Node" parent="."]
+script = ExtResource("7_q5oci")
 
 [node name="DamageComponent" type="Node" parent="."]
 script = ExtResource("5_6lkij")

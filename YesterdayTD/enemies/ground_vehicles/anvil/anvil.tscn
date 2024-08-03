@@ -103,6 +103,7 @@ spawn_point = NodePath("../../SpawnPoint")
 despawn_point = NodePath("../../DespawnPoint")
 
 [node name="Animations" type="AnimatedSprite2D" parent="Anvil"]
+unique_name_in_owner = true
 scale = Vector2(1.125, 1.125)
 sprite_frames = SubResource("SpriteFrames_7fp7q")
 animation = &"idle"

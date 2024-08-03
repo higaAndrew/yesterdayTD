@@ -7,6 +7,7 @@ var coin_value: CoinValueComponent
 var health: HealthComponent
 var layers: LayersComponent
 var path_movement: PathMovementComponent
+var properties: PropertiesComponent
 var sound: SoundComponent
 
 
@@ -16,18 +17,24 @@ func enter() -> void:
 	coin_value = parent.coin_value
 	health = parent.health
 	path_movement = parent.path_movement
+	properties = parent.properties
 	sound = parent.sound
 	
 	animations = parent.animations
 	GlobalScripts.connect_signal(animations, "animation_finished", self, "_on_animation_finished")
 	
-	## if the enemy has children, spawn them
+	# if the enemy has children, spawn them
 	if not parent.stats.children.is_empty():
 		layers = parent.layers
 		layers.spawn_children()
 	
 	coin_value.gain_coins()
 	GlobalScripts.play_animation(parent, animations, "die")
+	
+	# if enemy is flying, turn off its shadow
+	if properties.flying:
+		properties.toggle_shadow()
+	
 	hitbox.remove_hitbox()
 	sound.play_death_sound()
 

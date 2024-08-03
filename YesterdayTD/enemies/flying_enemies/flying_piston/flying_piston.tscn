@@ -1,0 +1,180 @@
+[gd_scene load_steps=29 format=3 uid="uid://d4g1risyqsva5"]
+
+[ext_resource type="Script" path="res://enemies/flying_enemies/flying_piston/flying_piston.gd" id="1_hjfkd"]
+[ext_resource type="Script" path="res://#shared_assets/components/hitbox.gd" id="2_2p1uu"]
+[ext_resource type="Resource" uid="uid://drd854im1m1et" path="res://enemies/flying_enemies/flying_piston/flying_piston_stats.tres" id="2_hk5t3"]
+[ext_resource type="Script" path="res://#debug/spawn_despawn_point_preview.gd" id="3_q5eo6"]
+[ext_resource type="Texture2D" uid="uid://tiocqvs8uw2t" path="res://enemies/flying_enemies/kenney_top_down_shooter_robots_flying_and_shadows.png" id="4_q38la"]
+[ext_resource type="Texture2D" uid="uid://ds0m5w136hjps" path="res://enemies/kenney_top_down_tanks_explosions.png" id="6_j2m78"]
+[ext_resource type="Script" path="res://#shared_assets/state_machine/state_machine.gd" id="8_15dff"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_follow_path.gd" id="9_r5v82"]
+[ext_resource type="Script" path="res://enemies/#states/enemy_die.gd" id="10_lu867"]
+[ext_resource type="Script" path="res://#shared_assets/components/coin_value_component.gd" id="11_2wunw"]
+[ext_resource type="Script" path="res://#shared_assets/components/damage_component.gd" id="12_cp6qm"]
+[ext_resource type="Script" path="res://#shared_assets/components/health_component.gd" id="13_sxnti"]
+[ext_resource type="Script" path="res://#shared_assets/components/hit_flash_component.gd" id="14_4h00b"]
+[ext_resource type="Script" path="res://#shared_assets/components/path_movement_component.gd" id="15_y57yy"]
+[ext_resource type="Script" path="res://#shared_assets/components/properties_component.gd" id="16_b7ppg"]
+[ext_resource type="Script" path="res://#shared_assets/components/layers_component.gd" id="16_oao6r"]
+[ext_resource type="Script" path="res://#shared_assets/components/sound_component.gd" id="17_vky3q"]
+[ext_resource type="Script" path="res://#shared_assets/components/speed_component.gd" id="18_x2t5d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0eun"]
+radius = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bolda"]
+atlas = ExtResource("4_q38la")
+region = Rect2(0, 76, 76, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te42r"]
+atlas = ExtResource("6_j2m78")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qq4e"]
+atlas = ExtResource("6_j2m78")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q1m0"]
+atlas = ExtResource("6_j2m78")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6c3"]
+atlas = ExtResource("6_j2m78")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqyou"]
+atlas = ExtResource("6_j2m78")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xryu"]
+atlas = ExtResource("4_q38la")
+region = Rect2(0, 0, 76, 76)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7fp7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te42r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qq4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q1m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6c3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqyou")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"die",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xryu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8m3o2"]
+radius = 0.01
+
+[node name="FlyingPistonPath" type="PathFollow2D"]
+loop = false
+
+[node name="FlyingPiston" type="Area2D" parent="." groups=["enemies", "ground_enemies", "robots"]]
+scale = Vector2(1.25, 1.25)
+collision_layer = 512
+collision_mask = 132
+script = ExtResource("1_hjfkd")
+stats = ExtResource("2_hk5t3")
+
+[node name="Hitbox" type="CollisionShape2D" parent="FlyingPiston"]
+shape = SubResource("CircleShape2D_e0eun")
+script = ExtResource("2_2p1uu")
+
+[node name="SpawnDespawnPointPreview" type="Node" parent="FlyingPiston/Hitbox" node_paths=PackedStringArray("spawn_point", "despawn_point")]
+script = ExtResource("3_q5eo6")
+spawn_point = NodePath("../../SpawnPoint")
+despawn_point = NodePath("../../DespawnPoint")
+
+[node name="Shadow" type="Sprite2D" parent="FlyingPiston"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.2)
+scale = Vector2(0.75, 0.75)
+texture = SubResource("AtlasTexture_bolda")
+offset = Vector2(-8, 40)
+
+[node name="Animations" type="AnimatedSprite2D" parent="FlyingPiston"]
+unique_name_in_owner = true
+scale = Vector2(1.125, 1.125)
+sprite_frames = SubResource("SpriteFrames_7fp7q")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0991277
+
+[node name="SpawnPoint" type="Marker2D" parent="FlyingPiston"]
+position = Vector2(26, 0)
+
+[node name="DespawnPoint" type="Area2D" parent="FlyingPiston" groups=["enemies"]]
+position = Vector2(-26, 0)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlyingPiston/DespawnPoint"]
+shape = SubResource("CircleShape2D_8m3o2")
+
+[node name="StateMachine" type="Node" parent="FlyingPiston" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_15dff")
+initial_state = NodePath("EnemyFollowPath")
+
+[node name="EnemyFollowPath" type="Node" parent="FlyingPiston/StateMachine"]
+script = ExtResource("9_r5v82")
+
+[node name="EnemyDie" type="Node" parent="FlyingPiston/StateMachine"]
+script = ExtResource("10_lu867")
+
+[node name="CoinValueComponent" type="Node" parent="FlyingPiston"]
+script = ExtResource("11_2wunw")
+
+[node name="DamageComponent" type="Node" parent="FlyingPiston"]
+script = ExtResource("12_cp6qm")
+
+[node name="HealthComponent" type="Node" parent="FlyingPiston" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("13_sxnti")
+hitbox = NodePath("../Hitbox")
+
+[node name="HitFlashComponent" type="Node" parent="FlyingPiston" node_paths=PackedStringArray("animations")]
+script = ExtResource("14_4h00b")
+animations = NodePath("../Animations")
+
+[node name="LayersComponent" type="Node" parent="FlyingPiston" node_paths=PackedStringArray("hitbox", "path_movement")]
+script = ExtResource("16_oao6r")
+hitbox = NodePath("../Hitbox")
+path_movement = NodePath("../PathMovementComponent")
+
+[node name="PathMovementComponent" type="Node" parent="FlyingPiston" node_paths=PackedStringArray("spawn_point", "despawn_point", "path_follow", "speed")]
+script = ExtResource("15_y57yy")
+spawn_point = NodePath("../SpawnPoint")
+despawn_point = NodePath("../DespawnPoint")
+path_follow = NodePath("../..")
+speed = NodePath("../SpeedComponent")
+
+[node name="PropertiesComponent" type="Node" parent="FlyingPiston" node_paths=PackedStringArray("shadow")]
+script = ExtResource("16_b7ppg")
+shadow = NodePath("../Shadow")
+
+[node name="SoundComponent" type="Node" parent="FlyingPiston"]
+script = ExtResource("17_vky3q")
+
+[node name="SpeedComponent" type="Node" parent="FlyingPiston"]
+script = ExtResource("18_x2t5d")

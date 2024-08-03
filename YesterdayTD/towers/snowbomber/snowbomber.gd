@@ -17,6 +17,7 @@ extends Tower
 @onready var state_machine := $StateMachine as StateMachine
 @onready var snowbomb_state_machine := $SnowbombStateMachine as StateMachine
 @onready var attack := $AttackComponent as AttackComponent
+@onready var attack_interactions := $AttackInteractionsComponent as AttackInteractionsComponent
 @onready var cooldown := $CooldownComponent as CooldownComponent
 @onready var outline := $OutlineComponent as OutlineComponent
 @onready var price := $PriceComponent as PriceComponent
@@ -32,6 +33,7 @@ func _ready() -> void:
 	GlobalScripts.verify(self, attack0_stats, "attack0_stats")
 	
 	attack.init(self)
+	attack_interactions.init(self)
 	cooldown.init(self)
 	outline.init(self)
 	price.init(self)

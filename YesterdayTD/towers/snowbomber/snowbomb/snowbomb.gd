@@ -16,6 +16,7 @@ extends Attack
 @onready var pierce_cooldown_timer := $PierceCooldownTimer as Timer
 @onready var snowbomb_explosion_state_machine := $SnowbombExplosionStateMachine as StateMachine
 @onready var attack := $AttackComponent as AttackComponent
+@onready var attack_interactions := $AttackInteractionsComponent as AttackInteractionsComponent
 @onready var damage := $DamageComponent as DamageComponent
 @onready var pierce := $PierceComponent as PierceComponent
 @onready var sound := $SoundComponent as SoundComponent
@@ -30,6 +31,7 @@ func _ready() -> void:
 	GlobalScripts.verify(self, attack0_stats, "snowbomb explosion stats")
 	
 	attack.init(self)
+	attack_interactions.init(self)
 	damage.init(self)
 	pierce.init(self)
 	sound.init(self)

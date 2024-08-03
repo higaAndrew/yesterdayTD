@@ -6,7 +6,8 @@
 script = ExtResource("1_q2h6h")
 base_health = 1.0
 base_speed = 100.0
-base_damage = 1
-base_monet = 1
+base_damage = 1.0
+base_coin_value = 1
 children = Array[PackedScene]([])
 number_children = Array[int]([])
+flying = false

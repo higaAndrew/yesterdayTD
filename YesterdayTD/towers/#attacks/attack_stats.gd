@@ -14,6 +14,7 @@ extends Resource
 @export var base_lifespan: float = 0.0
 
 @export_group("Attack Interactions")
+@export var inherits_interactions: bool = true
 @export var can_hit_flying: bool = false
 
 @export_group("Misc.")

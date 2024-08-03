@@ -5,7 +5,7 @@ extends Enemy
 @export var stats: EnemyStats
 
 @onready var hitbox := $Hitbox as Hitbox
-@onready var animations := $Animations as AnimatedSprite2D
+@onready var animations := %Animations as AnimatedSprite2D
 @onready var state_machine := $StateMachine as StateMachine
 @onready var coin_value := $CoinValueComponent as CoinValueComponent
 @onready var damage := $DamageComponent as DamageComponent
